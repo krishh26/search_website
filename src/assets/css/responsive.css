@@ -1,0 +1,95 @@
+/*large device desktop*/ 
+/* @media screen and (min-width: 1920px) { */
+    @media  screen and (min-width: 1920px) {
+        .container{
+            max-width: 1600px;
+        }
+   body{
+	   font-size:1.3rem
+   }
+   .bigger-heading {
+    font-size: 3rem;
+    line-height: 70px;
+}
+ul.icon-listing li {
+   margin-bottom: 30px;
+}
+ul.company-features li::before {
+    right: -94px;
+    width: 190px;
+}
+.p-18 {
+    font-size: 22px;
+}
+.min-height370{
+	min-height:370px;
+}
+}
+
+/*Mobile device */
+@media (min-width: 320px) and (max-width: 767px) {
+    .mob-mb-30{
+        margin-bottom: 30px !important;
+    }
+    .hero {
+       background-image: none;
+    }
+    .hero {
+        min-height: 400px;
+    }
+    .bigger-heading {
+        font-weight: 700;
+        font-size: 2.2rem;
+        line-height: 50px;
+    }
+    ul.company-features li {
+        background-color: #fff;
+        width: 45%;
+        border-radius: 10px;
+        border: 1px solid #F1F1F1;
+        padding: 15px;
+        margin-left: 15px;
+        margin-bottom: 15px;
+    }
+    ul.company-features li::before {
+        display: none;
+    }
+    .flex-column {
+        flex-direction: unset !important;
+    }
+    .vertical-tab .nav-pills .nav-link {
+        background: #FFF;
+        box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+        border-left: none;
+        border-radius: 10px;
+        padding: 1rem 1rem;
+        margin-bottom: 15px;
+        margin-left: 15px;
+        text-align: left;
+        transition: all 0.3s ease 0.3s;
+    }
+    .vertical-tab .nav-pills .nav-link.active, .nav-pills .show > .nav-link {
+        color: #FFF;
+        background-color: #0d6efd;
+        border-color: #0d6efd;
+    }
+    .mob-display{
+        display: block;
+      }
+      .digitalTransformation .small-business-image {
+        display: none;
+    }
+    .enterprise-business .enterprises-business-image {
+        display: none;
+    }
+    .enterprise-business {
+        padding: 2rem 0 4rem 0;
+    }
+    .profile1, .profile2, .profile3, .profile4, .profile5, .profile6{
+        display: none;
+    }
+    .latestBlog::before, .clientTestimonial::before {
+       display: none;
+    }
+     
+    }
