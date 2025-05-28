@@ -4,11 +4,16 @@ import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
 import { WorkawayComponent } from './workaway/workaway.component';
 import { E2eQaServicesComponent } from './e2e-qa-services/e2e-qa-services.component';
+import { WorkawayRegistrationComponent } from './workaway-registration/workaway-registration.component';
 
 const routes: Routes = [
   {
     path: 'workaway',
     component: WorkawayComponent
+  },
+  {
+    path: 'workaway-registration',
+    component: WorkawayRegistrationComponent
   },
   {
     path: 'e2e-qa-services',
