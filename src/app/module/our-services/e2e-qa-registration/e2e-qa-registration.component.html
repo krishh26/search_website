@@ -1,3 +1,5 @@
+
+
   <section class="registration-section" style="background-image: url(img/search-background-image.png);">
     <div class="overlay-bg" style="opacity: 1;">
       <div class="container">
@@ -21,19 +23,23 @@
        </div>
        <div class="FlatCard text-dark" style="z-index: 1;">
         <div class="card-body p-5">
-          <div class="text-center">
-            <p class="p-16 p-600 text-muted">In just a minute away</p>
-            <h2 class="page-titletop text-dark">Register with <span class="text-primary">Spectrum IT Hub</span></h2>
-         </div>
-         <ul class="wizard mt-3 mb-3">
-          <li ui-sref="firstStep" class="active">
-            <span data-translate="">Need Details</span>
-          </li>
-          <li ui-sref="secondStep" class="">
-            <span data-translate="">Contact Details</span>
-          </li>
-        </ul>
-         <div class="accordion accordion-flush" id="accordionFlushExample">
+          <div class="row">
+            <div class="col-12">
+              <div class="text-center">
+                <p class="p-16 p-600 text-muted">In just a minute away</p>
+                <h2 class="page-titletop text-dark">Register with <span class="text-primary">Spectrum IT Hub</span></h2>
+             </div>
+             <ul class="wizard mt-3 mb-3">
+              <li ui-sref="firstStep" class="active">
+                <span data-translate="">Need Details</span>
+              </li>
+              <li ui-sref="secondStep" class="">
+                <span data-translate="">Contact Details</span>
+              </li>
+            </ul>
+            </div>
+          </div>
+          <div class="accordion accordion-flush" id="accordionFlushExample">
           <div class="accordion-item">
             <h2 class="accordion-header" id="flush-headingOne">
               <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
@@ -65,8 +71,7 @@
               </select>
               <div class="invalid-feedback">Please select from the dropdown.</div>
             </div>
-
-           <p>Have the demand ready?</p>
+            <p>Have the demand ready?</p>
             <div class="form-check form-check-inline">
               <input class="form-check-input" type="radio" name="inlineRadioOptions" id="demandYes" value="option1">
               <label class="form-check-label" for="demandYes">Yes</label>
@@ -75,17 +80,79 @@
               <input class="form-check-input" type="radio" name="inlineRadioOptions" id="demandNo" value="option2">
               <label class="form-check-label" for="demandNo">No</label>
             </div>
-            <p class="mt-4"><a href="#" class="btn btn-light" data-bs-toggle="modal" data-bs-target="#uploadbulkModal"><i class="bi bi-upload me-2"></i> Upload Bulk Enquiry </a></p>
-            <p>I am registering at WorkAway for</p>
+            <div class="form-group mt-3">
+              <label>Enter Your Requirement</label>
+              <input type="text" class="form-control" placeholder="Eg. Integrated Testing" required>
+            </div>
             <div class="form-group">
+              Engagement Type :
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="Fulldelivery" value="option1">
+                <label class="form-check-label" for="inlineRadio1">Full Delivery</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="Partdelivery" value="option2">
+                <label class="form-check-label" for="inlineRadio2">Part Delivery</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="Ongoing" value="option2">
+                <label class="form-check-label" for="inlineRadio2">Ongoing</label>
+              </div>
+             </div>
+             <div class="form-group">
+              <label>Description</label>
+              <textarea class="form-control" rows="2" cols="100">Lorem ipsum is a dummy or placeholder text commonly used in graphic design, publishing, and web development.</textarea>
+             </div>
+             <div class="form-group">
+                  <label>Testing Type</label>
+                  <select class="form-select" id="professiontype" required>
+                    <option>Manual Testing</option>
+                    <option>Automation Testing</option>
+                  </select>
+                </div>
+             <div class="form-group">
+              <label>Enter Tool</label>
+              <input type="text" class="form-control" placeholder="Eg. Selenium" required>
+            </div>
+             <ul class="searchresult-tags mb-4">
+              <li class="">Selenium <span class="remove-tag"><i class="bi bi-x"></i></span></li>
+              <li class="">Cucumber <span class="remove-tag"><i class="bi bi-x"></i></span></li>
+              <li class="">Jira <span class="remove-tag"><i class="bi bi-x"></i></span></li>
+            </ul>
+
+            <div class="row align-items-center">
+              <div class="col-lg-4 col-xl-4 col-sm-4 col-md-4 col-12">
+                <div class="form-group">
+                  <label>Start Date</label>
+                  <input type="date" class="form-control" value="23/3/2025">
+                </div>
+              </div>
+              <div class="col-lg-4 col-xl-4 col-sm-4 col-md-4 col-12">
+                <div class="form-group">
+                  <label>End Date</label>
+                  <input type="date" class="form-control" value="02/05/2025">
+                </div>
+              </div>
+              <div class="col-lg-4 col-xl-4 col-sm-4 col-md-4 col-12">
+                <div class="form-group">
+                  <label>Project Budjet</label>
+                  <select class="form-select" id="professiontype" required>
+                    <option>5 Lac</option>
+                    <option>1-5 Lac</option>
+                  </select>
+                </div>
+              </div>
+             </div>
+            <div class="form-group">
+              <p>I am registering for</p>
               <div class="form-check">
-                <input class="form-check-input" type="radio" name="bankRadio" id="bankClientOption1">
+                <input class="form-check-input" type="radio" name="bankRadio" id="bankClientOption1" checked>
                 <label class="form-check-label" for="bankClientOption1">
-                  I would like to bank resources for my client(s)
+                  Representative for my client
                 </label>
               </div>
             </div>
-            <div class="form-group ps-4">
+            <div class="form-group">
               <div class="form-check">
                 <input class="form-check-input" type="checkbox" value="" id="invalidCheck" required>
                 <label class="form-check-label" for="invalidCheck">
@@ -98,12 +165,13 @@
               <div class="form-check">
                 <input class="form-check-input" type="radio" name="bankRadio" id="bankBusinessOption1">
                 <label class="form-check-label" for="bankBusinessOption1">
-                  I would like to bank resources for my business
+                  I am a business
                 </label>
               </div>
             </div>
             <div class="form-group text-end">
-              <a class="btn btn-dark" href="workaway.html"><i class="bi bi-arrow-left me-2"></i> Go Back</a>
+              <a href="it-subcontracting-service.html" class="btn btn-dark me-2"><i class="bi bi-arrow-left me-2"></i> Go Back</a>
+              <!-- <button class="btn btn-primary" type="submit"  onclick="window.location.href='registration-step2.html';">Next Step</button> -->
               <a class="btn btn-primary" type="submit" routerLink="/our-services/e2e-qa-registration-contact-details">Next Step <i class="bi bi-arrow-right ms-2"></i></a>
             </div>
           </form>
@@ -117,49 +185,49 @@
   <section>
     <div class="container">
       <div class="mb-5">
-        <h5 class="headingTitle">The most <span class="text-primary">demanding skills</span></h5>
+        <h5 class="headingTitle">The most <span class="text-primary">demanding services</span></h5>
         <p>Get some Inspirations from 86K+ skills</p>
       </div>
       <div class="row">
         <div class="col-lg-2 col-xl-2 col-md-4 col-sm-4 col-6">
           <div class="light-gray-card">
-            <img src="/assets/img/software-testing.gif" height="60" class="mb-4"/>
-            <p class="mb-0"><strong>Manual Tester</strong></p>
+            <img src="/assets/img/functional-testing.gif" height="60" class="mb-4"/>
+            <p class="mb-0"><strong>Functional Testing</strong></p>
+            <p class="mb-0 p-12">250 Skills</p>
+          </div>
+        </div>
+        <div class="col-lg-2 col-xl-2 col-md-4 col-sm-4 col-6">
+          <div class="light-gray-card">
+            <img src="/assets/img/mobile-testing.gif" height="60" class="mb-4"/>
+            <p class="mb-0"><strong>Mobile Testing</strong></p>
+            <p class="mb-0 p-12">250 Skills</p>
+          </div>
+        </div>
+        <div class="col-lg-2 col-xl-2 col-md-4 col-sm-4 col-6">
+          <div class="light-gray-card">
+            <img src="/assets/img/webapp-testing.gif" height="60" class="mb-4"/>
+            <p class="mb-0"><strong>Webapp Testing</strong></p>
             <p class="mb-0 p-12">250 Skills</p>
           </div>
         </div>
         <div class="col-lg-2 col-xl-2 col-md-4 col-sm-4 col-6">
           <div class="light-gray-card">
             <img src="/assets/img/automation-testing.gif" height="60" class="mb-4"/>
-            <p class="mb-0"><strong>Automation Tester</strong></p>
+            <p class="mb-0"><strong>Automation Testing</strong></p>
             <p class="mb-0 p-12">250 Skills</p>
           </div>
         </div>
         <div class="col-lg-2 col-xl-2 col-md-4 col-sm-4 col-6">
           <div class="light-gray-card">
-            <img src="/assets/img/quality-control.gif" height="60" class="mb-4"/>
-            <p class="mb-0"><strong>QA Analyst</strong></p>
-            <p class="mb-0 p-12">250 Skills</p>
-          </div>
-        </div>
-        <div class="col-lg-2 col-xl-2 col-md-4 col-sm-4 col-6">
-          <div class="light-gray-card">
-            <img src="/assets/img/nft-testing.gif" height="60" class="mb-4"/>
-            <p class="mb-0"><strong>NFT Lead</strong></p>
-            <p class="mb-0 p-12">250 Skills</p>
-          </div>
-        </div>
-        <div class="col-lg-2 col-xl-2 col-md-4 col-sm-4 col-6">
-          <div class="light-gray-card">
-            <img src="/assets/img/uat-testing.gif" height="60" class="mb-4"/>
-            <p class="mb-0"><strong>UAT Testing</strong></p>
+            <img src="/assets/img/api-testing.gif" height="60" class="mb-4"/>
+            <p class="mb-0"><strong>API Testing</strong></p>
             <p class="mb-0 p-12">250 Skills</p>
           </div>
         </div>
         <div class="col-lg-2 col-xl-2 col-md-4 col-sm-4 col-6">
           <div class="light-gray-card">
             <img src="/assets/img/page-optimization.gif" height="60" class="mb-4"/>
-            <p class="mb-0"><strong>Performance Tester</strong></p>
+            <p class="mb-0"><strong>Load Testing</strong></p>
             <p class="mb-0 p-12">250 Skills</p>
           </div>
         </div>
@@ -167,38 +235,7 @@
     </div>
   </section>
 
- <!--Upload Bulk  Modal -->
-<div class="modal fade" id="uploadbulkModal" tabindex="-1" aria-labelledby="uploadbulkModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered modal-lg">
-    <div class="modal-content">
-      <button type="button" class="btn-close-absolute" data-bs-dismiss="modal" aria-label="Close"></button>
-      <div class="modal-body p-5">
-        <h2><strong>Don’t just find. Be found your bulk enquiry in front of great employers</strong></h2>
-        <p>There are many variations of passages of Lorem Ipsum available, but the alteration in some form, by injected humour, or randomised words.</p>
-       <div class="row mt-5">
-        <div class="col-lg-6 col-xl-6 col-md-6 col-sm-6 col-12">
-          <a href="#" class="download-csv-btn shadow-nm">
-            <img src="/assets/img/csv-file.png" class="mb-3">
-            <p class="p-22 p-600">Download</p>
-            <p>Sample csv file for bulk
-             enquiry search</p>
-           </a>
-        </div>
-        <div class="col-lg-6 col-xl-6 col-md-6 col-sm-6 col-12">
-          <a href="#" class="download-csv-btn shadow-nm">
-            <img src="/assets/img/csv-file.png" class="mb-3">
-            <p class="p-22 p-600">Upload</p>
-            <p>Sample csv file for bulk
-             enquiry search</p>
-           </a>
-        </div>
-       </div>
-      </div>
-    </div>
-  </div>
-</div>
-
-   <!--Search  Modal -->
+<!--Search  Modal -->
 <div class="modal fade" id="searchModal" tabindex="-1" aria-labelledby="searchModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered modal-lg">
     <div class="modal-content">

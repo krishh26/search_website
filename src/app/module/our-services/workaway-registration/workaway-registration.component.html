@@ -1,170 +1,204 @@
-<section class="registration-section">
-  <div class="overlay-bg" style="opacity: 1;">
-    <div class="container">
-      <div class="row justify-content-center">
-        <div class="col-lg-7 col-xl-7 col-md-7 col-sm-7 col-12">
-          <div class="FlatCard text-dark" style="z-index: 1;">
-            <div class="card-body p-5">
-              <div class="text-center">
-                <p class="p-16 p-600 text-muted">In just a minute away</p>
-                <h2 class="page-titletop text-dark">Find, attract, and <span class="text-primary">hire talent</span>
-                  with
-                  SPECTRUM IT HUB </h2>
-              </div>
-              <ul class="wizard mt-3 mb-3">
-                <li ui-sref="firstStep" class="active">
-                  <span data-translate="">Search Details</span>
-                </li>
-                <li ui-sref="secondStep" class="">
-                  <span data-translate="">Contact Details</span>
-                </li>
-              </ul>
-              <form class="needs-validation" novalidate>
-                <div class="form-group">
-                  <label>I Am a</label>
-                  <select class="form-select" id="professiontype" required>
-                    <option selected disabled value="">Choose from below...</option>
-                    <option>Corporate recruitment teams</option>
-                    <option>IT recruitment agency</option>
-                    <option>Software house</option>
-                    <option>IT service provider</option>
-                  </select>
-                  <div class="invalid-feedback">Please select from the dropdown.</div>
-                </div>
-                <div class="form-group">
-                  <label>My Demand (Job Title)</label>
-                  <input type="text" class="form-control" id="jobtitle" placeholder="Enter the job title...">
-                  <div class="invalid-feedback">Please Enter the job title.</div>
-                </div>
-                <div class="accordion accordion-flush" id="accordionFlushExample">
-                  <div class="accordion-item">
-                    <h2 class="accordion-header" id="searchContentOne">
-                      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                        data-bs-target="#searchContentID1" aria-expanded="false" aria-controls="searchContentID1">
-                        Front-end Developer
-                      </button>
-                    </h2>
-                    <div id="searchContentID1" class="accordion-collapse collapse" aria-labelledby="searchContentOne"
-                      data-bs-parent="#accordionFlushExample">
-                      <div class="accordion-body">
-                        <div class="form-group">
-                          <input type="text" class="form-control" value="Front-end Developer">
-                        </div>
-                        <div class="form-group">
-                          <input type="text" class="form-control" value="25">
-                        </div>
-                        <div class="form-group">
-                          <input type="text" class="form-control" value="1-3 Years experience">
-                        </div>
-                        <div class="form-group">
-                          <input type="text" class="form-control"
-                            value="HTML5, CSS3, Bootstrap Framework, Angularjs 14">
-                        </div>
-                        <div class="form-group">
-                          <input type="text" class="form-control" value="Full Time">
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="accordion-item">
-                    <h2 class="accordion-header" id="searchContentTwo">
-                      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                        data-bs-target="#searchContentID5" aria-expanded="false" aria-controls="searchContentID5">
-                        UI UX Designer
-                      </button>
-                    </h2>
-                    <div id="searchContentID5" class="accordion-collapse collapse" aria-labelledby="searchContentTwo"
-                      data-bs-parent="#accordionFlushExample">
-                      <div class="accordion-body">
 
-                        <div class="form-group">
-                          <input type="text" class="form-control" value="UX UI Designer">
-                        </div>
-                        <div class="form-group">
-                          <input type="text" class="form-control" value="25">
-                        </div>
-                        <div class="form-group">
-                          <input type="text" class="form-control" value="1-3 Years experience">
-                        </div>
-                        <div class="form-group">
-                          <input type="text" class="form-control" value="Figma, Adobe XD">
-                        </div>
-                        <div class="form-group">
-                          <input type="text" class="form-control" value="Full Time">
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="accordion-item">
-                    <h2 class="accordion-header" id="searchContentThree">
-                      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                        data-bs-target="#searchContentID3" aria-expanded="false" aria-controls="searchContentID3">
-                        API and Backend Developer
-                      </button>
-                    </h2>
-                    <div id="searchContentID3" class="accordion-collapse collapse" aria-labelledby="searchContentThree"
-                      data-bs-parent="#accordionFlushExample">
-                      <div class="accordion-body">
-                        <div class="form-group">
-                          <input type="text" class="form-control" value="API and Backend Developer">
-                        </div>
-                        <div class="form-group">
-                          <input type="text" class="form-control" value="25">
-                        </div>
-                        <div class="form-group">
-                          <input type="text" class="form-control" value="1-3 Years experience">
-                        </div>
-                        <div class="form-group">
-                          <input type="text" class="form-control"
-                            value="HTML5, CSS3, Bootstrap Framework, Angularjs 14">
-                        </div>
-                        <div class="form-group">
-                          <input type="text" class="form-control" value="Full Time">
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <p><a href="#" class="text-primary p-600"><u>+ ADD MORE</u></a></p>
-                </div>
-                <div class="form-group">
-                  <p>I am registering at WorkAway for</p>
-                  <div class="form-check">
-                    <input class="form-check-input" type="radio" name="bankRadio" id="bankClientOption1" checked>
-                    <label class="form-check-label" for="bankClientOption1">
-                      I would like to bank resources for my client(s)
-                    </label>
-                  </div>
-                </div>
-                <div class="form-group">
-                  <div class="form-check">
-                    <input class="form-check-input" type="checkbox" value="" id="invalidCheck" required>
-                    <label class="form-check-label" for="invalidCheck">
-                      I would like to discuss white labelling options
-                    </label>
-                    <div class="invalid-feedback">Please select</div>
-                  </div>
-                </div>
-                <div class="form-group">
-                  <div class="form-check">
-                    <input class="form-check-input" type="radio" name="bankRadio" id="bankBusinessOption1">
-                    <label class="form-check-label" for="bankBusinessOption1">
-                      I would like to bank resources for my business
-                    </label>
-                  </div>
-                </div>
-                <div class="form-group text-end mb-0">
-                  <button type="reset" class="btn btn-dark me-2">Clear All</button>
-                  <!-- <button class="btn btn-primary" type="submit"  onclick="window.location.href='registration-step2.html';">Next Step</button> -->
-                  <a class="btn btn-primary" type="submit" routerLink="/our-services/workaway-registration-contact-details">Next Step</a>
-                </div>
-              </form>
+  <section class="registration-section" style="background-image: url(img/search-background-image.png);">
+    <div class="overlay-bg" style="opacity: 1;">
+      <div class="container">
+       <div class="text-center text-white">
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1" checked>
+          <label class="form-check-label" for="inlineRadio1">WorkAway</label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
+          <label class="form-check-label" for="inlineRadio2">IT Subcontracting</label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio3" value="option3">
+          <label class="form-check-label" for="inlineRadio3">E2E QA Services</label>
+        </div>
+
+        <h1 class="page-titletop mt-3">Lorem ipsum dolor sit amet, consectetur adipiscing elit</h1>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+          Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+       </div>
+       <div class="FlatCard text-dark" style="z-index: 1;">
+        <div class="card-body p-5">
+          <div class="text-center">
+            <p class="p-16 p-600 text-muted">In just a minute away</p>
+            <h2 class="page-titletop text-dark">Register with <span class="text-primary">Spectrum IT Hub</span></h2>
+         </div>
+         <ul class="wizard mt-3 mb-3">
+          <li ui-sref="firstStep" class="active">
+            <span data-translate="">Need Details</span>
+          </li>
+          <li ui-sref="secondStep" class="">
+            <span data-translate="">Contact Details</span>
+          </li>
+        </ul>
+
+        <div class="accordion accordion-flush" id="accordionFlushExample">
+          <div class="accordion-item">
+            <h2 class="accordion-header" id="flush-headingOne">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+                <strong><i class="bi bi-info-circle-fill"></i> Search Instruction</strong>
+              </button>
+            </h2>
+            <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
+              <div class="accordion-body">
+                <h5><strong>How to Use the Company Search</strong></h5>
+                    <p>Filter by Budget - Choose your preferred budget range (e.g., Under ₹1 Lakh, ₹1–2 Lakh, etc.) to view matching companies in India.</p>
+                    <p>Compare Key Details - Check each company’s experience, number of projects executed, and preferred engagement models.</p>
+                    <p>Register or Bulk Upload - For single needs, click “Register to Receive Quote.”
+                      For multiple requirements, use the [Excel Bulk Upload]—we’ll review and get in touch with tailored options.</p>
+                    <p>Find Your Match - Shortlist companies based on your goals and connect directly for quotes or discussions.</p>
+              </div>
             </div>
+          </div>
+        </div>
+          <form class="needs-validation" novalidate>
+            <div class="form-group">
+              <label>I Am a</label>
+              <select class="form-select" id="professiontype" required>
+                <option selected disabled value="">Choose from below...</option>
+                <option>Corporate recruitment teams</option>
+                <option>IT recruitment agency</option>
+                <option>Software house</option>
+                <option>IT service provider</option>
+              </select>
+              <div class="invalid-feedback">Please select from the dropdown.</div>
+            </div>
+
+            <p>Have the demand ready?</p>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="radio" name="inlineRadioOptions" id="demandYes" value="option1">
+              <label class="form-check-label" for="demandYes">Yes</label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="radio" name="inlineRadioOptions" id="demandNo" value="option2">
+              <label class="form-check-label" for="demandNo">No</label>
+            </div>
+            <p class="mt-4"><a href="#" class="btn btn-light" data-bs-toggle="modal" data-bs-target="#uploadbulkModal"><i class="bi bi-upload me-2"></i> Upload Bulk Enquiry </a></p>
+            <p>I am registering at WorkAway for</p>
+            <div class="form-group">
+              <div class="form-check">
+                <input class="form-check-input" type="radio" name="bankRadio" id="bankClientOption1">
+                <label class="form-check-label" for="bankClientOption1">
+                  I would like to bank resources for my client(s)
+                </label>
+              </div>
+            </div>
+            <div class="form-group ps-4">
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" value="" id="invalidCheck" required>
+                <label class="form-check-label" for="invalidCheck">
+                  I would like to discuss white labelling options
+                </label>
+                <div class="invalid-feedback">Please select</div>
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="form-check">
+                <input class="form-check-input" type="radio" name="bankRadio" id="bankBusinessOption1">
+                <label class="form-check-label" for="bankBusinessOption1">
+                  I would like to bank resources for my business
+                </label>
+              </div>
+            </div>
+            <div class="form-group text-end">
+              <a class="btn btn-dark" href="workaway.html"><i class="bi bi-arrow-left me-2"></i> Go Back</a>
+              <a class="btn btn-primary" type="submit" routerLink="/our-services/workaway-registration-contact-details">Next Step <i class="bi bi-arrow-right ms-2"></i></a>
+            </div>
+          </form>
+
+        </div>
+      </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="container">
+      <div class="mb-5">
+        <h5 class="headingTitle">The most <span class="text-primary">demanding skills</span></h5>
+        <p>Get some Inspirations from 86K+ skills</p>
+      </div>
+      <div class="row">
+        <div class="col-lg-2 col-xl-2 col-md-4 col-sm-4 col-6">
+          <div class="light-gray-card">
+            <img src="/assets/img/ui-ux.gif" height="60" class="mb-4"/>
+            <p class="mb-0"><strong>UX/UX Designer</strong></p>
+            <p class="mb-0 p-12">250 Skills</p>
+          </div>
+        </div>
+        <div class="col-lg-2 col-xl-2 col-md-4 col-sm-4 col-6">
+          <div class="light-gray-card">
+            <img src="/assets/img/softwarte-developer.gif" height="60" class="mb-4"/>
+            <p class="mb-0"><strong>Software Developer</strong></p>
+            <p class="mb-0 p-12">250 Skills</p>
+          </div>
+        </div>
+        <div class="col-lg-2 col-xl-2 col-md-4 col-sm-4 col-6">
+          <div class="light-gray-card">
+            <img src="/assets/img/software-testing.gif" height="60" class="mb-4"/>
+            <p class="mb-0"><strong>Software Tester</strong></p>
+            <p class="mb-0 p-12">250 Skills</p>
+          </div>
+        </div>
+        <div class="col-lg-2 col-xl-2 col-md-4 col-sm-4 col-6">
+          <div class="light-gray-card">
+            <img src="/assets/img/frontend-developer.gif" height="60" class="mb-4"/>
+            <p class="mb-0"><strong>Frontend Developer</strong></p>
+            <p class="mb-0 p-12">250 Skills</p>
+          </div>
+        </div>
+        <div class="col-lg-2 col-xl-2 col-md-4 col-sm-4 col-6">
+          <div class="light-gray-card">
+            <img src="/assets/img/api-developer.gif" height="60" class="mb-4"/>
+            <p class="mb-0"><strong>API Developer</strong></p>
+            <p class="mb-0 p-12">250 Skills</p>
+          </div>
+        </div>
+        <div class="col-lg-2 col-xl-2 col-md-4 col-sm-4 col-6">
+          <div class="light-gray-card">
+            <img src="/assets/img/fullstack-developer.gif" height="60" class="mb-4"/>
+            <p class="mb-0"><strong>Fullstack Developer</strong></p>
+            <p class="mb-0 p-12">250 Skills</p>
           </div>
         </div>
       </div>
     </div>
+  </section>
+
+
+  <!--Upload Bulk  Modal -->
+<div class="modal fade" id="uploadbulkModal" tabindex="-1" aria-labelledby="uploadbulkModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-lg">
+    <div class="modal-content">
+      <button type="button" class="btn-close-absolute" data-bs-dismiss="modal" aria-label="Close"></button>
+      <div class="modal-body p-5">
+        <h2><strong>Don’t just find. Be found your bulk enquiry in front of great employers</strong></h2>
+        <p>There are many variations of passages of Lorem Ipsum available, but the alteration in some form, by injected humour, or randomised words.</p>
+       <div class="row mt-5">
+        <div class="col-lg-6 col-xl-6 col-md-6 col-sm-6 col-12">
+          <a href="#" class="download-csv-btn shadow-nm">
+            <img src="/assets/img/csv-file.png" class="mb-3">
+            <p class="p-22 p-600">Download</p>
+            <p>Sample csv file for bulk
+             enquiry search</p>
+           </a>
+        </div>
+        <div class="col-lg-6 col-xl-6 col-md-6 col-sm-6 col-12">
+          <a href="#" class="download-csv-btn shadow-nm">
+            <img src="/assets/img/csv-file.png" class="mb-3">
+            <p class="p-22 p-600">Upload</p>
+            <p>Sample csv file for bulk
+             enquiry search</p>
+           </a>
+        </div>
+       </div>
+      </div>
+    </div>
   </div>
-</section>
+</div>
 
 <!--Search  Modal -->
 <div class="modal fade" id="searchModal" tabindex="-1" aria-labelledby="searchModalLabel" aria-hidden="true">
@@ -173,53 +207,51 @@
       <button type="button" class="btn-close-absolute" data-bs-dismiss="modal" aria-label="Close"></button>
       <div class="modal-body p-5">
         <h3><strong>Choose Your Need</strong></h3>
-        <p>Find Your Match - Shortlist companies based on your goals and connect directly for quotes or discussions.</p>
+       <p>Find Your Match - Shortlist companies based on your goals and connect directly for quotes or discussions.</p>
 
-        <ul class="SearchneedList">
-          <li>
-            <a href="resources-search.html">
-              <div class="row align-items-center">
+       <ul class="SearchneedList">
+        <li>
+          <a href="resources-search.html">
+             <div class="row align-items-center">
                 <div class="col-2">
-                  <img src="img/resources-team.gif" width="64" />
+                  <img src="/assets/img/resources-team.gif" width="64"/>
                 </div>
                 <div class="col-10">
                   <p class="p-18 p-600 mb-0">Search Talent</p>
                   <p class="mb-0 text-muted p-12">WorkAway gives you guaranteed access to pre-approved IT talent</p>
                 </div>
               </div>
-            </a>
-          </li>
-          <li>
-            <a href="resources-search.html">
-              <div class="row align-items-center">
+          </a>
+        </li>
+        <li>
+          <a href="resources-search.html">
+             <div class="row align-items-center">
                 <div class="col-2">
-                  <img src="img/QA-services.gif" width="64" />
+                  <img src="/assets/img/QA-services.gif" width="64"/>
                 </div>
                 <div class="col-10">
                   <p class="p-18 p-600 mb-0">QA Services</p>
-                  <p class="mb-0 text-muted p-12">End-to-end testing solutions powered by UK governance and India
-                    delivery strength</p>
+                  <p class="mb-0 text-muted p-12">End-to-end testing solutions powered by UK governance and India delivery strength</p>
                 </div>
               </div>
-            </a>
-          </li>
-          <li>
-            <a href="resources-search.html">
-              <div class="row align-items-center">
+          </a>
+        </li>
+        <li>
+          <a href="resources-search.html">
+             <div class="row align-items-center">
                 <div class="col-2">
-                  <img src="img/corporate-team.gif" width="64" />
+                  <img src="/assets/img/corporate-team.gif" width="64"/>
                 </div>
                 <div class="col-10">
                   <p class="p-18 p-600 mb-0">IT Subcontracting Services</p>
-                  <p class="mb-0 text-muted p-12">Scale your delivery capacity without the cost, risk, or delay of
-                    permanent hires</p>
+                  <p class="mb-0 text-muted p-12">Scale your delivery capacity without the cost, risk, or delay of permanent hires</p>
                 </div>
               </div>
-            </a>
-          </li>
-        </ul>
+          </a>
+        </li>
+       </ul>
 
       </div>
     </div>
-
+  </div>
 </div>
