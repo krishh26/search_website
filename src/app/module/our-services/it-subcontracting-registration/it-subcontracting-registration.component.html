@@ -1,0 +1,289 @@
+
+
+  <section class="registration-section" style="background-image: url(img/search-background-image.png);">
+    <div class="overlay-bg" style="opacity: 1;">
+      <div class="container">
+       <div class="text-center text-white">
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
+          <label class="form-check-label" for="inlineRadio1">WorkAway</label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2" checked>
+          <label class="form-check-label" for="inlineRadio2">IT Subcontracting</label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio3" value="option3">
+          <label class="form-check-label" for="inlineRadio3">E2E QA Services</label>
+        </div>
+
+        <h1 class="page-titletop mt-3">Lorem ipsum dolor sit amet, consectetur adipiscing elit</h1>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+          Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+       </div>
+       <div class="FlatCard text-dark" style="z-index: 1;">
+        <div class="card-body p-5">
+          <div class="row">
+            <div class="col-12">
+              <div class="text-center">
+                <p class="p-16 p-600 text-muted">In just a minute away</p>
+                <h2 class="page-titletop text-dark">Register with <span class="text-primary">Spectrum IT Hub</span></h2>
+             </div>
+             <ul class="wizard mt-3 mb-3">
+              <li ui-sref="firstStep" class="active">
+                <span data-translate="">Need Details</span>
+              </li>
+              <li ui-sref="secondStep" class="">
+                <span data-translate="">Contact Details</span>
+              </li>
+            </ul>
+            </div>
+          </div>
+           <div class="accordion accordion-flush" id="accordionFlushExample">
+              <div class="accordion-item">
+                <h2 class="accordion-header" id="flush-headingOne">
+                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+                    <strong><i class="bi bi-info-circle-fill"></i> Search Instruction</strong>
+                  </button>
+                </h2>
+                <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
+                  <div class="accordion-body">
+                    <h5><strong>How to Use the Company Search</strong></h5>
+                        <p>Filter by Budget - Choose your preferred budget range (e.g., Under ₹1 Lakh, ₹1–2 Lakh, etc.) to view matching companies in India.</p>
+                        <p>Compare Key Details - Check each company’s experience, number of projects executed, and preferred engagement models.</p>
+                        <p>Register or Bulk Upload - For single needs, click “Register to Receive Quote.”
+                          For multiple requirements, use the [Excel Bulk Upload]—we’ll review and get in touch with tailored options.</p>
+                        <p>Find Your Match - Shortlist companies based on your goals and connect directly for quotes or discussions.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          <form class="needs-validation" novalidate>
+            <div class="form-group">
+              <label>I Am a</label>
+              <select class="form-select" id="professiontype" required>
+                <option selected disabled value="">Choose from below...</option>
+                <option>Corporate recruitment teams</option>
+                <option>IT recruitment agency</option>
+                <option>Software house</option>
+                <option>IT service provider</option>
+              </select>
+              <div class="invalid-feedback">Please select from the dropdown.</div>
+            </div>
+
+            <p>Have the demand ready?</p>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="radio" name="inlineRadioOptions" id="demandYes" value="option1">
+              <label class="form-check-label" for="demandYes">Yes</label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="radio" name="inlineRadioOptions" id="demandNo" value="option2">
+              <label class="form-check-label" for="demandNo">No</label>
+            </div>
+
+
+            <div class="form-group mt-3">
+              <label>Enter Your Requirement</label>
+              <input type="text" class="form-control" placeholder="Eg. Cloud Migration" required>
+            </div>
+            <div class="form-group">
+              Engagement Type :
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="Fulldelivery" value="option1">
+                <label class="form-check-label" for="inlineRadio1">Full Delivery</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="Partdelivery" value="option2">
+                <label class="form-check-label" for="inlineRadio2">Part Delivery</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="Ongoing" value="option2">
+                <label class="form-check-label" for="inlineRadio2">Ongoing</label>
+              </div>
+             </div>
+             <div class="form-group">
+              <label>Description</label>
+              <textarea class="form-control" rows="2" cols="100">Lorem ipsum is a dummy or placeholder text commonly used in graphic design, publishing, and web development.</textarea>
+             </div>
+             <div class="form-group">
+              <label>Choose Language</label>
+              <input type="text" class="form-control" placeholder="Eg. javascript" required>
+            </div>
+             <ul class="searchresult-tags mb-4">
+              <li class="">Angular JS <span class="remove-tag"><i class="bi bi-x"></i></span></li>
+              <li class="">ASP .Net <span class="remove-tag"><i class="bi bi-x"></i></span></li>
+              <li class="">C# .Net <span class="remove-tag"><i class="bi bi-x"></i></span></li>
+              <li class="">PHP <span class="remove-tag"><i class="bi bi-x"></i></span></li>
+            </ul>
+
+            <div class="row align-items-center">
+              <div class="col-lg-4 col-xl-4 col-sm-4 col-md-4 col-12">
+                <div class="form-group">
+                  <label>Start Date</label>
+                  <input type="date" class="form-control" value="23/3/2025">
+                </div>
+              </div>
+              <div class="col-lg-4 col-xl-4 col-sm-4 col-md-4 col-12">
+                <div class="form-group">
+                  <label>End Date</label>
+                  <input type="date" class="form-control" value="02/05/2025">
+                </div>
+              </div>
+              <div class="col-lg-4 col-xl-4 col-sm-4 col-md-4 col-12">
+                <div class="form-group">
+                  <label>Project Budjet</label>
+                  <select class="form-select" id="professiontype" required>
+                    <option>5 Lac</option>
+                    <option>1-5 Lac</option>
+                  </select>
+                </div>
+              </div>
+             </div>
+            <div class="form-group">
+              <p>I am registering for</p>
+              <div class="form-check">
+                <input class="form-check-input" type="radio" name="bankRadio" id="bankClientOption1" checked>
+                <label class="form-check-label" for="bankClientOption1">
+                  Representative for my client
+                </label>
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" value="" id="invalidCheck" required>
+                <label class="form-check-label" for="invalidCheck">
+                  I would like to discuss white labelling options
+                </label>
+                <div class="invalid-feedback">Please select</div>
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="form-check">
+                <input class="form-check-input" type="radio" name="bankRadio" id="bankBusinessOption1">
+                <label class="form-check-label" for="bankBusinessOption1">
+                  I am a business
+                </label>
+              </div>
+            </div>
+            <div class="form-group text-end">
+              <a href="it-subcontracting-service.html" class="btn btn-dark me-2"><i class="bi bi-arrow-left me-2"></i> Go Back</a>
+              <!-- <button class="btn btn-primary" type="submit"  onclick="window.location.href='registration-step2.html';">Next Step</button> -->
+              <a class="btn btn-primary" type="submit" href="it-subcontracting-registration-contact-details.html">Next Step <i class="bi bi-arrow-right ms-2"></i></a>
+            </div>
+          </form>
+
+        </div>
+      </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="container">
+      <div class="mb-5">
+        <h5 class="headingTitle">The most <span class="text-primary">demanding services</span></h5>
+        <p>Get some Inspirations from 86K+ skills</p>
+      </div>
+      <div class="row">
+        <div class="col-lg-2 col-xl-2 col-md-4 col-sm-4 col-6">
+          <div class="light-gray-card">
+            <img src="/assets/img/software-development.gif" height="60" class="mb-4"/>
+            <p class="mb-0"><strong>Software Development</strong></p>
+            <p class="mb-0 p-12">250 Skills</p>
+          </div>
+        </div>
+        <div class="col-lg-2 col-xl-2 col-md-4 col-sm-4 col-6">
+          <div class="light-gray-card">
+            <img src="/assets/img/cloud-development.gif" height="60" class="mb-4"/>
+            <p class="mb-0"><strong>Cloud & DevOps</strong></p>
+            <p class="mb-0 p-12">250 Skills</p>
+          </div>
+        </div>
+        <div class="col-lg-2 col-xl-2 col-md-4 col-sm-4 col-6">
+          <div class="light-gray-card">
+            <img src="/assets/img/digital-transformation.gif" height="60" class="mb-4"/>
+            <p class="mb-0"><strong>Digital Transformation</strong></p>
+            <p class="mb-0 p-12">250 Skills</p>
+          </div>
+        </div>
+        <div class="col-lg-2 col-xl-2 col-md-4 col-sm-4 col-6">
+          <div class="light-gray-card">
+            <img src="/assets/img/system-intigration.gif" height="60" class="mb-4"/>
+            <p class="mb-0"><strong>Systems Integration</strong></p>
+            <p class="mb-0 p-12">250 Skills</p>
+          </div>
+        </div>
+        <div class="col-lg-2 col-xl-2 col-md-4 col-sm-4 col-6">
+          <div class="light-gray-card">
+            <img src="/assets/img/software-testing.gif" height="60" class="mb-4"/>
+            <p class="mb-0"><strong>QA & Testing</strong></p>
+            <p class="mb-0 p-12">250 Skills</p>
+          </div>
+        </div>
+        <div class="col-lg-2 col-xl-2 col-md-4 col-sm-4 col-6">
+          <div class="light-gray-card">
+            <img src="/assets/img/ui-ux.gif" height="60" class="mb-4"/>
+            <p class="mb-0"><strong>UI/UX Design</strong></p>
+            <p class="mb-0 p-12">250 Skills</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+ <!--Search  Modal -->
+<div class="modal fade" id="searchModal" tabindex="-1" aria-labelledby="searchModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-lg">
+    <div class="modal-content">
+      <button type="button" class="btn-close-absolute" data-bs-dismiss="modal" aria-label="Close"></button>
+      <div class="modal-body p-5">
+        <h3><strong>Choose Your Need</strong></h3>
+       <p>Find Your Match - Shortlist companies based on your goals and connect directly for quotes or discussions.</p>
+
+       <ul class="SearchneedList">
+        <li>
+          <a href="resources-search.html">
+             <div class="row align-items-center">
+                <div class="col-2">
+                  <img src="/assets/img/resources-team.gif" width="64"/>
+                </div>
+                <div class="col-10">
+                  <p class="p-18 p-600 mb-0">Search Talent</p>
+                  <p class="mb-0 text-muted p-12">WorkAway gives you guaranteed access to pre-approved IT talent</p>
+                </div>
+              </div>
+          </a>
+        </li>
+        <li>
+          <a href="resources-search.html">
+             <div class="row align-items-center">
+                <div class="col-2">
+                  <img src="/assets/img/QA-services.gif" width="64"/>
+                </div>
+                <div class="col-10">
+                  <p class="p-18 p-600 mb-0">QA Services</p>
+                  <p class="mb-0 text-muted p-12">End-to-end testing solutions powered by UK governance and India delivery strength</p>
+                </div>
+              </div>
+          </a>
+        </li>
+        <li>
+          <a href="resources-search.html">
+             <div class="row align-items-center">
+                <div class="col-2">
+                  <img src="/assets/img/corporate-team.gif" width="64"/>
+                </div>
+                <div class="col-10">
+                  <p class="p-18 p-600 mb-0">IT Subcontracting Services</p>
+                  <p class="mb-0 text-muted p-12">Scale your delivery capacity without the cost, risk, or delay of permanent hires</p>
+                </div>
+              </div>
+          </a>
+        </li>
+       </ul>
+
+      </div>
+    </div>
+  </div>
+</div>

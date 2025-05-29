@@ -1,5 +1,6 @@
 <!doctype html>
 <html lang="en">
+
 <head>
   <meta charset="utf-8">
   <title>SearchUi</title>
@@ -7,6 +8,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" type="image/x-icon" href="favicon.ico">
 </head>
+
 <body>
   <app-root></app-root>
   <script src="./assets/js/jquery.min.js"></script>
@@ -49,7 +51,7 @@
       });
     });
     // Form validation
-      (function () {
+    (function () {
       'use strict'
 
       // Fetch all the forms we want to apply custom Bootstrap validation styles to
@@ -67,7 +69,46 @@
             form.classList.add('was-validated')
           }, false)
         })
-      })()
+    })()
+  </script>
+  <script type="text/javascript">
+    $(document).ready(function () {
+      $(".navbar_main").click(function (event) {
+        $(".navbar-demo").toggleClass("open-nav");
+      });
+    });
+    //Sticky header code
+    $(function () {
+      $(window).on("scroll", function () {
+        if ($(window).scrollTop() > 50) {
+          $(".header").addClass("sticky-header");
+        } else {
+          //remove the background property so it comes transparent again (defined in your css)
+          $(".header").removeClass("sticky-header");
+        }
+      });
+    });
+    // Form validation
+    (function () {
+      'use strict'
+
+      // Fetch all the forms we want to apply custom Bootstrap validation styles to
+      var forms = document.querySelectorAll('.needs-validation')
+
+      // Loop over them and prevent submission
+      Array.prototype.slice.call(forms)
+        .forEach(function (form) {
+          form.addEventListener('submit', function (event) {
+            if (!form.checkValidity()) {
+              event.preventDefault()
+              event.stopPropagation()
+            }
+
+            form.classList.add('was-validated')
+          }, false)
+        })
+    })()
   </script>
 </body>
+
 </html>
