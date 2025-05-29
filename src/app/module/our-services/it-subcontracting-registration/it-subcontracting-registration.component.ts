@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Location } from '@angular/common';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-it-subcontracting-registration',
@@ -11,10 +11,10 @@ export class ItSubcontractingRegistrationComponent {
   hasDemandReady: boolean = false;
   isRepresentativeForClient: boolean = true;
 
-  constructor(private location: Location) { }
+  constructor(private router: Router) { }
 
   goBack(): void {
-    this.location.back();
+    this.router.navigate(['/our-services/it-subcontracting-services']);
   }
 
   onDemandReadyChange(value: string): void {

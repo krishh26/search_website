@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Location } from '@angular/common';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-workkaway-registration-contact-details',
@@ -8,10 +8,10 @@ import { Location } from '@angular/common';
 })
 export class WorkkawayRegistrationContactDetailsComponent {
 
-  constructor(private location: Location) { }
+  constructor(private router: Router) { }
 
   goBack(): void {
-    this.location.back();
+    this.router.navigate(['/our-services/workaway-registration']);
   }
 
 }

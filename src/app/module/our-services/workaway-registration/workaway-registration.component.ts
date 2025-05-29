@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Location } from '@angular/common';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-workaway-registration',
@@ -10,10 +10,10 @@ export class WorkawayRegistrationComponent {
   hasDemandReady: boolean = false;
   bankingForClients: boolean = false;
 
-  constructor(private location: Location) { }
+  constructor(private router: Router) { }
 
   goBack(): void {
-    this.location.back();
+    this.router.navigate(['/our-services/workaway']);
   }
 
   onDemandReadyChange(hasDemand: boolean): void {

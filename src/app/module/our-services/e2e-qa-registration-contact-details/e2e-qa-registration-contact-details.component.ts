@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Location } from '@angular/common';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-e2e-qa-registration-contact-details',
@@ -8,10 +8,10 @@ import { Location } from '@angular/common';
 })
 export class E2eQaRegistrationContactDetailsComponent {
 
-  constructor(private location: Location) { }
+  constructor(private router: Router) { }
 
   goBack(): void {
-    this.location.back();
+    this.router.navigate(['/our-services/e2e-qa-registration']);
   }
 
 }
