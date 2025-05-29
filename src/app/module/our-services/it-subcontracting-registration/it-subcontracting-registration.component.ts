@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-it-subcontracting-registration',
@@ -6,5 +7,11 @@ import { Component } from '@angular/core';
   styleUrls: ['./it-subcontracting-registration.component.scss']
 })
 export class ItSubcontractingRegistrationComponent {
+
+  constructor(private location: Location) { }
+
+  goBack(): void {
+    this.location.back();
+  }
 
 }
