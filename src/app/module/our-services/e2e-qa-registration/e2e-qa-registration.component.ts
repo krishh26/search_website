@@ -8,10 +8,21 @@ import { Location } from '@angular/common';
 })
 export class E2eQaRegistrationComponent {
 
+  hasDemandReady: boolean = false;
+  isRepresentativeForClient: boolean = true;
+
   constructor(private location: Location) { }
 
   goBack(): void {
     this.location.back();
+  }
+
+  onDemandReadyChange(value: string): void {
+    this.hasDemandReady = value === 'yes';
+  }
+
+  onRegistrationTypeChange(value: string): void {
+    this.isRepresentativeForClient = value === 'representative';
   }
 
 }

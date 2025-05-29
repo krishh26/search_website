@@ -73,86 +73,88 @@
             </div>
             <p>Have the demand ready?</p>
             <div class="form-check form-check-inline">
-              <input class="form-check-input" type="radio" name="inlineRadioOptions" id="demandYes" value="option1">
+              <input class="form-check-input" type="radio" name="demandRadioOptions" id="demandYes" value="yes" (change)="onDemandReadyChange('yes')">
               <label class="form-check-label" for="demandYes">Yes</label>
             </div>
             <div class="form-check form-check-inline">
-              <input class="form-check-input" type="radio" name="inlineRadioOptions" id="demandNo" value="option2">
+              <input class="form-check-input" type="radio" name="demandRadioOptions" id="demandNo" value="no" (change)="onDemandReadyChange('no')">
               <label class="form-check-label" for="demandNo">No</label>
             </div>
-            <div class="form-group mt-3">
-              <label>Enter Your Requirement</label>
-              <input type="text" class="form-control" placeholder="Eg. Integrated Testing" required>
-            </div>
-            <div class="form-group">
-              Engagement Type :
-              <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="Fulldelivery" value="option1">
-                <label class="form-check-label" for="inlineRadio1">Full Delivery</label>
+            <div *ngIf="hasDemandReady">
+              <div class="form-group mt-3">
+                <label>Enter Your Requirement</label>
+                <input type="text" class="form-control" placeholder="Eg. Integrated Testing" required>
               </div>
-              <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="Partdelivery" value="option2">
-                <label class="form-check-label" for="inlineRadio2">Part Delivery</label>
-              </div>
-              <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="Ongoing" value="option2">
-                <label class="form-check-label" for="inlineRadio2">Ongoing</label>
-              </div>
-             </div>
-             <div class="form-group">
-              <label>Description</label>
-              <textarea class="form-control" rows="2" cols="100">Lorem ipsum is a dummy or placeholder text commonly used in graphic design, publishing, and web development.</textarea>
-             </div>
-             <div class="form-group">
-                  <label>Testing Type</label>
-                  <select class="form-select" id="professiontype" required>
-                    <option>Manual Testing</option>
-                    <option>Automation Testing</option>
-                  </select>
+              <div class="form-group">
+                Engagement Type :
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="radio" name="engagementRadioOptions" id="Fulldelivery" value="option1">
+                  <label class="form-check-label" for="Fulldelivery">Full Delivery</label>
                 </div>
-             <div class="form-group">
-              <label>Enter Tool</label>
-              <input type="text" class="form-control" placeholder="Eg. Selenium" required>
-            </div>
-             <ul class="searchresult-tags mb-4">
-              <li class="">Selenium <span class="remove-tag"><i class="bi bi-x"></i></span></li>
-              <li class="">Cucumber <span class="remove-tag"><i class="bi bi-x"></i></span></li>
-              <li class="">Jira <span class="remove-tag"><i class="bi bi-x"></i></span></li>
-            </ul>
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="radio" name="engagementRadioOptions" id="Partdelivery" value="option2">
+                  <label class="form-check-label" for="Partdelivery">Part Delivery</label>
+                </div>
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="radio" name="engagementRadioOptions" id="Ongoing" value="option3">
+                  <label class="form-check-label" for="Ongoing">Ongoing</label>
+                </div>
+               </div>
+               <div class="form-group">
+                <label>Description</label>
+                <textarea class="form-control" rows="2" cols="100">Lorem ipsum is a dummy or placeholder text commonly used in graphic design, publishing, and web development.</textarea>
+               </div>
+               <div class="form-group">
+                    <label>Testing Type</label>
+                    <select class="form-select" id="testingtype" required>
+                      <option>Manual Testing</option>
+                      <option>Automation Testing</option>
+                    </select>
+                  </div>
+               <div class="form-group">
+                <label>Enter Tool</label>
+                <input type="text" class="form-control" placeholder="Eg. Selenium" required>
+              </div>
+               <ul class="searchresult-tags mb-4">
+                <li class="">Selenium <span class="remove-tag"><i class="bi bi-x"></i></span></li>
+                <li class="">Cucumber <span class="remove-tag"><i class="bi bi-x"></i></span></li>
+                <li class="">Jira <span class="remove-tag"><i class="bi bi-x"></i></span></li>
+              </ul>
 
-            <div class="row align-items-center">
-              <div class="col-lg-4 col-xl-4 col-sm-4 col-md-4 col-12">
-                <div class="form-group">
-                  <label>Start Date</label>
-                  <input type="date" class="form-control" value="23/3/2025">
+              <div class="row align-items-center">
+                <div class="col-lg-4 col-xl-4 col-sm-4 col-md-4 col-12">
+                  <div class="form-group">
+                    <label>Start Date</label>
+                    <input type="date" class="form-control" value="23/3/2025">
+                  </div>
                 </div>
-              </div>
-              <div class="col-lg-4 col-xl-4 col-sm-4 col-md-4 col-12">
-                <div class="form-group">
-                  <label>End Date</label>
-                  <input type="date" class="form-control" value="02/05/2025">
+                <div class="col-lg-4 col-xl-4 col-sm-4 col-md-4 col-12">
+                  <div class="form-group">
+                    <label>End Date</label>
+                    <input type="date" class="form-control" value="02/05/2025">
+                  </div>
                 </div>
-              </div>
-              <div class="col-lg-4 col-xl-4 col-sm-4 col-md-4 col-12">
-                <div class="form-group">
-                  <label>Project Budjet</label>
-                  <select class="form-select" id="professiontype" required>
-                    <option>5 Lac</option>
-                    <option>1-5 Lac</option>
-                  </select>
+                <div class="col-lg-4 col-xl-4 col-sm-4 col-md-4 col-12">
+                  <div class="form-group">
+                    <label>Project Budjet</label>
+                    <select class="form-select" id="budgettype" required>
+                      <option>5 Lac</option>
+                      <option>1-5 Lac</option>
+                    </select>
+                  </div>
                 </div>
-              </div>
-             </div>
+               </div>
+            </div>
             <div class="form-group">
               <p>I am registering for</p>
               <div class="form-check">
-                <input class="form-check-input" type="radio" name="bankRadio" id="bankClientOption1" checked>
+                <input class="form-check-input" type="radio" name="registrationRadio" id="bankClientOption1" value="representative" (change)="onRegistrationTypeChange('representative')" checked>
                 <label class="form-check-label" for="bankClientOption1">
                   Representative for my client
                 </label>
               </div>
             </div>
-            <div class="form-group">
+            <div class="form-group" *ngIf="isRepresentativeForClient">
               <div class="form-check">
                 <input class="form-check-input" type="checkbox" value="" id="invalidCheck" required>
                 <label class="form-check-label" for="invalidCheck">
@@ -163,7 +165,7 @@
             </div>
             <div class="form-group">
               <div class="form-check">
-                <input class="form-check-input" type="radio" name="bankRadio" id="bankBusinessOption1">
+                <input class="form-check-input" type="radio" name="registrationRadio" id="bankBusinessOption1" value="business" (change)="onRegistrationTypeChange('business')">
                 <label class="form-check-label" for="bankBusinessOption1">
                   I am a business
                 </label>
