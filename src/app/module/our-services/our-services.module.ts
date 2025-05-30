@@ -11,6 +11,7 @@ import { E2eQaRegistrationContactDetailsComponent } from './e2e-qa-registration-
 import { WorkkawayRegistrationContactDetailsComponent } from './workkaway-registration-contact-details/workkaway-registration-contact-details.component';
 import { E2eQaHireResourcesContactDetailsComponent } from './e2e-qa-hire-resources-contact-details/e2e-qa-hire-resources-contact-details.component';
 import { E2eQaHireResourcesRegistrationsComponent } from './e2e-qa-hire-resources-registrations/e2e-qa-hire-resources-registrations.component';
+import { PartnerSearchResultExperienceComponent } from './partner-search-result-experience/partner-search-result-experience.component';
 const routes: Routes = [
   {
     path: 'workaway',
@@ -53,6 +54,10 @@ const routes: Routes = [
     component: WorkkawayRegistrationContactDetailsComponent
   },
   {
+    path: 'partner-search-result-experience',
+    component: PartnerSearchResultExperienceComponent
+  },
+  {
     path: '',
     redirectTo: 'workaway',
     pathMatch: 'full'
@@ -69,8 +74,12 @@ const routes: Routes = [
     E2eQaRegistrationContactDetailsComponent,
     WorkawayRegistrationComponent,
     WorkkawayRegistrationContactDetailsComponent,
+<<<<<<< HEAD
     E2eQaHireResourcesContactDetailsComponent,
     E2eQaHireResourcesRegistrationsComponent
+=======
+    PartnerSearchResultExperienceComponent
+>>>>>>> 513a165f12e1b32e9c1f89391b5980b0fd3e545a
   ],
   imports: [
     CommonModule,
