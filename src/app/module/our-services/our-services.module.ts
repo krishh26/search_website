@@ -74,12 +74,9 @@ const routes: Routes = [
     E2eQaRegistrationContactDetailsComponent,
     WorkawayRegistrationComponent,
     WorkkawayRegistrationContactDetailsComponent,
-<<<<<<< HEAD
     E2eQaHireResourcesContactDetailsComponent,
-    E2eQaHireResourcesRegistrationsComponent
-=======
+    E2eQaHireResourcesRegistrationsComponent,
     PartnerSearchResultExperienceComponent
->>>>>>> 513a165f12e1b32e9c1f89391b5980b0fd3e545a
   ],
   imports: [
     CommonModule,
