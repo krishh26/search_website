@@ -1,0 +1,24 @@
+.margin-top104 {
+    margin-top: 104px;
+}
+ .nav-tabs{
+      border: none;
+    }
+    .nav-tabs .nav-link {
+    color: #000;
+    font-size: 1rem;
+    padding: 0.75rem 1rem;
+    background-color: #F5F5F5;
+    margin-right: 15px;
+  } 
+  .nav-tabs .nav-link:first-child {
+    padding-left: 1rem;
+}
+    .nav-tabs .nav-link.active,
+    .nav-tabs .nav-item.show .nav-link {
+      color: #ffffff;
+      background-color: #0f51e0;
+      border-color: transparent transparent #131325 transparent;
+      border-bottom-width: 2px;
+      font-weight: 600;
+    }

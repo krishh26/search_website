@@ -198,6 +198,9 @@ Margin / padding / listign class Css
 .ml-8-5 {
   margin-left: 8.5rem;
 }
+.btn-gap{
+  margin-right: 15px;
+}
 
 .min-height-342 {
   min-height: 342px;
