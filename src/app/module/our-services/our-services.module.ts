@@ -9,6 +9,7 @@ import { ItSubcontractingRegistrationComponent } from './it-subcontracting-regis
 import { E2eQaRegistrationComponent } from './e2e-qa-registration/e2e-qa-registration.component';
 import { E2eQaRegistrationContactDetailsComponent } from './e2e-qa-registration-contact-details/e2e-qa-registration-contact-details.component';
 import { WorkkawayRegistrationContactDetailsComponent } from './workkaway-registration-contact-details/workkaway-registration-contact-details.component';
+import { PartnerSearchResultExperienceComponent } from './partner-search-result-experience/partner-search-result-experience.component';
 const routes: Routes = [
   {
     path: 'workaway',
@@ -43,6 +44,10 @@ const routes: Routes = [
     component: WorkkawayRegistrationContactDetailsComponent
   },
   {
+    path: 'partner-search-result-experience',
+    component: PartnerSearchResultExperienceComponent
+  },
+  {
     path: '',
     redirectTo: 'workaway',
     pathMatch: 'full'
@@ -58,7 +63,8 @@ const routes: Routes = [
     E2eQaRegistrationComponent,
     E2eQaRegistrationContactDetailsComponent,
     WorkawayRegistrationComponent,
-    WorkkawayRegistrationContactDetailsComponent
+    WorkkawayRegistrationContactDetailsComponent,
+    PartnerSearchResultExperienceComponent
   ],
   imports: [
     CommonModule,
