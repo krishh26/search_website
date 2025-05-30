@@ -38,8 +38,8 @@ const routes: Routes = [
     component: E2eQaHireResourcesRegistrationsComponent
   },
   {
-    path: 'e2e-qa-hire-resources-reg',
-    component: E2eQaRegistrationContactDetailsComponent
+    path: 'e2e-qa-hire-resources-contact-details',
+    component: E2eQaHireResourcesContactDetailsComponent
   },
   {
     path: 'it-subcontracting-services',

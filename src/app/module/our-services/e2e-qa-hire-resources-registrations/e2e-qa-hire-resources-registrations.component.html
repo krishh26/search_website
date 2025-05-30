@@ -1,9 +1,10 @@
-<section class="registration-section" style="background-image: url(img/search-background-image.png);">
+<section class="registration-section margin-top104" style="background-image: url(/assets/img/search-background-image.png);">
   <div class="overlay-bg" style="opacity: 1;">
     <div class="container">
       <div class="text-center text-white">
         <div class="form-check form-check-inline">
-          <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
+          <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1"
+            checked>
           <label class="form-check-label" for="inlineRadio1">WorkAway</label>
         </div>
         <div class="form-check form-check-inline">
@@ -11,8 +12,7 @@
           <label class="form-check-label" for="inlineRadio2">IT Subcontracting</label>
         </div>
         <div class="form-check form-check-inline">
-          <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio3" value="option3"
-            checked>
+          <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio3" value="option3">
           <label class="form-check-label" for="inlineRadio3">E2E QA Services</label>
         </div>
 
@@ -36,6 +36,7 @@
               <span data-translate="">Contact Details</span>
             </li>
           </ul>
+
           <div class="accordion accordion-flush" id="accordionFlushExample">
             <div class="accordion-item">
               <h2 class="accordion-header" id="flush-headingOne">
@@ -50,10 +51,10 @@
                   <h5><strong>How to Use the Company Search</strong></h5>
                   <p>Filter by Budget - Choose your preferred budget range (e.g., Under ₹1 Lakh, ₹1–2 Lakh, etc.) to
                     view matching companies in India.</p>
-                  <p>Compare Key Details - Check each company’s experience, number of projects executed, and preferred
+                  <p>Compare Key Details - Check each company's experience, number of projects executed, and preferred
                     engagement models.</p>
-                  <p>Register or Bulk Upload - For single needs, click “Register to Receive Quote.”
-                    For multiple requirements, use the [Excel Bulk Upload]—we’ll review and get in touch with tailored
+                  <p>Register or Bulk Upload - For single needs, click "Register to Receive Quote."
+                    For multiple requirements, use the [Excel Bulk Upload]—we'll review and get in touch with tailored
                     options.</p>
                   <p>Find Your Match - Shortlist companies based on your goals and connect directly for quotes or
                     discussions.</p>
@@ -61,7 +62,6 @@
               </div>
             </div>
           </div>
-
           <form class="needs-validation" novalidate>
             <div class="form-group">
               <label>I Am a</label>
@@ -77,25 +77,25 @@
 
             <p>Have the demand ready?</p>
             <div class="form-check form-check-inline">
-              <input class="form-check-input" type="radio" name="inlineRadioOptions" id="demandYes" value="option1">
+              <input class="form-check-input" type="radio" name="demandRadioOptions" id="demandYes" value="option1" (click)="onDemandReadyChange(true)">
               <label class="form-check-label" for="demandYes">Yes</label>
             </div>
             <div class="form-check form-check-inline">
-              <input class="form-check-input" type="radio" name="inlineRadioOptions" id="demandNo" value="option2">
+              <input class="form-check-input" type="radio" name="demandRadioOptions" id="demandNo" value="option2" (click)="onDemandReadyChange(false)">
               <label class="form-check-label" for="demandNo">No</label>
             </div>
-            <p class="mt-4"><a href="#" class="btn btn-light" data-bs-toggle="modal"
+            <p class="mt-4" *ngIf="hasDemandReady"><a href="javascript();" class="btn btn-light" data-bs-toggle="modal"
                 data-bs-target="#uploadbulkModal"><i class="bi bi-upload me-2"></i> Upload Bulk Enquiry </a></p>
             <p>I am registering at WorkAway for</p>
             <div class="form-group">
               <div class="form-check">
-                <input class="form-check-input" type="radio" name="bankRadio" id="bankClientOption1">
+                <input class="form-check-input" type="radio" name="bankRadio" id="bankClientOption1" (click)="onBankingOptionChange(true)">
                 <label class="form-check-label" for="bankClientOption1">
                   I would like to bank resources for my client(s)
                 </label>
               </div>
             </div>
-            <div class="form-group ps-4">
+            <div class="form-group ps-4" *ngIf="bankingForClients">
               <div class="form-check">
                 <input class="form-check-input" type="checkbox" value="" id="invalidCheck" required>
                 <label class="form-check-label" for="invalidCheck">
@@ -106,15 +106,16 @@
             </div>
             <div class="form-group">
               <div class="form-check">
-                <input class="form-check-input" type="radio" name="bankRadio" id="bankBusinessOption1">
+                <input class="form-check-input" type="radio" name="bankRadio" id="bankBusinessOption1" (click)="onBankingOptionChange(false)">
                 <label class="form-check-label" for="bankBusinessOption1">
                   I would like to bank resources for my business
                 </label>
               </div>
             </div>
             <div class="form-group text-end">
-              <a class="btn btn-dark"  (click)="goBack()"><i class="bi bi-arrow-left me-2"></i> Go Back</a>
-              <a class="btn btn-primary" type="submit" routerLink="/our-services/e2e-qa-hire-resources-contact-details">Next Step <i
+              <button class="btn btn-dark me-2" (click)="goBack()"><i class="bi bi-arrow-left me-2"></i> Go Back</button>
+              <a class="btn btn-primary" type="submit"
+                routerLink="/our-services/e2e-qa-hire-resources-contact-details">Next Step <i
                   class="bi bi-arrow-right ms-2"></i></a>
             </div>
           </form>
@@ -134,43 +135,43 @@
     <div class="row">
       <div class="col-lg-2 col-xl-2 col-md-4 col-sm-4 col-6">
         <div class="light-gray-card">
+          <img src="/assets/img/ui-ux.gif" height="60" class="mb-4" />
+          <p class="mb-0"><strong>UX/UX Designer</strong></p>
+          <p class="mb-0 p-12">250 Skills</p>
+        </div>
+      </div>
+      <div class="col-lg-2 col-xl-2 col-md-4 col-sm-4 col-6">
+        <div class="light-gray-card">
+          <img src="/assets/img/softwarte-developer.gif" height="60" class="mb-4" />
+          <p class="mb-0"><strong>Software Developer</strong></p>
+          <p class="mb-0 p-12">250 Skills</p>
+        </div>
+      </div>
+      <div class="col-lg-2 col-xl-2 col-md-4 col-sm-4 col-6">
+        <div class="light-gray-card">
           <img src="/assets/img/software-testing.gif" height="60" class="mb-4" />
-          <p class="mb-0"><strong>Manual Tester</strong></p>
+          <p class="mb-0"><strong>Software Tester</strong></p>
           <p class="mb-0 p-12">250 Skills</p>
         </div>
       </div>
       <div class="col-lg-2 col-xl-2 col-md-4 col-sm-4 col-6">
         <div class="light-gray-card">
-          <img src="/assets/img/automation-testing.gif" height="60" class="mb-4" />
-          <p class="mb-0"><strong>Automation Tester</strong></p>
+          <img src="/assets/img/frontend-developer.gif" height="60" class="mb-4" />
+          <p class="mb-0"><strong>Frontend Developer</strong></p>
           <p class="mb-0 p-12">250 Skills</p>
         </div>
       </div>
       <div class="col-lg-2 col-xl-2 col-md-4 col-sm-4 col-6">
         <div class="light-gray-card">
-          <img src="/assets/img/quality-control.gif" height="60" class="mb-4" />
-          <p class="mb-0"><strong>QA Analyst</strong></p>
+          <img src="/assets/img/api-developer.gif" height="60" class="mb-4" />
+          <p class="mb-0"><strong>API Developer</strong></p>
           <p class="mb-0 p-12">250 Skills</p>
         </div>
       </div>
       <div class="col-lg-2 col-xl-2 col-md-4 col-sm-4 col-6">
         <div class="light-gray-card">
-          <img src="/assets/img/nft-testing.gif" height="60" class="mb-4" />
-          <p class="mb-0"><strong>NFT Lead</strong></p>
-          <p class="mb-0 p-12">250 Skills</p>
-        </div>
-      </div>
-      <div class="col-lg-2 col-xl-2 col-md-4 col-sm-4 col-6">
-        <div class="light-gray-card">
-          <img src="/assets/img/uat-testing.gif" height="60" class="mb-4" />
-          <p class="mb-0"><strong>UAT Testing</strong></p>
-          <p class="mb-0 p-12">250 Skills</p>
-        </div>
-      </div>
-      <div class="col-lg-2 col-xl-2 col-md-4 col-sm-4 col-6">
-        <div class="light-gray-card">
-          <img src="/assets/img/page-optimization.gif" height="60" class="mb-4" />
-          <p class="mb-0"><strong>Performance Tester</strong></p>
+          <img src="/assets/img/fullstack-developer.gif" height="60" class="mb-4" />
+          <p class="mb-0"><strong>Fullstack Developer</strong></p>
           <p class="mb-0 p-12">250 Skills</p>
         </div>
       </div>
@@ -178,18 +179,19 @@
   </div>
 </section>
 
+
 <!--Upload Bulk  Modal -->
 <div class="modal fade" id="uploadbulkModal" tabindex="-1" aria-labelledby="uploadbulkModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered modal-lg">
     <div class="modal-content">
       <button type="button" class="btn-close-absolute" data-bs-dismiss="modal" aria-label="Close"></button>
       <div class="modal-body p-5">
-        <h2><strong>Don’t just find. Be found your bulk enquiry in front of great employers</strong></h2>
+        <h2><strong>Don't just find. Be found your bulk enquiry in front of great employers</strong></h2>
         <p>There are many variations of passages of Lorem Ipsum available, but the alteration in some form, by injected
           humour, or randomised words.</p>
         <div class="row mt-5">
           <div class="col-lg-6 col-xl-6 col-md-6 col-sm-6 col-12">
-            <a href="#" class="download-csv-btn shadow-nm">
+            <a href="javascript();" class="download-csv-btn shadow-nm">
               <img src="/assets/img/csv-file.png" class="mb-3">
               <p class="p-22 p-600">Download</p>
               <p>Sample csv file for bulk
@@ -197,7 +199,7 @@
             </a>
           </div>
           <div class="col-lg-6 col-xl-6 col-md-6 col-sm-6 col-12">
-            <a href="#" class="download-csv-btn shadow-nm">
+            <a href="javascript();" class="download-csv-btn shadow-nm">
               <img src="/assets/img/csv-file.png" class="mb-3">
               <p class="p-22 p-600">Upload</p>
               <p>Sample csv file for bulk
@@ -262,6 +264,8 @@
             </a>
           </li>
         </ul>
+
       </div>
     </div>
   </div>
+</div>

@@ -8,10 +8,21 @@ import { Router } from '@angular/router';
 })
 export class E2eQaHireResourcesRegistrationsComponent {
 
+  hasDemandReady: boolean = false;
+  bankingForClients: boolean = false;
+
   constructor(private router: Router) { }
 
   goBack(): void {
     this.router.navigate(['/our-services/e2e-qa-services']);
+  }
+
+  onDemandReadyChange(hasDemand: boolean): void {
+    this.hasDemandReady = hasDemand;
+  }
+
+  onBankingOptionChange(forClients: boolean): void {
+    this.bankingForClients = forClients;
   }
 
 }
