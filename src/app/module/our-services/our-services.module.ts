@@ -9,6 +9,8 @@ import { ItSubcontractingRegistrationComponent } from './it-subcontracting-regis
 import { E2eQaRegistrationComponent } from './e2e-qa-registration/e2e-qa-registration.component';
 import { E2eQaRegistrationContactDetailsComponent } from './e2e-qa-registration-contact-details/e2e-qa-registration-contact-details.component';
 import { WorkkawayRegistrationContactDetailsComponent } from './workkaway-registration-contact-details/workkaway-registration-contact-details.component';
+import { E2eQaHireResourcesContactDetailsComponent } from './e2e-qa-hire-resources-contact-details/e2e-qa-hire-resources-contact-details.component';
+import { E2eQaHireResourcesRegistrationsComponent } from './e2e-qa-hire-resources-registrations/e2e-qa-hire-resources-registrations.component';
 const routes: Routes = [
   {
     path: 'workaway',
@@ -28,6 +30,14 @@ const routes: Routes = [
   },
   {
     path: 'e2e-qa-registration-contact-details',
+    component: E2eQaRegistrationContactDetailsComponent
+  },
+  {
+    path: 'e2e-qa-hire-resources-registration',
+    component: E2eQaHireResourcesRegistrationsComponent
+  },
+  {
+    path: 'e2e-qa-hire-resources-reg',
     component: E2eQaRegistrationContactDetailsComponent
   },
   {
@@ -58,7 +68,9 @@ const routes: Routes = [
     E2eQaRegistrationComponent,
     E2eQaRegistrationContactDetailsComponent,
     WorkawayRegistrationComponent,
-    WorkkawayRegistrationContactDetailsComponent
+    WorkkawayRegistrationContactDetailsComponent,
+    E2eQaHireResourcesContactDetailsComponent,
+    E2eQaHireResourcesRegistrationsComponent
   ],
   imports: [
     CommonModule,
