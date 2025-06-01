@@ -28,7 +28,7 @@
             <p class="p-16 p-600 text-muted">In just a minute away</p>
             <h2 class="page-titletop text-dark">Register with <span class="text-primary">Spectrum IT Hub</span></h2>
           </div>
-          <ul class="wizard mt-3 mb-3">
+          <ul class="wizard mt-3 mb-5">
             <li ui-sref="firstStep" class="active">
               <span data-translate="">Need Details</span>
             </li>
@@ -37,7 +37,10 @@
             </li>
           </ul>
 
-          <div class="accordion accordion-flush" id="accordionFlushExample">
+           <div class="row mb-3 align-items-center">
+              <label for="iama" class="col-sm-3 col-form-label">Search Instruction</label>
+              <div class="col-sm-9">
+                  <div class="accordion accordion-flush" id="accordionFlushExample">
             <div class="accordion-item">
               <h2 class="accordion-header" id="flush-headingOne">
                 <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
@@ -62,56 +65,78 @@
               </div>
             </div>
           </div>
-          <form class="needs-validation" novalidate>
-            <div class="form-group">
-              <label>I Am a</label>
-              <select class="form-select" id="professiontype" required>
-                <option selected disabled value="">Choose from below...</option>
-                <option>Corporate recruitment teams</option>
-                <option>IT recruitment agency</option>
-                <option>Software house</option>
-                <option>IT service provider</option>
-              </select>
-              <div class="invalid-feedback">Please select from the dropdown.</div>
+              </div>
             </div>
 
-            <p>Have the demand ready?</p>
-            <div class="form-check form-check-inline">
-              <input class="form-check-input" type="radio" name="demandRadioOptions" id="demandYes" value="option1" (click)="onDemandReadyChange(true)">
-              <label class="form-check-label" for="demandYes">Yes</label>
+         
+          <form class="needs-validation" novalidate>
+
+            <div class="row mb-3 align-items-center">
+              <label for="iama" class="col-sm-3 col-form-label">I Am a</label>
+              <div class="col-sm-9">
+                 <select class="form-select" id="professiontype" required>
+                  <option selected disabled value="">Choose from below...</option>
+                  <option>Corporate recruitment teams</option>
+                  <option>IT recruitment agency</option>
+                  <option>Software house</option>
+                  <option>IT service provider</option>
+                </select>
+              </div>
             </div>
-            <div class="form-check form-check-inline">
-              <input class="form-check-input" type="radio" name="demandRadioOptions" id="demandNo" value="option2" (click)="onDemandReadyChange(false)">
-              <label class="form-check-label" for="demandNo">No</label>
+
+            <div class="row mb-3 align-items-center">
+              <label for="iama" class="col-sm-3 col-form-label">Have the demand ready?</label>
+              <div class="col-sm-9">
+                 <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="radio" name="demandRadioOptions" id="demandYes" value="option1" (click)="onDemandReadyChange(true)">
+                  <label class="form-check-label" for="demandYes">Yes</label>
+                </div>
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="radio" name="demandRadioOptions" id="demandNo" value="option2" (click)="onDemandReadyChange(false)">
+                  <label class="form-check-label" for="demandNo">No</label>
+                </div>
+              </div>
             </div>
-            <p class="mt-4" *ngIf="hasDemandReady"><a href="javascript();" class="btn btn-light" data-bs-toggle="modal"
+
+            <div class="row mb-3 align-items-center" *ngIf="hasDemandReady">
+              <label for="iama" class="col-sm-3 col-form-label">Upload Bulk Enquiry</label>
+              <div class="col-sm-9">
+                <p class="mt-4"><a href="javascript();" class="btn btn-light" data-bs-toggle="modal"
                 data-bs-target="#uploadbulkModal"><i class="bi bi-upload me-2"></i> Upload Bulk Enquiry </a></p>
-            <p>I am registering at WorkAway for</p>
-            <div class="form-group">
-              <div class="form-check">
-                <input class="form-check-input" type="radio" name="bankRadio" id="bankClientOption1" (click)="onBankingOptionChange(true)">
-                <label class="form-check-label" for="bankClientOption1">
-                  I would like to bank resources for my client(s)
-                </label>
               </div>
             </div>
-            <div class="form-group ps-4" *ngIf="bankingForClients">
-              <div class="form-check">
-                <input class="form-check-input" type="checkbox" value="" id="invalidCheck" required>
-                <label class="form-check-label" for="invalidCheck">
-                  I would like to discuss white labelling options
-                </label>
-                <div class="invalid-feedback">Please select</div>
+
+             <div class="row mb-3 align-items-center">
+              <label for="iama" class="col-sm-3 col-form-label">I am registering at WorkAway for</label>
+              <div class="col-sm-9">
+                <div class="form-group">
+                    <div class="form-check">
+                      <input class="form-check-input" type="radio" name="bankRadio" id="bankClientOption1" (click)="onBankingOptionChange(true)">
+                      <label class="form-check-label" for="bankClientOption1">
+                        I would like to bank resources for my client(s)
+                      </label>
+                    </div>
+                  </div>
+                  <div class="form-group ps-4" *ngIf="bankingForClients">
+                    <div class="form-check">
+                      <input class="form-check-input" type="checkbox" value="" id="invalidCheck" required>
+                      <label class="form-check-label" for="invalidCheck">
+                        I would like to discuss white labelling options
+                      </label>
+                      <div class="invalid-feedback">Please select</div>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <div class="form-check">
+                      <input class="form-check-input" type="radio" name="bankRadio" id="bankBusinessOption1" (click)="onBankingOptionChange(false)">
+                      <label class="form-check-label" for="bankBusinessOption1">
+                        I would like to bank resources for my business
+                      </label>
+                    </div>
+                  </div>
               </div>
             </div>
-            <div class="form-group">
-              <div class="form-check">
-                <input class="form-check-input" type="radio" name="bankRadio" id="bankBusinessOption1" (click)="onBankingOptionChange(false)">
-                <label class="form-check-label" for="bankBusinessOption1">
-                  I would like to bank resources for my business
-                </label>
-              </div>
-            </div>
+            
             <div class="form-group text-end">
               <button class="btn btn-dark me-2" (click)="goBack()"><i class="bi bi-arrow-left me-2"></i> Go Back</button>
               <a class="btn btn-primary" type="submit"

@@ -1736,6 +1736,9 @@ Nav Tabs
 /*=================================
 Search bar 
 ==================================*/
+/*=================================
+Search bar 
+==================================*/
 .search-box-large {
   position: relative;
   height: 72px;
@@ -1746,7 +1749,8 @@ Search bar
 }
 
 .search-box-large i,
-.search-box-large .button {
+.search-box-large .button,
+.search-box-large .search-link{
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
@@ -1765,12 +1769,12 @@ Search bar
   font-size: 18px;
   font-weight: 400;
   border: none;
-  padding: 0 155px 0 65px;
+  padding: 0 300px 0 65px;
   background-color: transparent;
 }
 
 .search-box-large .button {
-  right: 20px;
+  right: 200px;
   font-size: 16px;
   font-weight: 400;
   color: #fff;
@@ -1780,9 +1784,35 @@ Search bar
   background-color: #000;
   cursor: pointer;
 }
+.search-box-large .search-link {
+  right: 0px;
+  font-size: 16px;
+  font-weight: 600;
+  color: #0F51E0;
+  border: none;
+  padding: 12px 30px;
+  cursor: pointer;
+}
 
+.search-link-btn {
+  right: 0px;
+  font-size: 16px;
+  font-weight: 600;
+  color: #0F51E0;
+  border: none;
+  padding: 12px 15px;
+  cursor: pointer;
+}
 .search-box-large .button:active {
   transform: translateY(-50%) scale(0.98);
+}
+
+.searchcard {
+ border-left: 6px solid #5BBB7B;
+}
+
+.searchcard:nth-child(2n+1) {
+ border-left: 6px solid #ffc107 ;
 }
 
 /* Responsive */
