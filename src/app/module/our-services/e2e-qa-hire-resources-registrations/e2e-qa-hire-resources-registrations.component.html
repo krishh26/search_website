@@ -37,39 +37,16 @@
             </li>
           </ul>
 
-           <div class="row mb-3 align-items-center">
-              <label for="iama" class="col-sm-3 col-form-label">Search Instruction</label>
-              <div class="col-sm-9">
-                  <div class="accordion accordion-flush" id="accordionFlushExample">
-                    <div class="accordion-item">
-                      <h2 class="accordion-header" id="flush-headingOne">
-                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                          data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
-                          <strong><i class="bi bi-info-circle-fill"></i> Search Instruction</strong>
-                        </button>
-                      </h2>
-                      <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne"
-                        data-bs-parent="#accordionFlushExample">
-                        <div class="accordion-body">
-                          <h5><strong>How to Use the Company Search</strong></h5>
-                          <p>Filter by Budget - Choose your preferred budget range (e.g., Under ₹1 Lakh, ₹1–2 Lakh, etc.) to
-                            view matching companies in India.</p>
-                          <p>Compare Key Details - Check each company's experience, number of projects executed, and preferred
-                            engagement models.</p>
-                          <p>Register or Bulk Upload - For single needs, click "Register to Receive Quote."
-                            For multiple requirements, use the [Excel Bulk Upload]—we'll review and get in touch with tailored
-                            options.</p>
-                          <p>Find Your Match - Shortlist companies based on your goals and connect directly for quotes or
-                            discussions.</p>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
+          <div class="row mb-3">
+            <div class="col-12">
+              <div class="alert" role="alert" style="background-color: #E5E4E2; border-color: #E5E4E2;">
+                <i class="bi bi-exclamation-triangle-fill me-2"></i>
+                <strong>Quick Guide:</strong> Filter by budget range to view matching companies. Compare experience, projects executed, and engagement models.<br>
+                <strong>Action:</strong> Click "Register to Receive Quote" for single needs or use "Excel Bulk Upload" for multiple requirements.
               </div>
+            </div>
           </div>
 
-
-         
           <form class="needs-validation" novalidate>
 
             <div class="row mb-3 align-items-center">
@@ -122,6 +99,11 @@
                       <div class="invalid-feedback">Please select</div>
                     </div>
                   </div>
+              </div>
+           </div>
+           <div class="row mb-3 mt-2">
+             <div class="col-sm-3"></div>
+             <div class="col-sm-9">
                   <div class="form-group">
                     <div class="form-check">
                       <input class="form-check-input" type="radio" name="bankRadio" id="bankBusinessOption1" (click)="onBankingOptionChange(false)">
@@ -132,8 +114,8 @@
                   </div>
               </div>
            </div>
-            
-                       
+
+
             <div class="form-group text-end">
               <button class="btn btn-dark me-2" (click)="goBack()"><i class="bi bi-arrow-left me-2"></i> Go Back</button>
               <a class="btn btn-primary" type="submit"
