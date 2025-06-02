@@ -40,62 +40,103 @@
               </ul>
 
 
-              <form class="needs-validation" novalidate>
+              <form [formGroup]="contactForm" (ngSubmit)="onSubmit()" class="needs-validation" novalidate>
 
                  <div class="row mb-3 align-items-center">
-                    <label for="iama" class="col-sm-3 col-form-label">Busienss Name</label>
+                    <label for="businessName" class="col-sm-3 col-form-label">Business Name</label>
                     <div class="col-sm-9">
-                      <input type="text" class="form-control" id="businessName" placeholder="Enter your business name...">
-                      <div class="invalid-feedback">Please enter your business name.</div>
+                      <input type="text" class="form-control" id="businessName"
+                             formControlName="businessName"
+                             placeholder="Enter your business name..."
+                             [class.is-invalid]="businessName?.invalid && businessName?.touched">
+                      <div class="invalid-feedback" *ngIf="businessName?.invalid && businessName?.touched">
+                        <span *ngIf="businessName?.errors?.['required']">Please enter your business name.</span>
+                        <span *ngIf="businessName?.errors?.['minlength']">Business name must be at least 2 characters.</span>
+                      </div>
                     </div>
                   </div>
                   <div class="row mb-3 align-items-center">
-                    <label for="iama" class="col-sm-3 col-form-label">Address</label>
+                    <label for="address" class="col-sm-3 col-form-label">Address</label>
                     <div class="col-sm-9">
-                       <textarea class="form-control" id="Address" cols="100" rows="1"
-                        placeholder="Enter your address..."></textarea>
-                      <div class="invalid-feedback">Please enter your business name.</div>
+                       <textarea class="form-control" id="address" cols="100" rows="1"
+                                formControlName="address"
+                                placeholder="Enter your address..."
+                                [class.is-invalid]="address?.invalid && address?.touched"></textarea>
+                      <div class="invalid-feedback" *ngIf="address?.invalid && address?.touched">
+                        <span *ngIf="address?.errors?.['required']">Please enter your address.</span>
+                        <span *ngIf="address?.errors?.['minlength']">Address must be at least 5 characters.</span>
+                      </div>
                     </div>
                   </div>
                   <div class="row mb-3 align-items-center">
-                    <label for="iama" class="col-sm-3 col-form-label">Your Full Name </label>
+                    <label for="fullName" class="col-sm-3 col-form-label">Your Full Name </label>
                     <div class="col-sm-9">
-                       <input type="text" class="form-control" id="yourName" placeholder="Enter your name...">
-                       <div class="invalid-feedback">Please enter your full name.</div>
+                       <input type="text" class="form-control" id="fullName"
+                              formControlName="fullName"
+                              placeholder="Enter your name..."
+                              [class.is-invalid]="fullName?.invalid && fullName?.touched">
+                       <div class="invalid-feedback" *ngIf="fullName?.invalid && fullName?.touched">
+                        <span *ngIf="fullName?.errors?.['required']">Please enter your full name.</span>
+                        <span *ngIf="fullName?.errors?.['minlength']">Name must be at least 2 characters.</span>
+                       </div>
                     </div>
                   </div>
                   <div class="row mb-3 align-items-center">
-                    <label for="iama" class="col-sm-3 col-form-label">Phone Number </label>
+                    <label for="phoneNumber" class="col-sm-3 col-form-label">Phone Number </label>
                     <div class="col-sm-9">
-                       <input type="text" class="form-control" id="phoneNo" placeholder="Enter your phone number...">
-                      <div class="invalid-feedback">Please enter your phone number.</div>
+                       <input type="text" class="form-control" id="phoneNumber"
+                              formControlName="phoneNumber"
+                              placeholder="Enter your phone number..."
+                              [class.is-invalid]="phoneNumber?.invalid && phoneNumber?.touched">
+                      <div class="invalid-feedback" *ngIf="phoneNumber?.invalid && phoneNumber?.touched">
+                        <span *ngIf="phoneNumber?.errors?.['required']">Please enter your phone number.</span>
+                        <span *ngIf="phoneNumber?.errors?.['pattern']">Please enter a valid phone number.</span>
+                      </div>
                     </div>
                   </div>
                   <div class="row mb-3 align-items-center">
-                    <label for="iama" class="col-sm-3 col-form-label">Job Title </label>
+                    <label for="jobTitle" class="col-sm-3 col-form-label">Job Title </label>
                     <div class="col-sm-9">
-                       <input type="text" class="form-control" id="jobTitle" placeholder="Enter your job title...">
-                       <div class="invalid-feedback">Please enter your job title.</div>
+                       <input type="text" class="form-control" id="jobTitle"
+                              formControlName="jobTitle"
+                              placeholder="Enter your job title..."
+                              [class.is-invalid]="jobTitle?.invalid && jobTitle?.touched">
+                       <div class="invalid-feedback" *ngIf="jobTitle?.invalid && jobTitle?.touched">
+                        <span *ngIf="jobTitle?.errors?.['required']">Please enter your job title.</span>
+                        <span *ngIf="jobTitle?.errors?.['minlength']">Job title must be at least 2 characters.</span>
+                       </div>
                     </div>
                   </div>
                   <div class="row mb-3 align-items-center">
-                    <label for="iama" class="col-sm-3 col-form-label">Email Address</label>
+                    <label for="emailAddress" class="col-sm-3 col-form-label">Email Address</label>
                     <div class="col-sm-9">
-                       <input type="text" class="form-control" id="emaiID" placeholder="Enter your email id...">
-                       <div class="invalid-feedback">Please enter your email id.</div>
+                       <input type="email" class="form-control" id="emailAddress"
+                              formControlName="emailAddress"
+                              placeholder="Enter your email id..."
+                              [class.is-invalid]="emailAddress?.invalid && emailAddress?.touched">
+                       <div class="invalid-feedback" *ngIf="emailAddress?.invalid && emailAddress?.touched">
+                        <span *ngIf="emailAddress?.errors?.['required']">Please enter your email address.</span>
+                        <span *ngIf="emailAddress?.errors?.['email']">Please enter a valid email address.</span>
+                       </div>
                     </div>
                   </div>
                   <div class="row mb-3 align-items-center">
-                    <label for="iama" class="col-sm-3 col-form-label">How did you hear about us? </label>
+                    <label for="howDidYouHear" class="col-sm-3 col-form-label">How did you hear about us? </label>
                     <div class="col-sm-9">
-                       <input type="text" class="form-control" id="aboutUS" placeholder="Enter details...">
+                       <input type="text" class="form-control" id="howDidYouHear"
+                              formControlName="howDidYouHear"
+                              placeholder="Enter details...">
                     </div>
                   </div>
                 <div class="form-group text-end">
-                  <!-- <button class="btn btn-primary" type="submit"  onclick="window.location.href='success-message.html';">Submit</button> -->
-                  <button class="btn btn-dark me-2" (click)="goBack()"><i class="bi bi-arrow-left me-2"></i> Go Back</button>
-                  <a class="btn btn-primary" type="submit" href="success-message.html">Submit <i
-                      class="bi bi-save2 ms-2"></i></a>
+                  <button class="btn btn-dark me-2" type="button" (click)="goBack()">
+                    <i class="bi bi-arrow-left me-2"></i> Go Back
+                  </button>
+                  <button class="btn btn-primary" type="submit" [disabled]="isSubmitting">
+                    <span *ngIf="isSubmitting" class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>
+                    {{ isSubmitting ? 'Submitting...' : 'Submit' }}
+                    <i class="bi bi-save2 ms-2" *ngIf="!isSubmitting"></i>
+                  </button>
                 </div>
               </form>
             </div>

@@ -1,6 +1,7 @@
 import { ItSubcontractingServicesComponent } from './it-subcontracting-services/it-subcontracting-services.component';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { ReactiveFormsModule } from '@angular/forms';
 import { RouterModule, Routes } from '@angular/router';
 import { WorkawayComponent } from './workaway/workaway.component';
 import { E2eQaServicesComponent } from './e2e-qa-services/e2e-qa-services.component';
@@ -13,6 +14,7 @@ import { E2eQaHireResourcesContactDetailsComponent } from './e2e-qa-hire-resourc
 import { E2eQaHireResourcesRegistrationsComponent } from './e2e-qa-hire-resources-registrations/e2e-qa-hire-resources-registrations.component';
 import { PartnerSearchResultExperienceComponent } from './partner-search-result-experience/partner-search-result-experience.component';
 import { CandidateSearchResultComponent } from './candidate-search-result/candidate-search-result.component';
+
 const routes: Routes = [
   {
     path: 'workaway',
@@ -86,6 +88,7 @@ const routes: Routes = [
   ],
   imports: [
     CommonModule,
+    ReactiveFormsModule,
     RouterModule.forChild(routes)
   ]
 })

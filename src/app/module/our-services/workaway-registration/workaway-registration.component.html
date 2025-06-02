@@ -4,15 +4,17 @@
       <div class="text-center text-white">
         <div class="form-check form-check-inline">
           <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1"
-            checked>
+            (change)="onServiceTypeChange('option1')" [checked]="selectedServiceType === 'option1'">
           <label class="form-check-label" for="inlineRadio1">WorkAway</label>
         </div>
         <div class="form-check form-check-inline">
-          <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
+          <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2"
+            (change)="onServiceTypeChange('option2')" [checked]="selectedServiceType === 'option2'">
           <label class="form-check-label" for="inlineRadio2">IT Subcontracting</label>
         </div>
         <div class="form-check form-check-inline">
-          <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio3" value="option3">
+          <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio3" value="option3"
+            (change)="onServiceTypeChange('option3')" [checked]="selectedServiceType === 'option3'">
           <label class="form-check-label" for="inlineRadio3">E2E QA Services</label>
         </div>
 
@@ -68,19 +70,23 @@
               </div>
             </div>
 
-         
-          <form class="needs-validation" novalidate>
+
+          <form [formGroup]="registrationForm" (ngSubmit)="onSubmit()" class="needs-validation" novalidate>
 
             <div class="row mb-3 align-items-center">
               <label for="iama" class="col-sm-3 col-form-label">I Am a</label>
               <div class="col-sm-9">
-                 <select class="form-select" id="professiontype" required>
+                 <select class="form-select" id="professiontype" formControlName="professionType"
+                         [class.is-invalid]="professionType?.invalid && professionType?.touched">
                   <option selected disabled value="">Choose from below...</option>
-                  <option>Corporate recruitment teams</option>
-                  <option>IT recruitment agency</option>
-                  <option>Software house</option>
-                  <option>IT service provider</option>
+                  <option value="Corporate recruitment teams">Corporate recruitment teams</option>
+                  <option value="IT recruitment agency">IT recruitment agency</option>
+                  <option value="Software house">Software house</option>
+                  <option value="IT service provider">IT service provider</option>
                 </select>
+                <div class="invalid-feedback" *ngIf="professionType?.invalid && professionType?.touched">
+                  Please select your profession type.
+                </div>
               </div>
             </div>
 
@@ -88,12 +94,17 @@
               <label for="iama" class="col-sm-3 col-form-label">Have the demand ready?</label>
               <div class="col-sm-9">
                  <div class="form-check form-check-inline">
-                  <input class="form-check-input" type="radio" name="demandRadioOptions" id="demandYes" value="option1" (click)="onDemandReadyChange(true)">
+                  <input class="form-check-input" type="radio" name="demandRadioOptions" id="demandYes"
+                         value="true" (click)="onDemandReadyChange(true)">
                   <label class="form-check-label" for="demandYes">Yes</label>
                 </div>
                 <div class="form-check form-check-inline">
-                  <input class="form-check-input" type="radio" name="demandRadioOptions" id="demandNo" value="option2" (click)="onDemandReadyChange(false)">
+                  <input class="form-check-input" type="radio" name="demandRadioOptions" id="demandNo"
+                         value="false" (click)="onDemandReadyChange(false)">
                   <label class="form-check-label" for="demandNo">No</label>
+                </div>
+                <div class="invalid-feedback" *ngIf="hasDemandReadyControl?.invalid && hasDemandReadyControl?.touched">
+                  Please select an option.
                 </div>
               </div>
             </div>
@@ -101,8 +112,17 @@
             <div class="row mb-3 align-items-center" *ngIf="hasDemandReady">
               <label for="iama" class="col-sm-3 col-form-label">Upload Bulk Enquiry</label>
               <div class="col-sm-9">
-                <p class="mt-4"><a href="javascript();" class="btn btn-light" data-bs-toggle="modal"
-                data-bs-target="#uploadbulkModal"><i class="bi bi-upload me-2"></i> Upload Bulk Enquiry </a></p>
+                <input type="file" #fileInput (change)="onFileUpload($event)" accept=".csv,.xlsx,.xls" style="display: none">
+                <p class="mt-4">
+                  <button type="button" class="btn btn-light me-2" (click)="fileInput.click()" [disabled]="isUploading">
+                    <span *ngIf="isUploading" class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>
+                    <i class="bi bi-upload me-2" *ngIf="!isUploading"></i>
+                    {{ isUploading ? 'Uploading...' : 'Upload File' }}
+                  </button>
+                  <button type="button" class="btn btn-light" (click)="onBulkEnquiryUpload()" [disabled]="isUploading" data-bs-toggle="modal" data-bs-target="#uploadbulkModal">
+                    <i class="bi bi-upload me-2"></i> Sample Bulk Upload
+                  </button>
+                </p>
               </div>
             </div>
 
@@ -119,11 +139,10 @@
                   </div>
                   <div class="form-group ps-4" *ngIf="bankingForClients">
                     <div class="form-check">
-                      <input class="form-check-input" type="checkbox" value="" id="invalidCheck" required>
+                      <input class="form-check-input" type="checkbox" formControlName="whiteLabelOption" id="invalidCheck">
                       <label class="form-check-label" for="invalidCheck">
                         I would like to discuss white labelling options
                       </label>
-                      <div class="invalid-feedback">Please select</div>
                     </div>
                   </div>
                   <div class="form-group">
@@ -134,14 +153,21 @@
                       </label>
                     </div>
                   </div>
+                <div class="invalid-feedback" *ngIf="bankingOption?.invalid && bankingOption?.touched">
+                  Please select a banking option.
+                </div>
               </div>
             </div>
-            
+
             <div class="form-group text-end">
-              <button class="btn btn-dark me-2" (click)="goBack()"><i class="bi bi-arrow-left me-2"></i> Go Back</button>
-              <a class="btn btn-primary" type="submit"
-                routerLink="/our-services/workaway-registration-contact-details">Next Step <i
-                  class="bi bi-arrow-right ms-2"></i></a>
+              <button class="btn btn-dark me-2" type="button" (click)="goBack()">
+                <i class="bi bi-arrow-left me-2"></i> Go Back
+              </button>
+              <button class="btn btn-primary" type="submit" [disabled]="isSubmitting">
+                <span *ngIf="isSubmitting" class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>
+                {{ isSubmitting ? 'Submitting...' : 'Next Step' }}
+                <i class="bi bi-arrow-right ms-2" *ngIf="!isSubmitting"></i>
+              </button>
             </div>
           </form>
 
@@ -216,7 +242,7 @@
           humour, or randomised words.</p>
         <div class="row mt-5">
           <div class="col-lg-6 col-xl-6 col-md-6 col-sm-6 col-12">
-            <a href="javascript();" class="download-csv-btn shadow-nm">
+            <a href="javascript:void(0);" class="download-csv-btn shadow-nm" (click)="downloadSampleCSV()">
               <img src="/assets/img/csv-file.png" class="mb-3">
               <p class="p-22 p-600">Download</p>
               <p>Sample csv file for bulk
@@ -224,10 +250,11 @@
             </a>
           </div>
           <div class="col-lg-6 col-xl-6 col-md-6 col-sm-6 col-12">
-            <a href="javascript();" class="download-csv-btn shadow-nm">
+            <input type="file" #modalFileInput (change)="onModalFileUpload($event)" accept=".csv,.xlsx,.xls" style="display: none">
+            <a href="javascript:void(0);" class="download-csv-btn shadow-nm" (click)="modalFileInput.click()">
               <img src="/assets/img/csv-file.png" class="mb-3">
               <p class="p-22 p-600">Upload</p>
-              <p>Sample csv file for bulk
+              <p>Upload your csv file for bulk
                 enquiry search</p>
             </a>
           </div>
