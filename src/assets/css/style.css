@@ -1734,10 +1734,10 @@ Nav Tabs
 }
 
 /*=================================
-Search bar 
+Search bar
 ==================================*/
 /*=================================
-Search bar 
+Search bar
 ==================================*/
 .search-box-large {
   position: relative;
@@ -1809,10 +1809,6 @@ Search bar
 
 .searchcard {
  border-left: 6px solid #5BBB7B;
-}
-
-.searchcard:nth-child(2n+1) {
- border-left: 6px solid #ffc107 ;
 }
 
 /* Responsive */
@@ -1919,7 +1915,7 @@ CTA style
 }
 
 /*=========================================
-Step wizard 
+Step wizard
 ===========================================*/
 ul.wizard,
 ul.wizard li {
@@ -2127,7 +2123,7 @@ ul.SearchneedList li a{
   color: #000;
   border-radius: 12px;
 }
-ul.SearchneedList li a:hover { 
+ul.SearchneedList li a:hover {
   background-color: #F5F8FF;
 }
 /*==================================
