@@ -1,46 +1,51 @@
-
-
-  <section class="registration-section margin-top104" style="background-image: url(assets/img/search-background-image.png);">
+<main>
+  <section class="registration-section margin-top104"
+    style="background-image: url(assets/img/search-background-image.png);">
     <div class="overlay-bg" style="opacity: 1;">
       <div class="container">
-       <div class="text-center text-white">
-        <div class="form-check form-check-inline">
-          <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
-          <label class="form-check-label" for="inlineRadio1">WorkAway</label>
-        </div>
-        <div class="form-check form-check-inline">
-          <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2" checked>
-          <label class="form-check-label" for="inlineRadio2">IT Subcontracting</label>
-        </div>
-        <div class="form-check form-check-inline">
-          <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio3" value="option3">
-          <label class="form-check-label" for="inlineRadio3">E2E QA Services</label>
-        </div>
-
-        <h1 class="page-titletop mt-3">Lorem ipsum dolor sit amet, consectetur adipiscing elit</h1>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-          Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-       </div>
-       <div class="FlatCard text-dark" style="z-index: 1;">
-        <div class="card-body p-5">
-          <div class="row">
-            <div class="col-12">
-              <div class="text-center">
-                <p class="p-16 p-600 text-muted">In just a minute away</p>
-                <h2 class="page-titletop text-dark">Register with <span class="text-primary">Spectrum IT Hub</span></h2>
-             </div>
-             <ul class="wizard mt-3 mb-5">
-              <li ui-sref="firstStep" class="active">
-                <span data-translate="">Need Details</span>
-              </li>
-              <li ui-sref="secondStep" class="">
-                <span data-translate="">Contact Details</span>
-              </li>
-            </ul>
-            </div>
+        <div class="text-center text-white">
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
+            <label class="form-check-label" for="inlineRadio1">WorkAway</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2"
+              checked>
+            <label class="form-check-label" for="inlineRadio2">IT Subcontracting</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio3" value="option3">
+            <label class="form-check-label" for="inlineRadio3">E2E QA Services</label>
           </div>
 
-           <!-- <div class="row mb-3 align-items-center">
+          <h1 class="page-titletop mt-3">Lorem ipsum dolor sit amet, consectetur adipiscing elit</h1>
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
+            dolore
+            magna aliqua.
+            Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+          </p>
+        </div>
+        <div class="FlatCard text-dark" style="z-index: 1;">
+          <div class="card-body p-5">
+            <div class="row">
+              <div class="col-12">
+                <div class="text-center">
+                  <p class="p-16 p-600 text-muted">In just a minute away</p>
+                  <h2 class="page-titletop text-dark">Register with <span class="text-primary">Spectrum IT Hub</span>
+                  </h2>
+                </div>
+                <ul class="wizard mt-3 mb-5">
+                  <li [class.active]="!showContactForm">
+                    <span data-translate="">Need Details</span>
+                  </li>
+                  <li [class.active]="showContactForm">
+                    <span data-translate="">Contact Details</span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+
+            <!-- <div class="row mb-3 align-items-center">
               <label for="iama" class="col-sm-3 col-form-label">Search Instruction</label>
               <div class="col-sm-9">
                   <div class="accordion accordion-flush" id="accordionFlushExample">
@@ -70,35 +75,39 @@
               <div class="col-12">
                 <div class="alert" role="alert" style="background-color: #E5E4E2; border-color: #E5E4E2;">
                   <i class="bi bi-exclamation-triangle-fill me-2"></i>
-                  <strong>Quick Guide:</strong> Filter by budget range to view matching companies. Compare experience, projects executed, and engagement models.<br>
-                  <strong>Action:</strong> Click "Register to Receive Quote" for single needs or use "Excel Bulk Upload" for multiple requirements.
+                  <strong>Quick Guide:</strong> Filter by budget range to view matching companies. Compare experience,
+                  projects executed, and engagement models.<br>
+                  <strong>Action:</strong> Click "Register to Receive Quote" for single needs or use "Excel Bulk Upload"
+                  for multiple requirements.
                 </div>
               </div>
             </div>
-          
 
-          <form class="needs-validation" novalidate>
 
-            <div class="row mb-3 align-items-center">
-              <label for="iama" class="col-sm-3 col-form-label">I Am a <span class="text-danger">*</span></label>
-              <div class="col-sm-9">
-                   <select class="form-select" id="professiontype" required>
+            <form [formGroup]="registrationForm" class="needs-validation" *ngIf="!showContactForm">
+              <div class="row mb-3 align-items-center">
+                <label for="professiontype" class="col-sm-3 col-form-label">I Am a <span class="text-danger">*</span></label>
+                <div class="col-sm-9">
+                  <select class="form-select" id="professiontype" formControlName="professionType" [class.is-invalid]="registrationForm.get('professionType')?.touched && registrationForm.get('professionType')?.errors">
                     <option selected disabled value="">Choose from below...</option>
                     <option>Corporate recruitment teams</option>
                     <option>IT recruitment agency</option>
                     <option>Software house</option>
                     <option>IT service provider</option>
                   </select>
-                  <div class="invalid-feedback">Please select from the dropdown.</div>                 
+                  <div class="invalid-feedback" *ngIf="getRegistrationFormError('professionType')">
+                    {{ getRegistrationFormError('professionType') }}
+                  </div>
+                </div>
               </div>
-           </div>  
 
-           <div class="row mb-3">
-                <label for="iama" class="col-sm-3 col-form-label">I am registering for <span class="text-danger">*</span></label>
+              <div class="row mb-3">
+                <label for="registrationType" class="col-sm-3 col-form-label">I am registering for <span class="text-danger">*</span></label>
                 <div class="col-sm-9">
                   <div class="form-group mt-2 mb-0">
-                     <div class="form-check">
-                      <input class="form-check-input" type="radio" name="registrationRadio" id="bankClientOption1" value="representative" (change)="onRegistrationTypeChange('representative')" checked>
+                    <div class="form-check">
+                      <input class="form-check-input" type="radio" name="registrationType" id="bankClientOption1"
+                        value="representative" formControlName="registrationType" (change)="onRegistrationTypeChange('representative')">
                       <label class="form-check-label" for="bankClientOption1">
                         Representative for my client
                       </label>
@@ -106,112 +115,211 @@
                   </div>
                   <div class="form-group mb-0 ps-4" *ngIf="isRepresentativeForClient">
                     <div class="form-check">
-                      <input class="form-check-input" type="checkbox" value="" id="invalidCheck" required>
+                      <input class="form-check-input" type="checkbox" formControlName="whiteLabelOption">
                       <label class="form-check-label" for="invalidCheck">
                         I would like to discuss white labelling options
                       </label>
-                      <div class="invalid-feedback">Please select</div>
                     </div>
                   </div>
-                   <div class="form-group mb-0">
+                  <div class="form-group mb-0">
                     <div class="form-check">
-                      <input class="form-check-input" type="radio" name="registrationRadio" id="bankBusinessOption1" value="business" (change)="onRegistrationTypeChange('business')">
+                      <input class="form-check-input" type="radio" name="registrationType" id="bankBusinessOption1"
+                        value="business" formControlName="registrationType" (change)="onRegistrationTypeChange('business')">
                       <label class="form-check-label" for="bankBusinessOption1">
                         I am a business
                       </label>
                     </div>
                   </div>
                 </div>
-            </div>
-
-            <div class="row mb-3 align-items-center">
-              <label for="iama" class="col-sm-3 col-form-label">Have the demand ready? <span class="text-danger">*</span></label>
-              <div class="col-sm-9">
-                 <div class="form-check form-check-inline">
-                  <input class="form-check-input" type="radio" name="demandRadioOptions" id="demandYes" value="yes" (change)="onDemandReadyChange('yes')">
-                  <label class="form-check-label" for="demandYes">Yes</label>
-                </div>
-                <div class="form-check form-check-inline">
-                  <input class="form-check-input" type="radio" name="demandRadioOptions" id="demandNo" value="no" (change)="onDemandReadyChange('no')">
-                  <label class="form-check-label" for="demandNo">No</label>
-                </div>                  
               </div>
-           </div>              
 
-            <div *ngIf="hasDemandReady">
-               <div class="row mb-3 align-items-center">
-                  <label for="iama" class="col-sm-3 col-form-label">Enter Your Requirement <span class="text-danger">*</span></label>
-                  <div class="col-sm-9">
-                    <input type="text" class="form-control" placeholder="Eg. Cloud Migration" required>               
+              <div class="row mb-3 align-items-center">
+                <label for="demandReady" class="col-sm-3 col-form-label">Have the demand ready? <span class="text-danger">*</span></label>
+                <div class="col-sm-9">
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="hasDemandReady" id="demandYes" value="yes"
+                      formControlName="hasDemandReady" (change)="onDemandReadyChange('yes')">
+                    <label class="form-check-label" for="demandYes">Yes</label>
                   </div>
-                </div>  
-                 <div class="row mb-3 align-items-center">
-                  <label for="iama" class="col-sm-3 col-form-label">Engagement Type <span class="text-danger">*</span></label>
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="hasDemandReady" id="demandNo" value="no"
+                      formControlName="hasDemandReady" (change)="onDemandReadyChange('no')">
+                    <label class="form-check-label" for="demandNo">No</label>
+                  </div>
+                  <div class="invalid-feedback" *ngIf="registrationForm.get('hasDemandReady')?.touched && registrationForm.get('hasDemandReady')?.errors?.['required']">
+                    Please select an option.
+                  </div>
+                </div>
+              </div>
+
+              <div *ngIf="hasDemandReady">
+                <div class="row mb-3 align-items-center">
+                  <label for="requirement" class="col-sm-3 col-form-label">Enter Your Requirement <span class="text-danger">*</span></label>
+                  <div class="col-sm-9">
+                    <input type="text" class="form-control" formControlName="requirement" 
+                           [class.is-invalid]="registrationForm.get('requirement')?.touched && registrationForm.get('requirement')?.errors"
+                           placeholder="Eg. Cloud Migration">
+                    <div class="invalid-feedback" *ngIf="getRegistrationFormError('requirement')">
+                      {{ getRegistrationFormError('requirement') }}
+                    </div>
+                  </div>
+                </div>
+                <div class="row mb-3 align-items-center">
+                  <label for="engagementType" class="col-sm-3 col-form-label">Engagement Type <span class="text-danger">*</span></label>
                   <div class="col-sm-9">
                     <div class="form-check form-check-inline">
-                      <input class="form-check-input" type="radio" name="engagementRadioOptions" id="Fulldelivery" value="option1">
+                      <input class="form-check-input" type="radio" name="engagementType" id="Fulldelivery"
+                        value="full" formControlName="engagementType">
                       <label class="form-check-label" for="Fulldelivery">Full Delivery</label>
                     </div>
                     <div class="form-check form-check-inline">
-                      <input class="form-check-input" type="radio" name="engagementRadioOptions" id="Partdelivery" value="option2">
+                      <input class="form-check-input" type="radio" name="engagementType" id="Partdelivery"
+                        value="part" formControlName="engagementType">
                       <label class="form-check-label" for="Partdelivery">Part Delivery</label>
                     </div>
                     <div class="form-check form-check-inline">
-                      <input class="form-check-input" type="radio" name="engagementRadioOptions" id="Ongoing" value="option3">
+                      <input class="form-check-input" type="radio" name="engagementType" id="Ongoing"
+                        value="ongoing" formControlName="engagementType">
                       <label class="form-check-label" for="Ongoing">Ongoing</label>
-                    </div>             
+                    </div>
+                    <div class="invalid-feedback" *ngIf="registrationForm.get('engagementType')?.touched && registrationForm.get('engagementType')?.errors?.['required']">
+                      Please select an engagement type.
+                    </div>
                   </div>
-                </div> 
+                </div>
                 <div class="row mb-3 align-items-center">
-                  <label for="iama" class="col-sm-3 col-form-label">Description <span class="text-danger">*</span></label>
+                  <label for="description" class="col-sm-3 col-form-label">Description <span class="text-danger">*</span></label>
                   <div class="col-sm-9">
-                       <textarea class="form-control" rows="2" cols="100">Lorem ipsum is a dummy or placeholder text commonly used in graphic design, publishing, and web development.</textarea>       
+                    <textarea class="form-control" rows="2" cols="100" formControlName="description"
+                             [class.is-invalid]="registrationForm.get('description')?.touched && registrationForm.get('description')?.errors"></textarea>
+                    <div class="invalid-feedback" *ngIf="getRegistrationFormError('description')">
+                      {{ getRegistrationFormError('description') }}
+                    </div>
                   </div>
-                </div>  
+                </div>
                 <div class="row mb-3 align-items-center">
-                  <label for="iama" class="col-sm-3 col-form-label">Choose Language <span class="text-danger">*</span></label>
+                  <label for="language" class="col-sm-3 col-form-label">Choose Language <span class="text-danger">*</span></label>
                   <div class="col-sm-9">
-                       <input type="text" class="form-control" placeholder="Eg. javascript" required>
-                        <ul class="searchresult-tags mb-2 mt-3">
-                          <li class="">Angular JS <span class="remove-tag"><i class="bi bi-x"></i></span></li>
-                          <li class="">ASP .Net <span class="remove-tag"><i class="bi bi-x"></i></span></li>
-                          <li class="">C# .Net <span class="remove-tag"><i class="bi bi-x"></i></span></li>
-                          <li class="">PHP <span class="remove-tag"><i class="bi bi-x"></i></span></li>
-                        </ul>
+                    <input type="text" class="form-control" formControlName="language"
+                           [class.is-invalid]="registrationForm.get('language')?.touched && registrationForm.get('language')?.errors"
+                           placeholder="Eg. javascript">
+                    <div class="invalid-feedback" *ngIf="getRegistrationFormError('language')">
+                      {{ getRegistrationFormError('language') }}
+                    </div>
+                    <ul class="searchresult-tags mb-2 mt-3">
+                      <li class="">Angular JS <span class="remove-tag"><i class="bi bi-x"></i></span></li>
+                      <li class="">ASP .Net <span class="remove-tag"><i class="bi bi-x"></i></span></li>
+                      <li class="">C# .Net <span class="remove-tag"><i class="bi bi-x"></i></span></li>
+                      <li class="">PHP <span class="remove-tag"><i class="bi bi-x"></i></span></li>
+                    </ul>
                   </div>
-                </div>  
+                </div>
                 <div class="row mb-3 align-items-center">
-                  <label for="iama" class="col-sm-3 col-form-label">Start Date, End Date & Budget <span class="text-danger">*</span></label>
+                  <label for="dates" class="col-sm-3 col-form-label">Start Date, End Date & Budget <span class="text-danger">*</span></label>
                   <div class="col-sm-9">
                     <div class="row">
                       <div class="col-lg-4 col-xl-4 col-sm-4 col-md-4 col-12 mob-mb1">
-                        <input type="date" class="form-control" value="23/3/2025">
-                      </div>
-                       <div class="col-lg-4 col-xl-4 col-sm-4 col-md-4 col-12 mob-mb1">
-                        <input type="date" class="form-control" value="23/3/2025">
+                        <input type="date" class="form-control" formControlName="startDate"
+                               [class.is-invalid]="registrationForm.get('startDate')?.touched && registrationForm.get('startDate')?.errors">
+                        <div class="invalid-feedback" *ngIf="getRegistrationFormError('startDate')">
+                          {{ getRegistrationFormError('startDate') }}
+                        </div>
                       </div>
                       <div class="col-lg-4 col-xl-4 col-sm-4 col-md-4 col-12 mob-mb1">
-                         <select class="form-select" id="budgettype" required>
-                            <option>5 Lac</option>
-                            <option>1-5 Lac</option>
-                          </select>
+                        <input type="date" class="form-control" formControlName="endDate"
+                               [class.is-invalid]="registrationForm.get('endDate')?.touched && registrationForm.get('endDate')?.errors">
+                        <div class="invalid-feedback" *ngIf="getRegistrationFormError('endDate')">
+                          {{ getRegistrationFormError('endDate') }}
+                        </div>
+                      </div>
+                      <div class="col-lg-4 col-xl-4 col-sm-4 col-md-4 col-12 mob-mb1">
+                        <select class="form-select" formControlName="budget"
+                                [class.is-invalid]="registrationForm.get('budget')?.touched && registrationForm.get('budget')?.errors">
+                          <option value="">Select Budget</option>
+                          <option value="5">5 Lac</option>
+                          <option value="1-5">1-5 Lac</option>
+                        </select>
+                        <div class="invalid-feedback" *ngIf="getRegistrationFormError('budget')">
+                          {{ getRegistrationFormError('budget') }}
+                        </div>
                       </div>
                     </div>
                   </div>
-                </div>                
-            </div>
+                </div>
+              </div>
 
-               
-           
-            <div class="form-group text-end">
-              <button class="btn btn-dark me-2" (click)="goBack()"><i class="bi bi-arrow-left me-2"></i> Go Back</button>
-              <!-- <button class="btn btn-primary" type="submit"  onclick="window.location.href='registration-step2.html';">Next Step</button> -->
-              <a class="btn btn-primary" type="button" routerLink="/our-services/workaway-registration-contact-details">Next Step <i class="bi bi-arrow-right ms-2"></i></a>
-            </div>
-          </form>
+              <div class="form-group text-end">
+                <button class="btn btn-dark me-2" (click)="goBack()"><i class="bi bi-arrow-left me-2"></i> Go Back</button>
+                <button class="btn btn-primary" type="button" (click)="nextStep()">Next Step <i class="bi bi-arrow-right ms-2"></i></button>
+              </div>
+            </form>
 
+            <form [formGroup]="contactForm" class="needs-validation" *ngIf="showContactForm">
+              <div class="form-group">
+                <label>Business name <span class="text-danger">*</span></label>
+                <input type="text" class="form-control" formControlName="businessName"
+                       [class.is-invalid]="contactForm.get('businessName')?.touched && contactForm.get('businessName')?.errors"
+                       placeholder="Enter your business name...">
+                <div class="invalid-feedback" *ngIf="getContactFormError('businessName')">
+                  {{ getContactFormError('businessName') }}
+                </div>
+              </div>
+              <div class="form-group">
+                <label>Address <span class="text-danger">*</span></label>
+                <textarea class="form-control" formControlName="address" cols="100" rows="1"
+                          [class.is-invalid]="contactForm.get('address')?.touched && contactForm.get('address')?.errors"
+                          placeholder="Enter your address..."></textarea>
+                <div class="invalid-feedback" *ngIf="getContactFormError('address')">
+                  {{ getContactFormError('address') }}
+                </div>
+              </div>
+              <div class="form-group">
+                <label>Your Full Name <span class="text-danger">*</span></label>
+                <input type="text" class="form-control" formControlName="fullName"
+                       [class.is-invalid]="contactForm.get('fullName')?.touched && contactForm.get('fullName')?.errors"
+                       placeholder="Enter your name...">
+                <div class="invalid-feedback" *ngIf="getContactFormError('fullName')">
+                  {{ getContactFormError('fullName') }}
+                </div>
+              </div>
+              <div class="form-group">
+                <label>Job Title <span class="text-danger">*</span></label>
+                <input type="text" class="form-control" formControlName="jobTitle"
+                       [class.is-invalid]="contactForm.get('jobTitle')?.touched && contactForm.get('jobTitle')?.errors"
+                       placeholder="Enter your job title...">
+                <div class="invalid-feedback" *ngIf="getContactFormError('jobTitle')">
+                  {{ getContactFormError('jobTitle') }}
+                </div>
+              </div>
+              <div class="form-group">
+                <label>Phone Number <span class="text-danger">*</span></label>
+                <input type="text" class="form-control" formControlName="phoneNumber"
+                       [class.is-invalid]="contactForm.get('phoneNumber')?.touched && contactForm.get('phoneNumber')?.errors"
+                       placeholder="Enter your phone number...">
+                <div class="invalid-feedback" *ngIf="getContactFormError('phoneNumber')">
+                  {{ getContactFormError('phoneNumber') }}
+                </div>
+              </div>
+              <div class="form-group">
+                <label>Email Address <span class="text-danger">*</span></label>
+                <input type="text" class="form-control" formControlName="email"
+                       [class.is-invalid]="contactForm.get('email')?.touched && contactForm.get('email')?.errors"
+                       placeholder="Enter your email id...">
+                <div class="invalid-feedback" *ngIf="getContactFormError('email')">
+                  {{ getContactFormError('email') }}
+                </div>
+              </div>
+              <div class="form-group">
+                <label>How did you hear about us?</label>
+                <input type="text" class="form-control" formControlName="hearAboutUs" placeholder="Enter details...">
+              </div>
+              <div class="form-group text-end">
+                <button class="btn btn-dark me-2" (click)="goBack()"><i class="bi bi-arrow-left me-2"></i> Go Back</button>
+                <button class="btn btn-primary" type="button" (click)="onSubmit()">Submit <i class="bi bi-save2 ms-2"></i></button>
+              </div>
+            </form>
+          </div>
         </div>
-      </div>
       </div>
     </div>
   </section>
@@ -225,42 +333,42 @@
       <div class="row">
         <div class="col-lg-2 col-xl-2 col-md-4 col-sm-4 col-6">
           <div class="light-gray-card">
-            <img src="/assets/img/software-development.gif" height="60" class="mb-4"/>
+            <img src="/assets/img/software-development.gif" height="60" class="mb-4" />
             <p class="mb-0"><strong>Software Development</strong></p>
             <p class="mb-0 p-12">250 Skills</p>
           </div>
         </div>
         <div class="col-lg-2 col-xl-2 col-md-4 col-sm-4 col-6">
           <div class="light-gray-card">
-            <img src="/assets/img/cloud-development.gif" height="60" class="mb-4"/>
+            <img src="/assets/img/cloud-development.gif" height="60" class="mb-4" />
             <p class="mb-0"><strong>Cloud & DevOps</strong></p>
             <p class="mb-0 p-12">250 Skills</p>
           </div>
         </div>
         <div class="col-lg-2 col-xl-2 col-md-4 col-sm-4 col-6">
           <div class="light-gray-card">
-            <img src="/assets/img/digital-transformation.gif" height="60" class="mb-4"/>
+            <img src="/assets/img/digital-transformation.gif" height="60" class="mb-4" />
             <p class="mb-0"><strong>Digital Transformation</strong></p>
             <p class="mb-0 p-12">250 Skills</p>
           </div>
         </div>
         <div class="col-lg-2 col-xl-2 col-md-4 col-sm-4 col-6">
           <div class="light-gray-card">
-            <img src="/assets/img/system-intigration.gif" height="60" class="mb-4"/>
+            <img src="/assets/img/system-intigration.gif" height="60" class="mb-4" />
             <p class="mb-0"><strong>Systems Integration</strong></p>
             <p class="mb-0 p-12">250 Skills</p>
           </div>
         </div>
         <div class="col-lg-2 col-xl-2 col-md-4 col-sm-4 col-6">
           <div class="light-gray-card">
-            <img src="/assets/img/software-testing.gif" height="60" class="mb-4"/>
+            <img src="/assets/img/software-testing.gif" height="60" class="mb-4" />
             <p class="mb-0"><strong>QA & Testing</strong></p>
             <p class="mb-0 p-12">250 Skills</p>
           </div>
         </div>
         <div class="col-lg-2 col-xl-2 col-md-4 col-sm-4 col-6">
           <div class="light-gray-card">
-            <img src="/assets/img/ui-ux.gif" height="60" class="mb-4"/>
+            <img src="/assets/img/ui-ux.gif" height="60" class="mb-4" />
             <p class="mb-0"><strong>UI/UX Design</strong></p>
             <p class="mb-0 p-12">250 Skills</p>
           </div>
@@ -268,57 +376,59 @@
       </div>
     </div>
   </section>
-
- <!--Search  Modal -->
+</main>
+<!--Search  Modal -->
 <div class="modal fade" id="searchModal" tabindex="-1" aria-labelledby="searchModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered modal-lg">
     <div class="modal-content">
       <button type="button" class="btn-close-absolute" data-bs-dismiss="modal" aria-label="Close"></button>
       <div class="modal-body p-5">
         <h3><strong>Choose Your Need</strong></h3>
-       <p>Find Your Match - Shortlist companies based on your goals and connect directly for quotes or discussions.</p>
+        <p>Find Your Match - Shortlist companies based on your goals and connect directly for quotes or discussions.</p>
 
-       <ul class="SearchneedList">
-        <li>
-          <a href="resources-search.html">
-             <div class="row align-items-center">
+        <ul class="SearchneedList">
+          <li>
+            <a href="resources-search.html">
+              <div class="row align-items-center">
                 <div class="col-2">
-                  <img src="/assets/img/resources-team.gif" width="64"/>
+                  <img src="/assets/img/resources-team.gif" width="64" />
                 </div>
                 <div class="col-10">
                   <p class="p-18 p-600 mb-0">Search Talent</p>
                   <p class="mb-0 text-muted p-12">WorkAway gives you guaranteed access to pre-approved IT talent</p>
                 </div>
               </div>
-          </a>
-        </li>
-        <li>
-          <a href="resources-search.html">
-             <div class="row align-items-center">
+            </a>
+          </li>
+          <li>
+            <a href="resources-search.html">
+              <div class="row align-items-center">
                 <div class="col-2">
-                  <img src="/assets/img/QA-services.gif" width="64"/>
+                  <img src="/assets/img/QA-services.gif" width="64" />
                 </div>
                 <div class="col-10">
                   <p class="p-18 p-600 mb-0">QA Services</p>
-                  <p class="mb-0 text-muted p-12">End-to-end testing solutions powered by UK governance and India delivery strength</p>
+                  <p class="mb-0 text-muted p-12">End-to-end testing solutions powered by UK governance and India
+                    delivery strength</p>
                 </div>
               </div>
-          </a>
-        </li>
-        <li>
-          <a href="resources-search.html">
-             <div class="row align-items-center">
+            </a>
+          </li>
+          <li>
+            <a href="resources-search.html">
+              <div class="row align-items-center">
                 <div class="col-2">
-                  <img src="/assets/img/corporate-team.gif" width="64"/>
+                  <img src="/assets/img/corporate-team.gif" width="64" />
                 </div>
                 <div class="col-10">
                   <p class="p-18 p-600 mb-0">IT Subcontracting Services</p>
-                  <p class="mb-0 text-muted p-12">Scale your delivery capacity without the cost, risk, or delay of permanent hires</p>
+                  <p class="mb-0 text-muted p-12">Scale your delivery capacity without the cost, risk, or delay of
+                    permanent hires</p>
                 </div>
               </div>
-          </a>
-        </li>
-       </ul>
+            </a>
+          </li>
+        </ul>
 
       </div>
     </div>
