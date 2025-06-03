@@ -40,7 +40,7 @@
             </div>
           </div>
 
-           <div class="row mb-3 align-items-center">
+           <!-- <div class="row mb-3 align-items-center">
               <label for="iama" class="col-sm-3 col-form-label">Search Instruction</label>
               <div class="col-sm-9">
                   <div class="accordion accordion-flush" id="accordionFlushExample">
@@ -63,16 +63,24 @@
                     </div>
                   </div>                   
               </div>
-           </div>                                 
+           </div>                                  -->
 
 
-
+            <div class="row mb-3">
+              <div class="col-12">
+                <div class="alert" role="alert" style="background-color: #E5E4E2; border-color: #E5E4E2;">
+                  <i class="bi bi-exclamation-triangle-fill me-2"></i>
+                  <strong>Quick Guide:</strong> Filter by budget range to view matching companies. Compare experience, projects executed, and engagement models.<br>
+                  <strong>Action:</strong> Click "Register to Receive Quote" for single needs or use "Excel Bulk Upload" for multiple requirements.
+                </div>
+              </div>
+            </div>
           
 
           <form class="needs-validation" novalidate>
 
             <div class="row mb-3 align-items-center">
-              <label for="iama" class="col-sm-3 col-form-label">I Am a</label>
+              <label for="iama" class="col-sm-3 col-form-label">I Am a <span class="text-danger">*</span></label>
               <div class="col-sm-9">
                    <select class="form-select" id="professiontype" required>
                     <option selected disabled value="">Choose from below...</option>
@@ -85,8 +93,39 @@
               </div>
            </div>  
 
+           <div class="row mb-3">
+                <label for="iama" class="col-sm-3 col-form-label">I am registering for <span class="text-danger">*</span></label>
+                <div class="col-sm-9">
+                  <div class="form-group mt-2 mb-0">
+                     <div class="form-check">
+                      <input class="form-check-input" type="radio" name="registrationRadio" id="bankClientOption1" value="representative" (change)="onRegistrationTypeChange('representative')" checked>
+                      <label class="form-check-label" for="bankClientOption1">
+                        Representative for my client
+                      </label>
+                    </div>
+                  </div>
+                  <div class="form-group mb-0 ps-4" *ngIf="isRepresentativeForClient">
+                    <div class="form-check">
+                      <input class="form-check-input" type="checkbox" value="" id="invalidCheck" required>
+                      <label class="form-check-label" for="invalidCheck">
+                        I would like to discuss white labelling options
+                      </label>
+                      <div class="invalid-feedback">Please select</div>
+                    </div>
+                  </div>
+                   <div class="form-group mb-0">
+                    <div class="form-check">
+                      <input class="form-check-input" type="radio" name="registrationRadio" id="bankBusinessOption1" value="business" (change)="onRegistrationTypeChange('business')">
+                      <label class="form-check-label" for="bankBusinessOption1">
+                        I am a business
+                      </label>
+                    </div>
+                  </div>
+                </div>
+            </div>
+
             <div class="row mb-3 align-items-center">
-              <label for="iama" class="col-sm-3 col-form-label">Have the demand ready?</label>
+              <label for="iama" class="col-sm-3 col-form-label">Have the demand ready? <span class="text-danger">*</span></label>
               <div class="col-sm-9">
                  <div class="form-check form-check-inline">
                   <input class="form-check-input" type="radio" name="demandRadioOptions" id="demandYes" value="yes" (change)="onDemandReadyChange('yes')">
@@ -101,13 +140,13 @@
 
             <div *ngIf="hasDemandReady">
                <div class="row mb-3 align-items-center">
-                  <label for="iama" class="col-sm-3 col-form-label">Enter Your Requirement</label>
+                  <label for="iama" class="col-sm-3 col-form-label">Enter Your Requirement <span class="text-danger">*</span></label>
                   <div class="col-sm-9">
                     <input type="text" class="form-control" placeholder="Eg. Cloud Migration" required>               
                   </div>
                 </div>  
                  <div class="row mb-3 align-items-center">
-                  <label for="iama" class="col-sm-3 col-form-label">Engagement Type :</label>
+                  <label for="iama" class="col-sm-3 col-form-label">Engagement Type <span class="text-danger">*</span></label>
                   <div class="col-sm-9">
                     <div class="form-check form-check-inline">
                       <input class="form-check-input" type="radio" name="engagementRadioOptions" id="Fulldelivery" value="option1">
@@ -124,13 +163,13 @@
                   </div>
                 </div> 
                 <div class="row mb-3 align-items-center">
-                  <label for="iama" class="col-sm-3 col-form-label">Description</label>
+                  <label for="iama" class="col-sm-3 col-form-label">Description <span class="text-danger">*</span></label>
                   <div class="col-sm-9">
                        <textarea class="form-control" rows="2" cols="100">Lorem ipsum is a dummy or placeholder text commonly used in graphic design, publishing, and web development.</textarea>       
                   </div>
                 </div>  
                 <div class="row mb-3 align-items-center">
-                  <label for="iama" class="col-sm-3 col-form-label">Choose Language</label>
+                  <label for="iama" class="col-sm-3 col-form-label">Choose Language <span class="text-danger">*</span></label>
                   <div class="col-sm-9">
                        <input type="text" class="form-control" placeholder="Eg. javascript" required>
                         <ul class="searchresult-tags mb-2 mt-3">
@@ -142,7 +181,7 @@
                   </div>
                 </div>  
                 <div class="row mb-3 align-items-center">
-                  <label for="iama" class="col-sm-3 col-form-label">Start Date, End Date & Budget</label>
+                  <label for="iama" class="col-sm-3 col-form-label">Start Date, End Date & Budget <span class="text-danger">*</span></label>
                   <div class="col-sm-9">
                     <div class="row">
                       <div class="col-lg-4 col-xl-4 col-sm-4 col-md-4 col-12 mob-mb1">
@@ -162,36 +201,7 @@
                 </div>                
             </div>
 
-            <div class="row mb-3 align-items-center">
-                <label for="iama" class="col-sm-3 col-form-label">I am registering for</label>
-                <div class="col-sm-9">
-                  <div class="form-group">
-                     <div class="form-check">
-                      <input class="form-check-input" type="radio" name="registrationRadio" id="bankClientOption1" value="representative" (change)="onRegistrationTypeChange('representative')" checked>
-                      <label class="form-check-label" for="bankClientOption1">
-                        Representative for my client
-                      </label>
-                    </div>
-                  </div>
-                  <div class="form-group" *ngIf="isRepresentativeForClient">
-                    <div class="form-check">
-                      <input class="form-check-input" type="checkbox" value="" id="invalidCheck" required>
-                      <label class="form-check-label" for="invalidCheck">
-                        I would like to discuss white labelling options
-                      </label>
-                      <div class="invalid-feedback">Please select</div>
-                    </div>
-                  </div>
-                   <div class="form-group">
-                    <div class="form-check">
-                      <input class="form-check-input" type="radio" name="registrationRadio" id="bankBusinessOption1" value="business" (change)="onRegistrationTypeChange('business')">
-                      <label class="form-check-label" for="bankBusinessOption1">
-                        I am a business
-                      </label>
-                    </div>
-                  </div>
-                </div>
-            </div>   
+               
            
             <div class="form-group text-end">
               <button class="btn btn-dark me-2" (click)="goBack()"><i class="bi bi-arrow-left me-2"></i> Go Back</button>

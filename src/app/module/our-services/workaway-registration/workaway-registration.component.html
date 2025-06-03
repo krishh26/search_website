@@ -53,7 +53,7 @@
           <form [formGroup]="registrationForm" (ngSubmit)="onSubmit()" class="needs-validation" novalidate>
 
             <div class="row mb-3 align-items-center">
-              <label for="iama" class="col-sm-3 col-form-label">I Am a</label>
+              <label for="iama" class="col-sm-3 col-form-label">I Am a <span class="text-danger">*</span></label>
               <div class="col-sm-9">
                  <select class="form-select" id="professiontype" formControlName="professionType"
                          [class.is-invalid]="professionType?.invalid && professionType?.touched">
@@ -69,8 +69,36 @@
               </div>
             </div>
 
+            <div class="row mb-3">
+              <label for="iama" class="col-sm-3 col-form-label">I am registering at WorkAway for <span class="text-danger">*</span></label>
+              <div class="col-sm-9">
+                <div class="form-group mt-2 mb-0">
+                    <div class="form-check">
+                      <input class="form-check-input" type="radio" name="bankRadio" id="bankClientOption1" (click)="onBankingOptionChange(true)">
+                      <label class="form-check-label mb-0" for="bankClientOption1">
+                        I would like to bank resources for my client(s)
+                      </label>
+                    </div>
+                  </div>
+                  <div class="form-group ps-4" *ngIf="bankingForClients">
+                    <div class="form-check">
+                      <input class="form-check-input" type="checkbox" formControlName="whiteLabelOption" id="invalidCheck">
+                      <label class="form-check-label" for="invalidCheck">
+                        I would like to discuss white labelling options
+                      </label>
+                    </div>
+                  </div>
+                  <div class="form-check">
+                      <input class="form-check-input" type="radio" name="bankRadio" id="bankBusinessOption1" (click)="onBankingOptionChange(false)">
+                      <label class="form-check-label" for="bankBusinessOption1">
+                        I would like to bank resources for my business
+                      </label>
+                    </div>
+              </div>
+            </div>
+
             <div class="row mb-3 align-items-center">
-              <label for="iama" class="col-sm-3 col-form-label">Have the demand ready?</label>
+              <label for="iama" class="col-sm-3 col-form-label">Have the demand ready? <span class="text-danger">*</span></label>
               <div class="col-sm-9">
                  <div class="form-check form-check-inline">
                   <input class="form-check-input" type="radio" name="demandRadioOptions" id="demandYes"
@@ -89,7 +117,7 @@
             </div>
 
             <div class="row mb-3 align-items-center" *ngIf="hasDemandReady">
-              <label for="iama" class="col-sm-3 col-form-label">Upload Bulk Enquiry</label>
+              <label for="iama" class="col-sm-3 col-form-label">Upload Enquiry <span class="text-danger">*</span></label>
               <div class="col-sm-9">
                 <input type="file" #fileInput (change)="onFileUpload($event)" accept=".csv,.xlsx,.xls" style="display: none">
                 <p class="mt-4">
@@ -98,50 +126,25 @@
                     <i class="bi bi-upload me-2" *ngIf="!isUploading"></i>
                     {{ isUploading ? 'Uploading...' : 'Upload File' }}
                   </button>
-                  <button type="button" class="btn btn-light" (click)="onBulkEnquiryUpload()" [disabled]="isUploading" data-bs-toggle="modal" data-bs-target="#uploadbulkModal">
-                    <i class="bi bi-upload me-2"></i> Sample Bulk Upload
+                  <button type="button" class="btn btn-link text-primary" (click)="onBulkEnquiryUpload()" [disabled]="isUploading" data-bs-toggle="modal" data-bs-target="#uploadbulkModal">
+                    <u> Sample File</u>
                   </button>
                 </p>
               </div>
             </div>
 
-             <div class="row mb-3 align-items-center">
-              <label for="iama" class="col-sm-3 col-form-label">I am registering at WorkAway for</label>
-              <div class="col-sm-9">
-                <div class="form-group">
-                    <div class="form-check">
-                      <input class="form-check-input" type="radio" name="bankRadio" id="bankClientOption1" (click)="onBankingOptionChange(true)">
-                      <label class="form-check-label" for="bankClientOption1">
-                        I would like to bank resources for my client(s)
-                      </label>
-                    </div>
-                  </div>
-                  <div class="form-group ps-4" *ngIf="bankingForClients">
-                    <div class="form-check">
-                      <input class="form-check-input" type="checkbox" formControlName="whiteLabelOption" id="invalidCheck">
-                      <label class="form-check-label" for="invalidCheck">
-                        I would like to discuss white labelling options
-                      </label>
-                    </div>
-                  </div>
-              </div>
-            </div>
-            <div class="row mb-3 mt-2">
+             
+            <!-- <div class="row mb-3 mt-2">
               <div class="col-sm-3"></div>
               <div class="col-sm-9">
                   <div class="form-group">
-                    <div class="form-check">
-                      <input class="form-check-input" type="radio" name="bankRadio" id="bankBusinessOption1" (click)="onBankingOptionChange(false)">
-                      <label class="form-check-label" for="bankBusinessOption1">
-                        I would like to bank resources for my business
-                      </label>
-                    </div>
+                    
                   </div>
                 <div class="invalid-feedback" *ngIf="bankingOption?.invalid && bankingOption?.touched">
                   Please select a banking option.
                 </div>
               </div>
-            </div>
+            </div> -->
 
             <div class="form-group text-end">
               <button class="btn btn-dark me-2" type="button" (click)="goBack()">
@@ -224,7 +227,7 @@
         <h2><strong>Don't just find. Be found your bulk enquiry in front of great employers</strong></h2>
         <p>There are many variations of passages of Lorem Ipsum available, but the alteration in some form, by injected
           humour, or randomised words.</p>
-        <div class="row mt-5">
+        <div class="row justify-content-center mt-5">
           <div class="col-lg-6 col-xl-6 col-md-6 col-sm-6 col-12">
             <a href="javascript:void(0);" class="download-csv-btn shadow-nm" (click)="downloadSampleCSV()">
               <img src="/assets/img/csv-file.png" class="mb-3">
@@ -232,16 +235,7 @@
               <p>Sample csv file for bulk
                 enquiry search</p>
             </a>
-          </div>
-          <div class="col-lg-6 col-xl-6 col-md-6 col-sm-6 col-12">
-            <input type="file" #modalFileInput (change)="onModalFileUpload($event)" accept=".csv,.xlsx,.xls" style="display: none">
-            <a href="javascript:void(0);" class="download-csv-btn shadow-nm" (click)="modalFileInput.click()">
-              <img src="/assets/img/csv-file.png" class="mb-3">
-              <p class="p-22 p-600">Upload</p>
-              <p>Upload your csv file for bulk
-                enquiry search</p>
-            </a>
-          </div>
+          </div>          
         </div>
       </div>
     </div>

@@ -50,7 +50,7 @@
           <form class="needs-validation" novalidate>
 
             <div class="row mb-3 align-items-center">
-              <label for="iama" class="col-sm-3 col-form-label">I Am a</label>
+              <label for="iama" class="col-sm-3 col-form-label">I Am a <span class="text-danger">*</span></label>
               <div class="col-sm-9">
                    <select class="form-select" id="professiontype" required>
                     <option selected disabled value="">Choose from below...</option>
@@ -63,26 +63,10 @@
               </div>
            </div>
 
-           <div class="row mb-3 align-items-center">
-              <label for="iama" class="col-sm-3 col-form-label">Have the demand ready?</label>
+           <div class="row mb-3">
+              <label for="iama" class="col-sm-3 col-form-label">I am registering at WorkAway for <span class="text-danger">*</span></label>
               <div class="col-sm-9">
-                  <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="demandRadioOptions" id="demandYes" value="option1" (click)="onDemandReadyChange(true)">
-                    <label class="form-check-label" for="demandYes">Yes</label>
-                  </div>
-                  <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="demandRadioOptions" id="demandNo" value="option2" (click)="onDemandReadyChange(false)">
-                    <label class="form-check-label" for="demandNo">No</label>
-                  </div>
-                   <p class="mt-4" *ngIf="hasDemandReady"><a href="javascript();" class="btn btn-light" data-bs-toggle="modal"
-                    data-bs-target="#uploadbulkModal"><i class="bi bi-upload me-2"></i> Upload Bulk Enquiry </a></p>
-              </div>
-           </div>
-
-             <div class="row mb-3 align-items-center">
-              <label for="iama" class="col-sm-3 col-form-label">I am registering at WorkAway for</label>
-              <div class="col-sm-9">
-                 <div class="form-group">
+                 <div class="form-group mb-0 mt-2">
                     <div class="form-check">
                       <input class="form-check-input" type="radio" name="bankRadio" id="bankClientOption1" (click)="onBankingOptionChange(true)">
                       <label class="form-check-label" for="bankClientOption1">
@@ -90,7 +74,7 @@
                       </label>
                     </div>
                   </div>
-                  <div class="form-group ps-4" *ngIf="bankingForClients">
+                  <div class="form-group mb-0 ps-4" *ngIf="bankingForClients">
                     <div class="form-check">
                       <input class="form-check-input" type="checkbox" value="" id="invalidCheck" required>
                       <label class="form-check-label" for="invalidCheck">
@@ -99,12 +83,7 @@
                       <div class="invalid-feedback">Please select</div>
                     </div>
                   </div>
-              </div>
-           </div>
-           <div class="row mb-3 mt-2">
-             <div class="col-sm-3"></div>
-             <div class="col-sm-9">
-                  <div class="form-group">
+                  <div class="form-group mb-0">
                     <div class="form-check">
                       <input class="form-check-input" type="radio" name="bankRadio" id="bankBusinessOption1" (click)="onBankingOptionChange(false)">
                       <label class="form-check-label" for="bankBusinessOption1">
@@ -115,7 +94,41 @@
               </div>
            </div>
 
+           <div class="row mb-3">
+              <label for="iama" class="col-sm-3 col-form-label">Have the demand ready? <span class="text-danger">*</span></label>
+              <div class="col-sm-9">
+                  <div class="form-check form-check-inline mt-2">
+                    <input class="form-check-input" type="radio" name="demandRadioOptions" id="demandYes" value="option1" (click)="onDemandReadyChange(true)">
+                    <label class="form-check-label" for="demandYes">Yes</label>
+                  </div>
+                  <div class="form-check form-check-inline mt-2">
+                    <input class="form-check-input" type="radio" name="demandRadioOptions" id="demandNo" value="option2" (click)="onDemandReadyChange(false)">
+                    <label class="form-check-label" for="demandNo">No</label>
+                  </div>                  
+              </div>
+           </div>
 
+            <div class="row mb-3 align-items-center" *ngIf="hasDemandReady">
+              <label for="iama" class="col-sm-3 col-form-label">Upload Enquiry <span class="text-danger">*</span></label>
+              <div class="col-sm-9">
+                <input type="file" #fileInput (change)="onFileUpload($event)" accept=".csv,.xlsx,.xls" style="display: none">
+                <p class="mt-4">
+                  <button type="button" class="btn btn-light me-2" (click)="fileInput.click()" [disabled]="isUploading">
+                    <span *ngIf="isUploading" class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>
+                    <i class="bi bi-upload me-2" *ngIf="!isUploading"></i>
+                    {{ isUploading ? 'Uploading...' : 'Upload File' }}
+                  </button>
+                  <button type="button" class="btn btn-link text-primary" (click)="onBulkEnquiryUpload()" [disabled]="isUploading" data-bs-toggle="modal" data-bs-target="#uploadbulkModal">
+                    <u> Sample File</u>
+                  </button>
+                </p>
+              </div>
+            </div>
+
+           
+
+             
+          
             <div class="form-group text-end">
               <button class="btn btn-dark me-2" (click)="goBack()"><i class="bi bi-arrow-left me-2"></i> Go Back</button>
               <a class="btn btn-primary" type="submit"
@@ -193,7 +206,7 @@
         <h2><strong>Don't just find. Be found your bulk enquiry in front of great employers</strong></h2>
         <p>There are many variations of passages of Lorem Ipsum available, but the alteration in some form, by injected
           humour, or randomised words.</p>
-        <div class="row mt-5">
+        <div class="row justify-content-center mt-5">
           <div class="col-lg-6 col-xl-6 col-md-6 col-sm-6 col-12">
             <a href="javascript();" class="download-csv-btn shadow-nm">
               <img src="/assets/img/csv-file.png" class="mb-3">
@@ -201,15 +214,7 @@
               <p>Sample csv file for bulk
                 enquiry search</p>
             </a>
-          </div>
-          <div class="col-lg-6 col-xl-6 col-md-6 col-sm-6 col-12">
-            <a href="javascript();" class="download-csv-btn shadow-nm">
-              <img src="/assets/img/csv-file.png" class="mb-3">
-              <p class="p-22 p-600">Upload</p>
-              <p>Sample csv file for bulk
-                enquiry search</p>
-            </a>
-          </div>
+          </div>          
         </div>
       </div>
     </div>
