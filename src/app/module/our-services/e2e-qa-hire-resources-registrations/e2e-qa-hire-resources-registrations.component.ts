@@ -15,7 +15,7 @@ export class E2eQaHireResourcesRegistrationsComponent {
   bankingForClients: boolean = false;
   isSubmitting: boolean = false;
   isUploading: boolean = false;
-  selectedServiceType: string = 'option1';
+  selectedServiceType: string = 'option3';
 
   constructor(
     private router: Router,
@@ -27,11 +27,13 @@ export class E2eQaHireResourcesRegistrationsComponent {
 
   private initializeForm(): void {
     this.registrationForm = this.formBuilder.group({
-      serviceType: ['option1', [Validators.required]], // WorkAway, IT Subcontracting, E2E QA Services
+      serviceType: ['option3', [Validators.required]], // Default to E2E QA Services
       professionType: ['', [Validators.required]],
-      hasDemandReady: ['', [Validators.required]],
+      hasDemandReady: [false, [Validators.required]],
       bankingOption: ['', [Validators.required]],
-      whiteLabelOption: [false]
+      whiteLabelOption: [false],
+      uploadedFileUrl: [''],
+      uploadedFileKey: ['']
     });
   }
 
@@ -41,10 +43,23 @@ export class E2eQaHireResourcesRegistrationsComponent {
 
   onDemandReadyChange(hasDemand: boolean): void {
     this.hasDemandReady = hasDemand;
+    this.registrationForm.patchValue({
+      hasDemandReady: hasDemand
+    });
   }
 
   onBankingOptionChange(forClients: boolean): void {
     this.bankingForClients = forClients;
+    this.registrationForm.patchValue({
+      bankingOption: forClients ? 'client' : 'business'
+    });
+  }
+
+  onServiceTypeChange(serviceType: string): void {
+    this.selectedServiceType = serviceType;
+    this.registrationForm.patchValue({
+      serviceType: serviceType
+    });
   }
 
   // Handle file upload
@@ -55,10 +70,12 @@ export class E2eQaHireResourcesRegistrationsComponent {
       this.formDataService.uploadProjectFiles(event.target.files[0]).subscribe({
         next: (response) => {
           this.isUploading = false;
-          if (response?.status == true) {
+          if (response?.status === true) {
             console.log('File uploaded successfully:', response);
-            console.log('File URL:', response?.data?.url);
-            console.log('File Key:', response?.data?.key);
+            this.registrationForm.patchValue({
+              uploadedFileUrl: response?.data?.url,
+              uploadedFileKey: response?.data?.key
+            });
             alert('File uploaded successfully!');
           } else {
             alert('Upload failed. Please try again.');
@@ -78,22 +95,39 @@ export class E2eQaHireResourcesRegistrationsComponent {
       this.isSubmitting = true;
 
       const formData = {
-        serviceType: this.getServiceTypeText(this.registrationForm.value.serviceType),
-        professionType: this.registrationForm.value.professionType,
-        hasDemandReady: this.registrationForm.value.hasDemandReady,
-        bankingOption: this.registrationForm.value.bankingOption,
-        whiteLabelOption: this.registrationForm.value.whiteLabelOption,
-        timestamp: new Date().toISOString()
+        formType: 'e2eQARegistration',
+        formData: {
+          serviceType: this.getServiceTypeText(this.registrationForm.value.serviceType),
+          professionType: this.registrationForm.value.professionType,
+          hasDemandReady: this.registrationForm.value.hasDemandReady,
+          bankingOption: this.registrationForm.value.bankingOption,
+          whiteLabelOption: this.registrationForm.value.whiteLabelOption,
+          uploadedFileUrl: this.registrationForm.value.uploadedFileUrl,
+          uploadedFileKey: this.registrationForm.value.uploadedFileKey,
+          timestamp: new Date().toISOString()
+        }
       };
 
-      // Store step one data temporarily
-      this.formDataService.storeStepOneData(formData);
-
-      this.isSubmitting = false;
-      console.log('Step 1 data stored:', formData);
-
-      // Navigate to contact details step
-      this.router.navigate(['/our-services/workaway-registration-contact-details']);
+      this.formDataService.submitRegistrationData(formData).subscribe({
+        next: (response) => {
+          if (response.status === true) {
+            console.log('Registration data submitted successfully:', response);
+            // Store step one data temporarily
+            this.formDataService.storeStepOneData(formData.formData);
+            this.isSubmitting = false;
+            // Navigate to contact details step
+            this.router.navigate(['/our-services/e2e-qa-hire-resources-contact-details']);
+          } else {
+            this.isSubmitting = false;
+            alert('Submission failed. Please try again.');
+          }
+        },
+        error: (error) => {
+          console.error('Error submitting registration:', error);
+          this.isSubmitting = false;
+          alert('Error submitting registration. Please try again.');
+        }
+      });
     } else {
       // Mark all fields as touched to show validation errors
       this.markFormGroupTouched(this.registrationForm);
@@ -157,7 +191,5 @@ export class E2eQaHireResourcesRegistrationsComponent {
       }
     });
   }
-
-
 
 }

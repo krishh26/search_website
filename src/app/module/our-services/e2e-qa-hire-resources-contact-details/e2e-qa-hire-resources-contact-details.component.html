@@ -2,104 +2,112 @@
   <div class="overlay-bg" style="opacity: 1;">
     <div class="container">
       <div class="text-center text-white">
-        <div class="form-check form-check-inline">
-          <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1"
-            checked>
-          <label class="form-check-label" for="inlineRadio1">WorkAway</label>
-        </div>
-        <div class="form-check form-check-inline">
-          <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
-          <label class="form-check-label" for="inlineRadio2">IT Subcontracting</label>
-        </div>
-        <div class="form-check form-check-inline">
-          <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio3" value="option3" checked>
-          <label class="form-check-label" for="inlineRadio3">E2E QA Services</label>
-        </div>
-
-        <h1 class="page-titletop mt-3">Lorem ipsum dolor sit amet, consectetur adipiscing elit</h1>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
-          magna aliqua.
-          Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-        </p>
+        <h1 class="page-titletop mt-3">Complete Your E2E QA Services Registration</h1>
+        <p>Please provide your contact details to complete the registration process.</p>
       </div>
       <div class="FlatCard text-dark" style="z-index: 1;">
         <div class="card-body p-5">
-          <div class="row">
-            <div class="col-12">
-              <div class="text-center">
-                <p class="p-16 p-600 text-muted">In just a minute away</p>
-                <h2 class="page-titletop text-dark">Register with <span class="text-primary">Spectrum IT Hub</span></h2>
-              </div>
-              <ul class="wizard mt-3 mb-5">
-                <li ui-sref="firstStep" class="active">
-                  <span data-translate="">Need Details</span>
-                </li>
-                <li ui-sref="secondStep" class="active">
-                  <span data-translate="">Contact Details</span>
-                </li>
-              </ul>
-
-
-              <form class="needs-validation" novalidate>
-                 <div class="row mb-3 align-items-center">
-                    <label for="iama" class="col-sm-3 col-form-label">Busienss Name</label>
-                    <div class="col-sm-9">
-                      <input type="text" class="form-control" id="businessName" placeholder="Enter your business name...">
-                      <div class="invalid-feedback">Please enter your business name.</div>
-                    </div>
-                  </div>
-                  <div class="row mb-3 align-items-center">
-                    <label for="iama" class="col-sm-3 col-form-label">Address</label>
-                    <div class="col-sm-9">
-                       <textarea class="form-control" id="Address" cols="100" rows="1"
-                        placeholder="Enter your address..."></textarea>
-                      <div class="invalid-feedback">Please enter your business name.</div>
-                    </div>
-                  </div>
-                  <div class="row mb-3 align-items-center">
-                    <label for="iama" class="col-sm-3 col-form-label">Your Full Name </label>
-                    <div class="col-sm-9">
-                       <input type="text" class="form-control" id="yourName" placeholder="Enter your name...">
-                       <div class="invalid-feedback">Please enter your full name.</div>
-                    </div>
-                  </div>
-                  <div class="row mb-3 align-items-center">
-                    <label for="iama" class="col-sm-3 col-form-label">Phone Number </label>
-                    <div class="col-sm-9">
-                       <input type="text" class="form-control" (keypress)="NumberOnly($event)" id="phoneNo" placeholder="Enter your phone number...">
-                      <div class="invalid-feedback">Please enter your phone number.</div>
-                    </div>
-                  </div>
-                  <div class="row mb-3 align-items-center">
-                    <label for="iama" class="col-sm-3 col-form-label">Job Title </label>
-                    <div class="col-sm-9">
-                       <input type="text" class="form-control" id="jobTitle" placeholder="Enter your job title...">
-                       <div class="invalid-feedback">Please enter your job title.</div>
-                    </div>
-                  </div>
-                  <div class="row mb-3 align-items-center">
-                    <label for="iama" class="col-sm-3 col-form-label">Email Address</label>
-                    <div class="col-sm-9">
-                       <input type="text" class="form-control" id="emaiID" placeholder="Enter your email id...">
-                       <div class="invalid-feedback">Please enter your email id.</div>
-                    </div>
-                  </div>
-                  <div class="row mb-3 align-items-center">
-                    <label for="iama" class="col-sm-3 col-form-label">How did you hear about us? </label>
-                    <div class="col-sm-9">
-                       <input type="text" class="form-control" id="aboutUS" placeholder="Enter details...">
-                    </div>
-                  </div>
-                <div class="form-group text-end">
-                  <!-- <button class="btn btn-primary" type="submit"  onclick="window.location.href='success-message.html';">Submit</button> -->
-                  <button class="btn btn-dark me-2" (click)="goBack()"><i class="bi bi-arrow-left me-2"></i> Go Back</button>
-                  <a class="btn btn-primary" type="submit" href="success-message.html">Submit <i
-                      class="bi bi-save2 ms-2"></i></a>
-                </div>
-              </form>
-            </div>
+          <div class="text-center">
+            <p class="p-16 p-600 text-muted">Almost there!</p>
+            <h2 class="page-titletop text-dark">Contact <span class="text-primary">Details</span></h2>
           </div>
+          <ul class="wizard mt-3 mb-5">
+            <li ui-sref="firstStep">
+              <span data-translate="">Need Details</span>
+            </li>
+            <li ui-sref="secondStep" class="active">
+              <span data-translate="">Contact Details</span>
+            </li>
+          </ul>
 
+          <form [formGroup]="contactForm" (ngSubmit)="onSubmit()" class="needs-validation">
+            <div class="row mb-3 align-items-center">
+              <label for="businessName" class="col-sm-3 col-form-label">Business Name <span class="text-danger">*</span></label>
+              <div class="col-sm-9">
+                <input type="text" class="form-control" id="businessName" formControlName="businessName" placeholder="Enter your business name">
+                <div class="invalid-feedback" *ngIf="contactForm.get('businessName')?.touched && contactForm.get('businessName')?.invalid">
+                  Business name is required
+                </div>
+              </div>
+            </div>
+
+            <div class="row mb-3 align-items-center">
+              <label for="address" class="col-sm-3 col-form-label">Address <span class="text-danger">*</span></label>
+              <div class="col-sm-9">
+                <textarea class="form-control" id="address" formControlName="address" rows="3" placeholder="Enter your business address"></textarea>
+                <div class="invalid-feedback" *ngIf="contactForm.get('address')?.touched && contactForm.get('address')?.invalid">
+                  Address is required
+                </div>
+              </div>
+            </div>
+
+            <div class="row mb-3 align-items-center">
+              <label for="fullName" class="col-sm-3 col-form-label">Full Name <span class="text-danger">*</span></label>
+              <div class="col-sm-9">
+                <input type="text" class="form-control" id="fullName" formControlName="fullName" placeholder="Enter your full name">
+                <div class="invalid-feedback" *ngIf="contactForm.get('fullName')?.touched && contactForm.get('fullName')?.invalid">
+                  Full name is required
+                </div>
+              </div>
+            </div>
+
+            <div class="row mb-3 align-items-center">
+              <label for="phoneNumber" class="col-sm-3 col-form-label">Phone Number <span class="text-danger">*</span></label>
+              <div class="col-sm-9">
+                <input type="text" class="form-control" id="phoneNumber" formControlName="phoneNumber" placeholder="Enter your phone number">
+                <div class="invalid-feedback" *ngIf="contactForm.get('phoneNumber')?.touched && contactForm.get('phoneNumber')?.invalid">
+                  Phone number is required
+                </div>
+              </div>
+            </div>
+
+            <div class="row mb-3 align-items-center">
+              <label for="jobTitle" class="col-sm-3 col-form-label">Job Title <span class="text-danger">*</span></label>
+              <div class="col-sm-9">
+                <input type="text" class="form-control" id="jobTitle" formControlName="jobTitle" placeholder="Enter your job title">
+                <div class="invalid-feedback" *ngIf="contactForm.get('jobTitle')?.touched && contactForm.get('jobTitle')?.invalid">
+                  Job title is required
+                </div>
+              </div>
+            </div>
+
+            <div class="row mb-3 align-items-center">
+              <label for="emailAddress" class="col-sm-3 col-form-label">Email Address <span class="text-danger">*</span></label>
+              <div class="col-sm-9">
+                <input type="email" class="form-control" id="emailAddress" formControlName="emailAddress" placeholder="Enter your email address">
+                <div class="invalid-feedback" *ngIf="contactForm.get('emailAddress')?.touched && contactForm.get('emailAddress')?.invalid">
+                  Please enter a valid email address
+                </div>
+              </div>
+            </div>
+
+            <div class="row mb-3 align-items-center">
+              <label for="howDidYouHear" class="col-sm-3 col-form-label">How did you hear about us? <span class="text-danger">*</span></label>
+              <div class="col-sm-9">
+                <select class="form-select" id="howDidYouHear" formControlName="howDidYouHear">
+                  <option value="">Select an option</option>
+                  <option value="search">Search Engine</option>
+                  <option value="social">Social Media</option>
+                  <option value="referral">Referral</option>
+                  <option value="advertisement">Advertisement</option>
+                  <option value="other">Other</option>
+                </select>
+                <div class="invalid-feedback" *ngIf="contactForm.get('howDidYouHear')?.touched && contactForm.get('howDidYouHear')?.invalid">
+                  Please select how you heard about us
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group text-end">
+              <button type="button" class="btn btn-dark me-2" (click)="goBack()">
+                <i class="bi bi-arrow-left me-2"></i> Go Back
+              </button>
+              <button type="submit" class="btn btn-primary" [disabled]="!contactForm.valid || isSubmitting">
+                <span *ngIf="isSubmitting" class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>
+                Complete Registration <i class="bi bi-check2 ms-2"></i>
+              </button>
+            </div>
+          </form>
         </div>
       </div>
     </div>
