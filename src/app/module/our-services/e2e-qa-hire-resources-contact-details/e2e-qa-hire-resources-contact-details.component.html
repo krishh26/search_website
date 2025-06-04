@@ -66,7 +66,7 @@
                   <div class="row mb-3 align-items-center">
                     <label for="iama" class="col-sm-3 col-form-label">Phone Number </label>
                     <div class="col-sm-9">
-                       <input type="text" class="form-control" id="phoneNo" placeholder="Enter your phone number...">
+                       <input type="text" class="form-control" (keypress)="NumberOnly($event)" id="phoneNo" placeholder="Enter your phone number...">
                       <div class="invalid-feedback">Please enter your phone number.</div>
                     </div>
                   </div>

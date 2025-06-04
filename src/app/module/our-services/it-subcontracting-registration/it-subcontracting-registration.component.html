@@ -66,7 +66,7 @@
                         </div>
                       </div>
                     </div>
-                  </div>                   
+                  </div>
               </div>
            </div>                                  -->
 
@@ -156,7 +156,7 @@
                 <div class="row mb-3 align-items-center">
                   <label for="requirement" class="col-sm-3 col-form-label">Enter Your Requirement <span class="text-danger">*</span></label>
                   <div class="col-sm-9">
-                    <input type="text" class="form-control" formControlName="requirement" 
+                    <input type="text" class="form-control" formControlName="requirement"
                            [class.is-invalid]="registrationForm.get('requirement')?.touched && registrationForm.get('requirement')?.errors"
                            placeholder="Eg. Cloud Migration">
                     <div class="invalid-feedback" *ngIf="getRegistrationFormError('requirement')">
@@ -293,7 +293,7 @@
               </div>
               <div class="form-group">
                 <label>Phone Number <span class="text-danger">*</span></label>
-                <input type="text" class="form-control" formControlName="phoneNumber"
+                <input type="text" class="form-control" formControlName="phoneNumber" (keypress)="NumberOnly($event)"
                        [class.is-invalid]="contactForm.get('phoneNumber')?.touched && contactForm.get('phoneNumber')?.errors"
                        placeholder="Enter your phone number...">
                 <div class="invalid-feedback" *ngIf="getContactFormError('phoneNumber')">

@@ -2,7 +2,7 @@
   <div class="overlay-header">
     <div class="container">
       <div class="page-header-content">
-        <h1 class="page-titletop">Let’s Talk About Scaling Smarter.</h1>
+        <h1 class="page-titletop">Let's Talk About Scaling Smarter.</h1>
         <nav aria-label="breadcrumb">
           <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="javascript();">Home</a></li>
@@ -39,75 +39,74 @@
         </div>
       </div>
       <div class="col-lg-7 col-xl-7 col-sm-8 col-md-8 col-12">
-        <h2 class="headingTitle2 mb-5">Need help? Want to learn more? <br><span class="text-primary"> We’re ready to
+        <h2 class="headingTitle2 mb-5">Need help? Want to learn more? <br><span class="text-primary"> We're ready to
             listen.</span></h2>
-        <form>
+        <form [formGroup]="contactForm" (ngSubmit)="onSubmit()">
           <div class="row mb-3 align-items-center">
-            <label for="iama" class="col-sm-3 col-form-label">Full Name<span class="text-danger">*</span> </label>
+            <label for="fullName" class="col-sm-3 col-form-label">Full Name<span class="text-danger">*</span> </label>
             <div class="col-sm-9">
-                <input type="text" class="form-control" placeholder="Enter your full name" required>
+                <input type="text" id="fullName" formControlName="fullName" class="form-control" placeholder="Enter your full name">
             </div>
           </div>
           <div class="row mb-3 align-items-center">
-            <label for="iama" class="col-sm-3 col-form-label">Company Name<span class="text-danger">*</span> </label>
+            <label for="companyName" class="col-sm-3 col-form-label">Company Name<span class="text-danger">*</span> </label>
             <div class="col-sm-9">
-                <input type="text" class="form-control" placeholder="Enter your company name" required>
+                <input type="text" id="companyName" formControlName="companyName" class="form-control" placeholder="Enter your company name">
             </div>
           </div>
           <div class="row mb-3 align-items-center">
-            <label for="iama" class="col-sm-3 col-form-label">Email Id<span class="text-danger">*</span></label>
+            <label for="email" class="col-sm-3 col-form-label">Email Id<span class="text-danger">*</span></label>
             <div class="col-sm-9">
-               <input type="email" class="form-control" placeholder="emailaddress@domain.com" required>
+               <input type="email" id="email" formControlName="email" class="form-control" placeholder="emailaddress@domain.com">
             </div>
-          </div> 
+          </div>
           <div class="row mb-3 align-items-center">
-            <label for="iama" class="col-sm-3 col-form-label">Phone Number</label>
+            <label for="phoneNumber" class="col-sm-3 col-form-label">Phone Number</label>
             <div class="col-sm-9">
-               <input type="text" class="form-control" placeholder="+Country Code XXXX XXXX XX" required>
+               <input type="text" id="phoneNumber" formControlName="phoneNumber" (keypress)="NumberOnly($event)" class="form-control" placeholder="+Country Code XXXX XXXX XX">
             </div>
-          </div> 
+          </div>
            <div class="row mb-3 align-items-center">
-            <label for="iama" class="col-sm-3 col-form-label">Website URL<span class="text-danger">*</span></label>
+            <label for="websiteUrl" class="col-sm-3 col-form-label">Website URL<span class="text-danger">*</span></label>
             <div class="col-sm-9">
-               <input type="text" class="form-control" placeholder="Eg. spectrumithub.com" required>
+               <input type="text" id="websiteUrl" formControlName="websiteUrl" class="form-control" placeholder="Eg. spectrumithub.com">
             </div>
-          </div> 
+          </div>
           <div class="row mb-3 align-items-center">
-            <label for="iama" class="col-sm-3 col-form-label">Your Role<span class="text-danger">*</span></label>
+            <label for="role" class="col-sm-3 col-form-label">Your Role<span class="text-danger">*</span></label>
             <div class="col-sm-9">
-               <select class="form-select form-control">
-              <option selected>Select from the dropdown </option>
-              <option>Client / Business Representative</option>
-              <option>Recruitment Agency Representative</option>
-              <option>IT Supplier / Vendor</option>
-              <option>Job Seeker / Candidate</option>
-              <option>Other (please specify)</option>
+               <select class="form-select form-control" id="role" formControlName="role">
+              <option value="">Select from the dropdown </option>
+              <option value="client">Client / Business Representative</option>
+              <option value="recruitment">Recruitment Agency Representative</option>
+              <option value="supplier">IT Supplier / Vendor</option>
+              <option value="jobseeker">Job Seeker / Candidate</option>
+              <option value="other">Other (please specify)</option>
             </select>
             </div>
-          </div> 
+          </div>
           <div class="row mb-3 align-items-center">
-            <label for="iama" class="col-sm-3 col-form-label">Reason for Contact<span class="text-danger">*</span></label>
+            <label for="reasonForContact" class="col-sm-3 col-form-label">Reason for Contact<span class="text-danger">*</span></label>
             <div class="col-sm-9">
-               <select class="form-select form-control">
-                <option selected>Select from the dropdown </option>
-                <option>Inquiry about Model PET</option>
-                <option>Inquiry about QA Services</option>
-                <option>Inquiry about IT Support Services</option>
-                <option>I'm a Recruitment Agency</option>
-                <option>General Inquiry</option>
+               <select class="form-select form-control" id="reasonForContact" formControlName="reasonForContact">
+                <option value="">Select from the dropdown </option>
+                <option value="pet">Inquiry about Model PET</option>
+                <option value="qa">Inquiry about QA Services</option>
+                <option value="it">Inquiry about IT Support Services</option>
+                <option value="recruitment">I'm a Recruitment Agency</option>
+                <option value="general">General Inquiry</option>
               </select>
             </div>
-          </div> 
-          <div class="row mb-3 align-items-center">
-            <label for="iama" class="col-sm-3 col-form-label">Drop Message</label>
-            <div class="col-sm-9">
-              <textarea class="form-control" cols="100" rows="3" placeholder="Enter your message"></textarea>
-            </div>
-          </div> 
-          <div class="text-end">
-            <button class="btn btn-primary btn-lg">Send Message</button>
           </div>
-          
+          <div class="row mb-3 align-items-center">
+            <label for="message" class="col-sm-3 col-form-label">Drop Message</label>
+            <div class="col-sm-9">
+              <textarea class="form-control" id="message" formControlName="message" cols="100" rows="3" placeholder="Enter your message"></textarea>
+            </div>
+          </div>
+          <div class="text-end">
+            <button type="submit" class="btn btn-primary btn-lg" [disabled]="!contactForm.valid">Send Message</button>
+          </div>
         </form>
       </div>
     </div>

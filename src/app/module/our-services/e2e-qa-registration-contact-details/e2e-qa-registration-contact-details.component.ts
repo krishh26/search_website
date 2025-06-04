@@ -14,4 +14,12 @@ export class E2eQaRegistrationContactDetailsComponent {
     this.router.navigate(['/our-services/e2e-qa-registration']);
   }
 
+  NumberOnly(event: any): boolean {
+    const charCode = event.which ? event.which : event.keyCode;
+    if (charCode > 31 && (charCode < 48 || charCode > 57)) {
+      return false;
+    }
+    return true;
+  }
+
 }

@@ -85,7 +85,7 @@
                     <label for="phoneNumber" class="col-sm-3 col-form-label">Phone Number </label>
                     <div class="col-sm-9">
                        <input type="text" class="form-control" id="phoneNumber"
-                              formControlName="phoneNumber"
+                              formControlName="phoneNumber" (keypress)="NumberOnly($event)"
                               placeholder="Enter your phone number..."
                               [class.is-invalid]="phoneNumber?.invalid && phoneNumber?.touched">
                       <div class="invalid-feedback" *ngIf="phoneNumber?.invalid && phoneNumber?.touched">

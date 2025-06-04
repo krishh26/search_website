@@ -36,6 +36,14 @@ export class WorkkawayRegistrationContactDetailsComponent implements OnInit {
     console.log('Step 1 data retrieved:', this.stepOneData);
   }
 
+  NumberOnly(event: any): boolean {
+    const charCode = event.which ? event.which : event.keyCode;
+    if (charCode > 31 && (charCode < 48 || charCode > 57)) {
+      return false;
+    }
+    return true;
+  }
+
   private initializeForm(): void {
     this.contactForm = this.formBuilder.group({
       businessName: ['', [Validators.required, Validators.minLength(2)]],
