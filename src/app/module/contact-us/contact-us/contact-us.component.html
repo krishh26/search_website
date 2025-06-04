@@ -29,7 +29,7 @@
           <div class="address-icon">
             <i class="bi bi-envelope-fill" style="color:#0f51e0"></i>
           </div>
-          <p class="p-18"><a href="mailto:contact@spectrumithub.com">contact@spectrumithub.com</a></p>
+          <p class="p-18"><a href="mailto:contact&#64;spectrumithub.com">contact&#64;spectrumithub.com</a></p>
         </div>
         <div class="address-line mb-4">
           <div class="address-icon">
@@ -43,9 +43,9 @@
             listen.</span></h2>
         <form [formGroup]="contactForm" (ngSubmit)="onSubmit()">
           <div class="row mb-3 align-items-center">
-            <label for="fullName" class="col-sm-3 col-form-label">Full Name<span class="text-danger">*</span> </label>
+            <label for="name" class="col-sm-3 col-form-label">Full Name<span class="text-danger">*</span> </label>
             <div class="col-sm-9">
-                <input type="text" id="fullName" formControlName="fullName" class="form-control" placeholder="Enter your full name">
+                <input type="text" id="name" formControlName="name" class="form-control" placeholder="Enter your full name">
             </div>
           </div>
           <div class="row mb-3 align-items-center">
@@ -61,9 +61,9 @@
             </div>
           </div>
           <div class="row mb-3 align-items-center">
-            <label for="phoneNumber" class="col-sm-3 col-form-label">Phone Number</label>
+            <label for="mobileNumber" class="col-sm-3 col-form-label">Phone Number</label>
             <div class="col-sm-9">
-               <input type="text" id="phoneNumber" formControlName="phoneNumber" (keypress)="NumberOnly($event)" class="form-control" placeholder="+Country Code XXXX XXXX XX">
+               <input type="text" id="mobileNumber" formControlName="mobileNumber" (keypress)="NumberOnly($event)" class="form-control" placeholder="+Country Code XXXX XXXX XX">
             </div>
           </div>
            <div class="row mb-3 align-items-center">

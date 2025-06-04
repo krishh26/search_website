@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { FormService } from '../../../services/form.service';
+import { ItSubcontractService } from 'src/app/services/it-subcontract.service';
 
 @Component({
   selector: 'app-contact-us',
@@ -12,15 +12,15 @@ export class ContactUsComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
-    private formService: FormService
+    private formService: ItSubcontractService
   ) {}
 
   ngOnInit() {
     this.contactForm = this.formBuilder.group({
-      fullName: ['', Validators.required],
-      companyName: ['', Validators.required],
+      name: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
-      phoneNumber: ['', Validators.required],
+      mobileNumber: ['', Validators.required],
+      companyName: ['', Validators.required],
       websiteUrl: ['', Validators.required],
       role: ['', Validators.required],
       reasonForContact: ['', Validators.required],
@@ -38,26 +38,30 @@ export class ContactUsComponent implements OnInit {
 
   onSubmit() {
     if (this.contactForm.valid) {
-      const formData = {
-        name: this.contactForm.get('fullName')?.value || '',
-        companyName: this.contactForm.get('companyName')?.value || '',
-        email: this.contactForm.get('email')?.value || '',
-        mobileNumber: this.contactForm.get('phoneNumber')?.value || '',
-        websiteUrl: this.contactForm.get('websiteUrl')?.value || '',
-        role: this.contactForm.get('role')?.value || '',
-        reasonForContact: this.contactForm.get('reasonForContact')?.value || '',
-        message: this.contactForm.get('message')?.value || ''
+      const payload = {
+        formType: 'contactUsForm',
+        formData: {
+          name: this.contactForm.get('name')?.value || '',
+          email: this.contactForm.get('email')?.value || '',
+          mobileNumber: this.contactForm.get('mobileNumber')?.value || '',
+          companyName: this.contactForm.get('companyName')?.value || '',
+          websiteUrl: this.contactForm.get('websiteUrl')?.value || '',
+          role: this.contactForm.get('role')?.value || '',
+          reasonForContact: this.contactForm.get('reasonForContact')?.value || '',
+          message: this.contactForm.get('message')?.value || ''
+        }
       };
 
-      this.formService.submitForm(formData).subscribe({
+      this.formService.submitItSubContractData(payload).subscribe({
         next: (response) => {
-          console.log('Form submitted successfully', response);
-          // Add success handling (e.g., show success message, reset form)
-          this.contactForm.reset();
+          if(response.status === true) {
+            console.log('Form submitted successfully', response);
+            this.contactForm.reset();
+          }
+
         },
         error: (error) => {
           console.error('Error submitting form', error);
-          // Add error handling (e.g., show error message)
         }
       });
     }
