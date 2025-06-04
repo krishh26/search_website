@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { FormDataService } from '../../../common/services/form-data.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-workaway-registration',
@@ -19,7 +20,8 @@ export class WorkawayRegistrationComponent implements OnInit {
   constructor(
     private router: Router,
     private formBuilder: FormBuilder,
-    private formDataService: FormDataService
+    private formDataService: FormDataService,
+    private toastr: ToastrService
   ) {
     this.initializeForm();
   }
@@ -117,19 +119,19 @@ export class WorkawayRegistrationComponent implements OnInit {
       this.formDataService.uploadProjectFiles(event.target.files[0]).subscribe({
         next: (response) => {
           this.isUploading = false;
-          if (response?.status) {
+          if (response?.status == true) {
             console.log('File uploaded successfully:', response);
             console.log('File URL:', response?.data?.url);
             console.log('File Key:', response?.data?.key);
-            alert('File uploaded successfully!');
+            this.toastr.success('File uploaded successfully!', 'Success');
           } else {
-            alert('Upload failed. Please try again.');
+            this.toastr.error('Upload failed. Please try again.', 'Error');
           }
         },
         error: (error) => {
           console.error('Error uploading file:', error);
           this.isUploading = false;
-          alert('Error uploading file. Please try again.');
+          this.toastr.error('Error uploading file. Please try again.', 'Error');
         }
       });
     }
@@ -163,12 +165,12 @@ export class WorkawayRegistrationComponent implements OnInit {
       next: (response) => {
         console.log('Bulk enquiry uploaded successfully:', response);
         this.isUploading = false;
-        alert('Bulk enquiry uploaded successfully!');
+        this.toastr.success('Bulk enquiry uploaded successfully!', 'Success');
       },
       error: (error) => {
         console.error('Error uploading bulk enquiry:', error);
         this.isUploading = false;
-        alert('Error uploading bulk enquiry. Please try again.');
+        this.toastr.error('Error uploading bulk enquiry. Please try again.', 'Error');
       }
     });
   }

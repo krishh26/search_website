@@ -55,7 +55,7 @@ export class E2eQaHireResourcesRegistrationsComponent {
       this.formDataService.uploadProjectFiles(event.target.files[0]).subscribe({
         next: (response) => {
           this.isUploading = false;
-          if (response?.status) {
+          if (response?.status == true) {
             console.log('File uploaded successfully:', response);
             console.log('File URL:', response?.data?.url);
             console.log('File Key:', response?.data?.key);

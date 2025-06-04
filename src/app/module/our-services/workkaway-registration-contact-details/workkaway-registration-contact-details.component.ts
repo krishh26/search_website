@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { FormDataService } from '../../../common/services/form-data.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-workkaway-registration-contact-details',
@@ -16,7 +17,8 @@ export class WorkkawayRegistrationContactDetailsComponent implements OnInit {
   constructor(
     private router: Router,
     private formBuilder: FormBuilder,
-    private formDataService: FormDataService
+    private formDataService: FormDataService,
+    private toastr: ToastrService
   ) {
     this.initializeForm();
   }
@@ -54,17 +56,15 @@ export class WorkkawayRegistrationContactDetailsComponent implements OnInit {
     if (this.contactForm.valid) {
       this.isSubmitting = true;
 
-      const stepTwoData = {
-        businessName: this.contactForm.value.businessName,
-        address: this.contactForm.value.address,
-        fullName: this.contactForm.value.fullName,
-        phoneNumber: this.contactForm.value.phoneNumber,
-        jobTitle: this.contactForm.value.jobTitle,
-        emailAddress: this.contactForm.value.emailAddress,
-        howDidYouHear: this.contactForm.value.howDidYouHear || ''
+      const formData = {
+        ...this.stepOneData,
+        ...this.contactForm.value
       };
 
-      this.formDataService.submitCompleteFormData(stepTwoData).subscribe({
+      this.formDataService.submitCompleteFormData({
+        formType: 'workAwayForm',
+        formData
+      }).subscribe({
         next: (response) => {
           console.log('Complete form submitted successfully:', response);
           this.isSubmitting = false;
@@ -72,19 +72,22 @@ export class WorkkawayRegistrationContactDetailsComponent implements OnInit {
           // Clear stored data
           this.formDataService.clearStoredData();
 
+          // Show success message
+          this.toastr.success('Form submitted successfully!', 'Success');
+
           // Navigate to success page
           this.router.navigate(['/success-message']);
         },
         error: (error) => {
           console.error('Error submitting complete form:', error);
           this.isSubmitting = false;
-          // Handle error (show message to user)
-          alert('Error submitting form. Please try again.');
+          this.toastr.error('Failed to submit form. Please try again.', 'Error');
         }
       });
     } else {
       // Mark all fields as touched to show validation errors
       this.markFormGroupTouched(this.contactForm);
+      this.toastr.warning('Please fill in all required fields correctly.', 'Warning');
     }
   }
 

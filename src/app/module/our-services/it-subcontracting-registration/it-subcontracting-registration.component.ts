@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ItSubcontractService } from 'src/app/services/it-subcontract.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-it-subcontracting-registration',
@@ -18,7 +19,8 @@ export class ItSubcontractingRegistrationComponent implements OnInit {
   constructor(
     private router: Router,
     private formBuilder: FormBuilder,
-    private itSubcontractService: ItSubcontractService
+    private itSubcontractService: ItSubcontractService,
+    private toastr: ToastrService
   ) { }
 
   ngOnInit() {
@@ -146,19 +148,26 @@ export class ItSubcontractingRegistrationComponent implements OnInit {
       this.itSubcontractService.submitItSubContractData({
         formType: 'itSubcontractForm',
         formData
-      }).subscribe((response) => {
-        if (response?.status) {
-          this.showContactForm = false;
-          this.registrationForm.reset();
-          this.contactForm.reset();
-        } else {
-          console.log("Error : ", response);
+      }).subscribe({
+        next: (response) => {
+          if (response?.status == true) {
+            this.showContactForm = false;
+            this.registrationForm.reset();
+            this.contactForm.reset();
+            this.toastr.success('Form submitted successfully!', 'Success');
+          } else {
+            this.toastr.error('Failed to submit form. Please try again.', 'Error');
+            console.log("Error : ", response);
+          }
+        },
+        error: (error) => {
+          console.error('Error submitting form:', error);
+          this.toastr.error('Failed to submit form. Please try again.', 'Error');
         }
-      })
-      console.log('Form Data:', formData);
-      // Here you can add your API call to submit the data
+      });
     } else {
       this.markFormGroupTouched(this.contactForm);
+      this.toastr.warning('Please fill in all required fields correctly.', 'Warning');
     }
   }
 

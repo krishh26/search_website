@@ -2,6 +2,11 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, BehaviorSubject } from 'rxjs';
 
+interface FormData {
+  formType: string;
+  formData: any;
+}
+
 interface StepOneData {
   serviceType: string;
   professionType: string;
@@ -56,66 +61,9 @@ export class FormDataService {
     return null;
   }
 
-  // Submit complete form data (both steps combined and flattened)
-  submitCompleteFormData(stepTwoData: StepTwoData): Observable<any> {
-    const stepOneData = this.getStepOneData();
-
-    if (!stepOneData) {
-      throw new Error('Step one data not found. Please complete step one first.');
-    }
-
-    // Flatten all data into a single object
-    const completeData = {
-      // Step One fields
-      serviceType: stepOneData.serviceType,
-      professionType: stepOneData.professionType,
-      hasDemandReady: stepOneData.hasDemandReady,
-      bankingOption: stepOneData.bankingOption,
-      whiteLabelOption: stepOneData.whiteLabelOption,
-
-      // Step Two fields
-      businessName: stepTwoData.businessName,
-      address: stepTwoData.address,
-      fullName: stepTwoData.fullName,
-      phoneNumber: stepTwoData.phoneNumber,
-      jobTitle: stepTwoData.jobTitle,
-      emailAddress: stepTwoData.emailAddress,
-      howDidYouHear: stepTwoData.howDidYouHear,
-
-      // Timestamps
-      stepOneTimestamp: stepOneData.timestamp,
-      completedTimestamp: new Date().toISOString()
-    };
-
-    /*
-    Example of complete payload structure:
-    {
-      "formType": "workAwayForm",
-      "formData": {
-        "serviceType": "WorkAway",
-        "professionType": "Corporate recruitment teams",
-        "hasDemandReady": true,
-        "bankingOption": "clients",
-        "whiteLabelOption": true,
-        "businessName": "ABC Corporation",
-        "address": "123 Business Street, City, Country",
-        "fullName": "John Doe",
-        "phoneNumber": "+1-234-567-8900",
-        "jobTitle": "Recruitment Manager",
-        "emailAddress": "john.doe@abc.com",
-        "howDidYouHear": "Google Search",
-        "stepOneTimestamp": "2024-01-01T12:00:00.000Z",
-        "completedTimestamp": "2024-01-01T12:05:00.000Z"
-      }
-    }
-    */
-
-    const payload = {
-      formType: 'workAwayForm',
-      formData: completeData
-    };
-
-    return this.http.post(`${this.baseUrl}/formdata`, payload);
+  // Submit complete form data
+  submitCompleteFormData(data: FormData): Observable<any> {
+    return this.http.post(`${this.baseUrl}/formdata`, data);
   }
 
   // Clear stored data after successful submission
