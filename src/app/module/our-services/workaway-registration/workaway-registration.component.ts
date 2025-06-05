@@ -16,6 +16,7 @@ export class WorkawayRegistrationComponent implements OnInit {
   isSubmitting: boolean = false;
   isUploading: boolean = false;
   selectedServiceType: string = 'option1'; // Default to WorkAway
+  fileUpload: any;
 
   constructor(
     private router: Router,
@@ -26,7 +27,7 @@ export class WorkawayRegistrationComponent implements OnInit {
     this.initializeForm();
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 
   private initializeForm(): void {
     this.registrationForm = this.formBuilder.group({
@@ -67,15 +68,14 @@ export class WorkawayRegistrationComponent implements OnInit {
         hasDemandReady: this.registrationForm.value.hasDemandReady,
         bankingOption: this.registrationForm.value.bankingOption,
         whiteLabelOption: this.registrationForm.value.whiteLabelOption,
-        timestamp: new Date().toISOString()
+        timestamp: new Date().toISOString(),
+        fileUpload: this.fileUpload
       };
 
       // Store step one data temporarily
       this.formDataService.storeStepOneData(formData);
 
       this.isSubmitting = false;
-      console.log('Step 1 data stored:', formData);
-
       // Navigate to contact details step
       this.router.navigate(['/our-services/workaway-registration-contact-details']);
     } else {
@@ -120,9 +120,7 @@ export class WorkawayRegistrationComponent implements OnInit {
         next: (response) => {
           this.isUploading = false;
           if (response?.status == true) {
-            console.log('File uploaded successfully:', response);
-            console.log('File URL:', response?.data?.url);
-            console.log('File Key:', response?.data?.key);
+            this.fileUpload = response?.data;
             this.toastr.success('File uploaded successfully!', 'Success');
           } else {
             this.toastr.error('Upload failed. Please try again.', 'Error');
@@ -163,7 +161,6 @@ export class WorkawayRegistrationComponent implements OnInit {
 
     this.formDataService.uploadWithArrayData(sampleBulkData).subscribe({
       next: (response) => {
-        console.log('Bulk enquiry uploaded successfully:', response);
         this.isUploading = false;
         this.toastr.success('Bulk enquiry uploaded successfully!', 'Success');
       },
@@ -183,9 +180,9 @@ export class WorkawayRegistrationComponent implements OnInit {
   // Download sample CSV
   downloadSampleCSV(): void {
     const csvContent = `Service Type,Profession Type,Location,Experience,Skills,Budget\n` +
-                      `WorkAway,Software Developer,India,3-5 years,"Angular,React,Node.js",50000-75000\n` +
-                      `WorkAway,QA Engineer,Remote,2-4 years,"Selenium,Cypress,API Testing",40000-60000\n` +
-                      `IT Subcontracting,Full Stack Developer,Bangalore,5-7 years,"Java,Spring,React",75000-100000`;
+      `WorkAway,Software Developer,India,3-5 years,"Angular,React,Node.js",50000-75000\n` +
+      `WorkAway,QA Engineer,Remote,2-4 years,"Selenium,Cypress,API Testing",40000-60000\n` +
+      `IT Subcontracting,Full Stack Developer,Bangalore,5-7 years,"Java,Spring,React",75000-100000`;
 
     const blob = new Blob([csvContent], { type: 'text/csv' });
     const url = window.URL.createObjectURL(blob);

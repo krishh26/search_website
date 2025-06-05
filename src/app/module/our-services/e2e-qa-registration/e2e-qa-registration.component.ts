@@ -169,7 +169,6 @@ export class E2eQaRegistrationComponent implements OnInit {
             this.router.navigate(['/success-message']);
           } else {
             this.toastr.error('Failed to submit form. Please try again.', 'Error');
-            console.log("Error : ", response);
           }
         },
         error: (error) => {
@@ -192,9 +191,6 @@ export class E2eQaRegistrationComponent implements OnInit {
         next: (response) => {
           this.isUploading = false;
           if (response?.status == true) {
-            console.log('File uploaded successfully:', response);
-            console.log('File URL:', response?.data?.url);
-            console.log('File Key:', response?.data?.key);
             this.toastr.success('File uploaded successfully!', 'Success');
           } else {
             this.toastr.error('Upload failed. Please try again.', 'Error');

@@ -75,7 +75,7 @@ export class FormDataService {
 
   // Submit complete form data
   submitCompleteFormData(data: FormData): Observable<any> {
-    return this.http.post(`${this.baseUrl}/formdata`, data);
+    return this.http.post(`${this.baseUrl}/search-ui/formdata`, data);
   }
 
   // Clear stored data after successful submission
@@ -93,8 +93,8 @@ export class FormDataService {
   // Upload project files
   uploadProjectFiles(file: File): Observable<RegistrationResponse> {
     const formData = new FormData();
-    formData.append('file', file);
-    return this.http.post<RegistrationResponse>(`${this.baseUrl}/upload`, formData);
+    formData.append('files', file);
+    return this.http.post<RegistrationResponse>(`${this.baseUrl}/project/upload-public`, formData);
   }
 
   // Upload with array data (alternative method if you need to send structured data)

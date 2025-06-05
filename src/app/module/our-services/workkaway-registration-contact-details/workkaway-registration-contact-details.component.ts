@@ -33,7 +33,6 @@ export class WorkkawayRegistrationContactDetailsComponent implements OnInit {
 
     // Get step one data to display or use
     this.stepOneData = this.formDataService.getStepOneData();
-    console.log('Step 1 data retrieved:', this.stepOneData);
   }
 
   NumberOnly(event: any): boolean {
@@ -74,7 +73,6 @@ export class WorkkawayRegistrationContactDetailsComponent implements OnInit {
         formData
       }).subscribe({
         next: (response) => {
-          console.log('Complete form submitted successfully:', response);
           this.isSubmitting = false;
 
           // Clear stored data

@@ -55,10 +55,8 @@ export class ContactUsComponent implements OnInit {
       this.formService.submitItSubContractData(payload).subscribe({
         next: (response) => {
           if(response.status === true) {
-            console.log('Form submitted successfully', response);
             this.contactForm.reset();
           }
-
         },
         error: (error) => {
           console.error('Error submitting form', error);

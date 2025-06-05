@@ -71,7 +71,6 @@ export class E2eQaHireResourcesRegistrationsComponent {
         next: (response) => {
           this.isUploading = false;
           if (response?.status === true) {
-            console.log('File uploaded successfully:', response);
             this.registrationForm.patchValue({
               uploadedFileUrl: response?.data?.url,
               uploadedFileKey: response?.data?.key
@@ -111,7 +110,6 @@ export class E2eQaHireResourcesRegistrationsComponent {
       this.formDataService.submitRegistrationData(formData).subscribe({
         next: (response) => {
           if (response.status === true) {
-            console.log('Registration data submitted successfully:', response);
             // Store step one data temporarily
             this.formDataService.storeStepOneData(formData.formData);
             this.isSubmitting = false;
@@ -169,7 +167,6 @@ export class E2eQaHireResourcesRegistrationsComponent {
 
     this.formDataService.uploadWithArrayData(sampleBulkData).subscribe({
       next: (response) => {
-        console.log('Bulk enquiry uploaded successfully:', response);
         this.isUploading = false;
         alert('Bulk enquiry uploaded successfully!');
       },

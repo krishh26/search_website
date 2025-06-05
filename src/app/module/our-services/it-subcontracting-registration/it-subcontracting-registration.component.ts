@@ -165,7 +165,6 @@ export class ItSubcontractingRegistrationComponent implements OnInit {
             this.toastr.success('Form submitted successfully!', 'Success');
           } else {
             this.toastr.error('Failed to submit form. Please try again.', 'Error');
-            console.log("Error : ", response);
           }
         },
         error: (error) => {
