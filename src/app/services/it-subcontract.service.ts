@@ -28,4 +28,8 @@ export class ItSubcontractService {
   getRolesList(): Observable<Role[]> {
     return this.http.get<Role[]>(`${this.baseUrl}/roles/public/get-list`);
   }
+
+  getSupplierList(): Observable<any> {
+    return this.http.get(`${this.baseUrl}/user/public/suplier/list`);
+  }
 }
