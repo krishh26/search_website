@@ -47,7 +47,7 @@ export class E2eQaHireResourcesContactDetailsComponent implements OnInit {
       this.isSubmitting = true;
 
       const completeFormData = {
-        formType: 'e2eQARegistration',
+        formType: 'e2eQaResourceForm',
         formData: {
           ...this.stepOneData,
           ...this.contactForm.value,
