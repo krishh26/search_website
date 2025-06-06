@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { FormDataService } from 'src/app/common/services';
 
 @Component({
@@ -16,7 +17,8 @@ export class E2eQaHireResourcesContactDetailsComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private formDataService: FormDataService,
-    private router: Router
+    private router: Router,
+    private toastr: ToastrService
   ) {}
 
   ngOnInit() {
@@ -64,6 +66,7 @@ export class E2eQaHireResourcesContactDetailsComponent implements OnInit {
             // Navigate to success page or show success message
             // You can customize this based on your requirements
             alert('Registration completed successfully!');
+            this.toastr.success('Registration completed successfully!', 'Success');
             this.router.navigate(['/our-services/e2e-qa-services']);
           } else {
             this.isSubmitting = false;
