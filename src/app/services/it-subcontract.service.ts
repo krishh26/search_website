@@ -3,6 +3,12 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environment/environment-prod';
 
+export interface Role {
+  id: number;
+  name: string;
+  // Add other properties as needed based on API response
+}
+
 @Injectable({
   providedIn: 'root'
 })
@@ -17,5 +23,9 @@ export class ItSubcontractService {
 
   submitItSubContractData(payload: any): Observable<any> {
     return this.http.post(`${this.baseUrl}/search-ui/formdata`, payload);
+  }
+
+  getRolesList(): Observable<Role[]> {
+    return this.http.get<Role[]>(`${this.baseUrl}/roles/public/get-list`);
   }
 }
