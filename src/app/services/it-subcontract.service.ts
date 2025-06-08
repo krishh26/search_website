@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environment/environment-prod';
@@ -29,7 +29,11 @@ export class ItSubcontractService {
     return this.http.get<Role[]>(`${this.baseUrl}/roles/public/get-list`);
   }
 
-  getSupplierList(): Observable<any> {
-    return this.http.get(`${this.baseUrl}/user/public/suplier/list`);
+  getSupplierList(limit: number = 10, search: string = ''): Observable<any> {
+    let params = new HttpParams().set('limit', limit.toString());
+    if (search) {
+      params = params.set('search', search);
+    }
+    return this.http.get(`${this.baseUrl}/user/public/suplier/list`, { params });
   }
 }
