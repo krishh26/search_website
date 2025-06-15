@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { FormDataService } from 'src/app/common/services/form-data.service';
 import { ToastrService } from 'ngx-toastr';
+import { ServiceTypeService } from '../../../services/service-type.service';
 
 @Component({
   selector: 'app-e2e-qa-registration',
@@ -17,12 +18,14 @@ export class E2eQaRegistrationComponent implements OnInit {
   showContactForm: boolean = false;
   isSubmitting: boolean = false;
   isUploading: boolean = false;
+  selectedServiceType: string = 'option3'; // Default to E2E QA Services
 
   constructor(
     private router: Router,
     private formBuilder: FormBuilder,
     private formDataService: FormDataService,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    public serviceTypeService: ServiceTypeService
   ) { }
 
   ngOnInit() {
@@ -32,6 +35,7 @@ export class E2eQaRegistrationComponent implements OnInit {
   private initializeForms() {
     // First form
     this.registrationForm = this.formBuilder.group({
+      serviceType: ['option3', [Validators.required]], // Default to E2E QA Services
       professionType: ['', [Validators.required]],
       registrationType: ['representative', [Validators.required]],
       whiteLabelOption: [false],
@@ -212,5 +216,21 @@ export class E2eQaRegistrationComponent implements OnInit {
         this.markFormGroupTouched(control);
       }
     });
+  }
+
+  onServiceTypeChange(serviceType: string): void {
+    this.selectedServiceType = serviceType;
+    this.registrationForm.patchValue({ serviceType });
+
+    // Navigate based on selection
+    switch (serviceType) {
+      case 'option1':
+        this.serviceTypeService.navigateToRegistration('workaway');
+        break;
+      case 'option2':
+        this.serviceTypeService.navigateToRegistration('itSubcontracting');
+        break;
+      // No need for option3 case as we're already on E2E QA page
+    }
   }
 }

@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ItSubcontractService } from 'src/app/services/it-subcontract.service';
 import { ToastrService } from 'ngx-toastr';
+import { ServiceTypeService } from '../../../services/service-type.service';
 
 @Component({
   selector: 'app-it-subcontracting-registration',
@@ -15,12 +16,14 @@ export class ItSubcontractingRegistrationComponent implements OnInit {
   hasDemandReady: boolean = false;
   isRepresentativeForClient: boolean = true;
   showContactForm: boolean = false;
+  selectedServiceType: string = 'option2'; // Default to IT Subcontracting
 
   constructor(
     private router: Router,
     private formBuilder: FormBuilder,
     private itSubcontractService: ItSubcontractService,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    private serviceTypeService: ServiceTypeService
   ) { }
 
   ngOnInit() {
@@ -30,6 +33,7 @@ export class ItSubcontractingRegistrationComponent implements OnInit {
   private initializeForms() {
     // First form
     this.registrationForm = this.formBuilder.group({
+      serviceType: ['option2', [Validators.required]], // Default to IT Subcontracting
       professionType: ['', [Validators.required]],
       registrationType: ['representative', [Validators.required]],
       whiteLabelOption: [false],
@@ -42,6 +46,10 @@ export class ItSubcontractingRegistrationComponent implements OnInit {
       endDate: [''],
       budget: ['']
     });
+
+    // Set initial service type
+    this.selectedServiceType = 'option2';
+    this.registrationForm.patchValue({ serviceType: 'option2' });
 
     // Subscribe to hasDemandReady changes
     this.registrationForm.get('hasDemandReady')?.valueChanges.subscribe(value => {
@@ -122,6 +130,28 @@ export class ItSubcontractingRegistrationComponent implements OnInit {
     this.registrationForm.patchValue({ registrationType: value });
   }
 
+  onServiceTypeChange(serviceType: string): void {
+    if (serviceType === this.selectedServiceType) {
+      return; // Don't navigate if already on the selected service type
+    }
+
+    this.selectedServiceType = serviceType;
+    this.registrationForm.patchValue({ serviceType });
+
+    // Navigate to the appropriate registration page
+    switch (serviceType) {
+      case 'option1':
+        this.serviceTypeService.navigateToRegistration('workaway');
+        break;
+      case 'option2':
+        // Already on IT Subcontracting page
+        break;
+      case 'option3':
+        this.serviceTypeService.navigateToRegistration('e2eQA');
+        break;
+    }
+  }
+
   goBack(): void {
     if (this.showContactForm) {
       this.showContactForm = false;
@@ -150,7 +180,8 @@ export class ItSubcontractingRegistrationComponent implements OnInit {
     if (this.contactForm.valid) {
       const formData = {
         ...this.registrationForm.value,
-        ...this.contactForm.value
+        ...this.contactForm.value,
+        serviceType: this.serviceTypeService.getServiceTypeText(this.registrationForm.value.serviceType)
       };
 
       this.itSubcontractService.submitItSubContractData({

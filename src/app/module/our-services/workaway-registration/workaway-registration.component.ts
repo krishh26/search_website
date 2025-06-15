@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { FormDataService } from '../../../common/services/form-data.service';
 import { ToastrService } from 'ngx-toastr';
+import { ServiceTypeService } from '../../../services/service-type.service';
 
 @Component({
   selector: 'app-workaway-registration',
@@ -22,21 +23,26 @@ export class WorkawayRegistrationComponent implements OnInit {
     private router: Router,
     private formBuilder: FormBuilder,
     private formDataService: FormDataService,
-    private toastr: ToastrService
-  ) {
+    private toastr: ToastrService,
+    private serviceTypeService: ServiceTypeService
+  ) { }
+
+  ngOnInit(): void {
     this.initializeForm();
   }
 
-  ngOnInit(): void { }
-
   private initializeForm(): void {
     this.registrationForm = this.formBuilder.group({
-      serviceType: ['option1', [Validators.required]], // WorkAway, IT Subcontracting, E2E QA Services
+      serviceType: ['option1', [Validators.required]], // Default to WorkAway
       professionType: ['', [Validators.required]],
       hasDemandReady: ['', [Validators.required]],
       bankingOption: ['', [Validators.required]],
       whiteLabelOption: [false]
     });
+
+    // Set initial service type
+    this.selectedServiceType = 'option1';
+    this.registrationForm.patchValue({ serviceType: 'option1' });
   }
 
   goBack(): void {
@@ -54,8 +60,25 @@ export class WorkawayRegistrationComponent implements OnInit {
   }
 
   onServiceTypeChange(serviceType: string): void {
+    if (serviceType === this.selectedServiceType) {
+      return; // Don't navigate if already on the selected service type
+    }
+
     this.selectedServiceType = serviceType;
-    this.registrationForm.patchValue({ serviceType: serviceType });
+    this.registrationForm.patchValue({ serviceType });
+
+    // Navigate to the appropriate registration page
+    switch (serviceType) {
+      case 'option1':
+        // Already on WorkAway page
+        break;
+      case 'option2':
+        this.serviceTypeService.navigateToRegistration('itSubcontracting');
+        break;
+      case 'option3':
+        this.serviceTypeService.navigateToRegistration('e2eQA');
+        break;
+    }
   }
 
   onSubmit(): void {
@@ -85,12 +108,7 @@ export class WorkawayRegistrationComponent implements OnInit {
   }
 
   private getServiceTypeText(value: string): string {
-    const serviceTypes: { [key: string]: string } = {
-      'option1': 'WorkAway',
-      'option2': 'IT Subcontracting',
-      'option3': 'E2E QA Services'
-    };
-    return serviceTypes[value] || value;
+    return this.serviceTypeService.getServiceTypeText(value);
   }
 
   private markFormGroupTouched(formGroup: FormGroup): void {

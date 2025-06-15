@@ -11,6 +11,7 @@ import { FooterComponent } from './common/footer/footer.component';
 import { HomeModule } from './module/home/home.module';
 import { AboutUsModule } from './module/about-us/about-us.module';
 import { HashLocationStrategy, LocationStrategy } from '@angular/common';
+import { ServiceTypeService } from './services/service-type.service';
 
 @NgModule({
   declarations: [
@@ -33,6 +34,7 @@ import { HashLocationStrategy, LocationStrategy } from '@angular/common';
   ],
   providers: [
     { provide: LocationStrategy, useClass: HashLocationStrategy },
+    ServiceTypeService
   ],
   bootstrap: [AppComponent]
 })

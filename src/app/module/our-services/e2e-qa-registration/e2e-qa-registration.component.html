@@ -5,16 +5,19 @@
       <div class="container">
         <div class="text-center text-white">
           <div class="form-check form-check-inline">
-            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
-            <label class="form-check-label" for="inlineRadio1">WorkAway</label>
+            <input class="form-check-input" type="radio" name="serviceType" id="workawayOption" value="option1"
+              (click)="onServiceTypeChange('option1')" />
+            <label class="form-check-label" for="workawayOption">WorkAway</label>
           </div>
           <div class="form-check form-check-inline">
-            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
-            <label class="form-check-label" for="inlineRadio2">IT Subcontracting</label>
+            <input class="form-check-input" type="radio" name="serviceType" id="itSubcontractingOption" value="option2"
+              (click)="onServiceTypeChange('option2')" />
+            <label class="form-check-label" for="itSubcontractingOption">IT Subcontracting</label>
           </div>
           <div class="form-check form-check-inline">
-            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio3" value="option3" checked>
-            <label class="form-check-label" for="inlineRadio3">E2E QA Services</label>
+            <input class="form-check-input" type="radio" name="serviceType" id="e2eQAOption" value="option3"
+              [checked]="true" />
+            <label class="form-check-label" for="e2eQAOption">E2E QA Services</label>
           </div>
 
           <h1 class="page-titletop mt-3">Lorem ipsum dolor sit amet, consectetur adipiscing elit</h1>

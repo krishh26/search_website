@@ -3,19 +3,19 @@
     <div class="container">
       <div class="text-center text-white">
         <div class="form-check form-check-inline">
-          <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1"
+          <input class="form-check-input" type="radio" name="serviceTypeOptions" id="workawayOption" value="option1"
             (change)="onServiceTypeChange('option1')" [checked]="selectedServiceType === 'option1'">
-          <label class="form-check-label" for="inlineRadio1">WorkAway</label>
+          <label class="form-check-label" for="workawayOption">WorkAway</label>
         </div>
         <div class="form-check form-check-inline">
-          <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2"
+          <input class="form-check-input" type="radio" name="serviceTypeOptions" id="itSubcontractingOption" value="option2"
             (change)="onServiceTypeChange('option2')" [checked]="selectedServiceType === 'option2'">
-          <label class="form-check-label" for="inlineRadio2">IT Subcontracting</label>
+          <label class="form-check-label" for="itSubcontractingOption">IT Subcontracting</label>
         </div>
         <div class="form-check form-check-inline">
-          <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio3" value="option3"
+          <input class="form-check-input" type="radio" name="serviceTypeOptions" id="e2eQAOption" value="option3"
             (change)="onServiceTypeChange('option3')" [checked]="selectedServiceType === 'option3'">
-          <label class="form-check-label" for="inlineRadio3">E2E QA Services</label>
+          <label class="form-check-label" for="e2eQAOption">E2E QA Services</label>
         </div>
 
         <h1 class="page-titletop mt-3">Lorem ipsum dolor sit amet, consectetur adipiscing elit</h1>
@@ -133,12 +133,12 @@
               </div>
             </div>
 
-             
+
             <!-- <div class="row mb-3 mt-2">
               <div class="col-sm-3"></div>
               <div class="col-sm-9">
                   <div class="form-group">
-                    
+
                   </div>
                 <div class="invalid-feedback" *ngIf="bankingOption?.invalid && bankingOption?.touched">
                   Please select a banking option.
@@ -235,7 +235,7 @@
               <p>Sample csv file for bulk
                 enquiry search</p>
             </a>
-          </div>          
+          </div>
         </div>
       </div>
     </div>
