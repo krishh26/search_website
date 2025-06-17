@@ -1,67 +1,70 @@
-<section class="registration-section margin-top104" style="background-image: url(/assets/img/search-background-image.png);">
-  <div class="overlay-bg" style="opacity: 1;">
-    <div class="container">
-      <div class="text-center text-white">
-        <div class="form-check form-check-inline">
-          <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1"
-            checked>
-          <label class="form-check-label" for="inlineRadio1">WorkAway</label>
+<main *ngIf="isMainPage">
+  <section class="registration-section margin-top104"
+    style="background-image: url(/assets/img/search-background-image.png);">
+    <div class="overlay-bg" style="opacity: 1;">
+      <div class="container">
+        <div class="text-center text-white">
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1"
+              checked>
+            <label class="form-check-label" for="inlineRadio1">WorkAway</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
+            <label class="form-check-label" for="inlineRadio2">IT Subcontracting</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio3" value="option3">
+            <label class="form-check-label" for="inlineRadio3">E2E QA Services</label>
+          </div>
+
+          <h1 class="page-titletop mt-3">Lorem ipsum dolor sit amet, consectetur adipiscing elit</h1>
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
+            dolore
+            magna aliqua.
+            Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+          </p>
         </div>
-        <div class="form-check form-check-inline">
-          <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
-          <label class="form-check-label" for="inlineRadio2">IT Subcontracting</label>
-        </div>
-        <div class="form-check form-check-inline">
-          <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio3" value="option3">
-          <label class="form-check-label" for="inlineRadio3">E2E QA Services</label>
-        </div>
-
-        <h1 class="page-titletop mt-3">Lorem ipsum dolor sit amet, consectetur adipiscing elit</h1>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
-          magna aliqua.
-          Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-        </p>
-      </div>
-      <div class="FlatCard text-dark" style="z-index: 1;">
-        <div class="card-body p-5">
-          <div class="row">
-            <div class="col-12">
-              <div class="text-center">
-                <p class="p-16 p-600 text-muted">In just a minute away</p>
-                <h2 class="page-titletop text-dark">Register with <span class="text-primary">Spectrum IT Hub</span></h2>
-              </div>
-              <ul class="wizard mt-3 mb-5">
-                <li ui-sref="firstStep" class="active">
-                  <span data-translate="">Need Details</span>
-                </li>
-                <li ui-sref="secondStep" class="active">
-                  <span data-translate="">Contact Details</span>
-                </li>
-              </ul>
+        <div class="FlatCard text-dark" style="z-index: 1;">
+          <div class="card-body p-5">
+            <div class="row">
+              <div class="col-12">
+                <div class="text-center">
+                  <p class="p-16 p-600 text-muted">In just a minute away</p>
+                  <h2 class="page-titletop text-dark">Register with <span class="text-primary">Spectrum IT Hub</span>
+                  </h2>
+                </div>
+                <ul class="wizard mt-3 mb-5">
+                  <li ui-sref="firstStep" class="active">
+                    <span data-translate="">Need Details</span>
+                  </li>
+                  <li ui-sref="secondStep" class="active">
+                    <span data-translate="">Contact Details</span>
+                  </li>
+                </ul>
 
 
-              <form [formGroup]="contactForm" (ngSubmit)="onSubmit()" class="needs-validation" novalidate>
+                <form [formGroup]="contactForm" (ngSubmit)="onSubmit()" class="needs-validation" novalidate>
 
-                 <div class="row mb-3 align-items-center">
+                  <div class="row mb-3 align-items-center">
                     <label for="businessName" class="col-sm-3 col-form-label">Business Name</label>
                     <div class="col-sm-9">
-                      <input type="text" class="form-control" id="businessName"
-                             formControlName="businessName"
-                             placeholder="Enter your business name..."
-                             [class.is-invalid]="businessName?.invalid && businessName?.touched">
+                      <input type="text" class="form-control" id="businessName" formControlName="businessName"
+                        placeholder="Enter your business name..."
+                        [class.is-invalid]="businessName?.invalid && businessName?.touched">
                       <div class="invalid-feedback" *ngIf="businessName?.invalid && businessName?.touched">
                         <span *ngIf="businessName?.errors?.['required']">Please enter your business name.</span>
-                        <span *ngIf="businessName?.errors?.['minlength']">Business name must be at least 2 characters.</span>
+                        <span *ngIf="businessName?.errors?.['minlength']">Business name must be at least 2
+                          characters.</span>
                       </div>
                     </div>
                   </div>
                   <div class="row mb-3 align-items-center">
                     <label for="address" class="col-sm-3 col-form-label">Address</label>
                     <div class="col-sm-9">
-                       <textarea class="form-control" id="address" cols="100" rows="1"
-                                formControlName="address"
-                                placeholder="Enter your address..."
-                                [class.is-invalid]="address?.invalid && address?.touched"></textarea>
+                      <textarea class="form-control" id="address" cols="100" rows="1" formControlName="address"
+                        placeholder="Enter your address..."
+                        [class.is-invalid]="address?.invalid && address?.touched"></textarea>
                       <div class="invalid-feedback" *ngIf="address?.invalid && address?.touched">
                         <span *ngIf="address?.errors?.['required']">Please enter your address.</span>
                         <span *ngIf="address?.errors?.['minlength']">Address must be at least 5 characters.</span>
@@ -71,23 +74,20 @@
                   <div class="row mb-3 align-items-center">
                     <label for="fullName" class="col-sm-3 col-form-label">Your Full Name </label>
                     <div class="col-sm-9">
-                       <input type="text" class="form-control" id="fullName"
-                              formControlName="fullName"
-                              placeholder="Enter your name..."
-                              [class.is-invalid]="fullName?.invalid && fullName?.touched">
-                       <div class="invalid-feedback" *ngIf="fullName?.invalid && fullName?.touched">
+                      <input type="text" class="form-control" id="fullName" formControlName="fullName"
+                        placeholder="Enter your name..." [class.is-invalid]="fullName?.invalid && fullName?.touched">
+                      <div class="invalid-feedback" *ngIf="fullName?.invalid && fullName?.touched">
                         <span *ngIf="fullName?.errors?.['required']">Please enter your full name.</span>
                         <span *ngIf="fullName?.errors?.['minlength']">Name must be at least 2 characters.</span>
-                       </div>
+                      </div>
                     </div>
                   </div>
                   <div class="row mb-3 align-items-center">
                     <label for="phoneNumber" class="col-sm-3 col-form-label">Phone Number </label>
                     <div class="col-sm-9">
-                       <input type="text" class="form-control" id="phoneNumber"
-                              formControlName="phoneNumber" (keypress)="NumberOnly($event)"
-                              placeholder="Enter your phone number..."
-                              [class.is-invalid]="phoneNumber?.invalid && phoneNumber?.touched">
+                      <input type="text" class="form-control" id="phoneNumber" formControlName="phoneNumber"
+                        (keypress)="NumberOnly($event)" placeholder="Enter your phone number..."
+                        [class.is-invalid]="phoneNumber?.invalid && phoneNumber?.touched">
                       <div class="invalid-feedback" *ngIf="phoneNumber?.invalid && phoneNumber?.touched">
                         <span *ngIf="phoneNumber?.errors?.['required']">Please enter your phone number.</span>
                         <span *ngIf="phoneNumber?.errors?.['pattern']">Please enter a valid phone number.</span>
@@ -97,106 +97,117 @@
                   <div class="row mb-3 align-items-center">
                     <label for="jobTitle" class="col-sm-3 col-form-label">Job Title </label>
                     <div class="col-sm-9">
-                       <input type="text" class="form-control" id="jobTitle"
-                              formControlName="jobTitle"
-                              placeholder="Enter your job title..."
-                              [class.is-invalid]="jobTitle?.invalid && jobTitle?.touched">
-                       <div class="invalid-feedback" *ngIf="jobTitle?.invalid && jobTitle?.touched">
+                      <input type="text" class="form-control" id="jobTitle" formControlName="jobTitle"
+                        placeholder="Enter your job title..."
+                        [class.is-invalid]="jobTitle?.invalid && jobTitle?.touched">
+                      <div class="invalid-feedback" *ngIf="jobTitle?.invalid && jobTitle?.touched">
                         <span *ngIf="jobTitle?.errors?.['required']">Please enter your job title.</span>
                         <span *ngIf="jobTitle?.errors?.['minlength']">Job title must be at least 2 characters.</span>
-                       </div>
+                      </div>
                     </div>
                   </div>
                   <div class="row mb-3 align-items-center">
                     <label for="emailAddress" class="col-sm-3 col-form-label">Email Address</label>
                     <div class="col-sm-9">
-                       <input type="email" class="form-control" id="emailAddress"
-                              formControlName="emailAddress"
-                              placeholder="Enter your email id..."
-                              [class.is-invalid]="emailAddress?.invalid && emailAddress?.touched">
-                       <div class="invalid-feedback" *ngIf="emailAddress?.invalid && emailAddress?.touched">
+                      <input type="email" class="form-control" id="emailAddress" formControlName="emailAddress"
+                        placeholder="Enter your email id..."
+                        [class.is-invalid]="emailAddress?.invalid && emailAddress?.touched">
+                      <div class="invalid-feedback" *ngIf="emailAddress?.invalid && emailAddress?.touched">
                         <span *ngIf="emailAddress?.errors?.['required']">Please enter your email address.</span>
                         <span *ngIf="emailAddress?.errors?.['email']">Please enter a valid email address.</span>
-                       </div>
+                      </div>
                     </div>
                   </div>
                   <div class="row mb-3 align-items-center">
                     <label for="howDidYouHear" class="col-sm-3 col-form-label">How did you hear about us? </label>
                     <div class="col-sm-9">
-                       <input type="text" class="form-control" id="howDidYouHear"
-                              formControlName="howDidYouHear"
-                              placeholder="Enter details...">
+                      <input type="text" class="form-control" id="howDidYouHear" formControlName="howDidYouHear"
+                        placeholder="Enter details...">
                     </div>
                   </div>
-                <div class="form-group text-end">
-                  <button class="btn btn-dark me-2" type="button" (click)="goBack()">
-                    <i class="bi bi-arrow-left me-2"></i> Go Back
-                  </button>
-                  <button class="btn btn-primary" type="submit" [disabled]="isSubmitting">
-                    <span *ngIf="isSubmitting" class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>
-                    {{ isSubmitting ? 'Submitting...' : 'Submit' }}
-                    <i class="bi bi-save2 ms-2" *ngIf="!isSubmitting"></i>
-                  </button>
-                </div>
-              </form>
+                  <div class="form-group text-end">
+                    <button class="btn btn-dark me-2" type="button" (click)="goBack()">
+                      <i class="bi bi-arrow-left me-2"></i> Go Back
+                    </button>
+                    <button class="btn btn-primary" type="submit" [disabled]="isSubmitting">
+                      <span *ngIf="isSubmitting" class="spinner-border spinner-border-sm me-2" role="status"
+                        aria-hidden="true"></span>
+                      {{ isSubmitting ? 'Submitting...' : 'Submit' }}
+                      <i class="bi bi-save2 ms-2" *ngIf="!isSubmitting"></i>
+                    </button>
+                  </div>
+                </form>
+              </div>
             </div>
+
           </div>
-
         </div>
       </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<section>
-  <div class="container">
-    <div class="mb-5">
-      <h5 class="headingTitle">The most <span class="text-primary">demanding skills</span></h5>
-      <p>Get some Inspirations from 86K+ skills</p>
+  <section>
+    <div class="container">
+      <div class="mb-5">
+        <h5 class="headingTitle">The most <span class="text-primary">demanding skills</span></h5>
+        <p>Get some Inspirations from 86K+ skills</p>
+      </div>
+      <div class="row">
+        <div class="col-lg-2 col-xl-2 col-md-4 col-sm-4 col-6">
+          <div class="light-gray-card">
+            <img src="/assets/img/ui-ux.gif" height="60" class="mb-4" />
+            <p class="mb-0"><strong>UX/UX Designer</strong></p>
+            <p class="mb-0 p-12">250 Skills</p>
+          </div>
+        </div>
+        <div class="col-lg-2 col-xl-2 col-md-4 col-sm-4 col-6">
+          <div class="light-gray-card">
+            <img src="/assets/img/softwarte-developer.gif" height="60" class="mb-4" />
+            <p class="mb-0"><strong>Software Developer</strong></p>
+            <p class="mb-0 p-12">250 Skills</p>
+          </div>
+        </div>
+        <div class="col-lg-2 col-xl-2 col-md-4 col-sm-4 col-6">
+          <div class="light-gray-card">
+            <img src="/assets/img/software-testing.gif" height="60" class="mb-4" />
+            <p class="mb-0"><strong>Software Tester</strong></p>
+            <p class="mb-0 p-12">250 Skills</p>
+          </div>
+        </div>
+        <div class="col-lg-2 col-xl-2 col-md-4 col-sm-4 col-6">
+          <div class="light-gray-card">
+            <img src="/assets/img/frontend-developer.gif" height="60" class="mb-4" />
+            <p class="mb-0"><strong>Frontend Developer</strong></p>
+            <p class="mb-0 p-12">250 Skills</p>
+          </div>
+        </div>
+        <div class="col-lg-2 col-xl-2 col-md-4 col-sm-4 col-6">
+          <div class="light-gray-card">
+            <img src="/assets/img/api-developer.gif" height="60" class="mb-4" />
+            <p class="mb-0"><strong>API Developer</strong></p>
+            <p class="mb-0 p-12">250 Skills</p>
+          </div>
+        </div>
+        <div class="col-lg-2 col-xl-2 col-md-4 col-sm-4 col-6">
+          <div class="light-gray-card">
+            <img src="/assets/img/fullstack-developer.gif" height="60" class="mb-4" />
+            <p class="mb-0"><strong>Fullstack Developer</strong></p>
+            <p class="mb-0 p-12">250 Skills</p>
+          </div>
+        </div>
+      </div>
     </div>
-    <div class="row">
-      <div class="col-lg-2 col-xl-2 col-md-4 col-sm-4 col-6">
-        <div class="light-gray-card">
-          <img src="/assets/img/ui-ux.gif" height="60" class="mb-4" />
-          <p class="mb-0"><strong>UX/UX Designer</strong></p>
-          <p class="mb-0 p-12">250 Skills</p>
-        </div>
-      </div>
-      <div class="col-lg-2 col-xl-2 col-md-4 col-sm-4 col-6">
-        <div class="light-gray-card">
-          <img src="/assets/img/softwarte-developer.gif" height="60" class="mb-4" />
-          <p class="mb-0"><strong>Software Developer</strong></p>
-          <p class="mb-0 p-12">250 Skills</p>
-        </div>
-      </div>
-      <div class="col-lg-2 col-xl-2 col-md-4 col-sm-4 col-6">
-        <div class="light-gray-card">
-          <img src="/assets/img/software-testing.gif" height="60" class="mb-4" />
-          <p class="mb-0"><strong>Software Tester</strong></p>
-          <p class="mb-0 p-12">250 Skills</p>
-        </div>
-      </div>
-      <div class="col-lg-2 col-xl-2 col-md-4 col-sm-4 col-6">
-        <div class="light-gray-card">
-          <img src="/assets/img/frontend-developer.gif" height="60" class="mb-4" />
-          <p class="mb-0"><strong>Frontend Developer</strong></p>
-          <p class="mb-0 p-12">250 Skills</p>
-        </div>
-      </div>
-      <div class="col-lg-2 col-xl-2 col-md-4 col-sm-4 col-6">
-        <div class="light-gray-card">
-          <img src="/assets/img/api-developer.gif" height="60" class="mb-4" />
-          <p class="mb-0"><strong>API Developer</strong></p>
-          <p class="mb-0 p-12">250 Skills</p>
-        </div>
-      </div>
-      <div class="col-lg-2 col-xl-2 col-md-4 col-sm-4 col-6">
-        <div class="light-gray-card">
-          <img src="/assets/img/fullstack-developer.gif" height="60" class="mb-4" />
-          <p class="mb-0"><strong>Fullstack Developer</strong></p>
-          <p class="mb-0 p-12">250 Skills</p>
-        </div>
-      </div>
+  </section>
+</main>
+
+<section *ngIf="!isMainPage">
+  <div class="overlay-bg" style="opacity: 1;">
+    <div class="container text-center">
+      <img src="assets/img/success-icon.gif" />
+      <h4><strong>Registration Successfully done!!!</strong></h4>
+      <p>Thank you for registration, we will connect<br>
+        you with 2-5 business days’ time</p>
+      <p><a routerLink="/our-services/workaway" class="btn btn-link text-primary p-600">Back to Home</a></p>
     </div>
   </div>
 </section>
