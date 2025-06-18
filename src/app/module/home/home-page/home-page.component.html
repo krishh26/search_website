@@ -5,9 +5,9 @@
         <div class="col-12">
           <div class="input-group main-searchbar mb-3">
             <div class="input-group-text p-0 mob-w100">
-              <select class="form-select">
-                <option>WorkAway</option>
-                <option>IT Subcontracting</option>
+              <select class="form-select" (change)="onServiceChange($event)">
+                <option value="WorkAway">WorkAway</option>
+                <option value="IT Subcontracting">IT Subcontracting</option>
               </select>
             </div>
             <input type="text" class="form-control mob-w100" placeholder="Search Here">
@@ -18,7 +18,7 @@
         </div>
       </div>
 
-      <div class="workaway-services-box">
+      <div class="workaway-services-box" *ngIf="showSkills">
         <h5 class="headingTitle">The most <span class="text-primary">demanding skills</span></h5>
         <p>Get some Inspirations from 86K+ skills</p>
         <div class="row">
@@ -66,6 +66,59 @@
           </div>
         </div>
       </div>
+
+
+      <div class="workaway-services-box" *ngIf="showServices">
+        <div class="mb-5">
+          <h5 class="headingTitle">The most <span class="text-primary">demanding services</span></h5>
+          <p>Get some Inspirations from 86K+ skills</p>
+        </div>
+        <div class="row">
+          <div class="col-lg-2 col-xl-2 col-md-4 col-sm-4 col-6">
+            <div class="light-gray-card">
+              <img src="/assets/img/software-development.gif" height="60" class="mb-4" />
+              <p class="mb-0"><strong>Software Development</strong></p>
+              <p class="mb-0 p-12">250 Skills</p>
+            </div>
+          </div>
+          <div class="col-lg-2 col-xl-2 col-md-4 col-sm-4 col-6">
+            <div class="light-gray-card">
+              <img src="/assets/img/cloud-development.gif" height="60" class="mb-4" />
+              <p class="mb-0"><strong>Cloud & DevOps</strong></p>
+              <p class="mb-0 p-12">250 Skills</p>
+            </div>
+          </div>
+          <div class="col-lg-2 col-xl-2 col-md-4 col-sm-4 col-6">
+            <div class="light-gray-card">
+              <img src="/assets/img/digital-transformation.gif" height="60" class="mb-4" />
+              <p class="mb-0"><strong>Digital Transformation</strong></p>
+              <p class="mb-0 p-12">250 Skills</p>
+            </div>
+          </div>
+          <div class="col-lg-2 col-xl-2 col-md-4 col-sm-4 col-6">
+            <div class="light-gray-card">
+              <img src="/assets/img/system-intigration.gif" height="60" class="mb-4" />
+              <p class="mb-0"><strong>Systems Integration</strong></p>
+              <p class="mb-0 p-12">250 Skills</p>
+            </div>
+          </div>
+          <div class="col-lg-2 col-xl-2 col-md-4 col-sm-4 col-6">
+            <div class="light-gray-card">
+              <img src="/assets/img/software-testing.gif" height="60" class="mb-4" />
+              <p class="mb-0"><strong>QA & Testing</strong></p>
+              <p class="mb-0 p-12">250 Skills</p>
+            </div>
+          </div>
+          <div class="col-lg-2 col-xl-2 col-md-4 col-sm-4 col-6">
+            <div class="light-gray-card">
+              <img src="/assets/img/ui-ux.gif" height="60" class="mb-4" />
+              <p class="mb-0"><strong>UI/UX Design</strong></p>
+              <p class="mb-0 p-12">250 Skills</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
     </div>
   </section>
   <section>
