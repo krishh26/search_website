@@ -13,6 +13,7 @@ export class WorkkawayRegistrationContactDetailsComponent implements OnInit {
   contactForm!: FormGroup;
   isSubmitting: boolean = false;
   stepOneData: any = null;
+  isMainPage: boolean = true;
 
   constructor(
     private router: Router,
@@ -81,6 +82,7 @@ export class WorkkawayRegistrationContactDetailsComponent implements OnInit {
           // Show success message
           this.toastr.success('Form submitted successfully!', 'Success');
 
+          this.isMainPage = false;
           // Navigate to success page
           this.router.navigate(['/success-message']);
         },

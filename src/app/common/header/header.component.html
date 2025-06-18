@@ -4,7 +4,8 @@
             <a class="navbar-brand text-white" href="index.html">
                 <!-- <img src="assets/asset/" class="mobile-hide" alt="Spectrum IT Hub Web" /> -->
                 <img src="assets/img/spectrum-logo.png" class="mobile-hide" alt="Spectrum IT Hub Web" />
-                <img src="assets/img/spectrum-icon-logo.png" class="desktop-hide mobile-show" alt="Spectrum IT Hub Web" />
+                <img src="assets/img/spectrum-icon-logo.png" class="desktop-hide mobile-show"
+                    alt="Spectrum IT Hub Web" />
             </a>
             <div class="offcanvas offcanvas-start-lg" tabindex="-1" id="offcanvasExample"
                 aria-labelledby="offcanvasExampleLabel">
@@ -34,8 +35,10 @@
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                                 <li><a class="dropdown-item" routerLink="/our-services/workaway">WorkAway</a></li>
-                                <li><a class="dropdown-item" routerLink="/our-services/e2e-qa-services">E2E QA Services</a></li>
-                                <li><a class="dropdown-item" routerLink="/our-services/it-subcontracting-services">IT Subcontracting
+                                <li><a class="dropdown-item" routerLink="/our-services/e2e-qa-services">E2E QA
+                                        Services</a></li>
+                                <li><a class="dropdown-item" routerLink="/our-services/it-subcontracting-services">IT
+                                        Subcontracting
                                         Service</a></li>
                             </ul>
                         </li>
@@ -53,7 +56,7 @@
                     </ul>
                 </div>
             </div>
-            <a data-bs-toggle="modal" data-bs-target="#searchModal" class="btn btn-signup"><i class="bi bi-search"></i>
+            <a routerLink="/our-services/candidate-search-result" class="btn btn-signup"><i class="bi bi-search"></i>
                 Search</a>
             <a href="javascript:;" class="btn btn-signin">Sign In</a>
             <button class="btn navbar-toggler border-3 px-2" type="button" data-bs-toggle="offcanvas"
@@ -67,3 +70,63 @@
         </div>
     </nav>
 </header>
+
+<!--Search  Modal -->
+<div class="modal fade" id="searchModal" tabindex="-1" aria-labelledby="searchModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content">
+            <button type="button" class="btn-close-absolute" data-bs-dismiss="modal" aria-label="Close"></button>
+            <div class="modal-body p-5">
+                <h3><strong>Choose Your Need</strong></h3>
+                <p>Find Your Match - Shortlist companies based on your goals and connect directly for quotes or
+                    discussions.</p>
+
+                <ul class="SearchneedList">
+                    <li>
+                        <a routerLink="/home/resource-search">
+                            <div class="row align-items-center" data-bs-dismiss="modal" aria-label="Close">
+                                <div class="col-2">
+                                    <img src="assets/img/resources-team.gif" width="64" />
+                                </div>
+                                <div class="col-10">
+                                    <p class="p-18 p-600 mb-0">Search Talent</p>
+                                    <p class="mb-0 text-muted p-12">WorkAway gives you guaranteed access to pre-approved
+                                        IT talent</p>
+                                </div>
+                            </div>
+                        </a>
+                    </li>
+                    <li>
+                        <a routerLink="/home/resource-search">
+                            <div class="row align-items-center" data-bs-dismiss="modal" aria-label="Close">
+                                <div class="col-2">
+                                    <img src="assets/img/QA-services.gif" width="64" />
+                                </div>
+                                <div class="col-10">
+                                    <p class="p-18 p-600 mb-0">QA Services</p>
+                                    <p class="mb-0 text-muted p-12">End-to-end testing solutions powered by UK
+                                        governance and India delivery strength</p>
+                                </div>
+                            </div>
+                        </a>
+                    </li>
+                    <li>
+                        <a routerLink="/home/resource-search">
+                            <div class="row align-items-center" data-bs-dismiss="modal" aria-label="Close">
+                                <div class="col-2">
+                                    <img src="assets/img/corporate-team.gif" width="64" />
+                                </div>
+                                <div class="col-10">
+                                    <p class="p-18 p-600 mb-0">IT Subcontracting Services</p>
+                                    <p class="mb-0 text-muted p-12">Scale your delivery capacity without the cost, risk,
+                                        or delay of permanent hires</p>
+                                </div>
+                            </div>
+                        </a>
+                    </li>
+                </ul>
+
+            </div>
+        </div>
+    </div>
+</div>
