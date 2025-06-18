@@ -5,7 +5,7 @@
         <div class="col-12">
           <div class="input-group main-searchbar mb-3">
             <div class="input-group-text p-0 mob-w100">
-              <select class="form-select" (change)="onServiceChange($event)">
+              <select class="form-select" [(ngModel)]="selectedService" (change)="onServiceChange($event)">
                 <option value="WorkAway">WorkAway</option>
                 <option value="IT Subcontracting">IT Subcontracting</option>
               </select>
