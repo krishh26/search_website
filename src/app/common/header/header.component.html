@@ -1,132 +1,131 @@
 <header class="header">
-    <nav class="navbar navbar-expand-lg navbar-light">
-        <div class="container">
-            <a class="navbar-brand text-white" href="index.html">
-                <!-- <img src="assets/asset/" class="mobile-hide" alt="Spectrum IT Hub Web" /> -->
-                <img src="assets/img/spectrum-logo.png" class="mobile-hide" alt="Spectrum IT Hub Web" />
-                <img src="assets/img/spectrum-icon-logo.png" class="desktop-hide mobile-show"
-                    alt="Spectrum IT Hub Web" />
-            </a>
-            <div class="offcanvas offcanvas-start-lg" tabindex="-1" id="offcanvasExample"
-                aria-labelledby="offcanvasExampleLabel">
-                <div class="offcanvas-header d-flex d-lg-none">
+  <nav class="navbar navbar-expand-lg navbar-light">
+    <div class="container">
+      <a class="navbar-brand text-white" href="index.html">
+        <!-- <img src="assets/asset/" class="mobile-hide" alt="Spectrum IT Hub Web" /> -->
+        <img src="assets/img/spectrum-logo.png" class="mobile-hide" alt="Spectrum IT Hub Web" />
+        <img src="assets/img/spectrum-icon-logo.png" class="desktop-hide mobile-show" alt="Spectrum IT Hub Web" />
+      </a>
+      <div class="offcanvas offcanvas-start-lg" tabindex="-1" id="offcanvasExample"
+        aria-labelledby="offcanvasExampleLabel">
+        <div class="offcanvas-header d-flex d-lg-none">
 
-                    <img src="assets/img/spectrum-logo.png" width="180" alt="Spectrum IT Hub Web" />
-                    <a href="javascript:void(0) " class="text-reset p-0" data-bs-dismiss="offcanvas" aria-label="close">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="#000"
-                            class="bi bi-x-circle" viewBox="0 0 16 16">
-                            <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
-                            <path
-                                d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z" />
-                        </svg>
-                    </a>
-                </div>
-                <div class="offcanvas-body p-lg-0">
-                    <ul class="navbar-nav ms-auto">
-                        <li class="nav-item">
-                            <a class="nav-link" routerLink="/about-us">
-                                About Us
-                            </a>
-                        </li>
-                        <li class="nav-item  dropdown margin--5">
-                            <a class="nav-link dropdown-toggle" href="javascript:;" id="navbarDropdown" role="button"
-                                data-bs-toggle="dropdown" aria-expanded="false">
-                                Our Services
-                            </a>
-                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <li><a class="dropdown-item" routerLink="/our-services/workaway">WorkAway</a></li>
-                                <li><a class="dropdown-item" routerLink="/our-services/e2e-qa-services">E2E QA
-                                        Services</a></li>
-                                <li><a class="dropdown-item" routerLink="/our-services/it-subcontracting-services">IT
-                                        Subcontracting
-                                        Service</a></li>
-                            </ul>
-                        </li>
-
-                        <li class="nav-item">
-                            <a class="nav-link" routerLink="/faq">
-                                Faq's
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" routerLink="/contact-us">
-                                Contact Us
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-            <a routerLink="/our-services/candidate-search-result" class="btn btn-signup"><i class="bi bi-search"></i>
-                Search</a>
-            <a href="javascript:;" class="btn btn-signin">Sign In</a>
-            <button class="btn navbar-toggler border-3 px-2" type="button" data-bs-toggle="offcanvas"
-                data-bs-target="#offcanvasExample" aria-controls="offcanvasExample">
-                <div class="hamburger">
-                    <div class="top-bun"></div>
-                    <div class="meat"></div>
-                    <div class="bottom-bun"></div>
-                </div>
-            </button>
+          <img src="assets/img/spectrum-logo.png" width="180" alt="Spectrum IT Hub Web" />
+          <a href="javascript:void(0) " class="text-reset p-0" data-bs-dismiss="offcanvas" aria-label="close">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="#000" class="bi bi-x-circle"
+              viewBox="0 0 16 16">
+              <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
+              <path
+                d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z" />
+            </svg>
+          </a>
         </div>
-    </nav>
+        <div class="offcanvas-body p-lg-0">
+          <ul class="navbar-nav ms-auto">
+            <li class="nav-item">
+              <a class="nav-link" routerLink="/about-us">
+                About Us
+              </a>
+            </li>
+            <li class="nav-item  dropdown margin--5">
+              <a class="nav-link dropdown-toggle" href="javascript:;" id="navbarDropdown" role="button"
+                data-bs-toggle="dropdown" aria-expanded="false">
+                Our Services
+              </a>
+              <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <li><a class="dropdown-item" routerLink="/our-services/workaway">WorkAway</a></li>
+                <li><a class="dropdown-item" routerLink="/our-services/e2e-qa-services">E2E QA
+                    Services</a></li>
+                <li><a class="dropdown-item" routerLink="/our-services/it-subcontracting-services">IT
+                    Subcontracting
+                    Service</a></li>
+              </ul>
+            </li>
+
+            <li class="nav-item">
+              <a class="nav-link" routerLink="/faq">
+                Faq's
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" routerLink="/contact-us">
+                Contact Us
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <a *ngIf="!isHomePage" routerLink="/" class="btn btn-signup"><i class="bi bi-search"></i>
+        Search</a>
+      <a href="javascript:;" class="btn btn-signin">Sign In</a>
+      <button class="btn navbar-toggler border-3 px-2" type="button" data-bs-toggle="offcanvas"
+        data-bs-target="#offcanvasExample" aria-controls="offcanvasExample">
+        <div class="hamburger">
+          <div class="top-bun"></div>
+          <div class="meat"></div>
+          <div class="bottom-bun"></div>
+        </div>
+      </button>
+    </div>
+  </nav>
 </header>
 
 <!--Search  Modal -->
 <div class="modal fade" id="searchModal" tabindex="-1" aria-labelledby="searchModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered modal-lg">
-        <div class="modal-content">
-            <button type="button" class="btn-close-absolute" data-bs-dismiss="modal" aria-label="Close"></button>
-            <div class="modal-body p-5">
-                <h3><strong>Choose Your Need</strong></h3>
-                <p>Find Your Match - Shortlist companies based on your goals and connect directly for quotes or
-                    discussions.</p>
+  <div class="modal-dialog modal-dialog-centered modal-lg">
+    <div class="modal-content">
+      <button type="button" class="btn-close-absolute" data-bs-dismiss="modal" aria-label="Close"></button>
+      <div class="modal-body p-5">
+        <h3><strong>Choose Your Need</strong></h3>
+        <p>Find Your Match - Shortlist companies based on your goals and connect directly for quotes or
+          discussions.</p>
 
-                <ul class="SearchneedList">
-                    <li>
-                        <a routerLink="/home/resource-search">
-                            <div class="row align-items-center" data-bs-dismiss="modal" aria-label="Close">
-                                <div class="col-2">
-                                    <img src="assets/img/resources-team.gif" width="64" />
-                                </div>
-                                <div class="col-10">
-                                    <p class="p-18 p-600 mb-0">Search Talent</p>
-                                    <p class="mb-0 text-muted p-12">WorkAway gives you guaranteed access to pre-approved
-                                        IT talent</p>
-                                </div>
-                            </div>
-                        </a>
-                    </li>
-                    <li>
-                        <a routerLink="/home/resource-search">
-                            <div class="row align-items-center" data-bs-dismiss="modal" aria-label="Close">
-                                <div class="col-2">
-                                    <img src="assets/img/QA-services.gif" width="64" />
-                                </div>
-                                <div class="col-10">
-                                    <p class="p-18 p-600 mb-0">QA Services</p>
-                                    <p class="mb-0 text-muted p-12">End-to-end testing solutions powered by UK
-                                        governance and India delivery strength</p>
-                                </div>
-                            </div>
-                        </a>
-                    </li>
-                    <li>
-                        <a routerLink="/home/resource-search">
-                            <div class="row align-items-center" data-bs-dismiss="modal" aria-label="Close">
-                                <div class="col-2">
-                                    <img src="assets/img/corporate-team.gif" width="64" />
-                                </div>
-                                <div class="col-10">
-                                    <p class="p-18 p-600 mb-0">IT Subcontracting Services</p>
-                                    <p class="mb-0 text-muted p-12">Scale your delivery capacity without the cost, risk,
-                                        or delay of permanent hires</p>
-                                </div>
-                            </div>
-                        </a>
-                    </li>
-                </ul>
+        <ul class="SearchneedList">
+          <li>
+            <a routerLink="/home/resource-search">
+              <div class="row align-items-center" data-bs-dismiss="modal" aria-label="Close">
+                <div class="col-2">
+                  <img src="assets/img/resources-team.gif" width="64" />
+                </div>
+                <div class="col-10">
+                  <p class="p-18 p-600 mb-0">Search Talent</p>
+                  <p class="mb-0 text-muted p-12">WorkAway gives you guaranteed access to pre-approved
+                    IT talent</p>
+                </div>
+              </div>
+            </a>
+          </li>
+          <li>
+            <a routerLink="/home/resource-search">
+              <div class="row align-items-center" data-bs-dismiss="modal" aria-label="Close">
+                <div class="col-2">
+                  <img src="assets/img/QA-services.gif" width="64" />
+                </div>
+                <div class="col-10">
+                  <p class="p-18 p-600 mb-0">QA Services</p>
+                  <p class="mb-0 text-muted p-12">End-to-end testing solutions powered by UK
+                    governance and India delivery strength</p>
+                </div>
+              </div>
+            </a>
+          </li>
+          <li>
+            <a routerLink="/home/resource-search">
+              <div class="row align-items-center" data-bs-dismiss="modal" aria-label="Close">
+                <div class="col-2">
+                  <img src="assets/img/corporate-team.gif" width="64" />
+                </div>
+                <div class="col-10">
+                  <p class="p-18 p-600 mb-0">IT Subcontracting Services</p>
+                  <p class="mb-0 text-muted p-12">Scale your delivery capacity without the cost, risk,
+                    or delay of permanent hires</p>
+                </div>
+              </div>
+            </a>
+          </li>
+        </ul>
 
-            </div>
-        </div>
+      </div>
     </div>
+  </div>
 </div>
