@@ -13,9 +13,9 @@
           <i class="bi bi-search"></i>
           <input type="text" [(ngModel)]="searchQuery" placeholder="Front-end developer" (keyup.enter)="onSearch()" />
           <button class="button" (click)="onSearch()">Search</button>
-          <a href="resources-search.html" class="search-link mobile-hide">Advance Search</a>
+          <a routerLink="/resource-search" class="search-link mobile-hide">Advance Search</a>
         </div>
-        <p class="mobile-show desktop-hide"> <a href="resources-search.html" class="search-link-btn">Advance Search</a></p>
+        <p class="mobile-show desktop-hide"> <a routerLink="/resource-search" class="search-link-btn">Advance Search</a></p>
       </div>
     </div>
     <ul class="searchresult-tags mb-4">

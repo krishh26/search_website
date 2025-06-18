@@ -11,21 +11,19 @@
       <div class="col-12">
         <div class="search-box-large mb-3">
           <i class="bi bi-search"></i>
-          <input type="text"
-                 placeholder="Search suppliers..."
-                 [value]="searchText"
-                 (input)="onSearch($event)" />
+          <input type="text" placeholder="Search suppliers..." [value]="searchText" (input)="onSearch($event)" />
           <button class="button">Search</button>
-          <a href="partner-search.html" class="search-link mobile-hide">Advance Search</a>
+          <a routerLink="/resource-search" class="search-link mobile-hide">Advance Search</a>
         </div>
-        <p class="mobile-show desktop-hide"> <a href="partner-search.html" class="search-link-btn">Advance Search</a>
+        <p class="mobile-show desktop-hide"> <a routerLink="/resource-search" class="search-link-btn">Advance Search</a>
         </p>
       </div>
     </div>
 
     <div class="row align-items-center mb-4">
       <div class="col-12">
-        <h1 class="headingTitle2">We found <span class="text-primary">{{totalSuppliers}} Consortium Partners</span> that match
+        <h1 class="headingTitle2">We found <span class="text-primary">{{totalSuppliers}} Consortium Partners</span> that
+          match
           your search</h1>
       </div>
 
@@ -48,10 +46,12 @@
           <div class="dotted-spacer"></div>
           <div class="row">
             <div class="col-lg-4 col-xl-4 col-md-4 col-sm-4 col-12">
-              <p><i class="bi bi-briefcase-fill text-muted me-2"></i> Experience- {{calculateExperience(supplier.yearOfEstablishment)}} Years</p>
+              <p><i class="bi bi-briefcase-fill text-muted me-2"></i> Experience-
+                {{calculateExperience(supplier.yearOfEstablishment)}} Years</p>
             </div>
             <div class="col-lg-4 col-xl-4 col-md-4 col-sm-4 col-12">
-              <p><i class="bi bi-laptop-fill text-muted me-2"></i> Total Projects Executed- {{supplier.totalProjectsExecuted || 0}}</p>
+              <p><i class="bi bi-laptop-fill text-muted me-2"></i> Total Projects Executed-
+                {{supplier.totalProjectsExecuted || 0}}</p>
             </div>
             <div class="col-lg-4 col-xl-4 col-md-4 col-sm-4 col-12">
               <p><i class="bi-people-fill text-muted me-2"></i> Resources Capacity- {{supplier.employeeCount || 0}}</p>
@@ -88,7 +88,7 @@
             <a href="resources-search.html">
               <div class="row align-items-center">
                 <div class="col-2">
-                  <img src="img/resources-team.gif" width="64" />
+                  <img src="/assets/img/resources-team.gif" width="64" />
                 </div>
                 <div class="col-10">
                   <p class="p-18 p-600 mb-0">Search Talent</p>
@@ -102,7 +102,7 @@
             <a href="resources-search.html">
               <div class="row align-items-center">
                 <div class="col-2">
-                  <img src="img/QA-services.gif" width="64" />
+                  <img src="/assets/img/QA-services.gif" width="64" />
                 </div>
                 <div class="col-10">
                   <p class="p-18 p-600 mb-0">QA Services</p>
@@ -116,7 +116,7 @@
             <a href="resources-search.html">
               <div class="row align-items-center">
                 <div class="col-2">
-                  <img src="img/corporate-team.gif" width="64" />
+                  <img src="/assets/img/corporate-team.gif" width="64" />
                 </div>
                 <div class="col-10">
                   <p class="p-18 p-600 mb-0">IT Subcontracting Services</p>
