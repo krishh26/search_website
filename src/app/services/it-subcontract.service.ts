@@ -36,4 +36,8 @@ export class ItSubcontractService {
     }
     return this.http.get(`${this.baseUrl}/user/public/suplier/list`, { params });
   }
+
+  getCandidateList(params?: any): Observable<any> {
+    return this.http.get(`${this.baseUrl}/candidate/public/get-list`, { params });
+  }
 }
