@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Bubble Popup on Hover and Click</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      background: #f0f0f0;
+      position: relative;
+    }
+
+    .bubble {
+      width: 100px;
+      height: 100px;
+      background-color: #3498db;
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: white;
+      font-size: 18px;
+      cursor: pointer;
+      transition: transform 0.2s ease;
+      position: relative;
+    }
+
+    .bubble:hover {
+      transform: scale(1.1);
+      background-color: #2980b9;
+    }
+
+    .popup {
+      display: none;
+      position: absolute;
+      top: -160px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 250px;
+      background: white;
+      padding: 20px;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+      border-radius: 8px;
+      z-index: 10;
+    }
+
+    .bubble:hover .popup {
+      display: block;
+    }
+
+    .popup.show {
+      display: block;
+    }
+
+    .close-btn {
+      background: #e74c3c;
+      color: white;
+      border: none;
+      padding: 6px 10px;
+      cursor: pointer;
+      border-radius: 4px;
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="bubble" id="bubble">
+    Click Me
+    <div class="popup" id="popup">
+      <h3>Hello!</h3>
+      <p>This popup appears on hover or click.</p>
+      <button class="close-btn" id="closePopup">Close</button>
+    </div>
+  </div>
+
+  <script>
+    const bubble = document.getElementById('bubble');
+    const popup = document.getElementById('popup');
+    const closeBtn = document.getElementById('closePopup');
+
+    // On click, force popup to stay open
+    bubble.addEventListener('click', () => {
+      popup.classList.add('show');
+    });
+
+    // Close button
+    closeBtn.addEventListener('click', (e) => {
+      e.stopPropagation(); // Prevent triggering bubble click
+      popup.classList.remove('show');
+    });
+
+    // Optional: hide popup if clicked outside
+    document.addEventListener('click', (e) => {
+      if (!bubble.contains(e.target)) {
+        popup.classList.remove('show');
+      }
+    });
+  </script>
+
+</body>
+</html>

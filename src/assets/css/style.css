@@ -198,9 +198,6 @@ Margin / padding / listign class Css
 .ml-8-5 {
   margin-left: 8.5rem;
 }
-.btn-gap{
-  margin-right: 15px;
-}
 
 .min-height-342 {
   min-height: 342px;
@@ -927,7 +924,7 @@ Button CSS
 Heading Styles
 ===============================*/
 .text-darkred {
-  color: #992324;
+  color: #992324 !important;
 }
 
 .light-green {
@@ -1122,7 +1119,7 @@ Hero section
   background: #FFEEEE;
   background: linear-gradient(90deg, rgba(255, 238, 238, 1) 0%, rgba(221, 239, 187, 1) 100%);
   min-height: 560px;
-  padding: 100px 0 0 0;
+  padding: 160px 0 0 0;
 }
 
 .hero .hero-image-slider {
@@ -1158,10 +1155,12 @@ Hero section
 
 .carousel-control-prev-icon {
   /* background-image: url("../img/slider-left-arrow.svg"); */
+  background-color: rgba(0, 0, 0, 0.5);
 }
 
 .carousel-control-next-icon {
   /* background-image: url("../img/slider-right-arrow.svg"); */
+  background-color: rgba(0, 0, 0, 0.5);
 }
 
 .carousel-indicators {
@@ -1736,9 +1735,6 @@ Nav Tabs
 /*=================================
 Search bar
 ==================================*/
-/*=================================
-Search bar
-==================================*/
 .search-box-large {
   position: relative;
   height: 72px;
@@ -1750,7 +1746,7 @@ Search bar
 
 .search-box-large i,
 .search-box-large .button,
-.search-box-large .search-link{
+.search-box-large .search-link {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
@@ -1784,6 +1780,7 @@ Search bar
   background-color: #000;
   cursor: pointer;
 }
+
 .search-box-large .search-link {
   right: 0px;
   font-size: 16px;
@@ -1803,19 +1800,20 @@ Search bar
   padding: 12px 15px;
   cursor: pointer;
 }
+
 .search-box-large .button:active {
   transform: translateY(-50%) scale(0.98);
 }
 
-.searchcard {
- border-left: 6px solid #ff55a0 ;
+.modal-p-5 {
+  padding: 3rem !important;
 }
 
 /* Responsive */
 @media screen and (max-width: 500px) {
   .search-box-large {
-    height: 66px;
-    margin: 0 8px;
+    height: 56px;
+    margin: 0;
   }
 
   .search-box-large i {
@@ -2109,23 +2107,27 @@ Modal Styling
   border-bottom: 1px dotted #D9D9D9;
   margin: 1rem 0;
 }
-ul.SearchneedList li{
+
+ul.SearchneedList li {
   display: block;
   margin-bottom: 15px;
   border-radius: 12px;
   border: 1px solid #D9D9D9;
   box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
 }
-ul.SearchneedList li a{
+
+ul.SearchneedList li a {
   display: block;
   padding: 1rem 2rem;
   background-color: #FFF;
   color: #000;
   border-radius: 12px;
 }
+
 ul.SearchneedList li a:hover {
   background-color: #F5F8FF;
 }
+
 /*==================================
 contact us address details
 ===================================*/
@@ -2198,6 +2200,86 @@ ul.socialmedia li a:hover {
   padding: 2px;
   height: 60px;
   width: 60px;
+}
+
+/*==================================
+Main search bar
+==================================*/
+.main-searchbar {
+  background-color: #FFF;
+  padding: 1rem;
+  border-radius: 100px;
+}
+
+.main-searchbar .input-group-text,
+.main-searchbar .form-select,
+.main-searchbar .form-control {
+  border: none;
+}
+
+.main-searchbar .form-select {
+  border: none;
+  padding-right: 30px;
+  border-right: 2px solid #f5f5f5;
+  border-radius: 0px;
+  width: fit-content;
+}
+
+.search-btn {
+  color: #FFF;
+  background-color: #ff9800;
+  border-color: #ff9800;
+  border-radius: 100px 100px 100px 100px !important;
+  padding-left: 1rem !important;
+  padding-right: 1rem !important;
+  margin-left: 15px !important;
+}
+
+.main-searchbar .form-select:focus,
+.main-searchbar .form-control:focus {
+  border: none;
+  box-shadow: none;
+}
+
+/*==================================
+Our on hover expanded div services
+====================================*/
+.container-flex {
+  display: flex;
+  width: 100%;
+}
+.panel {
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-color: #FFF;
+  border-radius: 8px;
+  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+  height: 100%vh;
+  cursor: pointer;
+  flex: 0.4;
+  margin: 5px;
+  padding: 1rem;
+  position: relative;
+  -webkit-transition: all 700ms ease-in;
+}
+
+.panel h3 {
+  font-size: 18px;
+  font-weight: 600;
+  color: #992324 ;
+
+}
+
+.panel .contentbox-result {
+ display: none;
+}
+.panel.active {
+  flex: 4;
+  height:100% !important;
+}
+.panel.active .contentbox-result {
+ display: block;
 }
 
 /*===================================
@@ -2419,4 +2501,30 @@ Media Query
   ul.searchresult-tags li {
     margin-bottom: 5px;
   }
+
+  .modal-p-5 {
+    padding: 1rem !important;
+  }
+
+  .main-searchbar {
+    background-color: #FFF;
+    padding: 1rem;
+    border-radius: 12px;
+  }
+
+  .search-btn {
+    padding: 1rem !important;
+    margin-left: 0 !important;
+    text-align: center;
+    margin-top: 15px;
+  }
+
+  .main-searchbar .form-select {
+    border: none;
+    padding-right: 30px;
+    border-right: none;
+    border-radius: 0px;
+    width: 100%;
+  }
+
 }
