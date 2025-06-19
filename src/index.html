@@ -109,6 +109,51 @@
         })
     })()
   </script>
+  <script type="text/javascript">
+    $(document).ready(function () {
+      $(".navbar_main").click(function (event) {
+        $(".navbar-demo").toggleClass("open-nav");
+      });
+    });
+    //Sticky header code
+    $(function () {
+      $(window).on("scroll", function () {
+        if ($(window).scrollTop() > 50) {
+          $(".header").addClass("sticky-header");
+        } else {
+          //remove the background property so it comes transparent again (defined in your css)
+          $(".header").removeClass("sticky-header");
+        }
+      });
+    });
+    //Our services box expand
+    $(document).ready(function () {
+      $('#showForcorporate').click(function () {
+        $(".add-arrow1").show();
+        $('.ForCorporate-content').slideToggle("slow");
+        $('.Forbusiness-content, .Foritservices-content, .Foragencies-content').hide();
+        $(".add-arrow2, .add-arrow3, .add-arrow4").hide();
+      });
+      $('#showForbusiness').click(function () {
+        $(".add-arrow2").show();
+        $('.Forbusiness-content').slideToggle("slow");
+        $('.ForCorporate-content, .Foritservices-content, .Foragencies-content').hide();
+        $(".add-arrow1, .add-arrow3, .add-arrow4").hide();
+      });
+      $('#showForitservices').click(function () {
+        $(".add-arrow3").show();
+        $('.Foritservices-content').slideToggle("slow");
+        $('.ForCorporate-content, .Forbusiness-content, .Foragencies-content').hide();
+        $(".add-arrow1, .add-arrow2, .add-arrow4").hide();
+      });
+      $('#showForagency').click(function () {
+        $(".add-arrow4").show();
+        $('.Foragencies-content').slideToggle("slow");
+        $('.ForCorporate-content, .Forbusiness-content, .Foritservices-content').hide();
+        $(".add-arrow1, .add-arrow2, .add-arrow3").hide();
+      });
+    });
+  </script>
 </body>
 
 </html>
