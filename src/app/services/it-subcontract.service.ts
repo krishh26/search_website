@@ -1,6 +1,6 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, map } from 'rxjs';
 import { environment } from 'src/environment/environment-prod';
 
 export interface Role {
@@ -14,6 +14,22 @@ export interface CandidateFilter {
   numberOfResources: number;
   experience: string;
   skills?: string[];
+}
+
+export interface Tag {
+  _id: string;
+  name: string;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface TagResponse {
+  message: string;
+  status: boolean;
+  data: {
+    tags: Tag[];
+    total: number;
+  };
 }
 
 @Injectable({
@@ -50,5 +66,11 @@ export class ItSubcontractService {
 
   saveCandidateFilters(filters: CandidateFilter[]): Observable<any> {
     return this.http.post(`${this.baseUrl}/candidate/save-filter`, filters);
+  }
+
+  getTags(): Observable<Tag[]> {
+    return this.http.get<TagResponse>(`${this.baseUrl}/tags/public`).pipe(
+      map(response => response.data.tags)
+    );
   }
 }
