@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { RouterModule, Routes } from '@angular/router';
+import { NgSelectModule } from '@ng-select/ng-select';
 import { WorkawayComponent } from './workaway/workaway.component';
 import { E2eQaServicesComponent } from './e2e-qa-services/e2e-qa-services.component';
 import { WorkawayRegistrationComponent } from './workaway-registration/workaway-registration.component';
@@ -14,6 +15,7 @@ import { E2eQaHireResourcesContactDetailsComponent } from './e2e-qa-hire-resourc
 import { E2eQaHireResourcesRegistrationsComponent } from './e2e-qa-hire-resources-registrations/e2e-qa-hire-resources-registrations.component';
 import { PartnerSearchResultExperienceComponent } from './partner-search-result-experience/partner-search-result-experience.component';
 import { CandidateSearchResultComponent } from './candidate-search-result/candidate-search-result.component';
+import { ItSubPartnerSearchComponent } from './it-sub-partner-search/it-sub-partner-search.component';
 
 const routes: Routes = [
   {
@@ -65,6 +67,10 @@ const routes: Routes = [
     component: CandidateSearchResultComponent
   },
   {
+    path: 'partner-search-result',
+    component: ItSubPartnerSearchComponent
+  },
+  {
     path: '',
     redirectTo: 'workaway',
     pathMatch: 'full'
@@ -84,12 +90,14 @@ const routes: Routes = [
     E2eQaHireResourcesContactDetailsComponent,
     E2eQaHireResourcesRegistrationsComponent,
     PartnerSearchResultExperienceComponent,
-    CandidateSearchResultComponent
+    CandidateSearchResultComponent,
+    ItSubPartnerSearchComponent
   ],
   imports: [
     CommonModule,
     ReactiveFormsModule,
     FormsModule,
+    NgSelectModule,
     RouterModule.forChild(routes)
   ]
 })

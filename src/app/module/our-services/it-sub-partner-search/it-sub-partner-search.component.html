@@ -1,0 +1,218 @@
+<section class="registration-section" style="background-image: url(img/search-background-image.png);">
+  <div class="overlay-bg" style="opacity: 1;">
+    <div class="container">
+      <div class="text-center text-white">
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
+          <label class="form-check-label" for="inlineRadio1">WorkAway</label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2"
+            checked>
+          <label class="form-check-label" for="inlineRadio2">IT Subcontracting</label>
+        </div>
+
+        <h1 class="page-titletop mt-3">Lorem ipsum dolor sit amet, consectetur adipiscing elit</h1>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
+          magna aliqua.
+          Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+        </p>
+      </div>
+      <div class="FlatCard text-dark" style="z-index: 1;">
+        <div class="card-body p-5">
+          <div class="row">
+            <div class="col-12">
+              <div class="form-group">
+                <label>Project Name</label>
+                <input type="text" placeholder="Project name" class="form-control">
+              </div>
+              <div class="form-group">
+                <label>Choose Your Project Category</label>
+                <ng-select
+                  [items]="projectCategories"
+                  [loading]="isLoading"
+                  [searchable]="true"
+                  bindLabel="name"
+                  bindValue="_id"
+                  placeholder="Choose your project category"
+                  [(ngModel)]="selectedCategory">
+                </ng-select>
+              </div>
+              <div class="form-group">
+                Engagement Type :
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="radio" name="inlineRadioOptions" id="Fulldelivery"
+                    value="option1">
+                  <label class="form-check-label" for="inlineRadio1">Full Delivery</label>
+                </div>
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="radio" name="inlineRadioOptions" id="Partdelivery"
+                    value="option2">
+                  <label class="form-check-label" for="inlineRadio2">Part Delivery</label>
+                </div>
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="radio" name="inlineRadioOptions" id="Ongoing" value="option2">
+                  <label class="form-check-label" for="inlineRadio2">Ongoing</label>
+                </div>
+              </div>
+              <div class="form-group">
+                <label>Project Description</label>
+                <input type="text" class="form-control" placeholder="Project description">
+              </div>
+              <div class="form-group">
+                <label>Technology Demand</label>
+                <input type="text" class="form-control" placeholder="Technology demand">
+              </div>
+              <div class="row align-items-center">
+                <div class="col-lg-4 col-xl-4 col-sm-4 col-md-4 col-12">
+                  <div class="form-group">
+                    <label>Start Date</label>
+                    <input type="date" class="form-control" placeholder="Start Date">
+                  </div>
+                </div>
+                <div class="col-lg-4 col-xl-4 col-sm-4 col-md-4 col-12">
+                  <div class="form-group">
+                    <label>End Date</label>
+                    <input type="date" class="form-control" placeholder="End Date">
+                  </div>
+                </div>
+                <div class="col-lg-4 col-xl-4 col-sm-4 col-md-4 col-12">
+                  <div class="form-group">
+                    <label>Choose Your Budget</label>
+                    <select class="form-select" id="professiontype" required>
+                      <option selected disabled value="">Budget</option>
+                      <option>1 Lac</option>
+                      <option>1-5 Lac</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group">
+                <label>Additional Instructions</label>
+                <input type="text" class="form-control" placeholder="Additional instruction">
+              </div>
+              <div class="form-group text-end">
+                <a href="it-subcontracting-service.html" class="btn btn-dark mob-mb1"><i
+                    class="bi bi-arrow-left me-2"></i> Go Back</a>
+                <button type="button" class="btn btn-success"
+                  onclick="window.location.href='partner-search-result-experience.html';"><i class="bi bi-search"></i>
+                  Search </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="container">
+    <div class="mb-5">
+      <h5 class="headingTitle">The most <span class="text-primary">demanding skills</span></h5>
+      <p>Get some Inspirations from 86K+ skills</p>
+    </div>
+    <div class="row">
+      <div class="col-lg-2 col-xl-2 col-md-4 col-sm-4 col-6">
+        <div class="light-gray-card">
+          <img src="/assets/img/software-development.gif" height="60" class="mb-4" />
+          <p class="mb-0"><strong>Software Development</strong></p>
+          <p class="mb-0 p-12">250 Skills</p>
+        </div>
+      </div>
+      <div class="col-lg-2 col-xl-2 col-md-4 col-sm-4 col-6">
+        <div class="light-gray-card">
+          <img src="/assets/img/cloud-development.gif" height="60" class="mb-4" />
+          <p class="mb-0"><strong>Cloud & DevOps</strong></p>
+          <p class="mb-0 p-12">250 Skills</p>
+        </div>
+      </div>
+      <div class="col-lg-2 col-xl-2 col-md-4 col-sm-4 col-6">
+        <div class="light-gray-card">
+          <img src="/assets/img/digital-transformation.gif" height="60" class="mb-4" />
+          <p class="mb-0"><strong>Digital Transformation</strong></p>
+          <p class="mb-0 p-12">250 Skills</p>
+        </div>
+      </div>
+      <div class="col-lg-2 col-xl-2 col-md-4 col-sm-4 col-6">
+        <div class="light-gray-card">
+          <img src="/assets/img/system-intigration.gif" height="60" class="mb-4" />
+          <p class="mb-0"><strong>Systems Integration</strong></p>
+          <p class="mb-0 p-12">250 Skills</p>
+        </div>
+      </div>
+      <div class="col-lg-2 col-xl-2 col-md-4 col-sm-4 col-6">
+        <div class="light-gray-card">
+          <img src="/assets/img/software-testing.gif" height="60" class="mb-4" />
+          <p class="mb-0"><strong>QA & Testing</strong></p>
+          <p class="mb-0 p-12">250 Skills</p>
+        </div>
+      </div>
+      <div class="col-lg-2 col-xl-2 col-md-4 col-sm-4 col-6">
+        <div class="light-gray-card">
+          <img src="/assets/img/ui-ux.gif" height="60" class="mb-4" />
+          <p class="mb-0"><strong>UI/UX Design</strong></p>
+          <p class="mb-0 p-12">250 Skills</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!--Search  Modal -->
+<div class="modal fade" id="searchModal" tabindex="-1" aria-labelledby="searchModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-lg">
+    <div class="modal-content">
+      <button type="button" class="btn-close-absolute" data-bs-dismiss="modal" aria-label="Close"></button>
+      <div class="modal-body p-5">
+        <h3><strong>Choose Your Need</strong></h3>
+        <p>Find Your Match - Shortlist companies based on your goals and connect directly for quotes or discussions.</p>
+
+        <ul class="SearchneedList">
+          <li>
+            <a href="resources-search.html">
+              <div class="row align-items-center">
+                <div class="col-2">
+                  <img src="/assets/img/resources-team.gif" width="64" />
+                </div>
+                <div class="col-10">
+                  <p class="p-18 p-600 mb-0">Search Talent</p>
+                  <p class="mb-0 text-muted p-12">WorkAway gives you guaranteed access to pre-approved IT talent</p>
+                </div>
+              </div>
+            </a>
+          </li>
+          <li>
+            <a href="resources-search.html">
+              <div class="row align-items-center">
+                <div class="col-2">
+                  <img src="/assets/img/QA-services.gif" width="64" />
+                </div>
+                <div class="col-10">
+                  <p class="p-18 p-600 mb-0">QA Services</p>
+                  <p class="mb-0 text-muted p-12">End-to-end testing solutions powered by UK governance and India
+                    delivery strength</p>
+                </div>
+              </div>
+            </a>
+          </li>
+          <li>
+            <a href="resources-search.html">
+              <div class="row align-items-center">
+                <div class="col-2">
+                  <img src="/assets/img/corporate-team.gif" width="64" />
+                </div>
+                <div class="col-10">
+                  <p class="p-18 p-600 mb-0">IT Subcontracting Services</p>
+                  <p class="mb-0 text-muted p-12">Scale your delivery capacity without the cost, risk, or delay of
+                    permanent hires</p>
+                </div>
+              </div>
+            </a>
+          </li>
+        </ul>
+
+      </div>
+    </div>
+  </div>
+</div>
