@@ -64,6 +64,8 @@ export class HomePageComponent implements OnInit {
   searchData() {
     if (this.selectedService == "WorkAway") {
       this.router.navigateByUrl('/resource-search');
+    } else if (this.selectedService === 'IT Subcontracting') {
+      this.router.navigateByUrl('/our-services/partner-search-result-experience');
     }
   }
 }

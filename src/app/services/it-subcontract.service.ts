@@ -52,11 +52,17 @@ export class ItSubcontractService {
     return this.http.get<Role[]>(`${this.baseUrl}/roles/public/get-list`);
   }
 
-  getSupplierList(limit: number = 10, search: string = ''): Observable<any> {
-    let params = new HttpParams().set('limit', limit.toString());
-    if (search) {
-      params = params.set('search', search);
+  getSupplierList(payload: { limit: number, search: string, projectName: string, tags: string }): Observable<any> {
+    let params = new HttpParams().set('limit', payload?.limit?.toString() || "10");
+    if (payload?.search) {
+      params = params.set('search', payload.search);
     }
+    // if (payload?.projectName) {
+    //   params = params.set('projectName', payload.projectName);
+    // }
+    // if (payload?.tags) {
+    //   params = params.set('tags', payload.tags);
+    // }
     return this.http.get(`${this.baseUrl}/user/public/suplier/list`, { params });
   }
 
@@ -74,8 +80,8 @@ export class ItSubcontractService {
 
   getCandidateFilterByList(id: string, page: number = 1, limit: number = 10000): Observable<any> {
     const params = new HttpParams()
-    .set('limit', limit.toString())
-    .set('page', page.toString());
+      .set('limit', limit.toString())
+      .set('page', page.toString());
 
     return this.http.get(`${this.baseUrl}/candidate/public/filter/${id}/candidates`, { params });
   }
