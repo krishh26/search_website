@@ -131,7 +131,10 @@
 
       <div class="row">
         <div class="col-lg-3 col-xl-3 col-md-6 col-sm-6 col-12 mb-4">
-          <div class="FlatCard shadow-none we-support-card1 min-height270" (click)="showServicePanel('corporate')" style="cursor: pointer;">
+          <div class="FlatCard shadow-none we-support-card1 min-height270"
+               (click)="showServicePanel('corporate')"
+               [class.active]="activeServicePanel === 'corporate'"
+               style="cursor: pointer;">
             <div class="card-body p-4">
               <img src="/assets/img/mobile-payment.png" width="84" class="mb-4">
               <p>Corporates are stuck paying sky-high bills to big-name MNC service providers.</p>
@@ -139,7 +142,10 @@
           </div>
         </div>
         <div class="col-lg-3 col-xl-3 col-md-6 col-sm-6 col-12 mb-4">
-          <div class="FlatCard shadow-none we-support-card2 min-height270" (click)="showServicePanel('it-services')" style="cursor: pointer;">
+          <div class="FlatCard shadow-none we-support-card2 min-height270"
+               (click)="showServicePanel('it-services')"
+               [class.active]="activeServicePanel === 'it-services'"
+               style="cursor: pointer;">
             <div class="card-body p-4">
               <img src="/assets/img/software-development.png" width="84" class="mb-4">
               <p>Software Houses and IT Service Providers are losing business to giants with bigger delivery promises.
@@ -148,7 +154,10 @@
           </div>
         </div>
         <div class="col-lg-3 col-xl-3 col-md-6 col-sm-6 col-12 mb-4">
-          <div class="FlatCard shadow-none we-support-card1 min-height270" (click)="showServicePanel('recruitment')" style="cursor: pointer;">
+          <div class="FlatCard shadow-none we-support-card1 min-height270"
+               (click)="showServicePanel('recruitment')"
+               [class.active]="activeServicePanel === 'recruitment'"
+               style="cursor: pointer;">
             <div class="card-body p-4">
               <img src="/assets/img/resources.png" width="84" class="mb-4">
               <p>Recruitment Agencies are squeezed out as clients demand "any skill, anytime" solutions.</p>
@@ -156,7 +165,10 @@
           </div>
         </div>
         <div class="col-lg-3 col-xl-3 col-md-6 col-sm-6 col-12 mb-4">
-          <div class="FlatCard shadow-none we-support-card2 min-height270" (click)="showServicePanel('growing-business')" style="cursor: pointer;">
+          <div class="FlatCard shadow-none we-support-card2 min-height270"
+               (click)="showServicePanel('growing-business')"
+               [class.active]="activeServicePanel === 'growing-business'"
+               style="cursor: pointer;">
             <div class="card-body p-4">
               <img src="/assets/img/banking.png" width="84" class="mb-4">
               <p>Growing businesses are struggling to access the right skills to scale.</p>
