@@ -131,7 +131,7 @@
 
       <div class="row">
         <div class="col-lg-3 col-xl-3 col-md-6 col-sm-6 col-12 mb-4">
-          <div class="FlatCard shadow-none we-support-card1 min-height270">
+          <div class="FlatCard shadow-none we-support-card1 min-height270" (click)="showServicePanel('corporate')" style="cursor: pointer;">
             <div class="card-body p-4">
               <img src="/assets/img/mobile-payment.png" width="84" class="mb-4">
               <p>Corporates are stuck paying sky-high bills to big-name MNC service providers.</p>
@@ -139,7 +139,7 @@
           </div>
         </div>
         <div class="col-lg-3 col-xl-3 col-md-6 col-sm-6 col-12 mb-4">
-          <div class="FlatCard shadow-none we-support-card2 min-height270">
+          <div class="FlatCard shadow-none we-support-card2 min-height270" (click)="showServicePanel('it-services')" style="cursor: pointer;">
             <div class="card-body p-4">
               <img src="/assets/img/software-development.png" width="84" class="mb-4">
               <p>Software Houses and IT Service Providers are losing business to giants with bigger delivery promises.
@@ -148,7 +148,7 @@
           </div>
         </div>
         <div class="col-lg-3 col-xl-3 col-md-6 col-sm-6 col-12 mb-4">
-          <div class="FlatCard shadow-none we-support-card1 min-height270">
+          <div class="FlatCard shadow-none we-support-card1 min-height270" (click)="showServicePanel('recruitment')" style="cursor: pointer;">
             <div class="card-body p-4">
               <img src="/assets/img/resources.png" width="84" class="mb-4">
               <p>Recruitment Agencies are squeezed out as clients demand "any skill, anytime" solutions.</p>
@@ -156,7 +156,7 @@
           </div>
         </div>
         <div class="col-lg-3 col-xl-3 col-md-6 col-sm-6 col-12 mb-4">
-          <div class="FlatCard shadow-none we-support-card2 min-height270">
+          <div class="FlatCard shadow-none we-support-card2 min-height270" (click)="showServicePanel('growing-business')" style="cursor: pointer;">
             <div class="card-body p-4">
               <img src="/assets/img/banking.png" width="84" class="mb-4">
               <p>Growing businesses are struggling to access the right skills to scale.</p>
@@ -174,7 +174,7 @@
       </div>
 
       <div class="container-flex">
-        <div class="panel">
+        <div class="panel" *ngIf="activeServicePanel === 'corporate'">
           <img src="/assets/img/corporate.png" width="84" class="mb-3" />
           <h3>For Corporates Services</h3>
           <p>Break Free From Expensive MNC Contracts</p>
@@ -209,7 +209,7 @@
               WorkAway Helps Corporates →</a>
           </div>
         </div>
-        <div class="panel">
+        <div class="panel" *ngIf="activeServicePanel === 'growing-business'">
           <img src="/assets/img/stock-market.png" width="84" class="mb-3" />
           <h3 class="text-darkred mb-2"><strong>For Growing Businesses</strong></h3>
           <p>Fuel Your Growth Without Full-Time Burdens.</p>
@@ -243,8 +243,8 @@
               WorkAway Helps Businesses →</a>
           </div>
         </div>
-        <div class="panel">
-          <img src="/assets/img/consultant.png" width="84" class="mb-3" />
+        <div class="panel" *ngIf="activeServicePanel === 'it-services'">
+          <img src="/assets/img/software-development.png" width="84" class="mb-3" />
           <h3 class="text-darkred mb-2"><strong>For IT Service Providers</strong></h3>
           <p>Compete with Giants — Scale Smarter, Not Harder.</p>
           <div class="contentbox-result">
@@ -277,7 +277,7 @@
               WorkAway Helps IT Providers →</a>
           </div>
         </div>
-        <div class="panel">
+        <div class="panel" *ngIf="activeServicePanel === 'recruitment'">
           <img src="/assets/img/recruitment.png" width="84" class="mb-3" />
           <h3 class="text-darkred mb-2"><strong>For Recruitment Agencies</strong></h3>
           <p>Reclaim Your Clients. Deliver Smarter. Grow Without Limits.</p>

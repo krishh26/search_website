@@ -12,6 +12,9 @@ export class HomePageComponent implements OnInit {
   showSkills: boolean = true; // Show skills by default for WorkAway
   showServices: boolean = false; // Hide services by default
 
+  // Add new properties for service panels
+  activeServicePanel: string = ''; // Tracks which service panel is currently active
+
   constructor(
     private router: Router,
     private route: ActivatedRoute,
@@ -51,5 +54,10 @@ export class HomePageComponent implements OnInit {
       this.showSkills = false;
       this.showServices = true;
     }
+  }
+
+  // Add new method to handle card clicks
+  showServicePanel(panelName: string) {
+    this.activeServicePanel = this.activeServicePanel === panelName ? '' : panelName;
   }
 }
