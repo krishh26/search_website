@@ -9,6 +9,13 @@ export interface Role {
   // Add other properties as needed based on API response
 }
 
+export interface CandidateFilter {
+  jobTitle: string;
+  numberOfResources: number;
+  experience: string;
+  skills?: string[];
+}
+
 @Injectable({
   providedIn: 'root'
 })
@@ -39,5 +46,9 @@ export class ItSubcontractService {
 
   getCandidateList(params?: any): Observable<any> {
     return this.http.get(`${this.baseUrl}/candidate/public/get-list`, { params });
+  }
+
+  saveCandidateFilters(filters: CandidateFilter[]): Observable<any> {
+    return this.http.post(`${this.baseUrl}/candidate/save-filter`, filters);
   }
 }
