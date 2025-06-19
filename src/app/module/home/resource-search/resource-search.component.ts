@@ -32,10 +32,6 @@ export class RecourceSearchComponent implements OnInit {
     this.getJobTitles();
   }
 
-  onRadioChange(event: any) {
-    this.serviceType = event.target.value;
-  }
-
   addFilter() {
     if (this.searchForm.valid) {
       this.filters.push(this.searchForm.value);
