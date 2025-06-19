@@ -1,8 +1,8 @@
 /*==============================================
- Website Name: Peer Connect
-    Description: Online petrol sale and purchase
+    Website Name: Spectrum IT HUb
+    Description: IT services & Consultant
     Version: 1.0.0
-    Author: Fusion Informatis
+    Author: WhyQtech
 ================================================*/
 
 /*=============================================
@@ -467,7 +467,12 @@ ul.cardList li:hover {
   box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
   border-color: #0F51E0;
 }
-
+.btn-gap{
+  margin-right: 15px;
+}
+.margin-top104{
+  margin-top: 104px;
+}
 /*====================================
 Header and responsive mobile menu
 ======================================*/
@@ -2043,6 +2048,9 @@ ul.searchresult-tags li .remove-tag {
   font-size: 1rem;
 }
 
+.searchcard {
+  border-left: 6px solid #ffc107 ;
+}
 /*=================================
  Accordian panel
  ==================================*/
@@ -2240,46 +2248,148 @@ Main search bar
   border: none;
   box-shadow: none;
 }
-
+.btn-link{
+  background-color: transparent;
+  color: #0154F7;
+}
 /*==================================
-Our on hover expanded div services
-====================================*/
-.container-flex {
-  display: flex;
-  width: 100%;
-}
-.panel {
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-color: #FFF;
-  border-radius: 8px;
-  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
-  height: 100%vh;
-  cursor: pointer;
-  flex: 0.4;
-  margin: 5px;
-  padding: 1rem;
+Services Box
+===================================*/
+.service-single-box {
+  border-radius: 12px;
+  background: #fff;
+  box-shadow: 0px 0px 55px 0px rgba(0, 0, 0, 0.10);
+  padding: 67px 25px 64px;
   position: relative;
-  -webkit-transition: all 700ms ease-in;
+  z-index: 1;
+  margin-bottom: 30px;
+  cursor: pointer;
 }
 
-.panel h3 {
-  font-size: 18px;
-  font-weight: 600;
-  color: #992324 ;
+/* .service-single-box::before {
+  position: absolute;
+  content: "";
+  height: 0;
+  width: 100%;
+  left: 0;
+  bottom: 0;
+  background: #0154F7;
+  z-index: -1;
+  transition: .5s;
+  border-radius: 12px;
+} */
 
+.add-arrow1, .add-arrow2, .add-arrow3, .add-arrow4 {
+  display: block;
+  position: relative;
+  left: 0px;
+  bottom: -48px;
+  z-index: -1;
+  transition: .2s;
+  display: none;
 }
 
-.panel .contentbox-result {
- display: none;
+.add-arrow1::before, .add-arrow2::before, .add-arrow3::before, .add-arrow4::before {
+  position: absolute;
+  content: "\F229";
+  font-family: "bootstrap-icons";
+  font-size: 2rem;
+  color: #FFF;
+  display: block;
 }
-.panel.active {
-  flex: 4;
-  height:100% !important;
+
+.service-single-box:hover::before {
+  height: 100%;
 }
-.panel.active .contentbox-result {
- display: block;
+
+.service-icon {
+  margin-bottom: 23px;
+}
+
+.service-icon img {
+  transition: .5s;
+}
+
+/* .service-single-box:hover .service-icon img{
+    filter: brightness(0)invert(1);
+} */
+
+.service-title h4 a {
+  color: #20292F;
+  font-size: 24px;
+  font-weight: 500;
+  text-decoration: none;
+  transition: .5s;
+}
+
+/* .service-single-box:hover .service-title h4 a {
+  color: #FFF;
+} */
+
+.serivice-discription p {
+  color: #666;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 24px;
+  margin: 43px 0 0;
+  transition: .5s;
+}
+
+/* .service-single-box:hover .serivice-discription p {
+  color: #FFF;
+} */
+
+.underline .br-line {
+  position: relative;
+  overflow: hidden;
+  height: 2px;
+  width: 57px;
+  background: #0154F7;
+  left: 0;
+  top: 20px;
+  z-index: 1;
+  transition: .5s;
+}
+
+.service-single-box:hover .underline .br-line {
+  background: #FFF;
+}
+
+.br-line:after,
+.br-line:before {
+  content: "";
+  position: absolute;
+  background: #fff;
+  width: 3px;
+  height: 3px;
+  left: 0;
+  z-index: -1;
+  -webkit-animation-duration: 3s;
+  animation-duration: 3s;
+  -webkit-animation-timing-function: linear;
+  animation-timing-function: linear;
+  -webkit-animation-iteration-count: infinite;
+  animation-iteration-count: infinite;
+  -webkit-animation-name: MOVE-BG;
+  animation-name: MOVE-BG;
+  transition: .5s;
+}
+
+/* .service-single-box:hover .br-line:after,
+.br-line:before {
+  background: #0154F7;
+} */
+
+@keyframes MOVE-BG {
+  0% {
+    -webkit-transform: translateX(0);
+    transform: translateX(0)
+  }
+
+  to {
+    -webkit-transform: translateX(60px);
+    transform: translateX(60px)
+  }
 }
 
 /*===================================

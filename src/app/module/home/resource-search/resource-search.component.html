@@ -1,12 +1,12 @@
 <main>
-  <section class="registration-section" style="background-image: url(assets/img/search-background-image.png);">
+  <section class="registration-section margin-top104" style="background-image: url(assets/img/search-background-image.png);">
     <div class="overlay-bg" style="opacity: 1;">
       <div class="container">
         <div class="text-center text-white">
           <div class="form-check form-check-inline">
             <input class="form-check-input" type="radio" name="serviceType" id="inlineRadio1" value="workaway"
               [(ngModel)]="serviceType" (change)="onRadioChange($event)" checked>
-            <label class="form-check-label" for="inlineRadio1">WorkAway</label>
+            <label class="form-check-label" for="inlineRadio1">12 WorkAway</label>
           </div>
           <div class="form-check form-check-inline">
             <input class="form-check-input" type="radio" name="serviceType" id="inlineRadio2" value="itsubcontract"
@@ -75,7 +75,7 @@
                   <div class="row justify-content-end">
                     <div class="col-lg-6 col-xl-6 col-12 text-end">
                       <div class="form-group">
-                        <a routerLink="/our-services/workaway" class="btn btn-dark mob-mb1">
+                        <a routerLink="/our-services/workaway" class="btn btn-dark mob-mb1 me-2">
                           <i class="bi bi-arrow-left me-2"></i> Go Back
                         </a>
                         <button type="button" class="btn btn-success" (click)="search()" [disabled]="filters.length === 0">
