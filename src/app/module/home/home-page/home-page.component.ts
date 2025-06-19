@@ -19,7 +19,7 @@ export class HomePageComponent implements OnInit {
     private router: Router,
     private route: ActivatedRoute,
     private navigationService: NavigationService
-  ) {}
+  ) { }
 
   ngOnInit() {
     // Check navigation service first
@@ -59,5 +59,11 @@ export class HomePageComponent implements OnInit {
   // Add new method to handle card clicks
   showServicePanel(panelName: string) {
     this.activeServicePanel = this.activeServicePanel === panelName ? '' : panelName;
+  }
+
+  searchData() {
+    if (this.selectedService == "WorkAway") {
+      this.router.navigateByUrl('/resource-search');
+    }
   }
 }

@@ -11,23 +11,30 @@
       <div class="col-12">
         <div class="search-box-large mb-3">
           <i class="bi bi-search"></i>
-          <input type="text" [(ngModel)]="searchQuery" placeholder="Front-end developer" (keyup.enter)="onSearch()" />
+          <input type="text" [(ngModel)]="searchQuery" [placeholder]="selectedFilterData.jobTitle || 'Search Candidates'" (keyup.enter)="onSearch()" />
           <button class="button" (click)="onSearch()">Search</button>
           <a routerLink="/resource-search" class="search-link mobile-hide">Advance Search</a>
         </div>
-        <p class="mobile-show desktop-hide"> <a routerLink="/resource-search" class="search-link-btn">Advance Search</a></p>
+        <p class="mobile-show desktop-hide"> <a routerLink="/resource-search" class="search-link-btn">Advance Search</a>
+        </p>
       </div>
     </div>
     <ul class="searchresult-tags mb-4">
-      <li class="active" data-bs-toggle="modal" data-bs-target="#advancesearchModal">Front-end developer <span
-          class="remove-tag"><i class="bi bi-x"></i></span></li>
+      <ng-container *ngFor="let item of filterList">
+          <li style="cursor: pointer;" [ngClass]="{'active': item?._id == selectedFilter }" (click)="selectFilter(item?._id)"> 
+             {{ item?.jobTitle }} <span class="remove-tag" (click)="removeFilter(item?._id)"><i class="bi bi-x"></i></span>
+          </li>
+      </ng-container>
+      
+      <!-- <li class="active">Front-end developer <span class="remove-tag"><i class="bi bi-x"></i></span></li>
       <li class="">Software developer <span class="remove-tag"><i class="bi bi-x"></i></span></li>
       <li class="">Web designer <span class="remove-tag"><i class="bi bi-x"></i></span></li>
-      <li class="">UI/UX designer <span class="remove-tag"><i class="bi bi-x"></i></span></li>
+      <li class="">UI/UX designer <span class="remove-tag"><i class="bi bi-x"></i></span></li> -->
     </ul>
     <div class="row align-items-center mb-4">
       <div class="col-12">
-        <h1 class="headingTitle2">We found <span class="text-primary">{{totalCandidates}} Resources</span> (<span class="text-success">{{activeCandidates}} Active</span>)</h1>
+        <h1 class="headingTitle2">We found <span class="text-primary">{{totalCandidates}} Resources</span> (<span
+            class="text-success">{{activeCandidates}} Active</span>)</h1>
       </div>
     </div>
 
@@ -59,19 +66,24 @@
               <p><i class="bi bi-globe text-muted me-2"></i> Nationality- {{candidate.nationality}}</p>
             </div>
             <div class="col-lg-4 col-xl-4 col-md-4 col-sm-4 col-12">
-              <p><i class="bi bi-mortarboard-fill text-muted me-2"></i> Qualification- {{candidate.highestQualification}}</p>
+              <p><i class="bi bi-mortarboard-fill text-muted me-2"></i> Qualification-
+                {{candidate.highestQualification}}</p>
             </div>
             <div class="col-lg-4 col-xl-4 col-md-4 col-sm-4 col-12">
-              <p><i class="bi bi-briefcase-fill text-muted me-2"></i> Experience- {{candidate.totalExperience}} Years</p>
+              <p><i class="bi bi-briefcase-fill text-muted me-2"></i> Experience- {{candidate.totalExperience}} Years
+              </p>
             </div>
             <div class="col-lg-4 col-xl-4 col-md-4 col-sm-4 col-12">
-              <p><i class="bi bi-cash text-muted me-2"></i> Hourly Rate- £{{candidate.ukHourlyRate}} | ₹{{candidate.indianDayRate}}</p>
+              <p><i class="bi bi-cash text-muted me-2"></i> Hourly Rate- £{{candidate.ukHourlyRate}} |
+                ₹{{candidate.indianDayRate}}</p>
             </div>
             <div class="col-lg-8 col-xl-8 col-md-8 col-sm-8 col-12">
-              <p><i class="bi bi-translate text-muted me-2"></i> Language- {{candidate.languagesKnown?.join(', ') || 'N/A'}}</p>
+              <p><i class="bi bi-translate text-muted me-2"></i> Language- {{candidate.languagesKnown?.join(', ') ||
+                'N/A'}}</p>
             </div>
             <div class="col-12">
-              <p><i class="bi bi-code-slash text-muted me-2"></i> Skills- {{candidate.technicalSkills?.join(', ') || 'N/A'}}</p>
+              <p><i class="bi bi-code-slash text-muted me-2"></i> Skills- {{candidate.technicalSkills?.join(', ') ||
+                'N/A'}}</p>
             </div>
           </div>
         </div>

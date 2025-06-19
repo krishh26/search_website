@@ -48,7 +48,32 @@ export class ItSubcontractService {
     return this.http.get(`${this.baseUrl}/candidate/public/get-list`, { params });
   }
 
-  saveCandidateFilters(filters: CandidateFilter[]): Observable<any> {
-    return this.http.post(`${this.baseUrl}/candidate/save-filter`, filters);
+  saveCandidateFilters(filters: any): Observable<any> {
+    return this.http.post(`${this.baseUrl}/candidate/public/save-filter`, filters);
+  }
+
+  getCandidateFilters(params?: any): Observable<any> {
+    return this.http.get(`${this.baseUrl}/candidate/public/filter-list`, { params });
+  }
+
+  getCandidateFilterByList(id: string, page: number = 1, limit: number = 10000): Observable<any> {
+    const params = new HttpParams()
+    .set('limit', limit.toString())
+    .set('page', page.toString());
+
+    return this.http.get(`${this.baseUrl}/candidate/public/filter/${id}/candidates`, { params });
+  }
+
+  removeCandidateFilters(id: string): Observable<any> {
+    return this.http.delete(`${this.baseUrl}/candidate/filter/${id}`);
+  }
+
+  // Function to be used to the get job title list
+  getJobTitles(search: any): Observable<any> {
+    let params = new HttpParams();
+    if (search) {
+      params = params.set('search', search);
+    }
+    return this.http.get(`${this.baseUrl}/roles/public/get-all-roles`, { params });
   }
 }

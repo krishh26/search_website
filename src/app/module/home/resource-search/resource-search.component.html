@@ -51,7 +51,10 @@
                 <form [formGroup]="searchForm">
                   <div class="form-group">
                     <label>Job Title</label>
-                    <input type="text" placeholder="Job Title" class="form-control" formControlName="jobTitle">
+                    <select class="form-control" formControlName="jobTitle">
+                      <option value="" disabled selected>Select Job Title</option>
+                      <option *ngFor="let role of jobRoles" [value]="role">{{ role }}</option>
+                    </select>
                     <div *ngIf="searchForm.get('jobTitle')?.touched && searchForm.get('jobTitle')?.invalid" class="text-danger">
                       Job title is required
                     </div>

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ItSubcontractService, Role } from 'src/app/services/it-subcontract.service';
-
+import { NotificationService } from 'src/app/services/notification/notification.service';
+import Swal from 'sweetalert2';
 interface Candidate {
   _id: string;
   fullName: string;
@@ -45,12 +46,72 @@ export class CandidateSearchResultComponent implements OnInit {
   totalCandidates: number = 0;
   activeCandidates: number = 0;
   searchQuery: string = '';
+  filterList: any[] = [];
+  selectedFilter: string = "";
+  selectedFilterData: any = {};
 
-  constructor(private itSubcontractService: ItSubcontractService) {}
+  constructor(
+    private itSubcontractService: ItSubcontractService,
+    private notificationService: NotificationService
+  ) { }
 
   ngOnInit() {
-   // this.fetchRoles();
-    this.fetchCandidates();
+    this.getFilterList();
+    // this.fetchCandidates();
+  }
+
+  // Function to be used for the getting saved filters
+  getFilterList() {
+    this.filterList = [];
+    this.selectedFilter = "";
+    this.itSubcontractService.getCandidateFilters().subscribe({
+      next: (response) => {
+        if (response?.status) {
+          this.filterList = response?.data || [];
+          this.selectFilter(this.filterList?.[0]?._id);
+          // this.selectedFilter = this.filterList?.[0]?._id || "";
+          // this.selectedFilterData = this.filterList?.[0] || {};
+        }
+      },
+    });
+  }
+
+  // Function to be used for the change filter
+  selectFilter(filterId: string) {
+    this.selectedFilter = filterId;
+    this.selectedFilterData = this.filterList.find((element) => element._id == filterId);
+    this.itSubcontractService.getCandidateFilterByList(filterId).subscribe({
+      next: (response) => {
+        if (response?.status) {
+           this.candidates = response.data || [];
+          this.totalCandidates = response.meta_data.items;
+          this.activeCandidates = response.activeCandidatesCount;
+        }
+      },
+    });
+  }
+
+  // Function to be used for the remove filter
+  removeFilter(filterId: string) {
+    Swal.fire({
+      title: 'Are you sure?',
+      text: 'Do you want to remove this filter?',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Yes, remove it!',
+      cancelButtonText: 'Cancel'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.itSubcontractService.removeCandidateFilters(filterId).subscribe((response) => {
+          if (response?.status) {
+            Swal.fire('Removed!', 'The filter has been removed.', 'success');
+            this.getFilterList();
+          }
+        }, (error) => {
+          this.notificationService.showError(error?.error?.message || 'Filter not removed please try again !');
+        })
+      }
+    });
   }
 
   fetchRoles() {
