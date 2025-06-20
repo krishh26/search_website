@@ -57,12 +57,12 @@ export class ItSubcontractService {
     if (payload?.search) {
       params = params.set('search', payload.search);
     }
-    // if (payload?.projectName) {
-    //   params = params.set('projectName', payload.projectName);
-    // }
-    // if (payload?.tags) {
-    //   params = params.set('tags', payload.tags);
-    // }
+    if (payload?.projectName) {
+      params = params.set('projectName', payload.projectName);
+    }
+    if (payload?.tags) {
+      params = params.set('tags', payload.tags);
+    }
     return this.http.get(`${this.baseUrl}/user/public/suplier/list`, { params });
   }
 
