@@ -1,6 +1,6 @@
 .min-height270 {
-      min-height: 270px;
-    }
+  min-height: 270px;
+}
 
 // Card shadow and hover effects
 .FlatCard {
@@ -12,7 +12,8 @@
     box-shadow: 0 12px 24px rgba(0, 0, 0, 0.25);
   }
 
-  &.we-support-card1, &.we-support-card2 {
+  &.we-support-card1,
+  &.we-support-card2 {
     border-radius: 8px;
 
     &.active {
