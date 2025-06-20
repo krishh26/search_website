@@ -49,12 +49,19 @@
 
                 <!-- Search Form -->
                 <form [formGroup]="searchForm">
-                  <div class="form-group">
-                    <label>Job Title</label>
-                    <select class="form-control" formControlName="jobTitle">
-                      <option value="" disabled selected>Select Job Title</option>
-                      <option *ngFor="let role of jobRoles" [value]="role">{{ role }}</option>
-                    </select>
+                  <div class="form-group mb-3">
+                    <label class="form-label">Job Title</label>
+                    <ng-select
+                      [items]="jobRoles"
+                      [clearable]="false"
+                      placeholder="Select Job Title"
+                      formControlName="jobTitle"
+                      [bindLabel]="'name'"
+                      [bindValue]="'name'"
+                      [loading]="isLoading"
+                      class="form-control-select"
+                      [notFoundText]="'No job titles found'">
+                    </ng-select>
                     <div *ngIf="searchForm.get('jobTitle')?.touched && searchForm.get('jobTitle')?.invalid" class="text-danger">
                       Job title is required
                     </div>

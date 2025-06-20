@@ -1,3 +1,59 @@
 .margin-top104{
     margin-top: 104px;
 }
+
+:host ::ng-deep {
+  .ng-select {
+    .ng-select-container {
+      min-height: 38px;
+      border-radius: 4px;
+      background-color: #fff;
+      border: 1px solid #ced4da;
+      padding: 0.375rem 0.75rem;
+      font-size: 1rem;
+      font-weight: 400;
+      line-height: 1.5;
+      color: #212529;
+      transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+
+      .ng-value-container {
+        padding-left: 0;
+
+        .ng-placeholder {
+          color: #6c757d;
+          font-size: 1rem;
+        }
+      }
+
+      .ng-input {
+        padding-left: 0;
+        padding-right: 0;
+      }
+    }
+
+    &.ng-invalid.ng-touched .ng-select-container {
+      border-color: #dc3545;
+    }
+
+    &:hover .ng-select-container {
+      border-color: #80bdff;
+    }
+
+    &.ng-select-focused {
+      .ng-select-container {
+        border-color: #80bdff;
+        outline: 0;
+        box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+      }
+    }
+  }
+
+  .form-group {
+    margin-bottom: 1rem;
+
+    .ng-select {
+      display: block;
+      width: 100%;
+    }
+  }
+}

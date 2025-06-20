@@ -4,6 +4,10 @@ import { Router } from '@angular/router';
 import { ItSubcontractService, CandidateFilter } from 'src/app/services/it-subcontract.service';
 import { NotificationService } from 'src/app/services/notification/notification.service';
 
+interface JobRole {
+  name: string;
+}
+
 @Component({
   selector: 'app-resource-search',
   templateUrl: './resource-search.component.html',
@@ -13,7 +17,8 @@ export class RecourceSearchComponent implements OnInit {
   searchForm: FormGroup;
   filters: CandidateFilter[] = [];
   serviceType: 'workaway' | 'itsubcontract' = 'workaway';
-  jobRoles: any[] = [];
+  jobRoles: JobRole[] = [];
+  isLoading = false;
 
   constructor(
     private fb: FormBuilder,
@@ -22,7 +27,7 @@ export class RecourceSearchComponent implements OnInit {
     private notificationService: NotificationService
   ) {
     this.searchForm = this.fb.group({
-      jobTitle: ['', Validators.required],
+      jobTitle: [null, Validators.required],
       numberOfResources: ['', [Validators.required, Validators.min(1)]],
       experience: ['', Validators.required],
     });
@@ -41,12 +46,17 @@ export class RecourceSearchComponent implements OnInit {
 
   getJobTitles() {
     this.jobRoles = [];
+    this.isLoading = true;
     this.itSubcontractService.getJobTitles(this.filters).subscribe({
       next: (response) => {
         if (response?.status) {
-          this.jobRoles = response?.data?.roles || [];
+          this.jobRoles = (response?.data?.roles || []).map((role: string) => ({ name: role }));
         }
+        this.isLoading = false;
       },
+      error: () => {
+        this.isLoading = false;
+      }
     });
   }
 
