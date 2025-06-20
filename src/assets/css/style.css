@@ -1896,7 +1896,7 @@ CTA style
 }
 
 .registration-section {
-  background-image: url("../img/registration-bg.png");
+  background-image: url("/assets/img/registration-bg.png");
   background-position: center center;
   background-repeat: no-repeat;
   background-size: cover;
@@ -2434,6 +2434,10 @@ Media Query
   #carouseHeroslider .carousel-caption .title {
     font-weight: 600;
     font-size: 32px;
+  }
+
+  .mob-mb1 {
+    margin-bottom: 1rem;
   }
 
   .tab-mb1 {
