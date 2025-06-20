@@ -20,6 +20,14 @@
         </p>
       </div>
     </div>
+    <ul class="searchresult-tags mb-4">
+      <ng-container *ngFor="let item of filterList">
+        <li style="cursor: pointer;" [ngClass]="{'active': item?._id == selectedFilter }"
+          (click)="selectFilter(item?._id)">
+          {{ item?.jobTitle }} <span class="remove-tag" (click)="removeFilter(item?._id, $event)"><i class="bi bi-x"></i></span>
+        </li>
+      </ng-container>
+    </ul>
 
     <div class="row align-items-center mb-4">
       <div class="col-12">
@@ -27,7 +35,13 @@
           match
           your search</h1>
       </div>
+    </div>
 
+    <!-- Add loading spinner -->
+    <div class="text-center my-4" *ngIf="isLoadingFilters">
+      <div class="spinner-border text-primary" role="status">
+        <span class="visually-hidden">Loading...</span>
+      </div>
     </div>
 
     <!--start result-->

@@ -1,9 +1,10 @@
-<section class="registration-section margin-top104" style="background-image: url(assets/img/search-background-image.png);">
+<section class="registration-section margin-top104"
+  style="background-image: url(assets/img/search-background-image.png);">
   <div class="overlay-bg" style="opacity: 1;">
     <div class="container">
       <div class="text-center text-white">
         <div class="form-check form-check-inline">
-          <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
+          <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1" (click)="navigateToWorkaway()">
           <label class="form-check-label" for="inlineRadio1">WorkAway</label>
         </div>
         <div class="form-check form-check-inline">
@@ -20,12 +21,40 @@
       </div>
       <div class="FlatCard text-dark" style="z-index: 1;">
         <div class="card-body p-5">
+          <div *ngIf="filters.length > 0" class="mb-4">
+            <h5>Added Filters:</h5>
+            <div class="accordion accordion-flush" id="filterAccordion">
+              <div class="accordion-item" *ngFor="let filter of filters; let i = index">
+                <h2 class="accordion-header" [id]="'filterHeader' + i">
+                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                    [attr.data-bs-target]="'#filterContent' + i" [attr.aria-controls]="'filterContent' + i">
+                    {{filter.projectName}}
+                  </button>
+                </h2>
+                <div [id]="'filterContent' + i" class="accordion-collapse collapse"
+                  [attr.aria-labelledby]="'filterHeader' + i" data-bs-parent="#filterAccordion">
+                  <div class="accordion-body">
+                    <p><strong>Project Name:</strong> {{filter.projectName}}</p>
+                    <p><strong>Expertise:</strong> {{filter.expertise}}</p>
+                    <p><strong>Tags:</strong> {{filter.tags}}</p>
+                    <div class="text-end">
+                      <button type="button" class="btn btn-danger btn-sm" (click)="removeFilter(i)">
+                        <i class="bi bi-trash"></i> Remove
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
           <form [formGroup]="partnerForm" (ngSubmit)="onSubmit()">
             <div class="row">
               <div class="col-12">
                 <div class="form-group">
                   <label>Project Name <span class="text-danger">*</span></label>
-                  <input type="text" placeholder="Project name" class="form-control" formControlName="projectName">
+                  <ng-select [items]="expertiseList" [loading]="loadingExpertise" [searchable]="true" bindLabel="name"
+                    bindValue="_id" placeholder="Select project name" formControlName="projectName">
+                  </ng-select>
                   <div *ngIf="f['projectName'].touched && f['projectName'].invalid" class="text-danger">
                     Project Name is required
                   </div>
@@ -50,18 +79,20 @@
                     <label class="form-check-label" for="Partdelivery">Part Delivery</label>
                   </div>
                   <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="engagementType" id="Ongoing"
-                      value="Ongoing" formControlName="engagementType">
+                    <input class="form-check-input" type="radio" name="engagementType" id="Ongoing" value="Ongoing"
+                      formControlName="engagementType">
                     <label class="form-check-label" for="Ongoing">Ongoing</label>
                   </div>
                 </div>
                 <div class="form-group">
                   <label>Project Description</label>
-                  <input type="text" class="form-control" placeholder="Project description" formControlName="projectDescription">
+                  <input type="text" class="form-control" placeholder="Project description"
+                    formControlName="projectDescription">
                 </div>
                 <div class="form-group">
                   <label>Technology Demand</label>
-                  <input type="text" class="form-control" placeholder="Technology demand" formControlName="technologyDemand">
+                  <input type="text" class="form-control" placeholder="Technology demand"
+                    formControlName="technologyDemand">
                 </div>
                 <div class="row align-items-center">
                   <div class="col-lg-4 col-xl-4 col-sm-4 col-md-4 col-12">
@@ -89,85 +120,46 @@
                 </div>
                 <div class="form-group">
                   <label>Additional Instructions</label>
-                  <input type="text" class="form-control" placeholder="Additional instruction" formControlName="additionalInstructions">
+                  <input type="text" class="form-control" placeholder="Additional instruction"
+                    formControlName="additionalInstructions">
                 </div>
                 <div class="form-group">
                   <label>Contact Email</label>
                   <input type="email" class="form-control" placeholder="Contact email" formControlName="contactEmail">
-                  <div *ngIf="f['contactEmail'].touched && f['contactEmail'].invalid && f['contactEmail'].errors?.['email']" class="text-danger">
+                  <div
+                    *ngIf="f['contactEmail'].touched && f['contactEmail'].invalid && f['contactEmail'].errors?.['email']"
+                    class="text-danger">
                     Please enter a valid email address
                   </div>
                 </div>
                 <div class="form-group">
                   <label>Contact Number</label>
                   <input type="text" class="form-control" placeholder="Contact number" formControlName="contactNumber">
-                  <div *ngIf="f['contactNumber'].touched && f['contactNumber'].invalid && f['contactNumber'].errors?.['pattern']" class="text-danger">
+                  <div
+                    *ngIf="f['contactNumber'].touched && f['contactNumber'].invalid && f['contactNumber'].errors?.['pattern']"
+                    class="text-danger">
                     Please enter a valid number
                   </div>
                 </div>
+
+                <!-- Added Filters Section -->
+
+
+                <div class="form-group">
+                  <p><a href="javascript:void(0)" class="text-primary" (click)="addFilter()">+ Add</a></p>
+                </div>
+
                 <div class="form-group text-end">
-                  <a href="it-subcontracting-service.html" class="btn btn-dark mob-mb1 me-2"><i
-                      class="bi bi-arrow-left me-2"></i> Go Back</a>
-                  <button type="submit" class="btn btn-success">
-                    <i class="bi bi-search"></i> Search
+                  <a routerLink="/our-services/it-subcontracting-services" class="btn btn-dark mob-mb1 me-2">
+                    <i class="bi bi-arrow-left me-2"></i> Go Back
+                  </a>
+                  <button type="submit" class="btn btn-success" [disabled]="filters.length === 0">
+                    <i class="bi bi-search"></i> Save & Search
                   </button>
                 </div>
               </div>
             </div>
           </form>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section>
-  <div class="container">
-    <div class="mb-5">
-      <h5 class="headingTitle">The most <span class="text-primary">demanding skills</span></h5>
-      <p>Get some Inspirations from 86K+ skills</p>
-    </div>
-    <div class="row">
-      <div class="col-lg-2 col-xl-2 col-md-4 col-sm-4 col-6">
-        <div class="light-gray-card">
-          <img src="/assets/img/software-development.gif" height="60" class="mb-4" />
-          <p class="mb-0"><strong>Software Development</strong></p>
-          <p class="mb-0 p-12">250 Requests</p>
-        </div>
-      </div>
-      <div class="col-lg-2 col-xl-2 col-md-4 col-sm-4 col-6">
-        <div class="light-gray-card">
-          <img src="/assets/img/cloud-development.gif" height="60" class="mb-4" />
-          <p class="mb-0"><strong>Cloud & DevOps</strong></p>
-          <p class="mb-0 p-12">250 Request</p>
-        </div>
-      </div>
-      <div class="col-lg-2 col-xl-2 col-md-4 col-sm-4 col-6">
-        <div class="light-gray-card">
-          <img src="/assets/img/digital-transformation.gif" height="60" class="mb-4" />
-          <p class="mb-0"><strong>Digital Transformation</strong></p>
-          <p class="mb-0 p-12">250 Requests</p>
-        </div>
-      </div>
-      <div class="col-lg-2 col-xl-2 col-md-4 col-sm-4 col-6">
-        <div class="light-gray-card">
-          <img src="/assets/img/system-intigration.gif" height="60" class="mb-4" />
-          <p class="mb-0"><strong>Systems Integration</strong></p>
-          <p class="mb-0 p-12">250 Requests</p>
-        </div>
-      </div>
-      <div class="col-lg-2 col-xl-2 col-md-4 col-sm-4 col-6">
-        <div class="light-gray-card">
-          <img src="/assets/img/software-testing.gif" height="60" class="mb-4" />
-          <p class="mb-0"><strong>QA & Testing</strong></p>
-          <p class="mb-0 p-12">250 Requests</p>
-        </div>
-      </div>
-      <div class="col-lg-2 col-xl-2 col-md-4 col-sm-4 col-6">
-        <div class="light-gray-card">
-          <img src="/assets/img/ui-ux.gif" height="60" class="mb-4" />
-          <p class="mb-0"><strong>UI/UX Design</strong></p>
-          <p class="mb-0 p-12">250 Requests</p>
         </div>
       </div>
     </div>

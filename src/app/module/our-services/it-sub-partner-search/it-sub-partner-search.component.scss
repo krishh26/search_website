@@ -51,3 +51,59 @@ display: block;
 .FlatCard {
 z-index: 1;
 }
+
+.accordion {
+  .accordion-item {
+    border: 1px solid #e9ecef;
+    margin-bottom: 0.5rem;
+    border-radius: 0.25rem;
+
+    .accordion-header {
+      .accordion-button {
+        background-color: #f8f9fa;
+        border: none;
+        padding: 1rem;
+        font-weight: 500;
+        border-radius: 0.25rem;
+
+        &:not(.collapsed) {
+          background-color: #e9ecef;
+          box-shadow: none;
+        }
+
+        &:focus {
+          box-shadow: none;
+          border-color: #e9ecef;
+        }
+      }
+    }
+
+    .accordion-body {
+      padding: 1rem;
+      background-color: #fff;
+
+      p {
+        margin-bottom: 0.5rem;
+        &:last-child {
+          margin-bottom: 0;
+        }
+      }
+
+      .btn-danger {
+        padding: 0.25rem 0.75rem;
+        font-size: 0.875rem;
+        line-height: 1.5;
+        border-radius: 0.2rem;
+
+        i {
+          margin-right: 0.25rem;
+        }
+
+        &:hover {
+          background-color: #dc3545;
+          border-color: #dc3545;
+        }
+      }
+    }
+  }
+}

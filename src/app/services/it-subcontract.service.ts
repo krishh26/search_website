@@ -32,6 +32,34 @@ export interface TagResponse {
   };
 }
 
+export interface SearchParams {
+  search?: string;
+  page?: number;
+  limit?: number;
+}
+
+export interface Partner {
+  _id: string;
+  companyName: string;
+  expertise: string;
+  location: string;
+  companySize: string;
+  experience: number;
+  technologies: string[];
+  active: boolean;
+}
+
+export interface PartnerResponse {
+  status: boolean;
+  message: string;
+  data: Partner[];
+  meta_data: {
+    items: number;
+    pages: number | null;
+  };
+  activePartnersCount: number;
+}
+
 @Injectable({
   providedIn: 'root'
 })
@@ -77,6 +105,10 @@ export class ItSubcontractService {
     return this.http.post(`${this.baseUrl}/candidate/public/save-filter`, filters);
   }
 
+  saveSupplierFilters(filters: any): Observable<any> {
+    return this.http.post(`${this.baseUrl}/user/public/supplier-filter/save`, filters);
+  }
+
   getCandidateFilters(params?: any): Observable<any> {
     return this.http.get(`${this.baseUrl}/candidate/public/filter-list`, { params });
   }
@@ -115,5 +147,30 @@ export class ItSubcontractService {
     return this.http.get<TagResponse>(`${this.baseUrl}/tags/public`).pipe(
       map(response => response.data.tags)
     );
+  }
+
+  getExpertiseList(): Observable<any> {
+    return this.http.get(`${this.baseUrl}/web-user/public/expertise-list`);
+  }
+
+  getSupplierFilterList(): Observable<any> {
+    return this.http.get(`${this.baseUrl}/user/public/supplier-filter/list`);
+  }
+
+  // New methods for partner search
+  searchPartners(params: SearchParams): Observable<PartnerResponse> {
+    return this.http.get<PartnerResponse>(`${this.baseUrl}/partners/search`, { params: params as any });
+  }
+
+  getPartnersByFilter(filterId: string): Observable<PartnerResponse> {
+    return this.http.get<PartnerResponse>(`${this.baseUrl}/partners/filter/${filterId}`);
+  }
+
+  removeSupplierFilter(filterId: string): Observable<{ status: boolean; message: string }> {
+    return this.http.delete<{ status: boolean; message: string }>(`${this.baseUrl}/user/public/supplier-filter/${filterId}`);
+  }
+
+  getSuppliersByFilterId(filterId: string): Observable<any> {
+    return this.http.get<any>(`${this.baseUrl}/user/public/supplier-filter/${filterId}/suppliers`);
   }
 }

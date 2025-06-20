@@ -1,53 +1,92 @@
 .margin-top104 {
-    margin-top: 104px;
+  margin-top: 104px;
 }
 .position-relative {
-  position: relative;
+position: relative;
 }
 .bubble {
-  width: fit-content;
-  padding: 10px 20px;
-  background-color: #495164;
-  border-radius: 30px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  color: white;
-  font-size: 18px;
-  cursor: pointer;
-  transition: transform 0.2s ease;
-  position: relative;
-  display: inline-block;
+width: fit-content;
+padding: 10px 20px;
+background-color: #495164;
+border-radius: 30px;
+display: flex;
+justify-content: center;
+align-items: center;
+color: white;
+font-size: 18px;
+cursor: pointer;
+transition: transform 0.2s ease;
+position: relative;
+display: inline-block;
 }
 
 .bubble:hover {
-  transform: scale(1);
-  background-color: #000000;
+transform: scale(1);
+background-color: #000000;
 }
 
 .popup {
-  display: none;
-  position: absolute;
-  /* top: -160px;
-    left: 50%;
-    transform: translateX(-50%); */
-  top: 50px;
-  left: 0%;
-  width: 620px;
-  background: white;
-  color: #000;
-  padding: 2rem;
-  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
-  border-radius: 8px;
-  z-index: 9999;
+display: none;
+position: absolute;
+/* top: -160px;
+  left: 50%;
+  transform: translateX(-50%); */
+top: 50px;
+left: 0%;
+width: 620px;
+background: white;
+color: #000;
+padding: 2rem;
+box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+border-radius: 8px;
+z-index: 9999;
 }
 
 .bubble:hover .popup {
-  display: block;
+display: block;
 }
 .popup.show {
-  display: block;
+display: block;
 }
 .FlatCard {
-  z-index: 1;
+z-index: 1;
+}
+
+.searchresult-tags {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+
+  li {
+    padding: 0.5rem 1rem;
+    background-color: #f8f9fa;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: all 0.3s ease;
+
+    &.active {
+      background-color: #007bff;
+      color: white;
+
+      .remove-tag {
+        color: white;
+      }
+    }
+
+    .remove-tag {
+      cursor: pointer;
+      color: #666;
+      display: flex;
+      align-items: center;
+
+      &:hover {
+        color: #dc3545;
+      }
+    }
+  }
 }

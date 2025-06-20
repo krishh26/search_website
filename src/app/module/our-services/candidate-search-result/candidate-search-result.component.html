@@ -11,7 +11,8 @@
       <div class="col-12">
         <div class="search-box-large mb-3">
           <i class="bi bi-search"></i>
-          <input type="text" [(ngModel)]="searchQuery" [placeholder]="selectedFilterData.jobTitle || 'Search Candidates'" (keyup.enter)="onSearch()" />
+          <input type="text" [(ngModel)]="searchQuery"
+            [placeholder]="selectedFilterData.jobTitle || 'Search Candidates'" (keyup.enter)="onSearch()" />
           <button class="button" (click)="onSearch()">Search</button>
           <a routerLink="/resource-search" class="search-link mobile-hide">Advance Search</a>
         </div>
@@ -21,15 +22,11 @@
     </div>
     <ul class="searchresult-tags mb-4">
       <ng-container *ngFor="let item of filterList">
-          <li style="cursor: pointer;" [ngClass]="{'active': item?._id == selectedFilter }" (click)="selectFilter(item?._id)"> 
-             {{ item?.jobTitle }} <span class="remove-tag" (click)="removeFilter(item?._id)"><i class="bi bi-x"></i></span>
-          </li>
+        <li style="cursor: pointer;" [ngClass]="{'active': item?._id == selectedFilter }"
+          (click)="selectFilter(item?._id)">
+          {{ item?.jobTitle }} <span class="remove-tag" (click)="removeFilter(item?._id)"><i class="bi bi-x"></i></span>
+        </li>
       </ng-container>
-      
-      <!-- <li class="active">Front-end developer <span class="remove-tag"><i class="bi bi-x"></i></span></li>
-      <li class="">Software developer <span class="remove-tag"><i class="bi bi-x"></i></span></li>
-      <li class="">Web designer <span class="remove-tag"><i class="bi bi-x"></i></span></li>
-      <li class="">UI/UX designer <span class="remove-tag"><i class="bi bi-x"></i></span></li> -->
     </ul>
     <div class="row align-items-center mb-4">
       <div class="col-12">

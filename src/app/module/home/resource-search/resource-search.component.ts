@@ -98,4 +98,10 @@ export class RecourceSearchComponent implements OnInit {
       this.notificationService.showError("Please enter one filter !");
     }
   }
+
+  onServiceTypeChange() {
+    if (this.serviceType === 'itsubcontract') {
+      this.router.navigate(['/our-services/partner-search-result']);
+    }
+  }
 }
