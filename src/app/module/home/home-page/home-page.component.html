@@ -10,12 +10,38 @@
                 <option value="IT Subcontracting">IT Subcontracting</option>
               </select>
             </div>
-            <input type="text" class="form-control mob-w100" placeholder="Search Here">
-            <button class="input-group-text shadow-none px-4 search-btn mob-w100 mob-mb1" (click)="searchData()">
-              <i class="bi bi-search me-2"></i>Search
-            </button>
-             <button class="input-group-text shadow-none px-4 btn-link mob-w100">
-             Advance Search
+
+             <!-- FOr WorkAway -->
+            <ng-container *ngIf="selectedService == 'WorkAway'">
+              <div class="form-control mob-w100">
+                <ng-select [items]="jobRoles" [loading]="isLoading" [searchable]="true" bindLabel="name"
+                  bindValue="name" placeholder="Search Here" [(ngModel)]="jobTitle">
+                </ng-select>
+              </div>
+
+              <!-- <input type="text" class="form-control mob-w100" placeholder="Search Here"> -->
+              <button class="input-group-text shadow-none px-4 search-btn mob-w100 mob-mb1"
+                (click)="searchForWorkAway()">
+                <i class="bi bi-search me-2"></i>Search
+              </button>
+            </ng-container>
+
+            <!-- For IT Subcontracting -->
+            <ng-container *ngIf="selectedService == 'IT Subcontracting'">
+              <div class="form-control mob-w100">
+                <ng-select [items]="expertiseList" [loading]="isLoading" [searchable]="true" bindLabel="name"
+                  bindValue="name" placeholder="Search Here" [(ngModel)]="expertiseSelect">
+                </ng-select>
+              </div>
+
+              <!-- <input type="text" class="form-control mob-w100" placeholder="Search Here"> -->
+              <button class="input-group-text shadow-none px-4 search-btn mob-w100 mob-mb1"
+                (click)="searchForItSubContract()">
+                <i class="bi bi-search me-2"></i>Search
+              </button>
+            </ng-container>
+            <button class="input-group-text shadow-none px-4 btn-link mob-w100" (click)="searchData()">
+              Advance Search
             </button>
           </div>
         </div>
@@ -125,7 +151,7 @@
     </div>
   </section>
 
-   <section>
+  <section>
     <div class="container">
       <div class="mb-5 text-center">
         <h3 class="headingTitle">The Rules of <span class="text-primary">Growth Have Changed.</span></h3>

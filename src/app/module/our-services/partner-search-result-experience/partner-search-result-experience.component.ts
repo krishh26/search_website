@@ -33,7 +33,7 @@ export class PartnerSearchResultExperienceComponent implements OnInit {
   private searchSubject = new Subject<string>();
   projectName: string = "";
   tags: string = "";
-
+  expertise: string = "";
 
   constructor(
     private itsubcontractService: ItSubcontractService,
@@ -50,6 +50,11 @@ export class PartnerSearchResultExperienceComponent implements OnInit {
         this.tags = params['tags'];
       } else {
         this.tags = ""
+      }
+      if (params['expertise']) {
+        this.expertise = params['expertise'];
+      } else {
+        this.expertise = ""
       }
     });
 
@@ -88,7 +93,8 @@ export class PartnerSearchResultExperienceComponent implements OnInit {
       limit: 1000,
       search,
       projectName: this.projectName || "",
-      tags: this.tags || ""
+      tags: this.tags || "",
+      expertise: this.expertise || ""
     }
     this.itsubcontractService.getSupplierList(payload).subscribe({
       next: (response: any) => {

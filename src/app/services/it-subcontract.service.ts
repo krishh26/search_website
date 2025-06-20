@@ -52,7 +52,7 @@ export class ItSubcontractService {
     return this.http.get<Role[]>(`${this.baseUrl}/roles/public/get-list`);
   }
 
-  getSupplierList(payload: { limit: number, search: string, projectName: string, tags: string }): Observable<any> {
+  getSupplierList(payload: { limit: number, search: string, projectName: string, tags: string, expertise: string }): Observable<any> {
     let params = new HttpParams().set('limit', payload?.limit?.toString() || "10");
     if (payload?.search) {
       params = params.set('search', payload.search);
@@ -62,6 +62,9 @@ export class ItSubcontractService {
     }
     if (payload?.tags) {
       params = params.set('tags', payload.tags);
+    }
+    if (payload?.expertise) {
+      params = params.set('expertise', payload.expertise);
     }
     return this.http.get(`${this.baseUrl}/user/public/suplier/list`, { params });
   }
@@ -91,12 +94,21 @@ export class ItSubcontractService {
   }
 
   // Function to be used to the get job title list
-  getJobTitles(search: any): Observable<any> {
+  getJobTitles(search?: any): Observable<any> {
     let params = new HttpParams();
     if (search) {
       params = params.set('search', search);
     }
     return this.http.get(`${this.baseUrl}/roles/public/get-all-roles`, { params });
+  }
+
+  // Function to be used to the get job title list
+  getExpertise(search?: any): Observable<any> {
+    let params = new HttpParams();
+    if (search) {
+      params = params.set('search', search);
+    }
+    return this.http.get(`${this.baseUrl}/web-user/public/expertise-list`, { params });
   }
 
   getTags(): Observable<Tag[]> {
