@@ -3,6 +3,7 @@ import { ItSubcontractService } from 'src/app/services/it-subcontract.service';
 import { debounceTime, distinctUntilChanged, Subject } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
 import { NotificationService } from 'src/app/services/notification/notification.service';
+import Swal from 'sweetalert2';
 
 interface Supplier {
   _id: string;
@@ -166,17 +167,38 @@ export class PartnerSearchResultExperienceComponent implements OnInit {
     if (event) {
       event.stopPropagation();
     }
-    this.itsubcontractService.removeSupplierFilter(filterId).subscribe({
-      next: (response: { status: boolean; message: string }) => {
-        if (response?.status) {
-          this.filterList = this.filterList.filter(f => f._id !== filterId);
-          this.savedFilters = this.savedFilters.filter(f => f._id !== filterId);
-          this.notificationService.showSuccess('Filter removed successfully');
-        }
-      },
-      error: (error: Error) => {
-        console.error('Error removing filter:', error);
-        this.notificationService.showError('Failed to remove filter');
+
+    Swal.fire({
+      title: 'Are you sure?',
+      text: "You won't be able to revert this!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, delete it!'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.itsubcontractService.removeSupplierFilter(filterId).subscribe({
+          next: (response: { status: boolean; message: string }) => {
+            if (response?.status) {
+              this.filterList = this.filterList.filter(f => f._id !== filterId);
+              this.savedFilters = this.savedFilters.filter(f => f._id !== filterId);
+              Swal.fire(
+                'Deleted!',
+                'Your filter has been deleted.',
+                'success'
+              );
+            }
+          },
+          error: (error: Error) => {
+            console.error('Error removing filter:', error);
+            Swal.fire(
+              'Error!',
+              'Failed to remove filter',
+              'error'
+            );
+          }
+        });
       }
     });
   }
