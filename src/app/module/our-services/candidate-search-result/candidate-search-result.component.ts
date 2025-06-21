@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ItSubcontractService, Role } from 'src/app/services/it-subcontract.service';
 import { NotificationService } from 'src/app/services/notification/notification.service';
 import Swal from 'sweetalert2';
+
 interface Candidate {
   _id: string;
   fullName: string;
@@ -39,9 +40,11 @@ interface CandidateResponse {
   styleUrls: ['./candidate-search-result.component.scss']
 })
 export class CandidateSearchResultComponent implements OnInit {
+  jobRoles: any[] = [];
   roles: Role[] = [];
   candidates: Candidate[] = [];
   loading: boolean = false;
+  isLoading: boolean = false;
   error: string | null = null;
   totalCandidates: number = 0;
   activeCandidates: number = 0;
@@ -57,7 +60,24 @@ export class CandidateSearchResultComponent implements OnInit {
 
   ngOnInit() {
     this.getFilterList();
-    // this.fetchCandidates();
+    this.getJobTitles();
+  }
+
+  getJobTitles() {
+    this.jobRoles = [];
+    this.isLoading = true;
+    this.itSubcontractService.getJobTitles().subscribe({
+      next: (response) => {
+        if (response?.status) {
+          this.jobRoles = (response?.data?.roles || []).map((role: string) => ({ name: role }));
+        }
+        this.isLoading = false;
+      },
+      error: () => {
+        this.isLoading = false;
+        this.notificationService.showError('Failed to load job titles');
+      }
+    });
   }
 
   // Function to be used for the getting saved filters

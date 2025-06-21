@@ -51,3 +51,156 @@ display: block;
 .FlatCard {
 z-index: 1;
 }
+
+.main-searchbar {
+  padding: 8px;
+
+  .input-group-text {
+    padding: 0 0 0 16px;
+    color: #6c757d;
+    font-size: 18px;
+  }
+
+  .form-control {
+    background: transparent !important;
+    box-shadow: none !important;
+    padding: 0;
+  }
+
+  .clean-ng-select {
+    ::ng-deep {
+      .ng-select-container {
+        border: none !important;
+        background: transparent !important;
+        min-height: 40px;
+
+        .ng-value-container {
+          padding: 0 8px;
+          border: 0;
+
+          .ng-input {
+            padding: 0;
+
+            > input {
+              height: 40px;
+              padding: 0;
+            }
+          }
+
+          .ng-placeholder {
+            color: #6c757d;
+          }
+
+          .ng-value {
+            color: #212529;
+          }
+        }
+
+        .ng-arrow-wrapper {
+          display: none;
+        }
+      }
+
+      .ng-dropdown-panel {
+        border: 1px solid #e9ecef;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        border-radius: 8px;
+        margin-top: 4px;
+
+        .ng-dropdown-panel-items {
+          padding: 8px 0;
+
+          .ng-option {
+            padding: 8px 16px;
+
+            &.ng-option-marked {
+              background-color: #f8f9fa;
+            }
+
+            &.ng-option-selected {
+              background-color: #e9ecef;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .btn-primary {
+    background: #FF8A00;
+    border: none;
+    height: 44px;
+    font-weight: 500;
+
+    &:hover {
+      background: #e67a00;
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .mobile-hide {
+    display: none;
+  }
+
+  .mobile-show {
+    display: block;
+  }
+
+  .search-link-btn {
+    display: inline-block;
+    color: #0d6efd;
+    text-decoration: none;
+    margin-top: 8px;
+    font-weight: 500;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
+
+@media (min-width: 769px) {
+  .desktop-hide {
+    display: none;
+  }
+}
+
+.searchresult-tags {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+
+  li {
+    padding: 0.5rem 1rem;
+    background-color: #f8f9fa;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: all 0.3s ease;
+
+    &.active {
+      background-color: #007bff;
+      color: white;
+
+      .remove-tag {
+        color: white;
+      }
+    }
+
+    .remove-tag {
+      cursor: pointer;
+      color: #666;
+      display: flex;
+      align-items: center;
+
+      &:hover {
+        color: #dc3545;
+      }
+    }
+  }
+}
