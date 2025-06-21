@@ -1,6 +1,13 @@
 .margin-top104 {
   margin-top: 104px;
 }
+.gradient-section{
+    position: relative;
+    background: #FFEEEE;
+    background: linear-gradient(90deg, rgba(255, 238, 238, 1) 0%, rgba(221, 239, 187, 1) 100%);
+    min-height: 560px;
+    padding: 130px 0 0 0;
+}
 .position-relative {
 position: relative;
 }
