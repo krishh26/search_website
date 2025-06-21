@@ -42,7 +42,7 @@
               </a>
             </div>
           </div>
-          <!-- Work Away Tag -->
+          <!-- Combined Tags -->
           <ul class="searchresult-tags-workaway mb-4">
             <ng-container *ngFor="let item of filterList">
               <li style="cursor: pointer;">
@@ -50,13 +50,9 @@
                 <span class="remove-tag" (click)="removeFilter(item?._id)"><i class="bi bi-x"></i></span>
               </li>
             </ng-container>
-          </ul>
-          <!-- It Subcontract Tag -->
-          <ul class="searchresult-tags-itSub mb-4">
             <ng-container *ngFor="let item of itSubFilterList">
               <li style="cursor: pointer;">
-                <span (click)="redirectFilterToItSubSearch(item?._id)"> {{ item?.projectName || item?.expertise
-                  }}</span>
+                <span (click)="redirectFilterToItSubSearch(item?._id)">{{ item?.projectName || item?.expertise }}</span>
                 <span class="remove-tag" (click)="removeFilterItSub(item?._id)"><i class="bi bi-x"></i></span>
               </li>
             </ng-container>

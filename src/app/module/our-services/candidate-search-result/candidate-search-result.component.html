@@ -14,15 +14,8 @@
             <i class="bi bi-search"></i>
           </div>
           <div class="form-control border-0">
-            <ng-select
-              [items]="jobRoles"
-              [loading]="isLoading"
-              [searchable]="true"
-              bindLabel="name"
-              bindValue="name"
-              placeholder="Search candidates by job title..."
-              [(ngModel)]="searchQuery"
-              [clearable]="true"
+            <ng-select [items]="jobRoles" [loading]="isLoading" [searchable]="true" bindLabel="name" bindValue="name"
+              placeholder="Search candidates by job title..." [(ngModel)]="searchQuery" [clearable]="true"
               class="border-0 clean-ng-select">
             </ng-select>
           </div>
@@ -30,6 +23,10 @@
             <button class="btn btn-primary rounded-pill px-4 d-flex align-items-center" (click)="onSearch()">
               <i class="bi bi-search me-2"></i>Search
             </button>
+            <a routerLink="/resource-search" class="search-link mobile-hide">Advance Search</a>
+          <p class="mobile-show desktop-hide"> <a routerLink="/resource-search"
+              class="search-link-btn">Advance Search</a>
+          </p>
           </div>
         </div>
       </div>
