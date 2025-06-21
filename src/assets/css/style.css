@@ -2039,7 +2039,7 @@ ul.searchresult-tags li {
 
 ul.searchresult-tags li:hover,
 ul.searchresult-tags li.active {
-  background-color: #0F51E0;
+  background-color: #0F51E0 !important;
   color: #FFFF;
 }
 
@@ -2047,7 +2047,10 @@ ul.searchresult-tags li .remove-tag {
   cursor: pointer;
   font-size: 1rem;
 }
-
+ul.searchresult-tags li:hover .remove-tag,
+ul.searchresult-tags li.active .remove-tag{
+  color: #FFFF !important;
+}
 .searchcard {
   border-left: 6px solid #ffc107 ;
 }
@@ -2266,18 +2269,18 @@ Services Box
   cursor: pointer;
 }
 
-/* .service-single-box::before {
+.service-single-box::before, .service-single-box .active::before  {
   position: absolute;
   content: "";
   height: 0;
   width: 100%;
   left: 0;
   bottom: 0;
-  background: #0154F7;
+  background: #e5e7eb;
   z-index: -1;
   transition: .5s;
   border-radius: 12px;
-} */
+}
 
 .add-arrow1, .add-arrow2, .add-arrow3, .add-arrow4 {
   display: block;
@@ -2352,7 +2355,7 @@ Services Box
 }
 
 .service-single-box:hover .underline .br-line {
-  background: #FFF;
+  background: #0154F7;
 }
 
 .br-line:after,
