@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ItSubcontractService } from 'src/app/services/it-subcontract.service';
 import { debounceTime, distinctUntilChanged, Subject } from 'rxjs';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { NotificationService } from 'src/app/services/notification/notification.service';
 import Swal from 'sweetalert2';
 
@@ -54,12 +54,15 @@ export class PartnerSearchResultExperienceComponent implements OnInit {
   isLoadingFilters: boolean = false;
   expertiseList: Expertise[] = [];
   filterList: any[] = [];
-  selectedFilter: string = '';
+  selectedFilter!: string;
+  expertiseSelect!: string | null;
+  isLoading: boolean = false;
 
   constructor(
     private itsubcontractService: ItSubcontractService,
     private route: ActivatedRoute,
-    private notificationService: NotificationService
+    private notificationService: NotificationService,
+    private router: Router
   ) {
     this.route.queryParams.subscribe(params => {
       if (params['projectName']) {
@@ -77,6 +80,11 @@ export class PartnerSearchResultExperienceComponent implements OnInit {
       } else {
         this.expertise = ""
       }
+      if (params['id']) {
+        this.selectedFilter = params['id'];
+      } else {
+        this.selectedFilter = ""
+      }
     });
 
     // Setup search debounce
@@ -93,43 +101,35 @@ export class PartnerSearchResultExperienceComponent implements OnInit {
   }
 
   loadExpertiseList(): void {
+    this.isLoading = true;
     this.itsubcontractService.getExpertiseList().subscribe({
       next: (response) => {
         if (response?.status && response?.data?.expertise) {
           this.expertiseList = response.data.expertise;
+          this.isLoading = false;
           this.loadFilterList();
         }
       },
       error: (error) => {
-        console.error('Error loading expertise list:', error);
+        this.isLoading = false;
         this.notificationService.showError('Failed to load expertise list');
       }
     });
   }
 
-  getExpertiseName(expertiseId: string): string {
-    if (!expertiseId) return '';
-    const expertise = this.expertiseList.find(e => e._id === expertiseId);
-    return expertise?.name || expertiseId;
-  }
-
   loadFilterList(): void {
     this.isLoadingFilters = true;
+    this.expertiseSelect = null;
     this.itsubcontractService.getSupplierFilterList().subscribe({
       next: (response) => {
         if (response.status && response.data) {
-          this.filterList = response.data.map((filter: any) => ({
-            _id: filter._id,
-            jobTitle: this.getExpertiseName(filter.projectName),
-            expertise: filter.expertise,
-            tags: filter.tags,
-            projectName: filter.projectName,
-            supplierCount: filter.supplierCount || 0
-          }));
+          this.filterList = response.data;
 
           // Automatically select first filter if available
           if (this.filterList.length > 0) {
-            this.selectFilter(this.filterList[0]._id);
+            this.selectFilter(this.selectedFilter ? this.selectedFilter : this.filterList[0]._id);
+          } else {
+            this.router.navigateByUrl('/home');
           }
         }
         this.isLoadingFilters = false;
@@ -181,13 +181,13 @@ export class PartnerSearchResultExperienceComponent implements OnInit {
         this.itsubcontractService.removeSupplierFilter(filterId).subscribe({
           next: (response: { status: boolean; message: string }) => {
             if (response?.status) {
-              this.filterList = this.filterList.filter(f => f._id !== filterId);
-              this.savedFilters = this.savedFilters.filter(f => f._id !== filterId);
+              this.selectedFilter = "";
               Swal.fire(
                 'Deleted!',
                 'Your filter has been deleted.',
                 'success'
               );
+              this.loadFilterList();
             }
           },
           error: (error: Error) => {
@@ -246,5 +246,35 @@ export class PartnerSearchResultExperienceComponent implements OnInit {
     this.tags = filter.tags;
     this.expertise = filter.expertise;
     this.loadSupplierList();
+  }
+
+  searchForItSubContract() {
+    if (this.expertiseSelect) {
+      const payload = {
+        userId: '', // This should come from your auth service
+        filters: [
+          {
+            "projectName": "",
+            "expertise": this.expertiseSelect,
+            "tags": "",
+            "projectNameId": ""
+          }
+        ]
+      };
+
+      this.itsubcontractService.saveSupplierFilters(payload).subscribe({
+        next: (response) => {
+          if (response?.status) {
+            this.notificationService.showSuccess('Filters saved successfully');
+            this.loadFilterList();
+          }
+        },
+        error: (error) => {
+          this.notificationService.showError(error?.error?.message || 'Failed to save filters');
+        }
+      });
+    } else {
+      this.notificationService.showError('Please add at least one filter');
+    }
   }
 }

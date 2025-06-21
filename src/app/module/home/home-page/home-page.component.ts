@@ -3,6 +3,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { NavigationService } from '../../../common/services/navigation.service';
 import { ItSubcontractService } from 'src/app/services/it-subcontract.service';
 import { NotificationService } from 'src/app/services/notification/notification.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-home-page',
@@ -24,6 +25,9 @@ export class HomePageComponent implements OnInit {
   expertiseList: any[] = [];
   expertiseSelect!: string;
 
+  filterList: any[] = [];
+  itSubFilterList: any[] = [];
+
   constructor(
     private router: Router,
     private route: ActivatedRoute,
@@ -42,7 +46,95 @@ export class HomePageComponent implements OnInit {
     }
     this.getJobTitles();
     this.getExpertise();
+    this.getFilterList();
+    this.loadFilterList();
   }
+
+  // Function to be used for the getting saved filters
+  getFilterList() {
+    this.filterList = [];
+    this.itSubcontractService.getCandidateFilters().subscribe({
+      next: (response) => {
+        if (response?.status) {
+          this.filterList = response?.data || [];
+        }
+      },
+    });
+  }
+
+  // Function to be used for the remove filter
+  removeFilter(filterId: string) {
+    Swal.fire({
+      title: 'Are you sure?',
+      text: 'Do you want to remove this filter?',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Yes, remove it!',
+      cancelButtonText: 'Cancel'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.itSubcontractService.removeCandidateFilters(filterId).subscribe((response) => {
+          if (response?.status) {
+            Swal.fire('Removed!', 'The filter has been removed.', 'success');
+            this.getFilterList();
+          }
+        }, (error) => {
+          this.notificationService.showError(error?.error?.message || 'Filter not removed please try again !');
+        })
+      }
+    });
+  }
+
+  loadFilterList(): void {
+    this.itSubFilterList = [];
+    this.itSubcontractService.getSupplierFilterList().subscribe({
+      next: (response) => {
+        if (response.status && response.data) {
+          this.itSubFilterList = response.data;
+        }
+      }
+    });
+  }
+
+  removeFilterItSub(filterId: string, event?: MouseEvent): void {
+    if (event) {
+      event.stopPropagation();
+    }
+
+    Swal.fire({
+      title: 'Are you sure?',
+      text: "You won't be able to revert this!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, delete it!'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.itSubcontractService.removeSupplierFilter(filterId).subscribe({
+          next: (response: { status: boolean; message: string }) => {
+            if (response?.status) {
+              Swal.fire(
+                'Deleted!',
+                'Your filter has been deleted.',
+                'success'
+              );
+              this.loadFilterList();
+            }
+          },
+          error: (error: Error) => {
+            console.error('Error removing filter:', error);
+            Swal.fire(
+              'Error!',
+              'Failed to remove filter',
+              'error'
+            );
+          }
+        });
+      }
+    });
+  }
+
 
   getJobTitles() {
     this.jobRoles = [];
@@ -82,7 +174,7 @@ export class HomePageComponent implements OnInit {
     }
   }
 
-  
+
   getExpertise() {
     this.expertiseList = [];
     this.isLoading = true;
@@ -100,14 +192,32 @@ export class HomePageComponent implements OnInit {
   }
 
   searchForItSubContract() {
-    if (this.expertiseSelect) { 
-      this.router.navigate(['/our-services/partner-search-result-experience'], {
-        queryParams: {
-          expertise: this.expertiseSelect || "",
+    if (this.expertiseSelect) {
+      const payload = {
+        userId: '', // This should come from your auth service
+        filters: [
+          {
+            "projectName": "",
+            "expertise": this.expertiseSelect,
+            "tags": "",
+            "projectNameId": ""
+          }
+        ]
+      };
+
+      this.itSubcontractService.saveSupplierFilters(payload).subscribe({
+        next: (response) => {
+          if (response?.status) {
+            this.notificationService.showSuccess('Filters saved successfully');
+            this.router.navigate(['/our-services/partner-search-result-experience']);
+          }
+        },
+        error: (error) => {
+          this.notificationService.showError(error?.error?.message || 'Failed to save filters');
         }
       });
     } else {
-         this.notificationService.showError("Please enter one filter !");
+      this.notificationService.showError('Please add at least one filter');
     }
   }
 
@@ -147,5 +257,21 @@ export class HomePageComponent implements OnInit {
     } else if (this.selectedService === 'IT Subcontracting') {
       this.router.navigateByUrl('/our-services/partner-search-result');
     }
+  }
+
+  redirectFilterToWorkAwaySearch(id: string) {
+    this.router.navigate(['/our-services/candidate-search-result'], {
+      queryParams: {
+        workAwayId: id,
+      }
+    });
+  }
+
+  redirectFilterToItSubSearch(id: string) {
+    this.router.navigate(['/our-services/partner-search-result-experience'], {
+      queryParams: {
+        id: id,
+      }
+    });
   }
 }

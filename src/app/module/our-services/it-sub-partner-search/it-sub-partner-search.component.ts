@@ -85,8 +85,7 @@ export class ItSubPartnerSearchComponent implements OnInit {
       this.filters.push({
         projectName: selectedExpertise?.name || '',
         expertise: formValue.technologyDemand,
-        tags: formValue.projectCategory,
-        projectNameId: selectedExpertise?._id || '' // Store ID for API calls
+        tags: formValue.projectCategory
       });
       this.initForm(); // Reset form for next entry
       this.notificationService.showSuccess('Filter added successfully');
@@ -108,10 +107,10 @@ export class ItSubPartnerSearchComponent implements OnInit {
 
     if (this.filters.length > 0) {
       const payload = {
-        userId: '683de8cc57a4a857766f083e', // This should come from your auth service
+        userId: '', // This should come from your auth service
         filters: this.filters.map(filter => ({
           ...filter,
-          projectName: filter.projectNameId // Use ID for API call
+          projectName: filter.projectName // Use ID for API call
         }))
       };
 
@@ -119,12 +118,7 @@ export class ItSubPartnerSearchComponent implements OnInit {
         next: (response) => {
           if (response?.status) {
             this.notificationService.showSuccess('Filters saved successfully');
-            this.router.navigate(['/our-services/partner-search-result-experience'], {
-              queryParams: {
-                projectName: this.filters[0].projectNameId,
-                tags: this.filters[0].tags,
-              }
-            });
+            this.router.navigate(['/our-services/partner-search-result-experience']);
           }
         },
         error: (error) => {

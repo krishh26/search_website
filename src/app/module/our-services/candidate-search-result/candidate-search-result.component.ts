@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ItSubcontractService, Role } from 'src/app/services/it-subcontract.service';
 import { NotificationService } from 'src/app/services/notification/notification.service';
 import Swal from 'sweetalert2';
@@ -55,12 +56,21 @@ export class CandidateSearchResultComponent implements OnInit {
 
   constructor(
     private itSubcontractService: ItSubcontractService,
-    private notificationService: NotificationService
+    private notificationService: NotificationService,
+    private router: Router,
+    private route: ActivatedRoute
   ) { }
 
   ngOnInit() {
     this.getFilterList();
     this.getJobTitles();
+    this.route.queryParams.subscribe(params => {
+      if (params['workAwayId']) {
+        this.selectedFilter = params['workAwayId'];
+      } else {
+        this.selectedFilter = ""
+      }
+    });
   }
 
   getJobTitles() {
@@ -88,9 +98,11 @@ export class CandidateSearchResultComponent implements OnInit {
       next: (response) => {
         if (response?.status) {
           this.filterList = response?.data || [];
-          this.selectFilter(this.filterList?.[0]?._id);
-          // this.selectedFilter = this.filterList?.[0]?._id || "";
-          // this.selectedFilterData = this.filterList?.[0] || {};
+          if (this.filterList?.length == 0) {
+            this.router.navigateByUrl('/home');
+          } else {
+            this.selectFilter(this.selectedFilter ? this.selectedFilter : this.filterList?.[0]?._id);
+          }
         }
       },
     });
@@ -100,10 +112,11 @@ export class CandidateSearchResultComponent implements OnInit {
   selectFilter(filterId: string) {
     this.selectedFilter = filterId;
     this.selectedFilterData = this.filterList.find((element) => element._id == filterId);
+    this.searchQuery = this.selectedFilterData?.jobTitle;
     this.itSubcontractService.getCandidateFilterByList(filterId).subscribe({
       next: (response) => {
         if (response?.status) {
-           this.candidates = response.data || [];
+          this.candidates = response.data || [];
           this.totalCandidates = response.meta_data.items;
           this.activeCandidates = response.activeCandidatesCount;
         }
@@ -124,6 +137,7 @@ export class CandidateSearchResultComponent implements OnInit {
       if (result.isConfirmed) {
         this.itSubcontractService.removeCandidateFilters(filterId).subscribe((response) => {
           if (response?.status) {
+            this.selectedFilter = "";
             Swal.fire('Removed!', 'The filter has been removed.', 'success');
             this.getFilterList();
           }
@@ -177,6 +191,24 @@ export class CandidateSearchResultComponent implements OnInit {
   }
 
   onSearch() {
-    this.fetchCandidates();
+    if (this.searchQuery) {
+      const payload = {
+        userId: null, // need to add id based on the login
+        filters: [{
+          jobTitle: this.searchQuery,
+          // minExperience: 0,
+          // maxExperience: 100,
+          // candidateCount: 100
+        }]
+      }
+
+      this.itSubcontractService.saveCandidateFilters(payload).subscribe({
+        next: (response) => {
+          this.getFilterList();
+        },
+      });
+    } else {
+      this.notificationService.showError("Please enter one filter !");
+    }
   }
 }

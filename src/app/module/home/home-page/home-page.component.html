@@ -5,7 +5,8 @@
         <div class="col-12">
           <div class="input-group main-searchbar mb-3 bg-white rounded-pill shadow-sm">
             <div class="input-group-text border-0 bg-transparent p-2">
-              <select class="form-select border-0 bg-transparent" [(ngModel)]="selectedService" (change)="onServiceChange($event)">
+              <select class="form-select border-0 bg-transparent" [(ngModel)]="selectedService"
+                (change)="onServiceChange($event)">
                 <option value="WorkAway">WorkAway</option>
                 <option value="IT Subcontracting">IT Subcontracting</option>
               </select>
@@ -14,14 +15,8 @@
             <!-- For WorkAway -->
             <ng-container *ngIf="selectedService == 'WorkAway'">
               <div class="form-control border-0 flex-grow-1">
-                <ng-select [items]="jobRoles"
-                  [loading]="isLoading"
-                  [searchable]="true"
-                  bindLabel="name"
-                  bindValue="name"
-                  placeholder="Search Here"
-                  [(ngModel)]="jobTitle"
-                  [clearable]="true"
+                <ng-select [items]="jobRoles" [loading]="isLoading" [searchable]="true" bindLabel="name"
+                  bindValue="name" placeholder="Search Here" [(ngModel)]="jobTitle" [clearable]="true"
                   class="border-0 clean-ng-select">
                 </ng-select>
               </div>
@@ -30,14 +25,8 @@
             <!-- For IT Subcontracting -->
             <ng-container *ngIf="selectedService == 'IT Subcontracting'">
               <div class="form-control border-0 flex-grow-1">
-                <ng-select [items]="expertiseList"
-                  [loading]="isLoading"
-                  [searchable]="true"
-                  bindLabel="name"
-                  bindValue="name"
-                  placeholder="Search Here"
-                  [(ngModel)]="expertiseSelect"
-                  [clearable]="true"
+                <ng-select [items]="expertiseList" [loading]="isLoading" [searchable]="true" bindLabel="name"
+                  bindValue="name" placeholder="Search Here" [(ngModel)]="expertiseSelect" [clearable]="true"
                   class="border-0 clean-ng-select">
                 </ng-select>
               </div>
@@ -48,13 +37,30 @@
                 (click)="selectedService == 'WorkAway' ? searchForWorkAway() : searchForItSubContract()">
                 <i class="bi bi-search me-2"></i>Search
               </button>
-              <a href="javascript:void(0)"
-                class="text-primary text-decoration-none"
-                (click)="searchData()">
+              <a href="javascript:void(0)" class="text-primary text-decoration-none" (click)="searchData()">
                 Advance Search
               </a>
             </div>
           </div>
+          <!-- Work Away Tag -->
+          <ul class="searchresult-tags-workaway mb-4">
+            <ng-container *ngFor="let item of filterList">
+              <li style="cursor: pointer;">
+                <span (click)="redirectFilterToWorkAwaySearch(item?._id)">{{ item?.jobTitle }}</span>
+                <span class="remove-tag" (click)="removeFilter(item?._id)"><i class="bi bi-x"></i></span>
+              </li>
+            </ng-container>
+          </ul>
+          <!-- It Subcontract Tag -->
+          <ul class="searchresult-tags-itSub mb-4">
+            <ng-container *ngFor="let item of itSubFilterList">
+              <li style="cursor: pointer;">
+                <span (click)="redirectFilterToItSubSearch(item?._id)"> {{ item?.projectName || item?.expertise
+                  }}</span>
+                <span class="remove-tag" (click)="removeFilterItSub(item?._id)"><i class="bi bi-x"></i></span>
+              </li>
+            </ng-container>
+          </ul>
         </div>
       </div>
 
