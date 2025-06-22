@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ItSubcontractService, Tag } from '../../../services/it-subcontract.service';
 import { Router } from '@angular/router';
 import { NotificationService } from 'src/app/services/notification/notification.service';
-
+import { Location } from '@angular/common';
 @Component({
   selector: 'app-it-sub-partner-search',
   templateUrl: './it-sub-partner-search.component.html',
@@ -22,7 +22,8 @@ export class ItSubPartnerSearchComponent implements OnInit {
     private itSubcontractService: ItSubcontractService,
     private fb: FormBuilder,
     private router: Router,
-    private notificationService: NotificationService
+    private notificationService: NotificationService,
+    private location: Location
   ) { }
 
   ngOnInit() {
@@ -59,7 +60,6 @@ export class ItSubPartnerSearchComponent implements OnInit {
       error: (error) => {
         console.error('Error loading expertise list:', error);
         this.loadingExpertise = false;
-        this.notificationService.showError('Failed to load expertise list');
       }
     });
   }
@@ -88,10 +88,8 @@ export class ItSubPartnerSearchComponent implements OnInit {
         tags: formValue.projectCategory
       });
       this.initForm(); // Reset form for next entry
-      this.notificationService.showSuccess('Filter added successfully');
     } else {
       this.partnerForm.markAllAsTouched();
-      this.notificationService.showError('Please fill in all required fields');
     }
   }
 
@@ -117,16 +115,17 @@ export class ItSubPartnerSearchComponent implements OnInit {
       this.itSubcontractService.saveSupplierFilters(payload).subscribe({
         next: (response) => {
           if (response?.status) {
-            this.notificationService.showSuccess('Filters saved successfully');
-            this.router.navigate(['/our-services/partner-search-result-experience']);
+            this.router.navigate(['/our-services/candidate-search-result'], {
+              queryParams: {
+                id: response?.data?.[0]?._id,
+              }
+            });
           }
         },
         error: (error) => {
-          this.notificationService.showError(error?.error?.message || 'Failed to save filters');
         }
       });
     } else {
-      this.notificationService.showError('Please add at least one filter');
     }
   }
 
@@ -135,5 +134,9 @@ export class ItSubPartnerSearchComponent implements OnInit {
 
   navigateToWorkaway() {
     this.router.navigate(['/resource-search']);
+  }
+
+  goBack(): void {
+    this.location.back();
   }
 }

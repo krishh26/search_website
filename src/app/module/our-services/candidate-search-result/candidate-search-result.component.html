@@ -2,106 +2,214 @@
   <div class="container">
     <nav aria-label="breadcrumb">
       <ol class="breadcrumb">
-        <li class="breadcrumb-item"><a href="#">Home</a></li>
-        <li class="breadcrumb-item"><a href="#">Search</a></li>
-        <li class="breadcrumb-item active" aria-current="page">Candidate result</li>
+        <li class="breadcrumb-item"><a routerLink="/home">Home</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Search</li>
+        <!-- <li class="breadcrumb-item active" aria-current="page">Candidate result</li> -->
       </ol>
     </nav>
     <div class="row align-items-center">
       <div class="col-12">
         <div class="input-group main-searchbar mb-3 bg-white rounded-pill shadow-sm">
-          <div class="input-group-text border-0 bg-transparent">
-            <i class="bi bi-search"></i>
+          <div class="input-group-text border-0 bg-transparent p-2">
+            <select class="form-select border-0 bg-transparent" [(ngModel)]="selectedService"
+              (change)="onServiceChange($event)">
+              <option value="WorkAway">WorkAway</option>
+              <option value="IT Subcontracting">IT Subcontracting</option>
+            </select>
           </div>
-          <div class="form-control border-0">
-            <ng-select [items]="jobRoles" [loading]="isLoading" [searchable]="true" bindLabel="name" bindValue="name"
-              placeholder="Search candidates by job title..." [(ngModel)]="searchQuery" [clearable]="true"
-              class="border-0 clean-ng-select">
-            </ng-select>
-          </div>
+
+          <!-- For WorkAway -->
+          <ng-container *ngIf="selectedService == 'WorkAway'">
+            <div class="form-control border-0 flex-grow-1">
+              <ng-select [items]="jobRoles" [loading]="isLoading" [searchable]="true" bindLabel="name" bindValue="name"
+                placeholder="Search Here" [(ngModel)]="searchQuery" [clearable]="true" class="border-0 clean-ng-select">
+              </ng-select>
+            </div>
+          </ng-container>
+
+          <!-- For IT Subcontracting -->
+          <ng-container *ngIf="selectedService == 'IT Subcontracting'">
+            <div class="form-control border-0 flex-grow-1">
+              <ng-select [items]="expertiseList" [loading]="isLoading" [searchable]="true" bindLabel="name"
+                bindValue="name" placeholder="Search Here" [(ngModel)]="expertiseSelect" [clearable]="true"
+                class="border-0 clean-ng-select">
+              </ng-select>
+            </div>
+          </ng-container>
+
           <div class="d-flex align-items-center pe-3">
-            <button class="btn btn-primary rounded-pill px-4 d-flex align-items-center" (click)="onSearch()">
+            <button class="btn btn-primary rounded-pill px-4 d-flex align-items-center me-3"
+              (click)="selectedService == 'WorkAway' ? onSearch() : searchForItSubContract()">
               <i class="bi bi-search me-2"></i>Search
             </button>
-            <a routerLink="/resource-search" class="search-link mobile-hide">Advance Search</a>
-          <p class="mobile-show desktop-hide"> <a routerLink="/resource-search"
-              class="search-link-btn">Advance Search</a>
-          </p>
+            <a href="javascript:void(0)" class="text-primary text-decoration-none" (click)="searchData()">
+              Advance Search
+            </a>
           </div>
+        </div>
+        <!-- Combined Tags -->
+        <ul class="searchresult-tags mb-4">
+          <ng-container *ngFor="let item of visibleFilterList">
+            <li style="cursor: pointer; background-color: #f8f9fa;"
+              [ngClass]="{'active': item?._id == selectedFilter && selectedService == 'WorkAway' }">
+              <span (click)="selectFilter(item?._id)">
+                {{ item?.jobTitle }}
+                <p style="font-size: 10px; text-align: center; margin-bottom: 0px !important;">(WorkAway)</p>
+              </span>
+              <span class="remove-tag" (click)="removeFilter(item?._id)"><i class="bi bi-x"></i></span>
+              <br>
+            </li>
+          </ng-container>
+          <ng-container *ngFor="let item of visibleItSubFilterList">
+            <li style="cursor: pointer; background-color: #f8f9fa;"
+              [ngClass]="{'active': item?._id == itSelectedFilter && selectedService !== 'WorkAway' }">
+              <span (click)="selectFilterItSubContractFilter(item?._id)">
+                {{ item?.projectName || item?.expertise }}
+                <p style="font-size: 10px; text-align: center; margin-bottom: 0px !important;">(IT Subcontracting)</p>
+              </span>
+              <span class="remove-tag" (click)="removeFilterItSub(item?._id)"><i class="bi bi-x"></i></span>
+            </li>
+          </ng-container>
+        </ul>
+
+        <!-- View More / View Less Button -->
+        <div *ngIf="(filterList.length + itSubFilterList.length) > defaultTagLimit" class="mb-3">
+          <button class="btn btn-link p-0" (click)="toggleShowAllTags()">
+            {{ showAllTags ? 'View Less' : 'View More' }}
+          </button>
         </div>
       </div>
     </div>
-    <ul class="searchresult-tags mb-4">
-      <ng-container *ngFor="let item of filterList">
-        <li style="cursor: pointer;" [ngClass]="{'active': item?._id == selectedFilter }"
-          (click)="selectFilter(item?._id)">
-          {{ item?.jobTitle }} <span class="remove-tag" (click)="removeFilter(item?._id)"><i class="bi bi-x"></i></span>
-        </li>
+
+
+    <div>
+      <ng-container *ngIf="selectedService == 'WorkAway'">
+        <div class="row align-items-center mb-4">
+          <div class="col-12">
+            <h1 class="headingTitle2">We found <span class="text-primary">{{totalCandidates}} Resources</span> (<span
+                class="text-success">{{activeCandidates}} Active</span>)</h1>
+          </div>
+        </div>
+
+        <!-- Loading and Error States -->
+        <div *ngIf="loading" class="text-center py-4">
+          <div class="spinner-border text-primary" role="status">
+            <span class="visually-hidden">Loading...</span>
+          </div>
+        </div>
+
+        <div *ngIf="error" class="alert alert-danger" role="alert">
+          {{error}}
+        </div>
+
+        <!--start result-->
+        <div *ngFor="let candidate of candidates" class="FlatCard searchcard mb-3">
+          <div class="card-body p-4">
+            <div class="row align-items-center">
+              <div class="col-lg-10 col-xl-10 col-md-10 col-sm-10 col-12">
+                <h4><strong>{{candidate.fullName}}</strong> <small>{{candidate.gender}}</small></h4>
+                <p class="mb-0">Job Title: {{candidate.currentRole?.name || 'N/A'}}</p>
+              </div>
+              <div class="col-lg-2 col-xl-2 col-md-2 col-sm-2 col-12">
+                <a href="workaway-registration.html" class="btn btn-outline-primary w-100">Engage</a>
+              </div>
+              <div class="dotted-spacer"></div>
+              <div class="row">
+                <div class="col-lg-4 col-xl-4 col-md-4 col-sm-4 col-12">
+                  <p><i class="bi bi-globe text-muted me-2"></i> Nationality- {{candidate.nationality}}</p>
+                </div>
+                <div class="col-lg-4 col-xl-4 col-md-4 col-sm-4 col-12">
+                  <p><i class="bi bi-mortarboard-fill text-muted me-2"></i> Qualification-
+                    {{candidate.highestQualification}}</p>
+                </div>
+                <div class="col-lg-4 col-xl-4 col-md-4 col-sm-4 col-12">
+                  <p><i class="bi bi-briefcase-fill text-muted me-2"></i> Experience- {{candidate.totalExperience}}
+                    Years
+                  </p>
+                </div>
+                <div class="col-lg-4 col-xl-4 col-md-4 col-sm-4 col-12">
+                  <p><i class="bi bi-cash text-muted me-2"></i> Hourly Rate- £{{candidate.ukHourlyRate}} |
+                    ₹{{candidate.indianDayRate}}</p>
+                </div>
+                <div class="col-lg-8 col-xl-8 col-md-8 col-sm-8 col-12">
+                  <p><i class="bi bi-translate text-muted me-2"></i> Language- {{candidate.languagesKnown?.join(', ') ||
+                    'N/A'}}</p>
+                </div>
+                <div class="col-12">
+                  <p><i class="bi bi-code-slash text-muted me-2"></i> Skills- {{candidate.technicalSkills?.join(', ') ||
+                    'N/A'}}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- No Results Message -->
+        <div *ngIf="!loading && !error && candidates.length === 0" class="text-center py-4">
+          <p>No candidates found matching your search criteria.</p>
+        </div>
+        <!--/end result-->
       </ng-container>
-    </ul>
-    <div class="row align-items-center mb-4">
-      <div class="col-12">
-        <h1 class="headingTitle2">We found <span class="text-primary">{{totalCandidates}} Resources</span> (<span
-            class="text-success">{{activeCandidates}} Active</span>)</h1>
-      </div>
-    </div>
-
-    <!-- Loading and Error States -->
-    <div *ngIf="loading" class="text-center py-4">
-      <div class="spinner-border text-primary" role="status">
-        <span class="visually-hidden">Loading...</span>
-      </div>
-    </div>
-
-    <div *ngIf="error" class="alert alert-danger" role="alert">
-      {{error}}
-    </div>
-
-    <!--start result-->
-    <div *ngFor="let candidate of candidates" class="FlatCard searchcard mb-3">
-      <div class="card-body p-4">
-        <div class="row align-items-center">
-          <div class="col-lg-10 col-xl-10 col-md-10 col-sm-10 col-12">
-            <h4><strong>{{candidate.fullName}}</strong> <small>{{candidate.gender}}</small></h4>
-            <p class="mb-0">Job Title: {{candidate.currentRole?.name || 'N/A'}}</p>
+      <ng-container *ngIf="selectedService == 'IT Subcontracting'">
+        <div class="row align-items-center mb-4">
+          <div class="col-12">
+            <h1 class="headingTitle2">We found <span class="text-primary">{{totalSuppliers}} Consortium Partners</span>
+              that
+              match
+              your search</h1>
           </div>
-          <div class="col-lg-2 col-xl-2 col-md-2 col-sm-2 col-12">
-            <a href="workaway-registration.html" class="btn btn-outline-primary w-100">Engage</a>
-          </div>
-          <div class="dotted-spacer"></div>
-          <div class="row">
-            <div class="col-lg-4 col-xl-4 col-md-4 col-sm-4 col-12">
-              <p><i class="bi bi-globe text-muted me-2"></i> Nationality- {{candidate.nationality}}</p>
-            </div>
-            <div class="col-lg-4 col-xl-4 col-md-4 col-sm-4 col-12">
-              <p><i class="bi bi-mortarboard-fill text-muted me-2"></i> Qualification-
-                {{candidate.highestQualification}}</p>
-            </div>
-            <div class="col-lg-4 col-xl-4 col-md-4 col-sm-4 col-12">
-              <p><i class="bi bi-briefcase-fill text-muted me-2"></i> Experience- {{candidate.totalExperience}} Years
-              </p>
-            </div>
-            <div class="col-lg-4 col-xl-4 col-md-4 col-sm-4 col-12">
-              <p><i class="bi bi-cash text-muted me-2"></i> Hourly Rate- £{{candidate.ukHourlyRate}} |
-                ₹{{candidate.indianDayRate}}</p>
-            </div>
-            <div class="col-lg-8 col-xl-8 col-md-8 col-sm-8 col-12">
-              <p><i class="bi bi-translate text-muted me-2"></i> Language- {{candidate.languagesKnown?.join(', ') ||
-                'N/A'}}</p>
-            </div>
-            <div class="col-12">
-              <p><i class="bi bi-code-slash text-muted me-2"></i> Skills- {{candidate.technicalSkills?.join(', ') ||
-                'N/A'}}</p>
+        </div>
+
+        <!-- Add loading spinner -->
+        <!-- <div class="text-center my-4" *ngIf="isLoadingFilters">
+        <div class="spinner-border text-primary" role="status">
+          <span class="visually-hidden">Loading...</span>
+        </div>
+      </div> -->
+
+        <!--start result-->
+        <div class="FlatCard searchcard mb-3" *ngFor="let supplier of supplierList">
+          <div class="card-body p-4">
+            <div class="row align-items-center">
+              <div class="col-lg-10 col-xl-10 col-md-10 col-sm-10 col-9 mob-mb1">
+                <h4><strong>{{supplier.companyName}}</strong></h4>
+                <ul class="bulletpipeLsit">
+                  <li>{{supplier.employeeCount || 0}} Employees</li>
+                  <li>{{supplier.location || 'Location not specified'}}</li>
+                </ul>
+              </div>
+              <div class="col-lg-2 col-xl-2 col-md-2 col-sm-2 col-12">
+                <a [routerLink]="['/it-subcontracting-registration']" class="btn btn-outline-primary w-100">Engage</a>
+              </div>
+              <div class="dotted-spacer"></div>
+              <div class="row">
+                <div class="col-lg-4 col-xl-4 col-md-4 col-sm-4 col-12">
+                  <p><i class="bi bi-briefcase-fill text-muted me-2"></i> Experience-
+                    {{calculateExperience(supplier.yearOfEstablishment)}} Years</p>
+                </div>
+                <div class="col-lg-4 col-xl-4 col-md-4 col-sm-4 col-12">
+                  <p><i class="bi bi-laptop-fill text-muted me-2"></i> Total Projects Executed-
+                    {{supplier.totalProjectsExecuted || 0}}</p>
+                </div>
+                <div class="col-lg-4 col-xl-4 col-md-4 col-sm-4 col-12">
+                  <p><i class="bi-people-fill text-muted me-2"></i> Resources Capacity- {{supplier.employeeCount || 0}}
+                  </p>
+                </div>
+                <div class="col-12">
+                  <p><i class="bi bi-file-code-fill text-muted me-2"></i> Expertise-
+                    <span *ngFor="let exp of supplier.expertise; let last = last">
+                      {{exp.name}}{{!last ? ', ' : ''}}
+                    </span>
+                  </p>
+                </div>
+                <div class="col-12" *ngIf="supplier.executiveSummary">
+                  <p class="mt-2"><small>{{supplier.executiveSummary}}</small></p>
+                </div>
+              </div>
             </div>
           </div>
         </div>
-      </div>
+      </ng-container>
     </div>
-
-    <!-- No Results Message -->
-    <div *ngIf="!loading && !error && candidates.length === 0" class="text-center py-4">
-      <p>No candidates found matching your search criteria.</p>
-    </div>
-    <!--/end result-->
   </div>
 </section>

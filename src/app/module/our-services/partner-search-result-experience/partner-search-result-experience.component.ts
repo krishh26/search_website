@@ -112,7 +112,6 @@ export class PartnerSearchResultExperienceComponent implements OnInit {
       },
       error: (error) => {
         this.isLoading = false;
-        this.notificationService.showError('Failed to load expertise list');
       }
     });
   }
@@ -136,7 +135,6 @@ export class PartnerSearchResultExperienceComponent implements OnInit {
       },
       error: (error) => {
         console.error('Error loading filters:', error);
-        this.notificationService.showError('Failed to load filters');
         this.isLoadingFilters = false;
       }
     });
@@ -157,7 +155,6 @@ export class PartnerSearchResultExperienceComponent implements OnInit {
       },
       error: (error: Error) => {
         console.error('Error loading suppliers:', error);
-        this.notificationService.showError('Failed to load suppliers');
         this.isLoadingFilters = false;
       }
     });
@@ -265,16 +262,13 @@ export class PartnerSearchResultExperienceComponent implements OnInit {
       this.itsubcontractService.saveSupplierFilters(payload).subscribe({
         next: (response) => {
           if (response?.status) {
-            this.notificationService.showSuccess('Filters saved successfully');
             this.loadFilterList();
           }
         },
         error: (error) => {
-          this.notificationService.showError(error?.error?.message || 'Failed to save filters');
         }
       });
     } else {
-      this.notificationService.showError('Please add at least one filter');
     }
   }
 }

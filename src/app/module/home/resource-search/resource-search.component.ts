@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ItSubcontractService, CandidateFilter } from 'src/app/services/it-subcontract.service';
 import { NotificationService } from 'src/app/services/notification/notification.service';
-
+import { Location } from '@angular/common';
 interface JobRole {
   name: string;
 }
@@ -24,7 +24,7 @@ export class RecourceSearchComponent implements OnInit {
     private fb: FormBuilder,
     private itSubcontractService: ItSubcontractService,
     private router: Router,
-    private notificationService: NotificationService
+    private location: Location
   ) {
     this.searchForm = this.fb.group({
       jobTitle: [null, Validators.required],
@@ -87,15 +87,17 @@ export class RecourceSearchComponent implements OnInit {
 
       this.itSubcontractService.saveCandidateFilters(payload).subscribe({
         next: (response) => {
-          this.notificationService.showSuccess('Filter added successfully');
+          this.router.navigate(['/our-services/candidate-search-result'], {
+            queryParams: {
+              workAwayId: response?.data?.[0]?._id,
+            }
+          });
           this.router.navigate(['/our-services/candidate-search-result']);
         },
         error: (error) => {
-          this.notificationService.showError(error?.error?.message || 'Something went wrong please try again !');
         }
       });
     } else {
-      this.notificationService.showError("Please enter one filter !");
     }
   }
 
@@ -103,5 +105,9 @@ export class RecourceSearchComponent implements OnInit {
     if (this.serviceType === 'itsubcontract') {
       this.router.navigate(['/our-services/partner-search-result']);
     }
+  }
+
+  goBack() {
+    this.location.back();
   }
 }

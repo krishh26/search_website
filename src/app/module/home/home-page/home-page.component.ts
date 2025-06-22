@@ -27,6 +27,9 @@ export class HomePageComponent implements OnInit {
 
   filterList: any[] = [];
   itSubFilterList: any[] = [];
+  // How many tags to show by default
+  defaultTagLimit = 2;
+  showAllTags = false;
 
   constructor(
     private router: Router,
@@ -35,6 +38,17 @@ export class HomePageComponent implements OnInit {
     private itSubcontractService: ItSubcontractService,
     private notificationService: NotificationService
   ) { }
+
+  get visibleFilterList() {
+    return this.showAllTags ? this.filterList : this.filterList.slice(0, this.defaultTagLimit);
+  }
+  get visibleItSubFilterList() {
+    return this.showAllTags ? this.itSubFilterList : this.itSubFilterList.slice(0, this.defaultTagLimit);
+  }
+
+  toggleShowAllTags() {
+    this.showAllTags = !this.showAllTags;
+  }
 
   ngOnInit() {
     // Check navigation service first
@@ -79,7 +93,6 @@ export class HomePageComponent implements OnInit {
             this.getFilterList();
           }
         }, (error) => {
-          this.notificationService.showError(error?.error?.message || 'Filter not removed please try again !');
         })
       }
     });
@@ -166,11 +179,15 @@ export class HomePageComponent implements OnInit {
 
       this.itSubcontractService.saveCandidateFilters(payload).subscribe({
         next: (response) => {
-          this.router.navigate(['/our-services/candidate-search-result']);
+          this.router.navigate(['/our-services/candidate-search-result'], {
+            queryParams: {
+              workAwayId: response?.data?.[0]?._id,
+            }
+          });
+          // this.router.navigate(['/our-services/candidate-search-result']);
         },
       });
     } else {
-      this.notificationService.showError("Please enter one filter !");
     }
   }
 
@@ -208,16 +225,18 @@ export class HomePageComponent implements OnInit {
       this.itSubcontractService.saveSupplierFilters(payload).subscribe({
         next: (response) => {
           if (response?.status) {
-            this.notificationService.showSuccess('Filters saved successfully');
-            this.router.navigate(['/our-services/partner-search-result-experience']);
+            this.router.navigate(['/our-services/candidate-search-result'], {
+              queryParams: {
+                id: response?.data?.[0]?._id,
+              }
+            });
+            // this.router.navigate(['/our-services/partner-search-result-experience']);
           }
         },
         error: (error) => {
-          this.notificationService.showError(error?.error?.message || 'Failed to save filters');
         }
       });
     } else {
-      this.notificationService.showError('Please add at least one filter');
     }
   }
 
@@ -268,7 +287,7 @@ export class HomePageComponent implements OnInit {
   }
 
   redirectFilterToItSubSearch(id: string) {
-    this.router.navigate(['/our-services/partner-search-result-experience'], {
+    this.router.navigate(['/our-services/candidate-search-result'], {
       queryParams: {
         id: id,
       }
