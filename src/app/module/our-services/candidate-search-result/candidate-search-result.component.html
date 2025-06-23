@@ -1,4 +1,4 @@
-<section class="gradient-section mb-5">
+<section class="gradient-section">
   <div class="container">
     <nav aria-label="breadcrumb">
       <ol class="breadcrumb">
@@ -70,18 +70,25 @@
               <span class="remove-tag" (click)="removeFilterItSub(item?._id)"><i class="bi bi-x"></i></span>
             </li>
           </ng-container>
+          <button class="btn btn-link p-0" (click)="toggleShowAllTags()" *ngIf="(filterList.length + itSubFilterList.length) > defaultTagLimit">
+            {{ showAllTags ? 'View Less' : 'View More' }}
+          </button>
         </ul>
 
         <!-- View More / View Less Button -->
-        <div *ngIf="(filterList.length + itSubFilterList.length) > defaultTagLimit" class="mb-3">
+        <!-- <div *ngIf="(filterList.length + itSubFilterList.length) > defaultTagLimit" class="mb-3">
           <button class="btn btn-link p-0" (click)="toggleShowAllTags()">
             {{ showAllTags ? 'View Less' : 'View More' }}
           </button>
-        </div>
+        </div> -->
       </div>
     </div>
+  </div>
+</section>
 
-
+<!-- Results Section -->
+<section class="results-section">
+  <div class="container">
     <div>
       <ng-container *ngIf="selectedService == 'WorkAway'">
         <div class="row align-items-center mb-4">
