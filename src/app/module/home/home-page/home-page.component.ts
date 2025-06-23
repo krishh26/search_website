@@ -28,7 +28,7 @@ export class HomePageComponent implements OnInit {
   filterList: any[] = [];
   itSubFilterList: any[] = [];
   // How many tags to show by default
-  defaultTagLimit = 2;
+  defaultTagLimit = 7;
   showAllTags = false;
 
   constructor(
@@ -51,6 +51,9 @@ export class HomePageComponent implements OnInit {
   }
 
   ngOnInit() {
+    // Reset the showAllTags state
+    this.showAllTags = false;
+
     // Check navigation service first
     const previousService = this.navigationService.getPreviousService();
     if (previousService) {
@@ -62,6 +65,11 @@ export class HomePageComponent implements OnInit {
     this.getExpertise();
     this.getFilterList();
     this.loadFilterList();
+
+    // Subscribe to router events to handle navigation
+    this.router.events.subscribe(() => {
+      this.showAllTags = false;
+    });
   }
 
   // Function to be used for the getting saved filters

@@ -128,6 +128,7 @@
     align-items: center;
     gap: 0.5rem;
     transition: all 0.3s ease;
+    margin-bottom: 0;
 
     &.active {
       background-color: #007bff;
@@ -148,14 +149,25 @@
         color: #dc3545;
       }
     }
+  }
 
-    .btn-link {
-      color: #0d6efd;
-      font-weight: 500;
+  .btn-link {
+    padding: 0.5rem 1rem !important;
+    margin: 0 !important;
+    height: fit-content;
+    white-space: nowrap;
+    display: inline-flex;
+    align-items: center;
+    text-decoration: none;
+    color: #0d6efd;
+    font-weight: 500;
+    background: transparent;
+    border: none;
+    cursor: pointer;
 
-      &:hover {
-        color: #0a58ca;
-      }
+    &:hover {
+      color: #0a58ca;
+      text-decoration: underline;
     }
   }
 }
