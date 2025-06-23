@@ -51,7 +51,7 @@ export class CandidateSearchResultComponent implements OnInit {
   activeCandidates: number = 0;
   searchQuery: any;
   filterList: any[] = [];
-  selectedFilter: string = "";
+  selectedFilter: any;
   selectedFilterData: any = {};
   supplierList: any[] = [];
   totalSuppliers: number = 0;
@@ -64,7 +64,7 @@ export class CandidateSearchResultComponent implements OnInit {
   itSelectedFilter: any;
 
   // How many tags to show by default
-  defaultTagLimit = 2;
+  defaultTagLimit = 7;
   showAllTags = false;
 
   constructor(
@@ -74,11 +74,17 @@ export class CandidateSearchResultComponent implements OnInit {
     private route: ActivatedRoute
   ) { }
 
-  get visibleFilterList() {
-    return this.showAllTags ? this.filterList : this.filterList.slice(0, this.defaultTagLimit);
+  get visibleCombinedTags() {
+    // Combine both lists, prioritizing filterList first
+    const combined = [...this.filterList, ...this.itSubFilterList];
+    if (this.showAllTags || combined.length <= this.defaultTagLimit) {
+      return combined;
+    }
+    return combined.slice(0, this.defaultTagLimit);
   }
-  get visibleItSubFilterList() {
-    return this.showAllTags ? this.itSubFilterList : this.itSubFilterList.slice(0, this.defaultTagLimit);
+
+  get showToggleButton() {
+    return (this.filterList.length + this.itSubFilterList.length) > this.defaultTagLimit;
   }
 
   toggleShowAllTags() {
@@ -139,6 +145,7 @@ export class CandidateSearchResultComponent implements OnInit {
     this.selectedService = "IT Subcontracting";
     this.itSelectedFilter = filterId;
 
+    this.selectedFilter = null;
     // Call the new API endpoint
     this.itSubcontractService.getSuppliersByFilterId(filterId).subscribe({
       next: (response: any) => {
@@ -209,6 +216,11 @@ export class CandidateSearchResultComponent implements OnInit {
       next: (response) => {
         if (response.status && response.data) {
           this.itSubFilterList = response.data as any;
+          this.itSubFilterList?.forEach((element: any) => {
+            if (element) {
+              element['type'] = 'itsubcontract'
+            }
+          })
           if (this.itSubFilterList?.length == 0) {
             this.router.navigateByUrl('/home');
           } else {
@@ -240,11 +252,15 @@ export class CandidateSearchResultComponent implements OnInit {
   // Function to be used for the getting saved filters
   getFilterList() {
     this.filterList = [];
-    this.selectedFilter = "";
     this.itSubcontractService.getCandidateFilters().subscribe({
       next: (response) => {
         if (response?.status) {
           this.filterList = response?.data || [];
+          this.filterList?.forEach((element) => {
+            if (element) {
+              element['type'] = 'workaway'
+            }
+          })
           if (this.filterList?.length == 0) {
             this.router.navigateByUrl('/home');
           } else {
@@ -261,6 +277,7 @@ export class CandidateSearchResultComponent implements OnInit {
   selectFilter(filterId: string) {
     this.selectedService = "WorkAway";
     this.selectedFilter = filterId;
+    this.itSelectedFilter = null;
     this.selectedFilterData = this.filterList.find((element) => element._id == filterId);
     this.searchQuery = null;
     // this.searchQuery = this.selectedFilterData?.jobTitle;
