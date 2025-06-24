@@ -97,22 +97,14 @@ export class HomePageComponent implements OnInit {
 
   // Function to be used for the remove filter
   removeFilter(filterId: string) {
-    Swal.fire({
-      title: 'Are you sure?',
-      text: 'Do you want to remove this filter?',
-      icon: 'warning',
-      showCancelButton: true,
-      confirmButtonText: 'Yes, remove it!',
-      cancelButtonText: 'Cancel'
-    }).then((result) => {
-      if (result.isConfirmed) {
-        this.itSubcontractService.removeCandidateFilters(filterId).subscribe((response) => {
-          if (response?.status) {
-            Swal.fire('Removed!', 'The filter has been removed.', 'success');
-            this.getFilterList();
-          }
-        }, (error) => {
-        })
+    this.itSubcontractService.removeCandidateFilters(filterId).subscribe({
+      next: (response) => {
+        if (response?.status) {
+          this.getFilterList();
+        }
+      },
+      error: (error) => {
+        console.error('Error removing filter:', error);
       }
     });
   }
@@ -138,40 +130,17 @@ export class HomePageComponent implements OnInit {
       event.stopPropagation();
     }
 
-    Swal.fire({
-      title: 'Are you sure?',
-      text: "You won't be able to revert this!",
-      icon: 'warning',
-      showCancelButton: true,
-      confirmButtonColor: '#3085d6',
-      cancelButtonColor: '#d33',
-      confirmButtonText: 'Yes, delete it!'
-    }).then((result) => {
-      if (result.isConfirmed) {
-        this.itSubcontractService.removeSupplierFilter(filterId).subscribe({
-          next: (response: { status: boolean; message: string }) => {
-            if (response?.status) {
-              Swal.fire(
-                'Deleted!',
-                'Your filter has been deleted.',
-                'success'
-              );
-              this.loadFilterList();
-            }
-          },
-          error: (error: Error) => {
-            console.error('Error removing filter:', error);
-            Swal.fire(
-              'Error!',
-              'Failed to remove filter',
-              'error'
-            );
-          }
-        });
+    this.itSubcontractService.removeSupplierFilter(filterId).subscribe({
+      next: (response: { status: boolean; message: string }) => {
+        if (response?.status) {
+          this.loadFilterList();
+        }
+      },
+      error: (error: Error) => {
+        console.error('Error removing filter:', error);
       }
     });
   }
-
 
   getJobTitles() {
     this.jobRoles = [];
