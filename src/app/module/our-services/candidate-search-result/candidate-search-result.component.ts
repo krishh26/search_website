@@ -176,6 +176,10 @@ export class CandidateSearchResultComponent implements OnInit {
               element['type'] = 'workaway'
             }
           })
+          // Only select IT Subcontracting filter if we're in IT Subcontracting mode
+          if (this.selectedService === "WorkAway") {
+            this.selectFilter(this.selectedFilter ? this.selectedFilter : this.filterList?.[0]?._id);
+          }
         }
       },
       error: (error) => {
@@ -229,15 +233,15 @@ export class CandidateSearchResultComponent implements OnInit {
     });
   }
 
-  calculateExperience(yearOfEstablishment: string | null): number {
-    if (!yearOfEstablishment) return 0;
+  calculateExperience(yearOfEstablishment: string | null): string {
+    if (!yearOfEstablishment) return "0";
 
     const establishmentDate = new Date(yearOfEstablishment);
     const today = new Date();
     const diffTime = Math.abs(today.getTime() - establishmentDate.getTime());
     const diffYears = Math.floor(diffTime / (1000 * 60 * 60 * 24 * 365.25));
 
-    return diffYears;
+    return this.getCompanyExperienceRange(diffYears);
   }
 
   removeFilterItSub(filterId: string, event?: MouseEvent): void {
@@ -270,8 +274,8 @@ export class CandidateSearchResultComponent implements OnInit {
           });
 
           // Only select IT Subcontracting filter if we're in IT Subcontracting mode
-          if (this.selectedService === "IT Subcontracting" && this.itSelectedFilter) {
-            this.selectFilterItSubContractFilter(this.itSelectedFilter);
+          if (this.selectedService === "IT Subcontracting") {
+            this.selectFilterItSubContractFilter(this.itSelectedFilter ? this.itSelectedFilter : this.itSubFilterList?.[0]?._id);
           }
         }
       }
@@ -353,6 +357,8 @@ export class CandidateSearchResultComponent implements OnInit {
 
   onSearch() {
     if (this.searchQuery) {
+      this.selectedFilter = null;
+      this.itSelectedFilter = null;
       const payload = {
         userId: null, // need to add id based on the login
         filters: [{
@@ -374,6 +380,8 @@ export class CandidateSearchResultComponent implements OnInit {
 
   searchForItSubContract() {
     if (this.expertiseSelect) {
+      this.selectedFilter = null;
+      this.itSelectedFilter = null;
       const payload = {
         userId: '', // This should come from your auth service
         filters: [
@@ -396,6 +404,73 @@ export class CandidateSearchResultComponent implements OnInit {
         }
       });
     } else {
+    }
+  }
+
+  maskName(name: string): string {
+    const words = name.split(' ');
+
+    return words.map((word, index) => {
+      if (index === 0) {
+        // First word: show 1st, 3rd, 5th
+        return word
+          .split('')
+          .map((char, i) => (i === 0 || i === 2 || i === 4 ? char : '*'))
+          .join('');
+      } else if (index === 1) {
+        // Second word: show 1st and 3rd
+        return word
+          .split('')
+          .map((char, i) => (i === 0 || i === 2 ? char : '*'))
+          .join('');
+      } else {
+        // All other words: full mask
+        return '*'.repeat(word.length);
+      }
+    }).join(' ');
+  }
+
+  resourceCapacity(value: number): string {
+    if (value === 0) {
+      return "0";
+    } else if (value > 0 && value <= 20) {
+      return "1-20";
+    } else if (value > 20 && value <= 50) {
+      return "21-50";
+    } else if (value > 50 && value <= 100) {
+      return "50-100";
+    } else if (value > 100 && value <= 200) {
+      return "100-200";
+    } else {
+      return "200+";
+    }
+  }
+
+  getExperienceRange(years: number): string {
+    if (years <= 0) {
+      return "0";
+    } else if (years > 0 && years <= 3) {
+      return "1-3";
+    } else if (years > 3 && years <= 5) {
+      return "3-5";
+    } else if (years > 5 && years <= 10) {
+      return "5-10";
+    } else {
+      return "10+";
+    }
+  }
+
+  getCompanyExperienceRange(years: number): string {
+    if (years <= 0) {
+      return "0";
+    } else if (years > 0 && years <= 3) {
+      return "1-3";
+    } else if (years > 3 && years <= 5) {
+      return "3-5";
+    } else if (years > 5 && years <= 10) {
+      return "5-10";
+    } else {
+      return "10+";
     }
   }
 }

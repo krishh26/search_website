@@ -112,7 +112,7 @@
           <div class="card-body p-4">
             <div class="row align-items-center">
               <div class="col-lg-10 col-xl-10 col-md-10 col-sm-10 col-12">
-                <h4><strong>{{candidate.fullName}}</strong> <small>{{candidate.gender}}</small></h4>
+                <h4><strong>{{ maskName(candidate.fullName) }}</strong> <small> ({{candidate.gender}})</small></h4>
                 <p class="mb-0">Job Title: {{candidate.currentRole?.name || 'N/A'}}</p>
               </div>
               <div class="col-lg-2 col-xl-2 col-md-2 col-sm-2 col-12">
@@ -128,7 +128,7 @@
                     {{candidate.highestQualification}}</p>
                 </div>
                 <div class="col-lg-4 col-xl-4 col-md-4 col-sm-4 col-12">
-                  <p><i class="bi bi-briefcase-fill text-muted me-2"></i> Experience- {{candidate.totalExperience}}
+                  <p><i class="bi bi-briefcase-fill text-muted me-2"></i> Experience- {{ candidate?.totalExperience ? getExperienceRange(candidate.totalExperience) : 0 }}
                     Years
                   </p>
                 </div>
@@ -177,27 +177,29 @@
           <div class="card-body p-4">
             <div class="row align-items-center">
               <div class="col-lg-10 col-xl-10 col-md-10 col-sm-10 col-9 mob-mb1">
-                <h4><strong>{{supplier.companyName}}</strong></h4>
+                <h4><strong>{{ maskName(supplier.companyName)}}</strong></h4>
                 <ul class="bulletpipeLsit">
                   <li>{{supplier.employeeCount || 0}} Employees</li>
                   <li>{{supplier.location || 'Location not specified'}}</li>
                 </ul>
               </div>
               <div class="col-lg-2 col-xl-2 col-md-2 col-sm-2 col-12">
-                <a [routerLink]="['/our-services/it-subcontracting-registration']" class="btn btn-outline-primary w-100">Engage</a>
+                <a [routerLink]="['/our-services/it-subcontracting-registration']"
+                  class="btn btn-outline-primary w-100">Engage</a>
               </div>
               <div class="dotted-spacer"></div>
               <div class="row">
                 <div class="col-lg-4 col-xl-4 col-md-4 col-sm-4 col-12">
                   <p><i class="bi bi-briefcase-fill text-muted me-2"></i> Experience-
-                    {{calculateExperience(supplier.yearOfEstablishment)}} Years</p>
+                    {{calculateExperience(supplier?.yearOfEstablishment)}} Years</p>
                 </div>
                 <div class="col-lg-4 col-xl-4 col-md-4 col-sm-4 col-12">
                   <p><i class="bi bi-laptop-fill text-muted me-2"></i> Total Projects Executed-
                     {{supplier.totalProjectsExecuted || 0}}</p>
                 </div>
                 <div class="col-lg-4 col-xl-4 col-md-4 col-sm-4 col-12">
-                  <p><i class="bi-people-fill text-muted me-2"></i> Resources Capacity- {{supplier.employeeCount || 0}}
+                  <p><i class="bi-people-fill text-muted me-2"></i> Resources Capacity- {{ supplier?.employeeCount ?
+                    resourceCapacity(supplier.employeeCount) : 0}}
                   </p>
                 </div>
                 <div class="col-12">

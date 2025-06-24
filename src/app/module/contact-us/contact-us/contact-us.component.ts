@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { ItSubcontractService } from 'src/app/services/it-subcontract.service';
 
 @Component({
@@ -12,8 +13,9 @@ export class ContactUsComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
-    private formService: ItSubcontractService
-  ) {}
+    private formService: ItSubcontractService,
+    private router: Router
+  ) { }
 
   ngOnInit() {
     this.contactForm = this.formBuilder.group({
@@ -54,8 +56,9 @@ export class ContactUsComponent implements OnInit {
 
       this.formService.submitItSubContractData(payload).subscribe({
         next: (response) => {
-          if(response.status === true) {
+          if (response.status === true) {
             this.contactForm.reset();
+            this.router.navigateByUrl('/contact-us/thank-you')
           }
         },
         error: (error) => {

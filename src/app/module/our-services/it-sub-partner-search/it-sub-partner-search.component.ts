@@ -34,8 +34,8 @@ export class ItSubPartnerSearchComponent implements OnInit {
 
   initForm() {
     this.partnerForm = this.fb.group({
-      projectName: ['', Validators.required],
-      projectCategory: [''],
+      projectName: [''],
+      projectCategory: ['', Validators.required],
       engagementType: [''],
       projectDescription: [''],
       technologyDemand: [''],
@@ -43,8 +43,8 @@ export class ItSubPartnerSearchComponent implements OnInit {
       endDate: [''],
       budget: [''],
       additionalInstructions: [''],
-      contactEmail: ['', [Validators.email]],
-      contactNumber: ['', [Validators.pattern('^[0-9]*$')]],
+      // contactEmail: ['', [Validators.email]],
+      // contactNumber: ['', [Validators.pattern('^[0-9]*$')]],
     });
   }
 

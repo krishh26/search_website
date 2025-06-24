@@ -28,8 +28,8 @@ export class RecourceSearchComponent implements OnInit {
   ) {
     this.searchForm = this.fb.group({
       jobTitle: [null, Validators.required],
-      numberOfResources: ['', [Validators.required, Validators.min(1)]],
-      experience: ['', Validators.required],
+      numberOfResources: ['', Validators.min(1)],
+      experience: [''],
     });
   }
 
@@ -38,6 +38,7 @@ export class RecourceSearchComponent implements OnInit {
   }
 
   addFilter() {
+    this.searchForm.markAllAsTouched();
     if (this.searchForm.valid) {
       this.filters.push(this.searchForm.value);
       this.searchForm.reset();
