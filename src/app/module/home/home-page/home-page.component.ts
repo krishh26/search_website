@@ -272,24 +272,26 @@ export class HomePageComponent implements OnInit {
   }
 
   redirectFilterToWorkAwaySearch(id: string) {
+    // First set the service type in navigation service
+    this.navigationService.setPreviousService('workaway');
+
+    // Then navigate with the ID
     this.router.navigate(['/our-services/candidate-search-result'], {
       queryParams: {
         workAwayId: id,
       }
-    }).then(() => {
-      // Force reload the page to ensure the component reinitializes with new data
-      window.location.reload();
     });
   }
 
   redirectFilterToItSubSearch(id: string) {
+    // First set the service type in navigation service
+    this.navigationService.setPreviousService('it-subcontracting');
+
+    // Then navigate with the ID
     this.router.navigate(['/our-services/candidate-search-result'], {
       queryParams: {
         id: id,
       }
-    }).then(() => {
-      // Force reload the page to ensure the component reinitializes with new data
-      window.location.reload();
     });
   }
 }

@@ -92,25 +92,113 @@ export class CandidateSearchResultComponent implements OnInit {
   }
 
   ngOnInit() {
+    // Subscribe to route params and load data accordingly
     this.route.queryParams.subscribe(params => {
+      // Reset data
+      this.candidates = [];
+      this.totalCandidates = 0;
+      this.activeCandidates = 0;
+
       if (params['workAwayId']) {
         this.selectedService = "WorkAway";
         this.selectedFilter = params['workAwayId'];
-      } else {
-        this.selectedFilter = ""
-      }
-
-      if (params['id']) {
+        // Load candidates for this filter
+        this.loadCandidatesForFilter(this.selectedFilter);
+      } else if (params['id']) {
         this.selectedService = "IT Subcontracting";
         this.itSelectedFilter = params['id'];
-      } else {
-        this.itSelectedFilter = ""
+        // Load suppliers for this filter
+        this.loadSuppliersForFilter(this.itSelectedFilter);
       }
     });
+
+    // Load all supporting data
     this.getFilterList();
     this.getJobTitles();
     this.getExpertise();
     this.loadFilterList();
+  }
+
+  loadCandidatesForFilter(filterId: string) {
+    if (!filterId) return;
+
+    this.loading = true;
+    this.error = null;
+
+    this.itSubcontractService.getCandidateFilterByList(filterId).subscribe({
+      next: (response) => {
+        if (response?.status) {
+          this.candidates = response.data || [];
+          this.totalCandidates = response.meta_data.items;
+          this.activeCandidates = response.activeCandidatesCount;
+        }
+        this.loading = false;
+      },
+      error: (error) => {
+        console.error('Error loading candidates:', error);
+        this.error = 'Failed to load candidates. Please try again.';
+        this.loading = false;
+      }
+    });
+  }
+
+  loadSuppliersForFilter(filterId: string) {
+    if (!filterId) return;
+
+    this.loading = true;
+    this.error = null;
+
+    this.itSubcontractService.getSuppliersByFilterId(filterId).subscribe({
+      next: (response) => {
+        if (response?.status) {
+          this.supplierList = response.data || [];
+          this.totalSuppliers = response.data?.length || 0;
+        }
+        this.loading = false;
+      },
+      error: (error) => {
+        console.error('Error loading suppliers:', error);
+        this.error = 'Failed to load suppliers. Please try again.';
+        this.loading = false;
+      }
+    });
+  }
+
+  // Function to be used for the getting saved filters
+  getFilterList() {
+    this.filterList = [];
+    this.itSubcontractService.getCandidateFilters().subscribe({
+      next: (response) => {
+        if (response?.status) {
+          this.filterList = response?.data || [];
+          this.filterList?.forEach((element) => {
+            if (element) {
+              element['type'] = 'workaway'
+            }
+          })
+        }
+      },
+      error: (error) => {
+        console.error('Error loading filters:', error);
+      }
+    });
+  }
+
+  // Function to be used for the change filter
+  selectFilter(filterId: string) {
+    this.selectedService = "WorkAway";
+    this.selectedFilter = filterId;
+    this.itSelectedFilter = null;
+    this.selectedFilterData = this.filterList.find((element) => element._id == filterId);
+    this.searchQuery = null;
+    this.loadCandidatesForFilter(filterId);
+  }
+
+  selectFilterItSubContractFilter(filterId: string): void {
+    this.selectedService = "IT Subcontracting";
+    this.itSelectedFilter = filterId;
+    this.selectedFilter = null;
+    this.loadSuppliersForFilter(filterId);
   }
 
   onServiceChange(event: any) {
@@ -137,25 +225,6 @@ export class CandidateSearchResultComponent implements OnInit {
       },
       error: () => {
         this.isLoading = false;
-      }
-    });
-  }
-
-  selectFilterItSubContractFilter(filterId: string): void {
-    this.selectedService = "IT Subcontracting";
-    this.itSelectedFilter = filterId;
-
-    this.selectedFilter = null;
-    // Call the new API endpoint
-    this.itSubcontractService.getSuppliersByFilterId(filterId).subscribe({
-      next: (response: any) => {
-        if (response?.status) {
-          this.supplierList = response.data || [];
-          this.totalSuppliers = response.data?.length || 0;
-        }
-      },
-      error: (error: Error) => {
-        console.error('Error loading suppliers:', error);
       }
     });
   }
@@ -198,13 +267,11 @@ export class CandidateSearchResultComponent implements OnInit {
             if (element) {
               element['type'] = 'itsubcontract'
             }
-          })
-          if (this.itSubFilterList?.length == 0) {
-            this.router.navigateByUrl('/home');
-          } else {
-            if (this.selectedService !== "WorkAway") {
-              this.selectFilterItSubContractFilter(this.itSelectedFilter ? this.itSelectedFilter : this.itSubFilterList?.[0]?._id);
-            }
+          });
+
+          // Only select IT Subcontracting filter if we're in IT Subcontracting mode
+          if (this.selectedService === "IT Subcontracting" && this.itSelectedFilter) {
+            this.selectFilterItSubContractFilter(this.itSelectedFilter);
           }
         }
       }
@@ -224,46 +291,6 @@ export class CandidateSearchResultComponent implements OnInit {
       error: () => {
         this.isLoading = false;
       }
-    });
-  }
-
-  // Function to be used for the getting saved filters
-  getFilterList() {
-    this.filterList = [];
-    this.itSubcontractService.getCandidateFilters().subscribe({
-      next: (response) => {
-        if (response?.status) {
-          this.filterList = response?.data || [];
-          this.filterList?.forEach((element) => {
-            if (element) {
-              element['type'] = 'workaway'
-            }
-          })
-          // Only select a filter if we have one and we're in WorkAway mode
-          if (this.selectedService == "WorkAway" && this.selectedFilter) {
-            this.selectFilter(this.selectedFilter);
-          }
-        }
-      }
-    })
-  }
-
-  // Function to be used for the change filter
-  selectFilter(filterId: string) {
-    this.selectedService = "WorkAway";
-    this.selectedFilter = filterId;
-    this.itSelectedFilter = null;
-    this.selectedFilterData = this.filterList.find((element) => element._id == filterId);
-    this.searchQuery = null;
-    // this.searchQuery = this.selectedFilterData?.jobTitle;
-    this.itSubcontractService.getCandidateFilterByList(filterId).subscribe({
-      next: (response) => {
-        if (response?.status) {
-          this.candidates = response.data || [];
-          this.totalCandidates = response.meta_data.items;
-          this.activeCandidates = response.activeCandidatesCount;
-        }
-      },
     });
   }
 
