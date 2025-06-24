@@ -42,8 +42,32 @@
               </a>
             </div>
           </div>
-          <!-- Combined Tags -->
+
           <ul class="searchresult-tags mb-4">
+            <ng-container *ngFor="let item of visibleCombinedTags">
+              <li style="cursor: pointer; background-color: #f8f9fa;">
+                <span *ngIf="item.type === 'workaway'" (click)="redirectFilterToWorkAwaySearch(item?._id)">
+                  {{ item.jobTitle }}
+                  <p style="font-size: 10px; text-align: center; margin-bottom: 0px !important;">(WorkAway)</p>
+                </span>
+                <span *ngIf="item.type === 'itsubcontract'" (click)="redirectFilterToItSubSearch(item._id)">
+                  {{ item.projectName || item.expertise }}
+                  <p style="font-size: 10px; text-align: center; margin-bottom: 0px !important;">(IT Subcontracting)</p>
+                </span>
+                <span class="remove-tag" *ngIf="item.type === 'workaway'" (click)="removeFilter(item._id)"><i
+                    class="bi bi-x"></i></span>
+                <span class="remove-tag" *ngIf="item.type === 'itsubcontract'" (click)="removeFilterItSub(item._id)"><i
+                    class="bi bi-x"></i></span>
+                <br>
+              </li>
+            </ng-container>
+            <button class="btn btn-link p-0" (click)="toggleShowAllTags()" *ngIf="showToggleButton">
+              {{ showAllTags ? 'View Less' : 'View More' }}
+            </button>
+          </ul>
+
+          <!-- Combined Tags -->
+          <!-- <ul class="searchresult-tags mb-4">
             <ng-container *ngFor="let item of visibleFilterList">
               <li style="cursor: pointer; background-color: #f8f9fa;">
                 <span (click)="redirectFilterToWorkAwaySearch(item?._id)">{{ item?.jobTitle }} <p
@@ -59,10 +83,11 @@
                 <span class="remove-tag" (click)="removeFilterItSub(item?._id)"><i class="bi bi-x"></i></span>
               </li>
             </ng-container>
-            <button *ngIf="(filterList.length + itSubFilterList.length) > defaultTagLimit" class="btn btn-link p-0" (click)="toggleShowAllTags()">
+            <button *ngIf="(filterList.length + itSubFilterList.length) > defaultTagLimit" class="btn btn-link p-0"
+              (click)="toggleShowAllTags()">
               {{ showAllTags ? 'View Less' : 'View More' }}
             </button>
-          </ul>
+          </ul> -->
           <!-- View More / View Less Button -->
           <!-- <div *ngIf="(filterList.length + itSubFilterList.length) > defaultTagLimit" class="mb-3">
             <button class="btn btn-link p-0" (click)="toggleShowAllTags()">

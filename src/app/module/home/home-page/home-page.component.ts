@@ -39,11 +39,17 @@ export class HomePageComponent implements OnInit {
     private notificationService: NotificationService
   ) { }
 
-  get visibleFilterList() {
-    return this.showAllTags ? this.filterList : this.filterList.slice(0, this.defaultTagLimit);
+  get visibleCombinedTags() {
+    // Combine both lists, prioritizing filterList first
+    const combined = [...this.filterList, ...this.itSubFilterList];
+    if (this.showAllTags || combined.length <= this.defaultTagLimit) {
+      return combined;
+    }
+    return combined.slice(0, this.defaultTagLimit);
   }
-  get visibleItSubFilterList() {
-    return this.showAllTags ? this.itSubFilterList : this.itSubFilterList.slice(0, this.defaultTagLimit);
+
+  get showToggleButton() {
+    return (this.filterList.length + this.itSubFilterList.length) > this.defaultTagLimit;
   }
 
   toggleShowAllTags() {
@@ -79,6 +85,11 @@ export class HomePageComponent implements OnInit {
       next: (response) => {
         if (response?.status) {
           this.filterList = response?.data || [];
+          this.filterList?.forEach((element) => {
+            if (element) {
+              element['type'] = 'workaway'
+            }
+          })
         }
       },
     });
@@ -112,6 +123,11 @@ export class HomePageComponent implements OnInit {
       next: (response) => {
         if (response.status && response.data) {
           this.itSubFilterList = response.data;
+          this.itSubFilterList?.forEach((element: any) => {
+            if (element) {
+              element['type'] = 'itsubcontract'
+            }
+          })
         }
       }
     });

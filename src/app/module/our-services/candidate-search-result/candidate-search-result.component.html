@@ -49,32 +49,30 @@
         </div>
         <!-- Combined Tags -->
         <ul class="searchresult-tags mb-4">
-          <ng-container *ngFor="let item of visibleFilterList">
-            <li style="cursor: pointer; background-color: #f8f9fa;"
-              [ngClass]="{'active': item?._id == selectedFilter && selectedService == 'WorkAway' }">
-              <span (click)="selectFilter(item?._id)">
-                {{ item?.jobTitle }}
+          <ng-container *ngFor="let item of visibleCombinedTags">
+            <li style="cursor: pointer; background-color: #f8f9fa;" [ngClass]="{
+                'active': (item.type === 'workaway' && item._id == selectedFilter) ||
+                          (item.type === 'itsubcontract' && item._id == itSelectedFilter)
+              }">
+              <span *ngIf="item.type === 'workaway'" (click)="selectFilter(item._id)">
+                {{ item.jobTitle }}
                 <p style="font-size: 10px; text-align: center; margin-bottom: 0px !important;">(WorkAway)</p>
               </span>
-              <span class="remove-tag" (click)="removeFilter(item?._id)"><i class="bi bi-x"></i></span>
+              <span *ngIf="item.type === 'itsubcontract'" (click)="selectFilterItSubContractFilter(item._id)">
+                {{ item.projectName || item.expertise }}
+                <p style="font-size: 10px; text-align: center; margin-bottom: 0px !important;">(IT Subcontracting)</p>
+              </span>
+              <span class="remove-tag" *ngIf="item.type === 'workaway'" (click)="removeFilter(item._id)"><i
+                  class="bi bi-x"></i></span>
+              <span class="remove-tag" *ngIf="item.type === 'itsubcontract'" (click)="removeFilterItSub(item._id)"><i
+                  class="bi bi-x"></i></span>
               <br>
             </li>
           </ng-container>
-          <ng-container *ngFor="let item of visibleItSubFilterList">
-            <li style="cursor: pointer; background-color: #f8f9fa;"
-              [ngClass]="{'active': item?._id == itSelectedFilter && selectedService !== 'WorkAway' }">
-              <span (click)="selectFilterItSubContractFilter(item?._id)">
-                {{ item?.projectName || item?.expertise }}
-                <p style="font-size: 10px; text-align: center; margin-bottom: 0px !important;">(IT Subcontracting)</p>
-              </span>
-              <span class="remove-tag" (click)="removeFilterItSub(item?._id)"><i class="bi bi-x"></i></span>
-            </li>
-          </ng-container>
-          <button class="btn btn-link p-0" (click)="toggleShowAllTags()" *ngIf="(filterList.length + itSubFilterList.length) > defaultTagLimit">
+          <button class="btn btn-link p-0" (click)="toggleShowAllTags()" *ngIf="showToggleButton">
             {{ showAllTags ? 'View Less' : 'View More' }}
           </button>
         </ul>
-
         <!-- View More / View Less Button -->
         <!-- <div *ngIf="(filterList.length + itSubFilterList.length) > defaultTagLimit" class="mb-3">
           <button class="btn btn-link p-0" (click)="toggleShowAllTags()">
