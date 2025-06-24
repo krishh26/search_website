@@ -239,12 +239,9 @@ export class CandidateSearchResultComponent implements OnInit {
               element['type'] = 'workaway'
             }
           })
-          if (this.filterList?.length == 0) {
-            this.router.navigateByUrl('/home');
-          } else {
-            if (this.selectedService == "WorkAway") {
-              this.selectFilter(this.selectedFilter ? this.selectedFilter : this.filterList?.[0]?._id);
-            }
+          // Only select a filter if we have one and we're in WorkAway mode
+          if (this.selectedService == "WorkAway" && this.selectedFilter) {
+            this.selectFilter(this.selectedFilter);
           }
         }
       }

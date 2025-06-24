@@ -276,6 +276,9 @@ export class HomePageComponent implements OnInit {
       queryParams: {
         workAwayId: id,
       }
+    }).then(() => {
+      // Force reload the page to ensure the component reinitializes with new data
+      window.location.reload();
     });
   }
 
@@ -284,6 +287,9 @@ export class HomePageComponent implements OnInit {
       queryParams: {
         id: id,
       }
+    }).then(() => {
+      // Force reload the page to ensure the component reinitializes with new data
+      window.location.reload();
     });
   }
 }
