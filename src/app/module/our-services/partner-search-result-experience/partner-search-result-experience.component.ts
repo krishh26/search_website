@@ -249,6 +249,7 @@ export class PartnerSearchResultExperienceComponent implements OnInit {
     if (this.expertiseSelect) {
       const payload = {
         userId: '', // This should come from your auth service
+        anonymousUserId: localStorage.getItem('anonymousUserId') || null,
         filters: [
           {
             "projectName": "",

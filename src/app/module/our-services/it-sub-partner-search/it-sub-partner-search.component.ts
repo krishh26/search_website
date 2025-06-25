@@ -105,7 +105,8 @@ export class ItSubPartnerSearchComponent implements OnInit {
 
     if (this.filters.length > 0) {
       const payload = {
-        userId: '', // This should come from your auth service
+        userId: '', // This should come from your auth service,
+        anonymousUserId: localStorage.getItem('anonymousUserId') || null,
         filters: this.filters.map(filter => ({
           ...filter,
           projectName: filter.projectName // Use ID for API call

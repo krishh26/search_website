@@ -361,6 +361,7 @@ export class CandidateSearchResultComponent implements OnInit {
       this.itSelectedFilter = null;
       const payload = {
         userId: null, // need to add id based on the login
+        anonymousUserId: localStorage.getItem('anonymousUserId') || null,
         filters: [{
           jobTitle: this.searchQuery,
           // minExperience: 0,
@@ -384,6 +385,7 @@ export class CandidateSearchResultComponent implements OnInit {
       this.itSelectedFilter = null;
       const payload = {
         userId: '', // This should come from your auth service
+        anonymousUserId: localStorage.getItem('anonymousUserId') || null,
         filters: [
           {
             "projectName": "",

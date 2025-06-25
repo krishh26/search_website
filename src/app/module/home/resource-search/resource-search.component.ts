@@ -64,7 +64,8 @@ export class RecourceSearchComponent implements OnInit {
   search() {
     if (this.filters.length > 0) {
       const payload = {
-        userId: null, // need to add id based on the login
+        userId: null, // need to add id based on the login,
+        anonymousUserId: localStorage.getItem('anonymousUserId') || null,
         filters: this.filters.map(item => {
           const exp = item.experience.trim();
           let minExperience, maxExperience;
