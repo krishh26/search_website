@@ -3,9 +3,10 @@
     <div class="container">
       <div class="row align-items-center mb-4">
         <div class="col-12">
-          <div class="input-group main-searchbar mb-3 bg-white rounded-pill shadow-sm">
-            <div class="input-group-text border-0 bg-transparent p-2">
-              <select class="form-select border-0 bg-transparent" [(ngModel)]="selectedService" (change)="onServiceChange($event)">
+          <div class="input-group main-searchbar mb-3">
+            <div class="input-group-text border-0 bg-transparent p-2 mob-w100">
+              <select class="form-select border-0 bg-transparent" [(ngModel)]="selectedService"
+                (change)="onServiceChange($event)">
                 <option value="WorkAway">WorkAway</option>
                 <option value="IT Subcontracting">IT Subcontracting</option>
               </select>
@@ -14,14 +15,8 @@
             <!-- For WorkAway -->
             <ng-container *ngIf="selectedService == 'WorkAway'">
               <div class="form-control border-0 flex-grow-1">
-                <ng-select [items]="jobRoles"
-                  [loading]="isLoading"
-                  [searchable]="true"
-                  bindLabel="name"
-                  bindValue="name"
-                  placeholder="Search Here"
-                  [(ngModel)]="jobTitle"
-                  [clearable]="true"
+                <ng-select [items]="jobRoles" [loading]="isLoading" [searchable]="true" bindLabel="name"
+                  bindValue="name" placeholder="Search Here" [(ngModel)]="jobTitle" [clearable]="true"
                   class="border-0 clean-ng-select">
                 </ng-select>
               </div>
@@ -29,28 +24,20 @@
 
             <!-- For IT Subcontracting -->
             <ng-container *ngIf="selectedService == 'IT Subcontracting'">
-              <div class="form-control border-0 flex-grow-1">
-                <ng-select [items]="expertiseList"
-                  [loading]="isLoading"
-                  [searchable]="true"
-                  bindLabel="name"
-                  bindValue="name"
-                  placeholder="Search Here"
-                  [(ngModel)]="expertiseSelect"
-                  [clearable]="true"
+              <div class="form-control border-0 flex-grow-1 mob-w100">
+                <ng-select [items]="expertiseList" [loading]="isLoading" [searchable]="true" bindLabel="name"
+                  bindValue="name" placeholder="Search Here" [(ngModel)]="expertiseSelect" [clearable]="true"
                   class="border-0 clean-ng-select">
                 </ng-select>
               </div>
             </ng-container>
 
-            <div class="d-flex align-items-center pe-3">
-              <button class="btn btn-primary rounded-pill px-4 d-flex align-items-center me-3"
+            <div class="d-flex align-items-center pe-3 mob-w100">
+              <button class="input-group-text shadow-none px-4 search-btn mob-w100"
                 (click)="selectedService == 'WorkAway' ? searchForWorkAway() : searchForItSubContract()">
                 <i class="bi bi-search me-2"></i>Search
               </button>
-              <a href="javascript:void(0)"
-                class="text-primary text-decoration-none"
-                (click)="searchData()">
+              <a href="javascript:void(0)" class="text-primary text-decoration-none mob-w100" (click)="searchData()">
                 Advance Search
               </a>
             </div>
@@ -171,7 +158,7 @@
       </div>
 
       <div class="row">
-        <div class="col-lg-3 col-xl-3 col-md-6 col-sm-6 col-12 mb-4">
+        <div class="col-lg-6 col-xl-3 col-12 mb-4">
           <div class="FlatCard shadow-none we-support-card1 min-height270">
             <div class="card-body p-4">
               <img src="assets/img/mobile-payment.png" width="84" class="mb-4">
@@ -179,7 +166,7 @@
             </div>
           </div>
         </div>
-        <div class="col-lg-3 col-xl-3 col-md-6 col-sm-6 col-12 mb-4">
+        <div class="col-lg-6 col-xl-3 col-12 mb-4">
           <div class="FlatCard shadow-none we-support-card2 min-height270">
             <div class="card-body p-4">
               <img src="assets/img/software-development.png" width="84" class="mb-4">
@@ -188,7 +175,7 @@
             </div>
           </div>
         </div>
-        <div class="col-lg-3 col-xl-3 col-md-6 col-sm-6 col-12 mb-4">
+        <div class="col-lg-6 col-xl-3 col-12 mb-4">
           <div class="FlatCard shadow-none we-support-card1 min-height270">
             <div class="card-body p-4">
               <img src="assets/img/resources.png" width="84" class="mb-4">
@@ -196,7 +183,7 @@
             </div>
           </div>
         </div>
-        <div class="col-lg-3 col-xl-3 col-md-6 col-sm-6 col-12 mb-4">
+        <div class="col-lg-6 col-xl-3 col-12 mb-4">
           <div class="FlatCard shadow-none we-support-card2 min-height270">
             <div class="card-body p-4">
               <img src="assets/img/banking.png" width="84" class="mb-4">
@@ -208,7 +195,7 @@
     </div>
   </section>
 
-  <section>
+  <section class="mobile-hide tablet-hide desktop-show">
     <div class="container">
       <div class="mb-5 text-center">
         <h3 class="headingTitle">We Offer <span class="text-primary">Most Valuable Services </span></h3>
@@ -410,6 +397,250 @@
       </div>
 
       <div class="FlatCard Foragencies-content" style="display: none;">
+        <div class="card-body p-4">
+          <div class="row">
+            <div class="col-lg-6 col-xl-6 col-12 mob-mb1">
+              <p class="p-600">Common Struggles:</p>
+              <ul class="circle-list mb-4">
+                <li>
+                  <p class="mb-0"><strong>Losing Clients to MNC Service Providers:</strong></p>
+                  <p class="mb-0">Clients prefer suppliers who guarantee faster access to skills.</p>
+                </li>
+                <li>
+                  <p class="mb-0"><strong>Resource Loss After Breaks:</strong></p>
+                  <p class="mb-0">Agencies can't guarantee the same candidate after project pauses.</p>
+                </li>
+                <li>
+                  <p class="mb-0"><strong>Scrambling for Talent:</strong></p>
+                  <p class="mb-0">Last-minute replacements risk delivery delays and trust issues.</p>
+                </li>
+              </ul>
+            </div>
+            <div class="col-lg-6 col-xl-6 col-12 mob-mb1">
+              <p><strong>WorkAway: The Secret Weapon for Agencies</strong></p>
+              <ul class="circle-list mb-4">
+                <li><strong>Talent On Tap:</strong><br> Bank and secure IT resources exclusively for your agency
+                  needs.</li>
+                <li><strong>Continuity Protection:</strong><br> Retain critical delivery resources even after
+                  project slowdowns.</li>
+                <li><strong>Stable Cost Model:</strong><br> Pre-agreed rates ensure profitability and reduce
+                  project risks.</li>
+                <li><strong>White-Label Delivery:</strong><br> Deliver services under your brand — powered quietly
+                  by WorkAway.</li>
+              </ul>
+            </div>
+          </div>
+          <a data-bs-toggle="modal" data-bs-target="#recruitmentagenciesModal" class="btn btn-primary">Learn
+            How WorkAway Helps Agencies →</a>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+
+  <section class="desktop-hide mobile-show tablet-show">
+    <div class="container">
+      <div class="mb-5 text-center">
+        <h3 class="headingTitle">Mobiel We Offer <span class="text-primary">Most Valuable Services </span></h3>
+      </div>
+
+      <div class="row">
+        <div class="col-xl-3 col-12">
+          <div class="service-single-box active" id="MobshowForcorporate">
+            <div class="service-icon">
+              <img src="/assets/img/corporate.png" width="84" alt="business stratergy icon">
+            </div>
+            <div class="service-content">
+              <div class="service-title">
+                <h4><strong>For Corporate Services</strong></h4>
+              </div>
+              <div class="underline">
+                <div class="br-line"></div>
+              </div>
+              <div class="serivice-discription">
+                <p>Break Free From Expensive MNC Contracts</p>
+              </div>
+            </div>
+            <div class="add-arrow1"></div>
+          </div>
+        </div>
+        <div class="FlatCard ForCorporate-content mb-3" style="display: none;">
+          <div class="card-body p-4">
+            <div class="row">
+              <div class="col-lg-6 col-xl-6 col-12 mob-mb1">
+                <p class="p-600">Common Struggles:</p>
+                <ul class="circle-list mb-4">
+                  <li>
+                    <p class="mb-0"><strong>Stuck Paying High MNC Bills</strong></p>
+                    <p class="mb-0">Long-term rigid contracts drain budgets even when project delivery slows.</p>
+                  </li>
+                  <li>
+                    <p class="mb-0"><strong>Limited Flexibility:</strong></p>
+                    <p class="mb-0">Adapting to fast-changing business needs is costly and slow with locked-in
+                      vendors.</p>
+                  </li>
+                  <li>
+                    <p class="mb-0"><strong>Vendor Lock-In:</strong></p>
+                    <p class="mb-0">Corporates are tied into expensive models with little control over timelines or
+                      costs.</p>
+                  </li>
+                </ul>
+              </div>
+              <div class="col-lg-6 col-xl-6 col-12 mob-mb1">
+                <p><strong>WorkAway: The Smarter Corporate Alternative</strong></p>
+                <ul class="circle-list mb-4">
+                  <li><strong>Talent On Tap:</strong><br> Bank pre-vetted IT talent for your business — flexible,
+                    ready, and under your control.</li>
+                  <li><strong>Pay-When-Used:</strong><br> Slash costs with a pure usage model — pay only when
+                    resources are active.</li>
+                  <li><strong>Full Control:</strong><br> Build, scale, or adjust your delivery team whenever you
+                    need — no vendor lock-ins.</li>
+                </ul>
+              </div>
+            </div>
+            <a data-bs-toggle="modal" data-bs-target="#corporateModal" class="btn btn-primary">Learn How
+              WorkAway Helps Corporates →</a>
+          </div>
+        </div>
+
+        <div class="col-xl-3 col-12">
+          <div class="service-single-box" id="MobshowForbusiness">
+            <div class="service-icon">
+              <img src="/assets/img/stock-market.png" width="84" alt="business stratergy icon">
+            </div>
+            <div class="service-content">
+              <div class="service-title">
+                <h4><strong>For Growing Businesses</strong></h4>
+              </div>
+              <div class="underline">
+                <div class="br-line"></div>
+              </div>
+              <div class="serivice-discription">
+                <p>Fuel Your Growth Without Full-Time Burdens.</p>
+              </div>
+            </div>
+            <div class="add-arrow2"></div>
+          </div>
+        </div>
+        <div class="FlatCard Forbusiness-content mb-3" style="display: none;">
+          <div class="card-body p-4">
+            <div class="row">
+              <div class="col-lg-6 col-xl-6 col-12 mob-mb1">
+                <p class="p-600">Common Struggles:</p>
+                <ul class="circle-list mb-4">
+                  <li>
+                    <p class="mb-0"><strong>No Access to Skills:</strong></p>
+                    <p class="mb-0">Struggling to find developers, testers, and IT experts when projects ramp up.
+                    </p>
+                  </li>
+                  <li>
+                    <p class="mb-0"><strong>Cash Drain During Downtime:</strong></p>
+                    <p class="mb-0">Paying for full-time teams when no active project work is available.</p>
+                  </li>
+                  <li>
+                    <p class="mb-0"><strong>Contractor Cost Inflation:</strong></p>
+                    <p class="mb-0">Short-term contractors demanding premium rates, hurting budgets.</p>
+                  </li>
+                </ul>
+              </div>
+              <div class="col-lg-6 col-xl-6 col-12 mob-mb1">
+                <p><strong>WorkAway: Your Smarter Growth Engine</strong></p>
+                <ul class="circle-list mb-4">
+                  <li><strong>Talent On Tap:</strong><br> Bank top-tier tech talent ready to activate when needed —
+                    no delays.</li>
+                  <li><strong>Pay Only When Used:</strong><br> Free your cash flow — no costs during downtime or
+                    project lulls.</li>
+                  <li><strong>Predictable Cost Model:</strong><br> Lock talent at stable, pre-agreed rates — protect
+                    your financial plans.</li>
+                </ul>
+              </div>
+            </div>
+            <a href="#" data-bs-toggle="modal" data-bs-target="#growingbusinessModal" class="btn btn-primary">Learn How
+              WorkAway Helps Businesses →</a>
+          </div>
+        </div>
+
+        <div class="col-xl-3 col-12">
+          <div class="service-single-box" id="MobshowForitservices">
+            <div class="service-icon">
+              <img src="/assets/img/consultant.png" width="84" alt="business stratergy icon">
+            </div>
+            <div class="service-content">
+              <div class="service-title">
+                <h4><strong>For IT Service Providers</strong></h4>
+              </div>
+              <div class="underline">
+                <div class="br-line"></div>
+              </div>
+              <div class="serivice-discription">
+                <p>Compete with Giants — Scale Smarter, Not Harder.</p>
+              </div>
+            </div>
+            <div class="add-arrow3"></div>
+          </div>
+        </div>
+        <div class="FlatCard Foritservices-content mb-3" style="display: none;">
+          <div class="card-body p-4">
+            <div class="row">
+              <div class="col-lg-6 col-xl-6 col-12 mob-mb1">
+                <p class="p-600">Common Struggles:</p>
+                <ul class="circle-list mb-4">
+                  <li>
+                    <p class="mb-0"><strong>Losing Deals to MNC Service Providers:</strong></p>
+                    <p class="mb-0">Clients opt for partners who promise bigger, faster delivery of skills</p>
+                  </li>
+                  <li>
+                    <p class="mb-0"><strong>Scaling Risks:</strong></p>
+                    <p class="mb-0">Building large teams fast creates financial risks when client demand fluctuates.
+                    </p>
+                  </li>
+                  <li>
+                    <p class="mb-0"><strong>Resource Gaps at Critical Moments:</strong></p>
+                    <p class="mb-0">Bids lost or projects delayed because of unavailable technical skills.</p>
+                  </li>
+                </ul>
+              </div>
+              <div class="col-lg-6 col-xl-6 col-12 mob-mb1">
+                <p><strong>WorkAway: The Smarter Corporate Alternative</strong></p>
+                <ul class="circle-list mb-4">
+                  <li><strong>Talent On Tap:</strong><br> Access banked technical resources for fast, flexible
+                    project scaling.</li>
+                  <li><strong>Pay-When-Used Flexibility:</strong><br> Expand or shrink delivery teams based on
+                    real-time project demands.</li>
+                  <li><strong>Cost-Smart Scaling:</strong><br> Win bigger deals without the overhead risks of
+                    permanent expansion.</li>
+                </ul>
+
+              </div>
+            </div>
+            <a data-bs-toggle="modal" data-bs-target="#itprovidersModal" class="btn btn-primary">Learn How
+              WorkAway Helps IT Providers →</a>
+          </div>
+        </div>
+
+        <div class="col-xl-3 col-12">
+          <div class="service-single-box" id="MobshowForagency">
+            <div class="service-icon">
+              <img src="/assets/img/recruitment.png" width="84" alt="business stratergy icon">
+            </div>
+            <div class="service-content">
+              <div class="service-title">
+                <h4><strong>For Recruitment Agencies</strong></h4>
+              </div>
+              <div class="underline">
+                <div class="br-line"></div>
+              </div>
+              <div class="serivice-discription">
+                <p>Reclaim Your Clients. Deliver Smarter. Grow Without Limits.</p>
+              </div>
+            </div>
+            <div class="add-arrow4"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="FlatCard Foragencies-content mb-3" style="display: none;">
         <div class="card-body p-4">
           <div class="row">
             <div class="col-lg-6 col-xl-6 col-12 mob-mb1">

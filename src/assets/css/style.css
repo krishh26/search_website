@@ -500,7 +500,7 @@ header {
 
 @media (max-width : 992px) {
   .offcanvas {
-    width: 250px !important;
+    width: 280px !important;
     background-color: #FFF;
   }
 
@@ -671,7 +671,7 @@ header {
 .navbar-light .navbar-nav .nav-link {
   color: #000;
   display: block;
-  text-align: center;
+  text-align: left;
   padding: 1rem 1.5rem;
   font-weight: 500;
   font-size: 1rem;
@@ -709,7 +709,7 @@ header {
 
 .navbar-expand-lg .navbar-nav .dropdown-menu {
   border: none;
-  padding: 15px 15px;
+  padding: 15px 0px;
   min-width: 200px;
   top: 109%;
 }
@@ -865,7 +865,7 @@ Button CSS
 }
 
 .btn-signup {
-  color: #FFF;
+  color: #FFF !important;
   background-color: #0F51E0;
   border-radius: 40px;
   transition: all 0.3s ease 0s;
@@ -873,7 +873,7 @@ Button CSS
 }
 
 .btn-signin {
-  color: #FFF;
+  color: #FFF !important;
   background-color: #5BBB7B;
   border-radius: 40px;
   transition: all 0.3s ease 0s;
@@ -1342,6 +1342,9 @@ Card Styling
   border-radius: 12px;
   padding: 2rem 1rem;
   margin-bottom: 1.5rem;
+}
+.light-gray-card p {
+  font-size: 14px;
 }
 
 ul.numberList {
@@ -2218,7 +2221,7 @@ Main search bar
 ==================================*/
 .main-searchbar {
   background-color: #FFF;
-  padding: 1rem;
+  padding: 0.75rem;
   border-radius: 100px;
 }
 
@@ -2241,9 +2244,9 @@ Main search bar
   background-color: #ff9800;
   border-color: #ff9800;
   border-radius: 100px 100px 100px 100px !important;
-  padding-left: 1rem !important;
-  padding-right: 1rem !important;
+  padding: 1rem !important;
   margin-left: 15px !important;
+  margin-right: 15px !important;
 }
 
 .main-searchbar .form-select:focus,
@@ -2446,6 +2449,19 @@ Media Query
   .tab-mb1 {
     margin-bottom: 1rem;
   }
+   .tablet-hide {
+    display: none;
+  }
+
+  .tablet-show {
+    display: block;
+  }
+    .cta-section {
+    padding-top: 5px;
+  }
+   .callto-action .cta-model {
+    display: none;
+  }
 }
 
 @media only screen and (min-width: 320px) and (max-width: 767px) {
@@ -2501,6 +2517,7 @@ Media Query
   .hero {
     position: relative;
     min-height: 220px;
+    padding-top: 100px;
   }
 
   .carousel-item {
@@ -2529,7 +2546,7 @@ Media Query
   }
 
   .headingTitle {
-    font-size: 32px;
+    font-size: 26px;
     font-weight: 600;
   }
 
@@ -2539,6 +2556,9 @@ Media Query
 
   .mob-w100 {
     width: 100%;
+  }
+  .mob-w50{
+    width: 50%;
   }
 
   .callto-action {
@@ -2643,5 +2663,6 @@ Media Query
     border-radius: 0px;
     width: 100%;
   }
+  
 
 }
