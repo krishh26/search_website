@@ -4,7 +4,8 @@
     <div class="container">
       <div class="text-center text-white">
         <div class="form-check form-check-inline">
-          <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1" (click)="navigateToWorkaway()">
+          <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1"
+            (click)="navigateToWorkaway()">
           <label class="form-check-label" for="inlineRadio1">WorkAway</label>
         </div>
         <div class="form-check form-check-inline">
@@ -51,7 +52,7 @@
             <div class="row">
               <div class="col-12">
                 <div class="form-group">
-                  <label>Project Name <span class="text-danger">*</span></label>
+                  <label>Project Name</label>
                   <ng-select [items]="expertiseList" [loading]="loadingExpertise" [searchable]="true" bindLabel="name"
                     bindValue="_id" placeholder="Select project name" formControlName="projectName">
                   </ng-select>
@@ -60,11 +61,14 @@
                   </div>
                 </div>
                 <div class="form-group">
-                  <label>Choose Your Project Category</label>
+                  <label>Choose Your Project Category <span class="text-danger">*</span> </label>
                   <ng-select [items]="projectCategories" [loading]="isLoading" [searchable]="true" bindLabel="name"
                     bindValue="name" placeholder="Choose your project category" [(ngModel)]="selectedCategory"
                     formControlName="projectCategory">
                   </ng-select>
+                  <div *ngIf="f['projectCategory'].touched && f['projectCategory'].invalid" class="text-danger">
+                    Project Category is required
+                  </div>
                 </div>
                 <div class="form-group">
                   Engagement Type :
@@ -123,7 +127,7 @@
                   <input type="text" class="form-control" placeholder="Additional instruction"
                     formControlName="additionalInstructions">
                 </div>
-                <div class="form-group">
+                <!-- <div class="form-group">
                   <label>Contact Email</label>
                   <input type="email" class="form-control" placeholder="Contact email" formControlName="contactEmail">
                   <div
@@ -140,7 +144,7 @@
                     class="text-danger">
                     Please enter a valid number
                   </div>
-                </div>
+                </div> -->
 
                 <!-- Added Filters Section -->
 
@@ -150,7 +154,7 @@
                 </div>
 
                 <div class="form-group text-end">
-                  <a routerLink="/our-services/it-subcontracting-services" class="btn btn-dark mob-mb1 me-2">
+                  <a (click)="goBack()" class="btn btn-dark mob-mb1 me-2">
                     <i class="bi bi-arrow-left me-2"></i> Go Back
                   </a>
                   <button type="submit" class="btn btn-success" [disabled]="filters.length === 0">

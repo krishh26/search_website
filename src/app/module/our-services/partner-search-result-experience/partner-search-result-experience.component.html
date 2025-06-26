@@ -1,4 +1,4 @@
-<section class="gradient-section">
+<section class="gradient-section mb-5">
   <div class="container">
     <nav aria-label="breadcrumb">
       <ol class="breadcrumb">
@@ -8,7 +8,24 @@
       </ol>
     </nav>
     <div class="row align-items-center">
-      <div class="col-12">
+
+      <div class="input-group main-searchbar mb-3 bg-white rounded-pill shadow-sm">
+        <div class="form-control border-0 flex-grow-1">
+          <ng-select [items]="expertiseList" [loading]="isLoading" [searchable]="true" bindLabel="name" bindValue="name"
+            placeholder="Search Here" [(ngModel)]="expertiseSelect" [clearable]="true" class="border-0 clean-ng-select">
+          </ng-select>
+        </div>
+
+        <div class="d-flex align-items-center pe-3">
+          <button class="btn btn-primary rounded-pill px-4 d-flex align-items-center me-3" (click)="searchForItSubContract()">Search</button>
+          <a routerLink="/our-services/partner-search-result" class="search-link mobile-hide">Advance Search</a>
+          <p class="mobile-show desktop-hide"> <a routerLink="/our-services/partner-search-result"
+              class="search-link-btn">Advance Search</a>
+          </p>
+        </div>
+      </div>
+
+      <!-- <div class="col-12">
         <div class="search-box-large mb-3">
           <i class="bi bi-search"></i>
           <input type="text" placeholder="Search suppliers..." [value]="searchText" (input)="onSearch($event)" />
@@ -18,13 +35,14 @@
         <p class="mobile-show desktop-hide"> <a routerLink="/our-services/partner-search-result"
             class="search-link-btn">Advance Search</a>
         </p>
-      </div>
+      </div> -->
     </div>
     <ul class="searchresult-tags mb-4">
       <ng-container *ngFor="let item of filterList">
         <li style="cursor: pointer;" [ngClass]="{'active': item?._id == selectedFilter }"
           (click)="selectFilter(item?._id)">
-          {{ item?.jobTitle }} <span class="remove-tag" (click)="removeFilter(item?._id, $event)"><i class="bi bi-x"></i></span>
+          {{ item?.projectName || item?.expertise }} <span class="remove-tag"
+            (click)="removeFilter(item?._id, $event)"><i class="bi bi-x"></i></span>
         </li>
       </ng-container>
     </ul>

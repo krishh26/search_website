@@ -109,7 +109,11 @@ export class ItSubcontractService {
     return this.http.post(`${this.baseUrl}/user/public/supplier-filter/save`, filters);
   }
 
-  getCandidateFilters(params?: any): Observable<any> {
+  getCandidateFilters(): Observable<any> {
+    let params = new HttpParams();
+    if (localStorage.getItem('anonymousUserId')) {
+      params = new HttpParams().set('anonymousUserId', localStorage.getItem('anonymousUserId') || "");
+    }
     return this.http.get(`${this.baseUrl}/candidate/public/filter-list`, { params });
   }
 
@@ -154,7 +158,11 @@ export class ItSubcontractService {
   }
 
   getSupplierFilterList(): Observable<any> {
-    return this.http.get(`${this.baseUrl}/user/public/supplier-filter/list`);
+    let params = new HttpParams();
+    if (localStorage.getItem('anonymousUserId')) {
+      params = new HttpParams().set('anonymousUserId', localStorage.getItem('anonymousUserId') || "");
+    }
+    return this.http.get(`${this.baseUrl}/user/public/supplier-filter/list`, { params });
   }
 
   // New methods for partner search

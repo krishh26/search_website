@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ItSubcontractService, Tag } from '../../../services/it-subcontract.service';
 import { Router } from '@angular/router';
 import { NotificationService } from 'src/app/services/notification/notification.service';
-
+import { Location } from '@angular/common';
 @Component({
   selector: 'app-it-sub-partner-search',
   templateUrl: './it-sub-partner-search.component.html',
@@ -22,7 +22,8 @@ export class ItSubPartnerSearchComponent implements OnInit {
     private itSubcontractService: ItSubcontractService,
     private fb: FormBuilder,
     private router: Router,
-    private notificationService: NotificationService
+    private notificationService: NotificationService,
+    private location: Location
   ) { }
 
   ngOnInit() {
@@ -33,8 +34,8 @@ export class ItSubPartnerSearchComponent implements OnInit {
 
   initForm() {
     this.partnerForm = this.fb.group({
-      projectName: ['', Validators.required],
-      projectCategory: [''],
+      projectName: [''],
+      projectCategory: ['', Validators.required],
       engagementType: [''],
       projectDescription: [''],
       technologyDemand: [''],
@@ -42,8 +43,8 @@ export class ItSubPartnerSearchComponent implements OnInit {
       endDate: [''],
       budget: [''],
       additionalInstructions: [''],
-      contactEmail: ['', [Validators.email]],
-      contactNumber: ['', [Validators.pattern('^[0-9]*$')]],
+      // contactEmail: ['', [Validators.email]],
+      // contactNumber: ['', [Validators.pattern('^[0-9]*$')]],
     });
   }
 
@@ -59,7 +60,6 @@ export class ItSubPartnerSearchComponent implements OnInit {
       error: (error) => {
         console.error('Error loading expertise list:', error);
         this.loadingExpertise = false;
-        this.notificationService.showError('Failed to load expertise list');
       }
     });
   }
@@ -85,14 +85,11 @@ export class ItSubPartnerSearchComponent implements OnInit {
       this.filters.push({
         projectName: selectedExpertise?.name || '',
         expertise: formValue.technologyDemand,
-        tags: formValue.projectCategory,
-        projectNameId: selectedExpertise?._id || '' // Store ID for API calls
+        tags: formValue.projectCategory
       });
       this.initForm(); // Reset form for next entry
-      this.notificationService.showSuccess('Filter added successfully');
     } else {
       this.partnerForm.markAllAsTouched();
-      this.notificationService.showError('Please fill in all required fields');
     }
   }
 
@@ -108,31 +105,28 @@ export class ItSubPartnerSearchComponent implements OnInit {
 
     if (this.filters.length > 0) {
       const payload = {
-        userId: '683de8cc57a4a857766f083e', // This should come from your auth service
+        userId: '', // This should come from your auth service,
+        anonymousUserId: localStorage.getItem('anonymousUserId') || null,
         filters: this.filters.map(filter => ({
           ...filter,
-          projectName: filter.projectNameId // Use ID for API call
+          projectName: filter.projectName // Use ID for API call
         }))
       };
 
       this.itSubcontractService.saveSupplierFilters(payload).subscribe({
         next: (response) => {
           if (response?.status) {
-            this.notificationService.showSuccess('Filters saved successfully');
-            this.router.navigate(['/our-services/partner-search-result-experience'], {
+            this.router.navigate(['/our-services/candidate-search-result'], {
               queryParams: {
-                projectName: this.filters[0].projectNameId,
-                tags: this.filters[0].tags,
+                id: response?.data?.[0]?._id,
               }
             });
           }
         },
         error: (error) => {
-          this.notificationService.showError(error?.error?.message || 'Failed to save filters');
         }
       });
     } else {
-      this.notificationService.showError('Please add at least one filter');
     }
   }
 
@@ -141,5 +135,9 @@ export class ItSubPartnerSearchComponent implements OnInit {
 
   navigateToWorkaway() {
     this.router.navigate(['/resource-search']);
+  }
+
+  goBack(): void {
+    this.location.back();
   }
 }

@@ -42,6 +42,59 @@
               </a>
             </div>
           </div>
+          <!-- Combined Tags -->
+
+          <ul class="searchresult-tags mb-4">
+            <ng-container *ngFor="let item of visibleCombinedTags">
+              <li style="cursor: pointer; background-color: #f8f9fa;">
+                <span *ngIf="item.type === 'workaway'" (click)="redirectFilterToWorkAwaySearch(item?._id)">
+                  {{ item.jobTitle }}
+                  <p style="font-size: 10px; text-align: center; margin-bottom: 0px !important;">(WorkAway)</p>
+                </span>
+                <span *ngIf="item.type === 'itsubcontract'" (click)="redirectFilterToItSubSearch(item._id)">
+                  {{ item.projectName || item.expertise }}
+                  <p style="font-size: 10px; text-align: center; margin-bottom: 0px !important;">(IT Subcontracting)</p>
+                </span>
+                <span class="remove-tag" *ngIf="item.type === 'workaway'" (click)="removeFilter(item._id)"><i
+                    class="bi bi-x"></i></span>
+                <span class="remove-tag" *ngIf="item.type === 'itsubcontract'" (click)="removeFilterItSub(item._id)"><i
+                    class="bi bi-x"></i></span>
+                <br>
+              </li>
+            </ng-container>
+            <button class="btn btn-link p-0" (click)="toggleShowAllTags()" *ngIf="showToggleButton">
+              {{ showAllTags ? 'View Less' : 'View More' }}
+            </button>
+          </ul>
+
+          <!-- Combined Tags -->
+          <!-- <ul class="searchresult-tags mb-4">
+            <ng-container *ngFor="let item of visibleFilterList">
+              <li style="cursor: pointer; background-color: #f8f9fa;">
+                <span (click)="redirectFilterToWorkAwaySearch(item?._id)">{{ item?.jobTitle }} <p
+                    style="font-size: 10px; text-align: center; margin-bottom: 0px !important;">(WorkAway)</p></span>
+                <span class="remove-tag" (click)="removeFilter(item?._id)"><i class="bi bi-x"></i></span>
+              </li>
+            </ng-container>
+            <ng-container *ngFor="let item of visibleItSubFilterList">
+              <li style="cursor: pointer; background-color: #f8f9fa;">
+                <span (click)="redirectFilterToItSubSearch(item?._id)">{{ item?.projectName || item?.expertise }}
+                  <p style="font-size: 10px; text-align: center; margin-bottom: 0px !important;">(IT Subcontracting)</p>
+                </span>
+                <span class="remove-tag" (click)="removeFilterItSub(item?._id)"><i class="bi bi-x"></i></span>
+              </li>
+            </ng-container>
+            <button *ngIf="(filterList.length + itSubFilterList.length) > defaultTagLimit" class="btn btn-link p-0"
+              (click)="toggleShowAllTags()">
+              {{ showAllTags ? 'View Less' : 'View More' }}
+            </button>
+          </ul> -->
+          <!-- View More / View Less Button -->
+          <!-- <div *ngIf="(filterList.length + itSubFilterList.length) > defaultTagLimit" class="mb-3">
+            <button class="btn btn-link p-0" (click)="toggleShowAllTags()">
+              {{ showAllTags ? 'View Less' : 'View More' }}
+            </button>
+          </div> -->
         </div>
       </div>
 
@@ -314,7 +367,7 @@
               </ul>
             </div>
           </div>
-          <a data-bs-toggle="modal" data-bs-target="#corporateModal" class="btn btn-primary">Learn How
+          <a routerLink="/our-services/workaway" class="btn btn-primary">Learn How
             WorkAway Helps Corporates →</a>
         </div>
       </div>
@@ -352,7 +405,7 @@
               </ul>
             </div>
           </div>
-          <a href="#" data-bs-toggle="modal" data-bs-target="#growingbusinessModal" class="btn btn-primary">Learn How
+          <a routerLink="/our-services/workaway" class="btn btn-primary">Learn How
             WorkAway Helps Businesses →</a>
         </div>
       </div>
@@ -388,10 +441,9 @@
                 <li><strong>Cost-Smart Scaling:</strong><br> Win bigger deals without the overhead risks of
                   permanent expansion.</li>
               </ul>
-
             </div>
           </div>
-          <a data-bs-toggle="modal" data-bs-target="#itprovidersModal" class="btn btn-primary">Learn How
+          <a routerLink="/our-services/workaway" class="btn btn-primary">Learn How
             WorkAway Helps IT Providers →</a>
         </div>
       </div>
@@ -442,7 +494,7 @@
   <section class="desktop-hide mobile-show tablet-show">
     <div class="container">
       <div class="mb-5 text-center">
-        <h3 class="headingTitle">Mobiel We Offer <span class="text-primary">Most Valuable Services </span></h3>
+        <h3 class="headingTitle">We Offer <span class="text-primary">Most Valuable Services </span></h3>
       </div>
 
       <div class="row">
