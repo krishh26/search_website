@@ -872,7 +872,7 @@ Button CSS
   background-color: #0F51E0;
   border-radius: 40px;
   transition: all 0.3s ease 0s;
-  margin-right: 15px;
+  margin-left: 15px;
 }
 
 .btn-signin {
@@ -2504,16 +2504,34 @@ Media Query
     border-radius: 0px;
     width: 100%;
   }
+
   .headingTitleLarge {
     font-size: 32px;
     font-weight: 600;
-}
-.mob-mb2{
-  margin-bottom: 2rem;
-}
-.padding-start5 {
+  }
+
+  .mob-mb2 {
+    margin-bottom: 2rem;
+  }
+
+  .padding-start5 {
     padding-left: 0rem;
-}
+  }
+
+  .ng-select {
+    border: 1px solid #D9D9D9 !important;
+    padding: 0.50rem 0.75rem;
+    border-radius: 6px;
+  }
+
+  .callto-action .title-cta {
+    font-size: 20px;
+    font-weight: 600;
+  }
+    .btn-signin, .btn-signup{
+    width: 100%;
+     margin-left: 0px;
+  }
 }
 
 
@@ -2720,6 +2738,21 @@ Media Query
 
   .light-gray-card p {
     font-size: 12px;
+  }
+
+  .ng-select {
+    border: 1px solid #D9D9D9 !important;
+    padding: 0.50rem 0.75rem;
+    border-radius: 6px;
+  }
+
+  .callto-action .title-cta {
+    font-size: 20px;
+    font-weight: 600;
+  }
+  .btn-signin, .btn-signup{
+    width: 100%;
+     margin-left: 0px;
   }
 
 }
