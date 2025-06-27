@@ -467,12 +467,15 @@ ul.cardList li:hover {
   box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
   border-color: #0F51E0;
 }
-.btn-gap{
+
+.btn-gap {
   margin-right: 15px;
 }
-.margin-top104{
+
+.margin-top104 {
   margin-top: 104px;
 }
+
 /*====================================
 Header and responsive mobile menu
 ======================================*/
@@ -672,7 +675,7 @@ header {
   color: #000;
   display: block;
   text-align: left;
-  padding: 1rem 1.5rem;
+  padding: 1rem 1rem;
   font-weight: 500;
   font-size: 1rem;
 }
@@ -1343,6 +1346,7 @@ Card Styling
   padding: 2rem 1rem;
   margin-bottom: 1.5rem;
 }
+
 .light-gray-card p {
   font-size: 14px;
 }
@@ -2050,13 +2054,16 @@ ul.searchresult-tags li .remove-tag {
   cursor: pointer;
   font-size: 1rem;
 }
+
 ul.searchresult-tags li:hover .remove-tag,
-ul.searchresult-tags li.active .remove-tag{
+ul.searchresult-tags li.active .remove-tag {
   color: #FFFF !important;
 }
+
 .searchcard {
-  border-left: 6px solid #ffc107 ;
+  border-left: 6px solid #ffc107;
 }
+
 /*=================================
  Accordian panel
  ==================================*/
@@ -2247,6 +2254,7 @@ Main search bar
   padding: 1rem !important;
   margin-left: 15px !important;
   margin-right: 15px !important;
+  display: block;
 }
 
 .main-searchbar .form-select:focus,
@@ -2254,10 +2262,12 @@ Main search bar
   border: none;
   box-shadow: none;
 }
-.btn-link{
+
+.btn-link {
   background-color: transparent;
   color: #0154F7;
 }
+
 /*==================================
 Services Box
 ===================================*/
@@ -2272,7 +2282,8 @@ Services Box
   cursor: pointer;
 }
 
-.service-single-box::before, .service-single-box .active::before  {
+.service-single-box::before,
+.service-single-box .active::before {
   position: absolute;
   content: "";
   height: 0;
@@ -2285,7 +2296,10 @@ Services Box
   border-radius: 12px;
 }
 
-.add-arrow1, .add-arrow2, .add-arrow3, .add-arrow4 {
+.add-arrow1,
+.add-arrow2,
+.add-arrow3,
+.add-arrow4 {
   display: block;
   position: relative;
   left: 0px;
@@ -2295,7 +2309,10 @@ Services Box
   display: none;
 }
 
-.add-arrow1::before, .add-arrow2::before, .add-arrow3::before, .add-arrow4::before {
+.add-arrow1::before,
+.add-arrow2::before,
+.add-arrow3::before,
+.add-arrow4::before {
   position: absolute;
   content: "\F229";
   font-family: "bootstrap-icons";
@@ -2442,6 +2459,10 @@ Media Query
     font-size: 32px;
   }
 
+  .tab-w100 {
+    width: 100%;
+  }
+
   .mob-mb1 {
     margin-bottom: 1rem;
   }
@@ -2449,20 +2470,52 @@ Media Query
   .tab-mb1 {
     margin-bottom: 1rem;
   }
-   .tablet-hide {
+
+  .tablet-hide {
     display: none;
   }
 
   .tablet-show {
     display: block;
   }
-    .cta-section {
+
+  .cta-section {
     padding-top: 5px;
   }
-   .callto-action .cta-model {
+
+  .callto-action .cta-model {
     display: none;
   }
+
+  .light-gray-card p {
+    font-size: 12px;
+  }
+
+  .main-searchbar {
+    background-color: #FFF;
+    padding: 1rem;
+    border-radius: 12px;
+  }
+
+  .main-searchbar .form-select {
+    border: none;
+    padding-right: 30px;
+    border-right: none;
+    border-radius: 0px;
+    width: 100%;
+  }
+  .headingTitleLarge {
+    font-size: 32px;
+    font-weight: 600;
 }
+.mob-mb2{
+  margin-bottom: 2rem;
+}
+.padding-start5 {
+    padding-left: 0rem;
+}
+}
+
 
 @media only screen and (min-width: 320px) and (max-width: 767px) {
 
@@ -2557,7 +2610,8 @@ Media Query
   .mob-w100 {
     width: 100%;
   }
-  .mob-w50{
+
+  .mob-w50 {
     width: 50%;
   }
 
@@ -2663,6 +2717,9 @@ Media Query
     border-radius: 0px;
     width: 100%;
   }
-  
+
+  .light-gray-card p {
+    font-size: 12px;
+  }
 
 }

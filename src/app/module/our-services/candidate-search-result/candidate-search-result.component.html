@@ -9,8 +9,8 @@
     </nav>
     <div class="row align-items-center">
       <div class="col-12">
-        <div class="input-group main-searchbar mb-3 bg-white rounded-pill shadow-sm">
-          <div class="input-group-text border-0 bg-transparent p-2">
+        <div class="input-group main-searchbar mb-3">
+          <div class="input-group-text border-0 bg-transparent p-2 mob-w100 tab-w100">
             <select class="form-select border-0 bg-transparent" [(ngModel)]="selectedService"
               (change)="onServiceChange($event)">
               <option value="WorkAway">WorkAway</option>
@@ -29,7 +29,7 @@
 
           <!-- For IT Subcontracting -->
           <ng-container *ngIf="selectedService == 'IT Subcontracting'">
-            <div class="form-control border-0 flex-grow-1">
+            <div class="form-control border-0 flex-grow-1 mob-w100 tab-w100">
               <ng-select [items]="expertiseList" [loading]="isLoading" [searchable]="true" bindLabel="name"
                 bindValue="name" placeholder="Search Here" [(ngModel)]="expertiseSelect" [clearable]="true"
                 class="border-0 clean-ng-select">
@@ -37,12 +37,12 @@
             </div>
           </ng-container>
 
-          <div class="d-flex align-items-center pe-3">
-            <button class="btn btn-primary rounded-pill px-4 d-flex align-items-center me-3"
+          <div class="d-flex align-items-center pe-3 mob-w100 tab-w100">
+            <button class="input-group-text shadow-none px-4 search-btn mob-w100 tab-w100"
               (click)="selectedService == 'WorkAway' ? onSearch() : searchForItSubContract()">
               <i class="bi bi-search me-2"></i>Search
             </button>
-            <a href="javascript:void(0)" class="text-primary text-decoration-none" (click)="searchData()">
+            <a href="javascript:void(0)" class="text-primary text-decoration-none mob-w100 tab-w100" (click)="searchData()">
               Advance Search
             </a>
           </div>
