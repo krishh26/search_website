@@ -43,6 +43,11 @@ export class WorkawayRegistrationComponent implements OnInit {
     // Set initial service type
     this.selectedServiceType = 'option1';
     this.registrationForm.patchValue({ serviceType: 'option1' });
+
+    // Subscribe to bankingOption changes to handle whiteLabelOption visibility
+    this.registrationForm.get('bankingOption')?.valueChanges.subscribe(value => {
+      this.bankingForClients = value === 'I would like to bank resources for my client(s)';
+    });
   }
 
   goBack(): void {
@@ -52,11 +57,6 @@ export class WorkawayRegistrationComponent implements OnInit {
   onDemandReadyChange(hasDemand: boolean): void {
     this.hasDemandReady = hasDemand;
     this.registrationForm.patchValue({ hasDemandReady: hasDemand });
-  }
-
-  onBankingOptionChange(forClients: boolean): void {
-    this.bankingForClients = forClients;
-    this.registrationForm.patchValue({ bankingOption: forClients ? 'clients' : 'business' });
   }
 
   onServiceTypeChange(serviceType: string): void {
