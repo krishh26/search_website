@@ -88,7 +88,7 @@
 <section class="results-section">
   <div class="container">
     <div>
-      <ng-container *ngIf="selectedService == 'WorkAway'">
+      <ng-container *ngIf="showServiceData == 'WorkAway'">
         <div class="row align-items-center mb-4">
           <div class="col-12">
             <h1 class="headingTitle2">We found <span class="text-primary">{{totalCandidates}} Resources</span> (<span
@@ -155,7 +155,7 @@
         </div>
         <!--/end result-->
       </ng-container>
-      <ng-container *ngIf="selectedService == 'IT Subcontracting'">
+      <ng-container *ngIf="showServiceData == 'IT Subcontracting'">
         <div class="row align-items-center mb-4">
           <div class="col-12">
             <h1 class="headingTitle2">We found <span class="text-primary">{{totalSuppliers}} Consortium Partners</span>

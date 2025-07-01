@@ -58,10 +58,11 @@ export class CandidateSearchResultComponent implements OnInit {
 
   selectedService: string = 'WorkAway'; // Default selection
 
-  expertiseSelect!: string;
+  expertiseSelect!: string | null;
   expertiseList: any[] = [];
   itSubFilterList: any = [];
   itSelectedFilter: any;
+  showServiceData: string = 'WorkAway';
 
   // How many tags to show by default
   defaultTagLimit = 7;
@@ -102,11 +103,13 @@ export class CandidateSearchResultComponent implements OnInit {
       if (params['workAwayId']) {
         this.selectedService = "WorkAway";
         this.selectedFilter = params['workAwayId'];
+        this.showServiceData = "WorkAway";
         // Load candidates for this filter
         this.loadCandidatesForFilter(this.selectedFilter);
       } else if (params['id']) {
         this.selectedService = "IT Subcontracting";
         this.itSelectedFilter = params['id'];
+        this.showServiceData = "IT Subcontracting";
         // Load suppliers for this filter
         this.loadSuppliersForFilter(this.itSelectedFilter);
       }
@@ -171,6 +174,9 @@ export class CandidateSearchResultComponent implements OnInit {
       next: (response) => {
         if (response?.status) {
           this.filterList = response?.data || [];
+          if (this.filterList?.length == 0 && this.itSubFilterList?.length == 0) {
+            this.router.navigateByUrl('/home');
+          }
           this.filterList?.forEach((element) => {
             if (element) {
               element['type'] = 'workaway'
@@ -179,6 +185,10 @@ export class CandidateSearchResultComponent implements OnInit {
           // Only select IT Subcontracting filter if we're in IT Subcontracting mode
           if (this.selectedService === "WorkAway") {
             this.selectFilter(this.selectedFilter ? this.selectedFilter : this.filterList?.[0]?._id);
+          }
+        } else {
+          if (this.filterList?.length == 0 && this.itSubFilterList?.length == 0) {
+            this.router.navigateByUrl('/home');
           }
         }
       },
@@ -191,6 +201,7 @@ export class CandidateSearchResultComponent implements OnInit {
   // Function to be used for the change filter
   selectFilter(filterId: string) {
     this.selectedService = "WorkAway";
+    this.showServiceData = "WorkAway";
     this.selectedFilter = filterId;
     this.itSelectedFilter = null;
     this.selectedFilterData = this.filterList.find((element) => element._id == filterId);
@@ -200,6 +211,7 @@ export class CandidateSearchResultComponent implements OnInit {
 
   selectFilterItSubContractFilter(filterId: string): void {
     this.selectedService = "IT Subcontracting";
+    this.showServiceData = "IT Subcontracting";
     this.itSelectedFilter = filterId;
     this.selectedFilter = null;
     this.loadSuppliersForFilter(filterId);
@@ -267,6 +279,9 @@ export class CandidateSearchResultComponent implements OnInit {
       next: (response) => {
         if (response.status && response.data) {
           this.itSubFilterList = response.data as any;
+          if (this.filterList?.length == 0 && this.itSubFilterList?.length == 0) {
+            this.router.navigateByUrl('/home');
+          }
           this.itSubFilterList?.forEach((element: any) => {
             if (element) {
               element['type'] = 'itsubcontract'
@@ -276,6 +291,10 @@ export class CandidateSearchResultComponent implements OnInit {
           // Only select IT Subcontracting filter if we're in IT Subcontracting mode
           if (this.selectedService === "IT Subcontracting") {
             this.selectFilterItSubContractFilter(this.itSelectedFilter ? this.itSelectedFilter : this.itSubFilterList?.[0]?._id);
+          }
+        } else {
+          if (this.filterList?.length == 0 && this.itSubFilterList?.length == 0) {
+            this.router.navigateByUrl('/home');
           }
         }
       }
@@ -383,6 +402,7 @@ export class CandidateSearchResultComponent implements OnInit {
     if (this.expertiseSelect) {
       this.selectedFilter = null;
       this.itSelectedFilter = null;
+
       const payload = {
         userId: '', // This should come from your auth service
         anonymousUserId: localStorage.getItem('anonymousUserId') || null,
@@ -400,6 +420,7 @@ export class CandidateSearchResultComponent implements OnInit {
         next: (response) => {
           if (response?.status) {
             this.loadFilterList();
+            this.expertiseSelect = null;
           }
         },
         error: (error) => {
