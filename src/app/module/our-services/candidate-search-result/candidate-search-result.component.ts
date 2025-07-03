@@ -119,9 +119,9 @@ export class CandidateSearchResultComponent implements OnInit {
     this.getFilterList();
     this.getJobTitles();
     this.getExpertise();
-    setTimeout(() => {
-      this.loadFilterList();
-    }, 2000);
+    // setTimeout(() => {
+    //   this.loadFilterList();
+    // }, 2000);
   }
 
   loadCandidatesForFilter(filterId: string) {
@@ -180,10 +180,16 @@ export class CandidateSearchResultComponent implements OnInit {
             if (element) {
               element['type'] = 'workaway'
             }
-          })
+          });
+          // Only select IT Subcontracting filter if we're in IT Subcontracting mode
+          if (this.selectedService === "WorkAway") {
+            this.selectFilter(this.selectedFilter ? this.selectedFilter : this.filterList?.[0]?._id);
+          }
+          this.loadFilterList();
         } 
       },
       error: (error) => {
+        this.loadFilterList();
         console.error('Error loading filters:', error);
       }
     });
