@@ -10,8 +10,8 @@
             <label class="form-check-label" for="workawayOption">WorkAway</label>
           </div>
           <div class="form-check form-check-inline">
-            <input class="form-check-input" type="radio" name="serviceTypeOptions" id="itSubcontractingOption" value="option2"
-              (change)="onServiceTypeChange('option2')" [checked]="selectedServiceType === 'option2'">
+            <input class="form-check-input" type="radio" name="serviceTypeOptions" id="itSubcontractingOption"
+              value="option2" (change)="onServiceTypeChange('option2')" [checked]="selectedServiceType === 'option2'">
             <label class="form-check-label" for="itSubcontractingOption">IT Subcontracting</label>
           </div>
           <div class="form-check form-check-inline">
@@ -88,9 +88,11 @@
 
             <form [formGroup]="registrationForm" class="needs-validation" *ngIf="!showContactForm">
               <div class="row mb-3 align-items-center">
-                <label for="professiontype" class="col-sm-3 col-form-label">I Am a <span class="text-danger">*</span></label>
+                <label for="professiontype" class="col-sm-3 col-form-label">I Am a <span
+                    class="text-danger">*</span></label>
                 <div class="col-sm-9">
-                  <select class="form-select" id="professiontype" formControlName="professionType" [class.is-invalid]="registrationForm.get('professionType')?.touched && registrationForm.get('professionType')?.errors">
+                  <select class="form-select" id="professiontype" formControlName="professionType"
+                    [class.is-invalid]="registrationForm.get('professionType')?.touched && registrationForm.get('professionType')?.errors">
                     <option selected disabled value="">Choose from below...</option>
                     <option>Corporate recruitment teams</option>
                     <option>IT recruitment agency</option>
@@ -104,12 +106,14 @@
               </div>
 
               <div class="row mb-3">
-                <label for="registrationType" class="col-sm-3 col-form-label">I am registering for <span class="text-danger">*</span></label>
+                <label for="registrationType" class="col-sm-3 col-form-label">I am registering for <span
+                    class="text-danger">*</span></label>
                 <div class="col-sm-9">
                   <div class="form-group mt-2 mb-0">
                     <div class="form-check">
                       <input class="form-check-input" type="radio" name="registrationType" id="bankClientOption1"
-                        value="representative" formControlName="registrationType" (change)="onRegistrationTypeChange('representative')">
+                        value="representative" formControlName="registrationType"
+                        (change)="onRegistrationTypeChange('representative')">
                       <label class="form-check-label" for="bankClientOption1">
                         Representative for my client
                       </label>
@@ -126,7 +130,8 @@
                   <div class="form-group mb-0">
                     <div class="form-check">
                       <input class="form-check-input" type="radio" name="registrationType" id="bankBusinessOption1"
-                        value="business" formControlName="registrationType" (change)="onRegistrationTypeChange('business')">
+                        value="business" formControlName="registrationType"
+                        (change)="onRegistrationTypeChange('business')">
                       <label class="form-check-label" for="bankBusinessOption1">
                         I am a business
                       </label>
@@ -136,7 +141,8 @@
               </div>
 
               <div class="row mb-3 align-items-center">
-                <label for="demandReady" class="col-sm-3 col-form-label">Have the demand ready? <span class="text-danger">*</span></label>
+                <label for="demandReady" class="col-sm-3 col-form-label">Have the demand ready? <span
+                    class="text-danger">*</span></label>
                 <div class="col-sm-9">
                   <div class="form-check form-check-inline">
                     <input class="form-check-input" type="radio" name="hasDemandReady" id="demandYes" value="yes"
@@ -148,7 +154,8 @@
                       formControlName="hasDemandReady" (change)="onDemandReadyChange('no')">
                     <label class="form-check-label" for="demandNo">No</label>
                   </div>
-                  <div class="invalid-feedback" *ngIf="registrationForm.get('hasDemandReady')?.touched && registrationForm.get('hasDemandReady')?.errors?.['required']">
+                  <div class="invalid-feedback"
+                    *ngIf="registrationForm.get('hasDemandReady')?.touched && registrationForm.get('hasDemandReady')?.errors?.['required']">
                     Please select an option.
                   </div>
                 </div>
@@ -156,55 +163,60 @@
 
               <div *ngIf="hasDemandReady">
                 <div class="row mb-3 align-items-center">
-                  <label for="requirement" class="col-sm-3 col-form-label">Enter Your Requirement <span class="text-danger">*</span></label>
+                  <label for="requirement" class="col-sm-3 col-form-label">Enter Your Requirement <span
+                      class="text-danger">*</span></label>
                   <div class="col-sm-9">
                     <input type="text" class="form-control" formControlName="requirement"
-                           [class.is-invalid]="registrationForm.get('requirement')?.touched && registrationForm.get('requirement')?.errors"
-                           placeholder="Eg. Cloud Migration">
+                      [class.is-invalid]="registrationForm.get('requirement')?.touched && registrationForm.get('requirement')?.errors"
+                      placeholder="Eg. Cloud Migration">
                     <div class="invalid-feedback" *ngIf="getRegistrationFormError('requirement')">
                       {{ getRegistrationFormError('requirement') }}
                     </div>
                   </div>
                 </div>
                 <div class="row mb-3 align-items-center">
-                  <label for="engagementType" class="col-sm-3 col-form-label">Engagement Type <span class="text-danger">*</span></label>
+                  <label for="engagementType" class="col-sm-3 col-form-label">Engagement Type <span
+                      class="text-danger">*</span></label>
                   <div class="col-sm-9">
                     <div class="form-check form-check-inline">
-                      <input class="form-check-input" type="radio" name="engagementType" id="Fulldelivery"
-                        value="full" formControlName="engagementType">
+                      <input class="form-check-input" type="radio" name="engagementType" id="Fulldelivery" value="full"
+                        formControlName="engagementType">
                       <label class="form-check-label" for="Fulldelivery">Full Delivery</label>
                     </div>
                     <div class="form-check form-check-inline">
-                      <input class="form-check-input" type="radio" name="engagementType" id="Partdelivery"
-                        value="part" formControlName="engagementType">
+                      <input class="form-check-input" type="radio" name="engagementType" id="Partdelivery" value="part"
+                        formControlName="engagementType">
                       <label class="form-check-label" for="Partdelivery">Part Delivery</label>
                     </div>
                     <div class="form-check form-check-inline">
-                      <input class="form-check-input" type="radio" name="engagementType" id="Ongoing"
-                        value="ongoing" formControlName="engagementType">
+                      <input class="form-check-input" type="radio" name="engagementType" id="Ongoing" value="ongoing"
+                        formControlName="engagementType">
                       <label class="form-check-label" for="Ongoing">Ongoing</label>
                     </div>
-                    <div class="invalid-feedback" *ngIf="registrationForm.get('engagementType')?.touched && registrationForm.get('engagementType')?.errors?.['required']">
+                    <div class="invalid-feedback"
+                      *ngIf="registrationForm.get('engagementType')?.touched && registrationForm.get('engagementType')?.errors?.['required']">
                       Please select an engagement type.
                     </div>
                   </div>
                 </div>
                 <div class="row mb-3 align-items-center">
-                  <label for="description" class="col-sm-3 col-form-label">Description <span class="text-danger">*</span></label>
+                  <label for="description" class="col-sm-3 col-form-label">Description <span
+                      class="text-danger">*</span></label>
                   <div class="col-sm-9">
                     <textarea class="form-control" rows="2" cols="100" formControlName="description"
-                             [class.is-invalid]="registrationForm.get('description')?.touched && registrationForm.get('description')?.errors"></textarea>
+                      [class.is-invalid]="registrationForm.get('description')?.touched && registrationForm.get('description')?.errors"></textarea>
                     <div class="invalid-feedback" *ngIf="getRegistrationFormError('description')">
                       {{ getRegistrationFormError('description') }}
                     </div>
                   </div>
                 </div>
                 <div class="row mb-3 align-items-center">
-                  <label for="language" class="col-sm-3 col-form-label">Choose Language <span class="text-danger">*</span></label>
+                  <label for="language" class="col-sm-3 col-form-label">Choose Language <span
+                      class="text-danger">*</span></label>
                   <div class="col-sm-9">
                     <input type="text" class="form-control" formControlName="language"
-                           [class.is-invalid]="registrationForm.get('language')?.touched && registrationForm.get('language')?.errors"
-                           placeholder="Eg. javascript">
+                      [class.is-invalid]="registrationForm.get('language')?.touched && registrationForm.get('language')?.errors"
+                      placeholder="Eg. javascript">
                     <div class="invalid-feedback" *ngIf="getRegistrationFormError('language')">
                       {{ getRegistrationFormError('language') }}
                     </div>
@@ -217,26 +229,27 @@
                   </div>
                 </div>
                 <div class="row mb-3 align-items-center">
-                  <label for="dates" class="col-sm-3 col-form-label">Start Date, End Date & Budget <span class="text-danger">*</span></label>
+                  <label for="dates" class="col-sm-3 col-form-label">Start Date, End Date & Budget <span
+                      class="text-danger">*</span></label>
                   <div class="col-sm-9">
                     <div class="row">
                       <div class="col-lg-4 col-xl-4 col-sm-4 col-md-4 col-12 mob-mb1">
                         <input type="date" class="form-control" formControlName="startDate"
-                               [class.is-invalid]="registrationForm.get('startDate')?.touched && registrationForm.get('startDate')?.errors">
+                          [class.is-invalid]="registrationForm.get('startDate')?.touched && registrationForm.get('startDate')?.errors">
                         <div class="invalid-feedback" *ngIf="getRegistrationFormError('startDate')">
                           {{ getRegistrationFormError('startDate') }}
                         </div>
                       </div>
                       <div class="col-lg-4 col-xl-4 col-sm-4 col-md-4 col-12 mob-mb1">
                         <input type="date" class="form-control" formControlName="endDate"
-                               [class.is-invalid]="registrationForm.get('endDate')?.touched && registrationForm.get('endDate')?.errors">
+                          [class.is-invalid]="registrationForm.get('endDate')?.touched && registrationForm.get('endDate')?.errors">
                         <div class="invalid-feedback" *ngIf="getRegistrationFormError('endDate')">
                           {{ getRegistrationFormError('endDate') }}
                         </div>
                       </div>
                       <div class="col-lg-4 col-xl-4 col-sm-4 col-md-4 col-12 mob-mb1">
                         <select class="form-select" formControlName="budget"
-                                [class.is-invalid]="registrationForm.get('budget')?.touched && registrationForm.get('budget')?.errors">
+                          [class.is-invalid]="registrationForm.get('budget')?.touched && registrationForm.get('budget')?.errors">
                           <option value="">Select Budget</option>
                           <option value="5">5 Lac</option>
                           <option value="1-5">1-5 Lac</option>
@@ -249,10 +262,42 @@
                   </div>
                 </div>
               </div>
-
+              <div class="row mb-3">
+                <div>
+                  <h5>Your Search : </h5>
+                </div>
+                <div class="col-12">
+                  <ul class="searchresult-tags mb-4">
+                    <ng-container *ngFor="let item of visibleCombinedTags">
+                      <li style="cursor: pointer; background-color: #f8f9fa;">
+                        <span *ngIf="item.type === 'workaway'">
+                          {{ item.jobTitle }}
+                          <p style="font-size: 10px; text-align: center; margin-bottom: 0px !important;">(WorkAway)</p>
+                        </span>
+                        <span *ngIf="item.type === 'itsubcontract'">
+                          {{ item.projectName || item.expertise }}
+                          <p style="font-size: 10px; text-align: center; margin-bottom: 0px !important;">(IT Subcontracting)
+                          </p>
+                        </span>
+                        <span class="remove-tag" *ngIf="item.type === 'workaway'" (click)="removeFilter(item._id)"><i
+                            class="bi bi-x"></i></span>
+                        <span class="remove-tag" *ngIf="item.type === 'itsubcontract'"
+                          (click)="removeFilterItSub(item._id)"><i class="bi bi-x"></i></span>
+                        <br>
+                      </li>
+                    </ng-container>
+                    <button class="btn btn-link p-0" (click)="toggleShowAllTags()" *ngIf="showToggleButton">
+                      {{ showAllTags ? 'View Less' : 'View More' }}
+                    </button>
+                  </ul>
+                </div>
+              </div>
+              
               <div class="form-group text-end">
-                <button class="btn btn-dark me-2" (click)="goBack()"><i class="bi bi-arrow-left me-2"></i> Go Back</button>
-                <button class="btn btn-primary" type="button" (click)="nextStep()">Next Step <i class="bi bi-arrow-right ms-2"></i></button>
+                <button class="btn btn-dark me-2" (click)="goBack()"><i class="bi bi-arrow-left me-2"></i> Go
+                  Back</button>
+                <button class="btn btn-primary" type="button" (click)="nextStep()">Next Step <i
+                    class="bi bi-arrow-right ms-2"></i></button>
               </div>
             </form>
 
@@ -260,8 +305,8 @@
               <div class="form-group">
                 <label>Business name <span class="text-danger">*</span></label>
                 <input type="text" class="form-control" formControlName="businessName"
-                       [class.is-invalid]="contactForm.get('businessName')?.touched && contactForm.get('businessName')?.errors"
-                       placeholder="Enter your business name...">
+                  [class.is-invalid]="contactForm.get('businessName')?.touched && contactForm.get('businessName')?.errors"
+                  placeholder="Enter your business name...">
                 <div class="invalid-feedback" *ngIf="getContactFormError('businessName')">
                   {{ getContactFormError('businessName') }}
                 </div>
@@ -269,8 +314,8 @@
               <div class="form-group">
                 <label>Address <span class="text-danger">*</span></label>
                 <textarea class="form-control" formControlName="address" cols="100" rows="1"
-                          [class.is-invalid]="contactForm.get('address')?.touched && contactForm.get('address')?.errors"
-                          placeholder="Enter your address..."></textarea>
+                  [class.is-invalid]="contactForm.get('address')?.touched && contactForm.get('address')?.errors"
+                  placeholder="Enter your address..."></textarea>
                 <div class="invalid-feedback" *ngIf="getContactFormError('address')">
                   {{ getContactFormError('address') }}
                 </div>
@@ -278,8 +323,8 @@
               <div class="form-group">
                 <label>Your Full Name <span class="text-danger">*</span></label>
                 <input type="text" class="form-control" formControlName="fullName"
-                       [class.is-invalid]="contactForm.get('fullName')?.touched && contactForm.get('fullName')?.errors"
-                       placeholder="Enter your name...">
+                  [class.is-invalid]="contactForm.get('fullName')?.touched && contactForm.get('fullName')?.errors"
+                  placeholder="Enter your name...">
                 <div class="invalid-feedback" *ngIf="getContactFormError('fullName')">
                   {{ getContactFormError('fullName') }}
                 </div>
@@ -287,8 +332,8 @@
               <div class="form-group">
                 <label>Job Title <span class="text-danger">*</span></label>
                 <input type="text" class="form-control" formControlName="jobTitle"
-                       [class.is-invalid]="contactForm.get('jobTitle')?.touched && contactForm.get('jobTitle')?.errors"
-                       placeholder="Enter your job title...">
+                  [class.is-invalid]="contactForm.get('jobTitle')?.touched && contactForm.get('jobTitle')?.errors"
+                  placeholder="Enter your job title...">
                 <div class="invalid-feedback" *ngIf="getContactFormError('jobTitle')">
                   {{ getContactFormError('jobTitle') }}
                 </div>
@@ -296,8 +341,8 @@
               <div class="form-group">
                 <label>Phone Number <span class="text-danger">*</span></label>
                 <input type="text" class="form-control" formControlName="phoneNumber" (keypress)="NumberOnly($event)"
-                       [class.is-invalid]="contactForm.get('phoneNumber')?.touched && contactForm.get('phoneNumber')?.errors"
-                       placeholder="Enter your phone number...">
+                  [class.is-invalid]="contactForm.get('phoneNumber')?.touched && contactForm.get('phoneNumber')?.errors"
+                  placeholder="Enter your phone number...">
                 <div class="invalid-feedback" *ngIf="getContactFormError('phoneNumber')">
                   {{ getContactFormError('phoneNumber') }}
                 </div>
@@ -305,8 +350,8 @@
               <div class="form-group">
                 <label>Email Address <span class="text-danger">*</span></label>
                 <input type="text" class="form-control" formControlName="email"
-                       [class.is-invalid]="contactForm.get('email')?.touched && contactForm.get('email')?.errors"
-                       placeholder="Enter your email id...">
+                  [class.is-invalid]="contactForm.get('email')?.touched && contactForm.get('email')?.errors"
+                  placeholder="Enter your email id...">
                 <div class="invalid-feedback" *ngIf="getContactFormError('email')">
                   {{ getContactFormError('email') }}
                 </div>
@@ -316,10 +361,13 @@
                 <input type="text" class="form-control" formControlName="hearAboutUs" placeholder="Enter details...">
               </div>
               <div class="form-group text-end">
-                <button class="btn btn-dark me-2" (click)="goBack()"><i class="bi bi-arrow-left me-2"></i> Go Back</button>
-                <button class="btn btn-primary" type="button" (click)="onSubmit()">Submit <i class="bi bi-save2 ms-2"></i></button>
+                <button class="btn btn-dark me-2" (click)="goBack()"><i class="bi bi-arrow-left me-2"></i> Go
+                  Back</button>
+                <button class="btn btn-primary" type="button" (click)="onSubmit()">Submit <i
+                    class="bi bi-save2 ms-2"></i></button>
               </div>
             </form>
+
           </div>
         </div>
       </div>

@@ -1,4 +1,5 @@
-<section class="registration-section margin-top104" style="background-image: url(/assets/img/search-background-image.png);">
+<section class="registration-section margin-top104"
+  style="background-image: url(/assets/img/search-background-image.png);">
   <div class="overlay-bg" style="opacity: 1;">
     <div class="container">
       <div class="text-center text-white">
@@ -8,8 +9,8 @@
           <label class="form-check-label" for="workawayOption">WorkAway</label>
         </div>
         <div class="form-check form-check-inline">
-          <input class="form-check-input" type="radio" name="serviceTypeOptions" id="itSubcontractingOption" value="option2"
-            (change)="onServiceTypeChange('option2')" [checked]="selectedServiceType === 'option2'">
+          <input class="form-check-input" type="radio" name="serviceTypeOptions" id="itSubcontractingOption"
+            value="option2" (change)="onServiceTypeChange('option2')" [checked]="selectedServiceType === 'option2'">
           <label class="form-check-label" for="itSubcontractingOption">IT Subcontracting</label>
         </div>
         <div class="form-check form-check-inline">
@@ -39,24 +40,24 @@
             </li>
           </ul>
 
-           <div class="row mb-3">
-              <div class="col-12">
-                <div class="alert" role="alert" style="background-color: #E5E4E2; border-color: #E5E4E2;">
-                  <i class="bi bi-exclamation-triangle-fill me-2"></i>
-                  <strong>Quick Guide:</strong> Filter by budget range to view matching companies. Compare experience, projects executed, and engagement models.<br>
-                  <strong>Action:</strong> Click "Register to Receive Quote" for single needs or use "Excel Bulk Upload" for multiple requirements.
-                </div>
+          <div class="row mb-3">
+            <div class="col-12">
+              <div class="alert" role="alert" style="background-color: #E5E4E2; border-color: #E5E4E2;">
+                <i class="bi bi-exclamation-triangle-fill me-2"></i>
+                <strong>Quick Guide:</strong> Filter by budget range to view matching companies. Compare experience,
+                projects executed, and engagement models.<br>
+                <strong>Action:</strong> Click "Register to Receive Quote" for single needs or use "Excel Bulk Upload"
+                for multiple requirements.
               </div>
             </div>
-
-
+          </div>
           <form [formGroup]="registrationForm" (ngSubmit)="onSubmit()" class="needs-validation" novalidate>
 
             <div class="row mb-3 align-items-center">
               <label for="iama" class="col-sm-3 col-form-label">I Am a <span class="text-danger">*</span></label>
               <div class="col-sm-9">
-                 <select class="form-select" id="professiontype" formControlName="professionType"
-                         [class.is-invalid]="professionType?.invalid && professionType?.touched">
+                <select class="form-select" id="professiontype" formControlName="professionType"
+                  [class.is-invalid]="professionType?.invalid && professionType?.touched">
                   <option selected disabled value="">Choose from below...</option>
                   <option value="Corporate recruitment teams">Corporate recruitment teams</option>
                   <option value="IT recruitment agency">IT recruitment agency</option>
@@ -70,44 +71,49 @@
             </div>
 
             <div class="row mb-3">
-              <label for="iama" class="col-sm-3 col-form-label">I am registering at WorkAway for <span class="text-danger">*</span></label>
+              <label for="iama" class="col-sm-3 col-form-label">I am registering at WorkAway for <span
+                  class="text-danger">*</span></label>
               <div class="col-sm-9">
                 <div class="form-group mt-2 mb-0">
-                    <div class="form-check">
-                      <input class="form-check-input" type="radio" formControlName="bankingOption" name="bankRadio" id="bankClientOption1" value="I would like to bank resources for my client(s)">
-                      <label class="form-check-label mb-0" for="bankClientOption1">
-                        I would like to bank resources for my client(s)
-                      </label>
-                    </div>
-                  </div>
-                  <div class="form-group ps-4" *ngIf="bankingForClients">
-                    <div class="form-check">
-                      <input class="form-check-input" type="checkbox" formControlName="whiteLabelOption" id="invalidCheck">
-                      <label class="form-check-label" for="invalidCheck">
-                        I would like to discuss white labelling options
-                      </label>
-                    </div>
-                  </div>
                   <div class="form-check">
-                      <input class="form-check-input" type="radio" formControlName="bankingOption" name="bankRadio" id="bankBusinessOption1" value="I would like to bank resources for my business">
-                      <label class="form-check-label" for="bankBusinessOption1">
-                        I would like to bank resources for my business
-                      </label>
-                    </div>
+                    <input class="form-check-input" type="radio" formControlName="bankingOption" name="bankRadio"
+                      id="bankClientOption1" value="I would like to bank resources for my client(s)">
+                    <label class="form-check-label mb-0" for="bankClientOption1">
+                      I would like to bank resources for my client(s)
+                    </label>
+                  </div>
+                </div>
+                <div class="form-group ps-4" *ngIf="bankingForClients">
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" formControlName="whiteLabelOption"
+                      id="invalidCheck">
+                    <label class="form-check-label" for="invalidCheck">
+                      I would like to discuss white labelling options
+                    </label>
+                  </div>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" type="radio" formControlName="bankingOption" name="bankRadio"
+                    id="bankBusinessOption1" value="I would like to bank resources for my business">
+                  <label class="form-check-label" for="bankBusinessOption1">
+                    I would like to bank resources for my business
+                  </label>
+                </div>
               </div>
             </div>
 
             <div class="row mb-3 align-items-center">
-              <label for="iama" class="col-sm-3 col-form-label">Have the demand ready? <span class="text-danger">*</span></label>
+              <label for="iama" class="col-sm-3 col-form-label">Have the demand ready? <span
+                  class="text-danger">*</span></label>
               <div class="col-sm-9">
-                 <div class="form-check form-check-inline">
-                  <input class="form-check-input" type="radio" name="demandRadioOptions" id="demandYes"
-                         value="true" (click)="onDemandReadyChange(true)">
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="radio" name="demandRadioOptions" id="demandYes" value="true"
+                    (click)="onDemandReadyChange(true)">
                   <label class="form-check-label" for="demandYes">Yes</label>
                 </div>
                 <div class="form-check form-check-inline">
-                  <input class="form-check-input" type="radio" name="demandRadioOptions" id="demandNo"
-                         value="false" (click)="onDemandReadyChange(false)">
+                  <input class="form-check-input" type="radio" name="demandRadioOptions" id="demandNo" value="false"
+                    (click)="onDemandReadyChange(false)">
                   <label class="form-check-label" for="demandNo">No</label>
                 </div>
                 <div class="invalid-feedback" *ngIf="hasDemandReadyControl?.invalid && hasDemandReadyControl?.touched">
@@ -117,16 +123,20 @@
             </div>
 
             <div class="row mb-3 align-items-center" *ngIf="hasDemandReady">
-              <label for="iama" class="col-sm-3 col-form-label">Upload Enquiry <span class="text-danger">*</span></label>
+              <label for="iama" class="col-sm-3 col-form-label">Upload Enquiry <span
+                  class="text-danger">*</span></label>
               <div class="col-sm-9">
-                <input type="file" #fileInput (change)="onFileUpload($event)" accept=".csv,.xlsx,.xls" style="display: none">
+                <input type="file" #fileInput (change)="onFileUpload($event)" accept=".csv,.xlsx,.xls"
+                  style="display: none">
                 <p class="mt-4">
                   <button type="button" class="btn btn-light me-2" (click)="fileInput.click()" [disabled]="isUploading">
-                    <span *ngIf="isUploading" class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>
+                    <span *ngIf="isUploading" class="spinner-border spinner-border-sm me-2" role="status"
+                      aria-hidden="true"></span>
                     <i class="bi bi-upload me-2" *ngIf="!isUploading"></i>
                     {{ isUploading ? 'Uploading...' : 'Upload File' }}
                   </button>
-                  <button type="button" class="btn btn-link text-primary" (click)="onBulkEnquiryUpload()" [disabled]="isUploading" data-bs-toggle="modal" data-bs-target="#uploadbulkModal">
+                  <button type="button" class="btn btn-link text-primary" (click)="onBulkEnquiryUpload()"
+                    [disabled]="isUploading" data-bs-toggle="modal" data-bs-target="#uploadbulkModal">
                     <u> Sample File</u>
                   </button>
                 </p>
@@ -145,19 +155,50 @@
                 </div>
               </div>
             </div> -->
+            <div class="row mb-3">
+              <div>
+                <h5>Your Search : </h5>
+              </div>
+              <div class="col-12">
+                <ul class="searchresult-tags mb-4">
+                  <ng-container *ngFor="let item of visibleCombinedTags">
+                    <li style="cursor: pointer; background-color: #f8f9fa;">
+                      <span *ngIf="item.type === 'workaway'">
+                        {{ item.jobTitle }}
+                        <p style="font-size: 10px; text-align: center; margin-bottom: 0px !important;">(WorkAway)</p>
+                      </span>
+                      <span *ngIf="item.type === 'itsubcontract'">
+                        {{ item.projectName || item.expertise }}
+                        <p style="font-size: 10px; text-align: center; margin-bottom: 0px !important;">(IT Subcontracting)
+                        </p>
+                      </span>
+                      <span class="remove-tag" *ngIf="item.type === 'workaway'" (click)="removeFilter(item._id)"><i
+                          class="bi bi-x"></i></span>
+                      <span class="remove-tag" *ngIf="item.type === 'itsubcontract'"
+                        (click)="removeFilterItSub(item._id)"><i class="bi bi-x"></i></span>
+                      <br>
+                    </li>
+                  </ng-container>
+                  <button class="btn btn-link p-0" (click)="toggleShowAllTags()" *ngIf="showToggleButton">
+                    {{ showAllTags ? 'View Less' : 'View More' }}
+                  </button>
+                </ul>
+              </div>
+            </div>
 
             <div class="form-group text-end">
               <button class="btn btn-dark me-2" type="button" (click)="goBack()">
                 <i class="bi bi-arrow-left me-2"></i> Go Back
               </button>
               <button class="btn btn-primary" type="submit" [disabled]="isSubmitting">
-                <span *ngIf="isSubmitting" class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>
+                <span *ngIf="isSubmitting" class="spinner-border spinner-border-sm me-2" role="status"
+                  aria-hidden="true"></span>
                 {{ isSubmitting ? 'Submitting...' : 'Next Step' }}
                 <i class="bi bi-arrow-right ms-2" *ngIf="!isSubmitting"></i>
               </button>
             </div>
           </form>
-
+         
         </div>
       </div>
     </div>

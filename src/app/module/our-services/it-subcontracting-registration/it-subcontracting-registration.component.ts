@@ -23,11 +23,101 @@ export class ItSubcontractingRegistrationComponent implements OnInit {
     private formBuilder: FormBuilder,
     private itSubcontractService: ItSubcontractService,
     private toastr: ToastrService,
-    private serviceTypeService: ServiceTypeService
+    private serviceTypeService: ServiceTypeService,
   ) { }
 
   ngOnInit() {
     this.initializeForms();
+    this.getFilterList();
+    this.loadFilterList();
+  }
+
+
+  filterList: any[] = [];
+  itSubFilterList: any[] = [];
+  // How many tags to show by default
+  defaultTagLimit = 7;
+  showAllTags = false;
+
+  get visibleCombinedTags() {
+    // Combine both lists, prioritizing filterList first
+    const combined = [...this.filterList, ...this.itSubFilterList];
+    if (this.showAllTags || combined.length <= this.defaultTagLimit) {
+      return combined;
+    }
+    return combined.slice(0, this.defaultTagLimit);
+  }
+
+  // Function to be used for the getting saved filters
+  getFilterList() {
+    this.filterList = [];
+    this.itSubcontractService.getCandidateFilters().subscribe({
+      next: (response) => {
+        if (response?.status) {
+          this.filterList = response?.data || [];
+          this.filterList?.forEach((element) => {
+            if (element) {
+              element['type'] = 'workaway'
+            }
+          })
+        }
+      },
+    });
+  }
+
+  loadFilterList(): void {
+    this.itSubFilterList = [];
+    this.itSubcontractService.getSupplierFilterList().subscribe({
+      next: (response) => {
+        if (response.status && response.data) {
+          this.itSubFilterList = response.data;
+          this.itSubFilterList?.forEach((element: any) => {
+            if (element) {
+              element['type'] = 'itsubcontract'
+            }
+          })
+        }
+      }
+    });
+  }
+
+  toggleShowAllTags() {
+    this.showAllTags = !this.showAllTags;
+  }
+
+  get showToggleButton() {
+    return (this.filterList.length + this.itSubFilterList.length) > this.defaultTagLimit;
+  }
+
+  // Function to be used for the remove filter
+  removeFilter(filterId: string) {
+    this.itSubcontractService.removeCandidateFilters(filterId).subscribe({
+      next: (response) => {
+        if (response?.status) {
+          this.getFilterList();
+        }
+      },
+      error: (error) => {
+        console.error('Error removing filter:', error);
+      }
+    });
+  }
+
+  removeFilterItSub(filterId: string, event?: MouseEvent): void {
+    if (event) {
+      event.stopPropagation();
+    }
+
+    this.itSubcontractService.removeSupplierFilter(filterId).subscribe({
+      next: (response: { status: boolean; message: string }) => {
+        if (response?.status) {
+          this.loadFilterList();
+        }
+      },
+      error: (error: Error) => {
+        console.error('Error removing filter:', error);
+      }
+    });
   }
 
   private initializeForms() {

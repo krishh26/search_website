@@ -73,6 +73,9 @@ export class ItSubcontractService {
   }
 
   submitItSubContractData(payload: any): Observable<any> {
+    if (localStorage.getItem('anonymousUserId')) {
+      payload['anonymousUserId'] = localStorage.getItem('anonymousUserId');
+    }
     return this.http.post(`${this.baseUrl}/search-ui/formdata`, payload);
   }
 

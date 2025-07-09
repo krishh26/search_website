@@ -15,10 +15,13 @@ export class FormService {
   }
 
   submitForm(formData: any): Observable<any> {
-    const payload = {
+    const payload : any = {
       formType: 'contactUsForm',
       formData: formData
     };
+    if (localStorage.getItem('anonymousUserId')) {
+      payload['anonymousUserId'] = localStorage.getItem('anonymousUserId');
+    }
     return this.http.post(this.apiUrl, payload);
   }
 }

@@ -74,7 +74,10 @@ export class FormDataService {
   }
 
   // Submit complete form data
-  submitCompleteFormData(data: FormData): Observable<any> {
+  submitCompleteFormData(data: FormData | any): Observable<any> {
+    if (localStorage.getItem('anonymousUserId')) {
+      data['anonymousUserId'] = localStorage.getItem('anonymousUserId');
+    }
     return this.http.post(`${this.baseUrl}/search-ui/formdata`, data);
   }
 
@@ -103,6 +106,9 @@ export class FormDataService {
   }
 
   submitRegistrationData(data: any): Observable<RegistrationResponse> {
+    if (localStorage.getItem('anonymousUserId')) {
+      data['anonymousUserId'] = localStorage.getItem('anonymousUserId');
+    }
     return this.http.post<RegistrationResponse>(`${this.baseUrl}/search-ui/formdata`, data);
   }
 }
