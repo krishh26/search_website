@@ -151,6 +151,7 @@
 
         <!-- No Results Message -->
         <div *ngIf="!loading && !error && candidates.length === 0" class="text-center py-4">
+          <img src="assets/img/norecordfound.png" alt="No Records Found" class="img-fluid mb-3" style="max-width: 200px;">
           <p>No candidates found matching your search criteria.</p>
           <a routerLink="/our-services/workaway-registration" class="btn btn-primary mt-3">Register Now</a>
         </div>
