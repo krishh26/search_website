@@ -28,7 +28,7 @@ export class HomePageComponent implements OnInit {
   filterList: any[] = [];
   itSubFilterList: any[] = [];
   // How many tags to show by default
-  defaultTagLimit = 7;
+  defaultTagLimit = 5;
   showAllTags = false;
 
   constructor(

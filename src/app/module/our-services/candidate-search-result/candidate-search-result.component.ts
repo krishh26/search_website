@@ -65,7 +65,7 @@ export class CandidateSearchResultComponent implements OnInit {
   showServiceData: string = 'WorkAway';
 
   // How many tags to show by default
-  defaultTagLimit = 7;
+  defaultTagLimit = 5;
   showAllTags = false;
 
   constructor(
@@ -186,7 +186,7 @@ export class CandidateSearchResultComponent implements OnInit {
             this.selectFilter(this.selectedFilter ? this.selectedFilter : this.filterList?.[0]?._id);
           }
           this.loadFilterList();
-        } 
+        }
       },
       error: (error) => {
         this.loadFilterList();
