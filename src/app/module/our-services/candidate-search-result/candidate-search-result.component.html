@@ -152,6 +152,7 @@
         <!-- No Results Message -->
         <div *ngIf="!loading && !error && candidates.length === 0" class="text-center py-4">
           <p>No candidates found matching your search criteria.</p>
+          <a routerLink="/our-services/workaway-registration" class="btn btn-primary mt-3">Register Now</a>
         </div>
         <!--/end result-->
       </ng-container>
