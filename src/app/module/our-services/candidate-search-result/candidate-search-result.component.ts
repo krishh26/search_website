@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ItSubcontractService, Role } from 'src/app/services/it-subcontract.service';
 import { NotificationService } from 'src/app/services/notification/notification.service';
 import Swal from 'sweetalert2';
+import { debounceTime, distinctUntilChanged, Subject } from 'rxjs';
 
 interface Candidate {
   _id: string;
@@ -64,9 +65,24 @@ export class CandidateSearchResultComponent implements OnInit {
   itSelectedFilter: any;
   showServiceData: string = 'WorkAway';
 
+  // Custom search input and dropdown state (like home page)
+  jobTitleSearch: string = '';
+  showJobTitleDropdown: boolean = false;
+  expertiseSearch: string = '';
+  showExpertiseDropdown: boolean = false;
+  hasSearchedJob: boolean = false;
+  hasSearchedExpertise: boolean = false;
+
+  // Search subjects for debouncing
+  private jobTitleSearchSubject = new Subject<string>();
+  private expertiseSearchSubject = new Subject<string>();
+
   // How many tags to show by default
   defaultTagLimit = 5;
   showAllTags = false;
+  
+  // Information message visibility
+  showInfoMessage: boolean = true;
 
   constructor(
     private itSubcontractService: ItSubcontractService,
@@ -117,11 +133,37 @@ export class CandidateSearchResultComponent implements OnInit {
 
     // Load all supporting data
     this.getFilterList();
-    this.getJobTitles();
-    this.getExpertise();
-    // setTimeout(() => {
-    //   this.loadFilterList();
-    // }, 2000);
+    this.loadFilterList();
+
+    // Setup search debouncing for job titles
+    this.jobTitleSearchSubject.pipe(
+      debounceTime(300),
+      distinctUntilChanged()
+    ).subscribe(searchTerm => {
+      this.hasSearchedJob = true;
+      if (searchTerm && searchTerm.trim().length > 0) {
+        this.searchJobTitles(searchTerm);
+        this.showJobTitleDropdown = true;
+      } else {
+        this.jobRoles = [];
+        this.showJobTitleDropdown = false;
+      }
+    });
+
+    // Setup search debouncing for expertise
+    this.expertiseSearchSubject.pipe(
+      debounceTime(300),
+      distinctUntilChanged()
+    ).subscribe(searchTerm => {
+      this.hasSearchedExpertise = true;
+      if (searchTerm && searchTerm.trim().length > 0) {
+        this.searchExpertise(searchTerm);
+        this.showExpertiseDropdown = true;
+      } else {
+        this.expertiseList = [];
+        this.showExpertiseDropdown = false;
+      }
+    });
   }
 
   loadCandidatesForFilter(filterId: string) {
@@ -216,6 +258,17 @@ export class CandidateSearchResultComponent implements OnInit {
 
   onServiceChange(event: any) {
     this.selectedService = event.target.value;
+    // Reset search inputs and dropdowns when service changes
+    this.jobTitleSearch = '';
+    this.expertiseSearch = '';
+    this.searchQuery = '';
+    this.expertiseSelect = '';
+    this.jobRoles = [];
+    this.expertiseList = [];
+    this.showJobTitleDropdown = false;
+    this.showExpertiseDropdown = false;
+    this.hasSearchedJob = false;
+    this.hasSearchedExpertise = false;
   }
 
   searchData() {
@@ -226,21 +279,7 @@ export class CandidateSearchResultComponent implements OnInit {
     }
   }
 
-  getExpertise() {
-    this.expertiseList = [];
-    this.isLoading = true;
-    this.itSubcontractService.getExpertise().subscribe({
-      next: (response) => {
-        if (response?.status) {
-          this.expertiseList = (response?.data?.expertise || []).map((role: any) => ({ name: role.name }));
-        }
-        this.isLoading = false;
-      },
-      error: () => {
-        this.isLoading = false;
-      }
-    });
-  }
+
 
   calculateExperience(yearOfEstablishment: string | null): string {
     if (!yearOfEstablishment) return "0";
@@ -298,13 +337,77 @@ export class CandidateSearchResultComponent implements OnInit {
     });
   }
 
-  getJobTitles() {
-    this.jobRoles = [];
+
+
+  // Method to handle job title search input
+  onJobTitleSearch(event: any) {
+    const searchTerm = event?.term || '';
+    this.jobTitleSearchSubject.next(searchTerm);
+  }
+
+  // Method to handle expertise search input
+  onExpertiseSearch(event: any) {
+    const searchTerm = event?.term || '';
+    this.expertiseSearchSubject.next(searchTerm);
+  }
+
+  // Custom input handlers (like home page)
+  onJobTitleSearchChange(event: any) {
+    this.jobTitleSearch = event?.target?.value;
+    this.jobTitleSearchSubject.next(this.jobTitleSearch);
+  }
+  onExpertiseSearchChange(event: any) {
+    this.expertiseSearch = event?.target?.value;
+    this.expertiseSearchSubject.next(this.expertiseSearch);
+  }
+  selectJobTitle(jobTitle: string) {
+    this.searchQuery = jobTitle;
+    this.jobTitleSearch = jobTitle;
+    this.showJobTitleDropdown = false;
+  }
+  selectExpertise(expertise: string) {
+    this.expertiseSelect = expertise;
+    this.expertiseSearch = expertise;
+    this.showExpertiseDropdown = false;
+  }
+  onInputBlur() {
+    setTimeout(() => {
+      this.showJobTitleDropdown = false;
+      this.showExpertiseDropdown = false;
+    }, 200);
+  }
+  onKeyPress(event: KeyboardEvent) {
+    if (event.key === 'Enter') {
+      if (this.selectedService === 'WorkAway' && (this.searchQuery || this.jobTitleSearch)) {
+        this.onSearch();
+      } else if (this.selectedService === 'IT Subcontracting' && (this.expertiseSelect || this.expertiseSearch)) {
+        this.searchForItSubContract();
+      }
+    }
+  }
+
+  // Method to search job titles with API
+  searchJobTitles(searchTerm: string) {
     this.isLoading = true;
-    this.itSubcontractService.getJobTitles().subscribe({
+    this.itSubcontractService.getJobTitles(searchTerm).subscribe({
       next: (response) => {
         if (response?.status) {
           this.jobRoles = (response?.data?.roles || []).map((role: string) => ({ name: role }));
+        }
+        this.isLoading = false;
+      },
+      error: () => {
+        this.isLoading = false;
+      }
+    });
+  }
+  // Method to search expertise with API
+  searchExpertise(searchTerm: string) {
+    this.isLoading = true;
+    this.itSubcontractService.getExpertise(searchTerm).subscribe({
+      next: (response) => {
+        if (response?.status) {
+          this.expertiseList = (response?.data?.expertise || []).map((role: any) => ({ name: role.name }));
         }
         this.isLoading = false;
       },
@@ -372,47 +475,41 @@ export class CandidateSearchResultComponent implements OnInit {
   }
 
   onSearch() {
-    if (this.searchQuery) {
+    const searchValue = this.searchQuery || this.jobTitleSearch;
+    if (searchValue) {
       this.selectedFilter = null;
       this.itSelectedFilter = null;
       const payload = {
         userId: null, // need to add id based on the login
         anonymousUserId: localStorage.getItem('anonymousUserId') || null,
         filters: [{
-          jobTitle: this.searchQuery,
-          // minExperience: 0,
-          // maxExperience: 100,
-          // candidateCount: 100
+          jobTitle: searchValue,
         }]
       }
-
       this.itSubcontractService.saveCandidateFilters(payload).subscribe({
         next: (response) => {
           this.getFilterList();
         },
       });
-    } else {
     }
   }
-
   searchForItSubContract() {
-    if (this.expertiseSelect) {
+    const searchValue = this.expertiseSelect || this.expertiseSearch;
+    if (searchValue) {
       this.selectedFilter = null;
       this.itSelectedFilter = null;
-
       const payload = {
-        userId: '', // This should come from your auth service
+        userId: '',
         anonymousUserId: localStorage.getItem('anonymousUserId') || null,
         filters: [
           {
             "projectName": "",
-            "expertise": this.expertiseSelect,
+            "expertise": searchValue,
             "tags": "",
             "projectNameId": ""
           }
         ]
       };
-
       this.itSubcontractService.saveSupplierFilters(payload).subscribe({
         next: (response) => {
           if (response?.status) {
@@ -423,7 +520,6 @@ export class CandidateSearchResultComponent implements OnInit {
         error: (error) => {
         }
       });
-    } else {
     }
   }
 
@@ -492,5 +588,9 @@ export class CandidateSearchResultComponent implements OnInit {
     } else {
       return "10+";
     }
+  }
+
+  closeInfoMessage(): void {
+    this.showInfoMessage = false;
   }
 }

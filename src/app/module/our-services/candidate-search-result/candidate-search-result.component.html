@@ -20,20 +20,69 @@
 
           <!-- For WorkAway -->
           <ng-container *ngIf="selectedService == 'WorkAway'">
-            <div class="form-control border-0 flex-grow-1">
-              <ng-select [items]="jobRoles" [loading]="isLoading" [searchable]="true" bindLabel="name" bindValue="name"
-                placeholder="Search Here" [(ngModel)]="searchQuery" [clearable]="true" class="border-0 clean-ng-select">
-              </ng-select>
+            <div class="form-control border-0 flex-grow-1 position-relative">
+              <input type="text" class="form-control border-0" placeholder="Search Here" [(ngModel)]="jobTitleSearch"
+                (input)="onJobTitleSearchChange($event)" (blur)="onInputBlur()" (keypress)="onKeyPress($event)"
+                autocomplete="off">
+
+              <!-- Dropdown for job titles -->
+              <div class="dropdown-menu w-100 show" *ngIf="showJobTitleDropdown && jobRoles.length > 0"
+                style="position: absolute; top: 100%; left: 0; z-index: 1000; max-height: 200px; overflow-y: auto;">
+                <div class="dropdown-item" *ngFor="let role of jobRoles" (click)="selectJobTitle(role.name)"
+                  style="cursor: pointer; padding: 8px 16px;">
+                  {{ role.name }}
+                </div>
+              </div>
+
+              <!-- Loading indicator -->
+              <div class="dropdown-menu w-100 show" *ngIf="showJobTitleDropdown && isLoading"
+                style="position: absolute; top: 100%; left: 0; z-index: 1000;">
+                <div class="dropdown-item text-center" style="padding: 8px 16px;">
+                  <i class="bi bi-arrow-clockwise spin"></i> Loading...
+                </div>
+              </div>
+              <!-- No records found -->
+              <div class="dropdown-menu w-100 show"
+                *ngIf="showJobTitleDropdown && hasSearchedJob && !isLoading && jobRoles.length === 0 && jobTitleSearch.length > 0"
+                style="position: absolute; top: 100%; left: 0; z-index: 1000;">
+                <div class="dropdown-item text-center" style="padding: 8px 16px;">
+                  No records found
+                </div>
+              </div>
             </div>
           </ng-container>
 
           <!-- For IT Subcontracting -->
           <ng-container *ngIf="selectedService == 'IT Subcontracting'">
-            <div class="form-control border-0 flex-grow-1 mob-w100 tab-w100">
-              <ng-select [items]="expertiseList" [loading]="isLoading" [searchable]="true" bindLabel="name"
-                bindValue="name" placeholder="Search Here" [(ngModel)]="expertiseSelect" [clearable]="true"
-                class="border-0 clean-ng-select">
-              </ng-select>
+            <div class="form-control border-0 flex-grow-1 mob-w100 tab-w100 position-relative">
+              <input type="text" class="form-control border-0" placeholder="Search Here" [(ngModel)]="expertiseSearch"
+                (input)="onExpertiseSearchChange($event)" (blur)="onInputBlur()" (keypress)="onKeyPress($event)"
+                autocomplete="off">
+
+              <!-- Dropdown for expertise -->
+              <div class="dropdown-menu w-100 show" *ngIf="showExpertiseDropdown && expertiseList.length > 0"
+                style="position: absolute; top: 100%; left: 0; z-index: 1000; max-height: 200px; overflow-y: auto;">
+                <div class="dropdown-item" *ngFor="let expertise of expertiseList"
+                  (click)="selectExpertise(expertise.name)" style="cursor: pointer; padding: 8px 16px;">
+                  {{ expertise.name }}
+                </div>
+              </div>
+
+              <!-- Loading indicator -->
+              <div class="dropdown-menu w-100 show" *ngIf="showExpertiseDropdown && isLoading"
+                style="position: absolute; top: 100%; left: 0; z-index: 1000;">
+                <div class="dropdown-item text-center" style="padding: 8px 16px;">
+                  <i class="bi bi-arrow-clockwise spin"></i> Loading...
+                </div>
+              </div>
+              <!-- No records found -->
+              <div class="dropdown-menu w-100 show"
+                *ngIf="showExpertiseDropdown && hasSearchedExpertise && !isLoading && expertiseList.length === 0 && expertiseSearch.length > 0"
+                style="position: absolute; top: 100%; left: 0; z-index: 1000;">
+                <div class="dropdown-item text-center" style="padding: 8px 16px;">
+                  No records found
+                </div>
+              </div>
             </div>
           </ng-container>
 
@@ -42,7 +91,8 @@
               (click)="selectedService == 'WorkAway' ? onSearch() : searchForItSubContract()">
               <i class="bi bi-search me-2"></i>Search
             </button>
-            <a href="javascript:void(0)" class="text-primary text-decoration-none mob-w100 tab-w100" (click)="searchData()">
+            <a href="javascript:void(0)" class="text-primary text-decoration-none mob-w100 tab-w100"
+              (click)="searchData()">
               Advance Search
             </a>
           </div>
@@ -94,6 +144,17 @@
             <h1 class="headingTitle2">We found <span class="text-primary">{{totalCandidates}} Resources</span> (<span
                 class="text-success">{{activeCandidates}} Active</span>)</h1>
           </div>
+          <div class="col-12 infomation-message-box" *ngIf="showInfoMessage">
+            <div class="info-content">
+              <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Et quam aut autem porro impedit dolor.
+                Nesciunt
+                aliquid accusamus temporibus eveniet sed debitis quam esse aspernatur. Sed perferendis saepe corrupti
+                autem?</p>
+              <button class="close-btn" (click)="closeInfoMessage()" aria-label="Close information message">
+                <i class="bi bi-x-circle"></i>
+              </button>
+            </div>
+          </div>
         </div>
 
         <!-- Loading and Error States -->
@@ -128,13 +189,14 @@
                     {{candidate.highestQualification}}</p>
                 </div>
                 <div class="col-lg-4 col-xl-4 col-md-4 col-sm-4 col-12">
-                  <p><i class="bi bi-briefcase-fill text-muted me-2"></i> Experience- {{ candidate?.totalExperience ? getExperienceRange(candidate.totalExperience) : 0 }}
+                  <p><i class="bi bi-briefcase-fill text-muted me-2"></i> Experience- {{ candidate?.totalExperience ?
+                    getExperienceRange(candidate.totalExperience) : 0 }}
                     Years
                   </p>
                 </div>
                 <div class="col-lg-4 col-xl-4 col-md-4 col-sm-4 col-12">
                   <p><i class="bi bi-cash text-muted me-2"></i> Hourly Rate- £{{candidate.ukHourlyRate}} |
-                    </p>
+                  </p>
                 </div>
                 <div class="col-lg-8 col-xl-8 col-md-8 col-sm-8 col-12">
                   <p><i class="bi bi-translate text-muted me-2"></i> Language- {{candidate.languagesKnown.join(', ') ||
@@ -151,7 +213,8 @@
 
         <!-- No Results Message -->
         <div *ngIf="!loading && !error && candidates.length === 0" class="text-center py-4">
-          <img src="assets/img/norecordfound.png" alt="No Records Found" class="img-fluid mb-3" style="max-width: 200px;">
+          <img src="assets/img/norecordfound.png" alt="No Records Found" class="img-fluid mb-3"
+            style="max-width: 200px;">
           <p>No candidates found matching your search criteria.</p>
           <a routerLink="/our-services/workaway-registration" class="btn btn-primary mt-3">Register Now</a>
         </div>
@@ -164,6 +227,17 @@
               that
               match
               your search</h1>
+          </div>
+          <div class="col-12 infomation-message-box" *ngIf="showInfoMessage">
+            <div class="info-content">
+              <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Et quam aut autem porro impedit dolor.
+                Nesciunt
+                aliquid accusamus temporibus eveniet sed debitis quam esse aspernatur. Sed perferendis saepe corrupti
+                autem?</p>
+              <button class="close-btn" (click)="closeInfoMessage()" aria-label="Close information message">
+                <i class="bi bi-x-circle"></i>
+              </button>
+            </div>
           </div>
         </div>
 
@@ -218,6 +292,15 @@
             </div>
           </div>
         </div>
+
+        <!-- No Results Message -->
+        <div *ngIf="!loading && !error && candidates.length === 0" class="text-center py-4">
+          <img src="assets/img/norecordfound.png" alt="No Records Found" class="img-fluid mb-3"
+            style="max-width: 200px;">
+          <p>No Consortium Partners found matching your search criteria.</p>
+          <a routerLink="/our-services/it-subcontracting-registration" class="btn btn-primary mt-3">Register Now</a>
+        </div>
+        <!--/end result-->
       </ng-container>
     </div>
   </div>

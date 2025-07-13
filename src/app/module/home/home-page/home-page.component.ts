@@ -4,6 +4,7 @@ import { NavigationService } from '../../../common/services/navigation.service';
 import { ItSubcontractService } from 'src/app/services/it-subcontract.service';
 import { NotificationService } from 'src/app/services/notification/notification.service';
 import Swal from 'sweetalert2';
+import { debounceTime, distinctUntilChanged, Subject } from 'rxjs';
 
 @Component({
   selector: 'app-home-page',
@@ -21,9 +22,17 @@ export class HomePageComponent implements OnInit {
   jobRoles: any[] = [];
   isLoading: boolean = false;
   jobTitle!: string;
+  jobTitleSearch: string = ''; // New property for job title search input
+  showJobTitleDropdown: boolean = false; // Control dropdown visibility
 
   expertiseList: any[] = [];
   expertiseSelect!: string;
+  expertiseSearch: string = ''; // New property for expertise search input
+  showExpertiseDropdown: boolean = false; // Control dropdown visibility
+
+  // Search subjects for debouncing
+  private jobTitleSearchSubject = new Subject<string>();
+  private expertiseSearchSubject = new Subject<string>();
 
   filterList: any[] = [];
   itSubFilterList: any[] = [];
@@ -67,14 +76,40 @@ export class HomePageComponent implements OnInit {
       // Clear the service after using it
       this.navigationService.clearPreviousService();
     }
-    this.getJobTitles();
-    this.getExpertise();
     this.getFilterList();
     this.loadFilterList();
 
     // Subscribe to router events to handle navigation
     this.router.events.subscribe(() => {
       this.showAllTags = false;
+    });
+
+    // Setup search debouncing for job titles
+    this.jobTitleSearchSubject.pipe(
+      debounceTime(300),
+      distinctUntilChanged()
+    ).subscribe(searchTerm => {
+      if (searchTerm && searchTerm.trim().length > 0) {
+        this.searchJobTitles(searchTerm);
+        this.showJobTitleDropdown = true;
+      } else {
+        this.jobRoles = [];
+        this.showJobTitleDropdown = false;
+      }
+    });
+
+    // Setup search debouncing for expertise
+    this.expertiseSearchSubject.pipe(
+      debounceTime(300),
+      distinctUntilChanged()
+    ).subscribe(searchTerm => {
+      if (searchTerm && searchTerm.trim().length > 0) {
+        this.searchExpertise(searchTerm);
+        this.showExpertiseDropdown = true;
+      } else {
+        this.expertiseList = [];
+        this.showExpertiseDropdown = false;
+      }
     });
   }
 
@@ -142,29 +177,16 @@ export class HomePageComponent implements OnInit {
     });
   }
 
-  getJobTitles() {
-    this.jobRoles = [];
-    this.isLoading = true;
-    this.itSubcontractService.getJobTitles().subscribe({
-      next: (response) => {
-        if (response?.status) {
-          this.jobRoles = (response?.data?.roles || []).map((role: string) => ({ name: role }));
-        }
-        this.isLoading = false;
-      },
-      error: () => {
-        this.isLoading = false;
-      }
-    });
-  }
+
 
   searchForWorkAway() {
-    if (this.jobTitle) {
+    const searchValue = this.jobTitle || this.jobTitleSearch;
+    if (searchValue) {
       const payload = {
         userId: null, // need to add id based on the login
         anonymousUserId: localStorage.getItem('anonymousUserId') || null,
         filters: [{
-          jobTitle: this.jobTitle,
+          jobTitle: searchValue,
           // minExperience: 0,
           // maxExperience: 100,
           // candidateCount: 100
@@ -186,31 +208,18 @@ export class HomePageComponent implements OnInit {
   }
 
 
-  getExpertise() {
-    this.expertiseList = [];
-    this.isLoading = true;
-    this.itSubcontractService.getExpertise().subscribe({
-      next: (response) => {
-        if (response?.status) {
-          this.expertiseList = (response?.data?.expertise || []).map((role: any) => ({ name: role.name }));
-        }
-        this.isLoading = false;
-      },
-      error: () => {
-        this.isLoading = false;
-      }
-    });
-  }
+
 
   searchForItSubContract() {
-    if (this.expertiseSelect) {
+    const searchValue = this.expertiseSelect || this.expertiseSearch;
+    if (searchValue) {
       const payload = {
         userId: '', // This should come from your auth service
         anonymousUserId: localStorage.getItem('anonymousUserId') || null,
         filters: [
           {
             "projectName": "",
-            "expertise": this.expertiseSelect,
+            "expertise": searchValue,
             "tags": "",
             "projectNameId": ""
           }
@@ -248,6 +257,16 @@ export class HomePageComponent implements OnInit {
   onServiceChange(event: any) {
     const value = event.target.value;
     this.updateVisibility(value);
+    
+    // Reset search inputs and dropdowns when service changes
+    this.jobTitleSearch = '';
+    this.expertiseSearch = '';
+    this.jobTitle = '';
+    this.expertiseSelect = '';
+    this.jobRoles = [];
+    this.expertiseList = [];
+    this.showJobTitleDropdown = false;
+    this.showExpertiseDropdown = false;
   }
 
   private updateVisibility(service: string) {
@@ -295,5 +314,83 @@ export class HomePageComponent implements OnInit {
         id: id,
       }
     });
+  }
+
+  // New method to handle job title search input
+  onJobTitleSearchChange(event: any) {
+    this.jobTitleSearch = event?.target?.value;
+    this.jobTitleSearchSubject.next(event?.target?.value);
+  }
+
+  // New method to handle expertise search input
+  onExpertiseSearchChange(event: any) {
+    this.expertiseSearch = event?.target?.value;;
+    this.expertiseSearchSubject.next(event?.target?.value);
+  }
+
+  // New method to search job titles with API
+  searchJobTitles(searchTerm: string) {
+    this.isLoading = true;
+    this.itSubcontractService.getJobTitles(searchTerm).subscribe({
+      next: (response) => {
+        if (response?.status) {
+          this.jobRoles = (response?.data?.roles || []).map((role: string) => ({ name: role }));
+        }
+        this.isLoading = false;
+      },
+      error: () => {
+        this.isLoading = false;
+      }
+    });
+  }
+
+  // New method to search expertise with API
+  searchExpertise(searchTerm: string) {
+    this.isLoading = true;
+    this.itSubcontractService.getExpertise(searchTerm).subscribe({
+      next: (response) => {
+        if (response?.status) {
+          this.expertiseList = (response?.data?.expertise || []).map((role: any) => ({ name: role.name }));
+        }
+        this.isLoading = false;
+      },
+      error: () => {
+        this.isLoading = false;
+      }
+    });
+  }
+
+  // Method to select job title from dropdown
+  selectJobTitle(jobTitle: string) {
+    this.jobTitle = jobTitle;
+    this.jobTitleSearch = jobTitle;
+    this.showJobTitleDropdown = false;
+  }
+
+  // Method to select expertise from dropdown
+  selectExpertise(expertise: string) {
+    this.expertiseSelect = expertise;
+    this.expertiseSearch = expertise;
+    this.showExpertiseDropdown = false;
+  }
+
+  // Method to close dropdowns when clicking outside
+  onInputBlur() {
+    // Small delay to allow for dropdown item clicks
+    setTimeout(() => {
+      this.showJobTitleDropdown = false;
+      this.showExpertiseDropdown = false;
+    }, 200);
+  }
+
+  // Method to handle Enter key press
+  onKeyPress(event: KeyboardEvent) {
+    if (event.key === 'Enter') {
+      if (this.selectedService === 'WorkAway' && (this.jobTitle || this.jobTitleSearch)) {
+        this.searchForWorkAway();
+      } else if (this.selectedService === 'IT Subcontracting' && (this.expertiseSelect || this.expertiseSearch)) {
+        this.searchForItSubContract();
+      }
+    }
   }
 }

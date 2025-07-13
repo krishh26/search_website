@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ItSubcontractService } from 'src/app/services/it-subcontract.service';
 import { ToastrService } from 'ngx-toastr';
 import { ServiceTypeService } from '../../../services/service-type.service';
+import { debounceTime, distinctUntilChanged, Subject } from 'rxjs';
 
 @Component({
   selector: 'app-it-subcontracting-registration',
@@ -17,6 +18,15 @@ export class ItSubcontractingRegistrationComponent implements OnInit {
   isRepresentativeForClient: boolean = true;
   showContactForm: boolean = false;
   selectedServiceType: string = 'option2'; // Default to IT Subcontracting
+  technologiesList: any[] = [];
+
+  // Technology multiselect properties
+  techSearch: string = '';
+  selectedTechnologies: any[] = [];
+  showTechDropdown: boolean = false;
+  isLoadingTech: boolean = false;
+  hasSearchedTech: boolean = false;
+  private techSearchSubject = new Subject<string>();
 
   constructor(
     private router: Router,
@@ -30,8 +40,70 @@ export class ItSubcontractingRegistrationComponent implements OnInit {
     this.initializeForms();
     this.getFilterList();
     this.loadFilterList();
+    
+    // Setup search debouncing for technologies
+    this.techSearchSubject.pipe(
+      debounceTime(300),
+      distinctUntilChanged()
+    ).subscribe(searchTerm => {
+      this.hasSearchedTech = true;
+      if (searchTerm && searchTerm.trim().length > 0) {
+        this.searchTechnologies(searchTerm);
+        this.showTechDropdown = true;
+      } else {
+        this.technologiesList = [];
+        this.showTechDropdown = false;
+      }
+    });
   }
 
+  // Technology search methods
+  onTechSearchChange(event: any) {
+    this.techSearch = event?.target?.value;
+    this.techSearchSubject.next(this.techSearch);
+  }
+
+  searchTechnologies(searchTerm: string) {
+    this.isLoadingTech = true;
+    this.itSubcontractService.getTechnologies({ search: searchTerm }).subscribe({
+      next: (response) => {
+        if (response?.status) {
+          this.technologiesList = response?.data || [];
+        }
+        this.isLoadingTech = false;
+      },
+      error: () => {
+        this.isLoadingTech = false;
+      }
+    });
+  }
+
+  selectTechnology(tech: any) {
+    // Check if technology is already selected
+    const isAlreadySelected = this.selectedTechnologies.some(t => t._id === tech._id);
+    if (!isAlreadySelected) {
+      this.selectedTechnologies.push(tech);
+      this.updateLanguageField();
+    }
+    this.showTechDropdown = false;
+    this.techSearch = '';
+  }
+
+  removeTechnology(techId: string) {
+    this.selectedTechnologies = this.selectedTechnologies.filter(t => t._id !== techId);
+    this.updateLanguageField();
+  }
+
+  updateLanguageField() {
+    const languageString = this.selectedTechnologies.map(t => t.name).join(', ');
+    this.registrationForm.patchValue({ language: languageString });
+  }
+
+  onTechInputBlur() {
+    setTimeout(() => {
+      this.showTechDropdown = false;
+    }, 200);
+  }
 
   filterList: any[] = [];
   itSubFilterList: any[] = [];
@@ -212,6 +284,7 @@ export class ItSubcontractingRegistrationComponent implements OnInit {
         endDate: '',
         budget: ''
       });
+      this.selectedTechnologies = [];
     }
   }
 
@@ -283,6 +356,7 @@ export class ItSubcontractingRegistrationComponent implements OnInit {
             this.showContactForm = false;
             this.registrationForm.reset();
             this.contactForm.reset();
+            this.selectedTechnologies = [];
             this.toastr.success('Form submitted successfully!', 'Success');
           } else {
             this.toastr.error('Failed to submit form. Please try again.', 'Error');

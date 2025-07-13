@@ -14,21 +14,67 @@
 
             <!-- For WorkAway -->
             <ng-container *ngIf="selectedService == 'WorkAway'">
-              <div class="form-control border-0 flex-grow-1">
-                <ng-select [items]="jobRoles" [loading]="isLoading" [searchable]="true" bindLabel="name"
-                  bindValue="name" placeholder="Search Here" [(ngModel)]="jobTitle" [clearable]="true"
-                  class="border-0 clean-ng-select">
-                </ng-select>
+              <div class="form-control border-0 flex-grow-1 position-relative">
+                <input 
+                  type="text" 
+                  class="form-control border-0" 
+                  placeholder="Search Here" 
+                  [(ngModel)]="jobTitleSearch"
+                  (input)="onJobTitleSearchChange($event)"
+                  (blur)="onInputBlur()"
+                  (keypress)="onKeyPress($event)"
+                  autocomplete="off">
+                
+                <!-- Dropdown for job titles -->
+                <div class="dropdown-menu w-100 show" *ngIf="showJobTitleDropdown && jobRoles.length > 0" style="position: absolute; top: 100%; left: 0; z-index: 1000; max-height: 200px; overflow-y: auto;">
+                  <div 
+                    class="dropdown-item" 
+                    *ngFor="let role of jobRoles" 
+                    (click)="selectJobTitle(role.name)"
+                    style="cursor: pointer; padding: 8px 16px;">
+                    {{ role.name }}
+                  </div>
+                </div>
+                
+                <!-- Loading indicator -->
+                <div class="dropdown-menu w-100 show" *ngIf="showJobTitleDropdown && isLoading" style="position: absolute; top: 100%; left: 0; z-index: 1000;">
+                  <div class="dropdown-item text-center" style="padding: 8px 16px;">
+                    <i class="bi bi-arrow-clockwise spin"></i> Loading...
+                  </div>
+                </div>
               </div>
             </ng-container>
 
             <!-- For IT Subcontracting -->
             <ng-container *ngIf="selectedService == 'IT Subcontracting'">
-              <div class="form-control border-0 flex-grow-1 mob-w100 tab-w100">
-                <ng-select [items]="expertiseList" [loading]="isLoading" [searchable]="true" bindLabel="name"
-                  bindValue="name" placeholder="Search Here" [(ngModel)]="expertiseSelect" [clearable]="true"
-                  class="clean-ng-select">
-                </ng-select>
+              <div class="form-control border-0 flex-grow-1 mob-w100 tab-w100 position-relative">
+                <input 
+                  type="text" 
+                  class="form-control border-0" 
+                  placeholder="Search Here" 
+                  [(ngModel)]="expertiseSearch"
+                  (input)="onExpertiseSearchChange($event)"
+                  (blur)="onInputBlur()"
+                  (keypress)="onKeyPress($event)"
+                  autocomplete="off">
+                
+                <!-- Dropdown for expertise -->
+                <div class="dropdown-menu w-100 show" *ngIf="showExpertiseDropdown && expertiseList.length > 0" style="position: absolute; top: 100%; left: 0; z-index: 1000; max-height: 200px; overflow-y: auto;">
+                  <div 
+                    class="dropdown-item" 
+                    *ngFor="let expertise of expertiseList" 
+                    (click)="selectExpertise(expertise.name)"
+                    style="cursor: pointer; padding: 8px 16px;">
+                    {{ expertise.name }}
+                  </div>
+                </div>
+                
+                <!-- Loading indicator -->
+                <div class="dropdown-menu w-100 show" *ngIf="showExpertiseDropdown && isLoading" style="position: absolute; top: 100%; left: 0; z-index: 1000;">
+                  <div class="dropdown-item text-center" style="padding: 8px 16px;">
+                    <i class="bi bi-arrow-clockwise spin"></i> Loading...
+                  </div>
+                </div>
               </div>
             </ng-container>
 
@@ -37,7 +83,8 @@
                 (click)="selectedService == 'WorkAway' ? searchForWorkAway() : searchForItSubContract()">
                 <i class="bi bi-search me-2"></i>Search
               </button>
-              <a href="javascript:void(0)" class="text-primary text-decoration-none mob-w100 tab-w100" (click)="searchData()">
+              <a href="javascript:void(0)" class="text-primary text-decoration-none mob-w100 tab-w100"
+                (click)="searchData()">
                 Advance Search
               </a>
             </div>

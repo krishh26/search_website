@@ -214,3 +214,45 @@
     color: #0a58ca;
   }
 }
+
+// Loading spinner animation
+.spin {
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+// Custom dropdown styling
+.dropdown-menu {
+  border: 1px solid #e9ecef;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  border-radius: 8px;
+  margin-top: 2px;
+  background: white;
+  
+  .dropdown-item {
+    border: none;
+    background: transparent;
+    transition: background-color 0.2s ease;
+    
+    &:hover {
+      background-color: #f8f9fa;
+    }
+    
+    &:active {
+      background-color: #e9ecef;
+    }
+  }
+}
+
+// Position relative for dropdown container
+.position-relative {
+  position: relative;
+}

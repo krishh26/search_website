@@ -160,11 +160,15 @@ export class ItSubcontractService {
     return this.http.get(`${this.baseUrl}/web-user/public/expertise-list`);
   }
 
-  getSupplierFilterList(): Observable<any> {
+  getSupplierFilterList(page: number = 1, limit: number = 10000): Observable<any> {
     let params = new HttpParams();
     if (localStorage.getItem('anonymousUserId')) {
       params = new HttpParams().set('anonymousUserId', localStorage.getItem('anonymousUserId') || "");
     }
+
+    params = params.set('limit', limit.toString())
+    params = params.set('page', page.toString());
+
     return this.http.get(`${this.baseUrl}/user/public/supplier-filter/list`, { params });
   }
 
@@ -181,7 +185,21 @@ export class ItSubcontractService {
     return this.http.delete<{ status: boolean; message: string }>(`${this.baseUrl}/user/public/supplier-filter/${filterId}`);
   }
 
-  getSuppliersByFilterId(filterId: string): Observable<any> {
-    return this.http.get<any>(`${this.baseUrl}/user/public/supplier-filter/${filterId}/suppliers`);
+  getSuppliersByFilterId(filterId: string, page: number = 1, limit: number = 10000): Observable<any> {
+    const params = new HttpParams()
+      .set('limit', limit.toString())
+      .set('page', page.toString());
+
+    return this.http.get<any>(`${this.baseUrl}/user/public/supplier-filter/${filterId}/suppliers`, { params });
+  }
+
+
+  getTechnologies(payload: { search: string }): Observable<any> {
+    let params = new HttpParams()
+    if (payload?.search) {
+      params = params.set('search', payload.search);
+    }
+
+    return this.http.get(`${this.baseUrl}/tech-language/public/technologies`, { params });
   }
 }
