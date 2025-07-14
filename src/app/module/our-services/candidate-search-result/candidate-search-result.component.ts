@@ -80,7 +80,7 @@ export class CandidateSearchResultComponent implements OnInit {
   // How many tags to show by default
   defaultTagLimit = 5;
   showAllTags = false;
-  
+
   // Information message visibility
   showInfoMessage: boolean = true;
 
@@ -592,5 +592,39 @@ export class CandidateSearchResultComponent implements OnInit {
 
   closeInfoMessage(): void {
     this.showInfoMessage = false;
+  }
+
+  supplierAddToCart(item: any) {
+    const payload = {
+      "itemType": "candidate",
+      "itemId": item?.supplierId,
+      "anonymousUserId": localStorage.getItem('anonymousUserId')
+    }
+
+    this.itSubcontractService.addToCart(payload).subscribe((response) => {
+      {
+        if (response?.status) {
+          this.notificationService.showSuccess('Added to cart.');
+        }
+      }
+    });
+  }
+
+
+  candidateAddToCart(item: any) {
+    console.log("item", item);
+    const payload = {
+      "itemType": "supplier",
+      "itemId": item?._id,
+      "anonymousUserId": localStorage.getItem('anonymousUserId')
+    }
+
+    this.itSubcontractService.addToCart(payload).subscribe((response) => {
+      {
+        if (response?.status) {
+          this.notificationService.showSuccess('Added to cart.');
+        }
+      }
+    });
   }
 }

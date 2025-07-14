@@ -20,6 +20,7 @@ export class E2eQaRegistrationComponent implements OnInit {
   isSubmitting: boolean = false;
   isUploading: boolean = false;
   selectedServiceType: string = 'option3'; // Default to E2E QA Services
+  cartItems: any = [];
 
   constructor(
     private router: Router,
@@ -34,6 +35,7 @@ export class E2eQaRegistrationComponent implements OnInit {
     this.initializeForms();
     this.getFilterList();
     this.loadFilterList();
+    this.getCartItems();
   }
 
 
@@ -324,5 +326,45 @@ export class E2eQaRegistrationComponent implements OnInit {
         break;
       // No need for option3 case as we're already on E2E QA page
     }
+  }
+
+
+  getCartItems() {
+    this.cartItems = [];
+    this.itSubcontractService.getCartItems().subscribe((response: any) => {
+      if (response?.status) {
+        this.cartItems = response?.data || [];
+      }
+    })
+  }
+
+  removeCartItem(itemId: string) {
+    this.itSubcontractService.removeFromCart(itemId).subscribe({
+      next: () => this.getCartItems(),
+      error: (err) => console.error('Failed to remove item from cart', err)
+    });
+  }
+
+  maskName(name: string): string {
+    const words = name.split(' ');
+
+    return words.map((word, index) => {
+      if (index === 0) {
+        // First word: show 1st, 3rd, 5th
+        return word
+          .split('')
+          .map((char, i) => (i === 0 || i === 2 || i === 4 ? char : '*'))
+          .join('');
+      } else if (index === 1) {
+        // Second word: show 1st and 3rd
+        return word
+          .split('')
+          .map((char, i) => (i === 0 || i === 2 ? char : '*'))
+          .join('');
+      } else {
+        // All other words: full mask
+        return '*'.repeat(word.length);
+      }
+    }).join(' ');
   }
 }

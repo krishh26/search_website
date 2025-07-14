@@ -202,4 +202,24 @@ export class ItSubcontractService {
 
     return this.http.get(`${this.baseUrl}/tech-language/public/technologies`, { params });
   }
+
+  addToCart(filters: any): Observable<any> {
+    return this.http.post(`${this.baseUrl}/cart/public/add`, filters);
+  }
+
+  getCartItems(): Observable<any> {
+    let params = new HttpParams();
+    if (localStorage.getItem('anonymousUserId')) {
+      params = new HttpParams().set('anonymousUserId', localStorage.getItem('anonymousUserId') || "");
+    }
+    return this.http.get(`${this.baseUrl}/cart/public/items`, { params });
+  }
+
+  removeFromCart(id: string): Observable<any> {
+    const options: any = {};
+    if (localStorage.getItem('anonymousUserId')) {
+      options.body = { anonymousUserId: localStorage.getItem('anonymousUserId') || '' };
+    }
+    return this.http.delete(`${this.baseUrl}/cart/public/remove/${id}`, options);
+  }
 }

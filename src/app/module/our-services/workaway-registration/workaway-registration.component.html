@@ -169,7 +169,8 @@
                       </span>
                       <span *ngIf="item.type === 'itsubcontract'">
                         {{ item.projectName || item.expertise }}
-                        <p style="font-size: 10px; text-align: center; margin-bottom: 0px !important;">(IT Subcontracting)
+                        <p style="font-size: 10px; text-align: center; margin-bottom: 0px !important;">(IT
+                          Subcontracting)
                         </p>
                       </span>
                       <span class="remove-tag" *ngIf="item.type === 'workaway'" (click)="removeFilter(item._id)"><i
@@ -183,6 +184,29 @@
                     {{ showAllTags ? 'View Less' : 'View More' }}
                   </button>
                 </ul>
+              </div>
+            </div>
+
+            <div class="row mb-3" *ngIf="cartItems.items.length">
+              <div>
+                <h5>Your Carts : </h5>
+              </div>
+              <div class="col-12">
+                <div *ngIf="cartItems.items && cartItems.items.length > 0;">
+                  <div *ngFor="let item of cartItems.items" class="cart-card">
+                    <div class="cart-card-header">
+                      <h2>{{ maskName(item.itemDetails.companyName) }}</h2>
+                      <button (click)="removeCartItem(item._id)" class="remove-btn">Remove</button>
+                    </div>
+                    <div class="cart-card-body">
+                      <p><strong>Email:</strong> {{ item.itemDetails.email }}</p>
+                      <p><strong>Type:</strong> {{ item.itemType == 'candidate' ? 'WorkAway' : 'IT Subcontract'
+                        }}</p>
+                      <p><strong>Plan:</strong> {{ item.itemDetails.plan }}</p>
+                      <p><strong>Company Address:</strong> {{ item.itemDetails.companyAddress }}</p>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
 

@@ -1,11 +1,12 @@
 <main>
-  <section class="registration-section margin-top104" style="background-image: url(assets/img/search-background-image.png);">
+  <section class="registration-section margin-top104"
+    style="background-image: url(assets/img/search-background-image.png);">
     <div class="overlay-bg" style="opacity: 1;">
       <div class="container">
         <div class="text-center text-white">
           <div class="form-check form-check-inline">
             <input class="form-check-input" type="radio" name="serviceType" id="inlineRadio1" value="workaway"
-              [(ngModel)]="serviceType"checked>
+              [(ngModel)]="serviceType" checked>
             <label class="form-check-label" for="inlineRadio1"> WorkAway</label>
           </div>
           <div class="form-check form-check-inline">
@@ -51,32 +52,30 @@
                 <form [formGroup]="searchForm">
                   <div class="form-group mb-3">
                     <label class="form-label">Job Title <span class="text-danger">*</span> </label>
-                    <ng-select
-                      [items]="jobRoles"
-                      [clearable]="false"
-                      placeholder="Select Job Title"
-                      formControlName="jobTitle"
-                      [bindLabel]="'name'"
-                      [bindValue]="'name'"
-                      [loading]="isLoading"
-                      class="form-control-select"
-                      [notFoundText]="'No job titles found'">
+                    <ng-select [items]="jobRoles" [clearable]="false" placeholder="Select Job Title"
+                      formControlName="jobTitle" [bindLabel]="'name'" [bindValue]="'name'" [loading]="isLoading"
+                      class="form-control-select" [notFoundText]="'No job titles found'">
                     </ng-select>
-                    <div *ngIf="searchForm.get('jobTitle')?.touched && searchForm.get('jobTitle')?.invalid" class="text-danger">
+                    <div *ngIf="searchForm.get('jobTitle')?.touched && searchForm.get('jobTitle')?.invalid"
+                      class="text-danger">
                       Job title is required
                     </div>
                   </div>
                   <div class="form-group">
                     <label>Number of Resources</label>
-                    <input type="number" placeholder="Number of Resources" class="form-control" formControlName="numberOfResources">
-                    <div *ngIf="searchForm.get('numberOfResources')?.touched && searchForm.get('numberOfResources')?.invalid" class="text-danger">
+                    <input type="number" placeholder="Number of Resources" class="form-control"
+                      formControlName="numberOfResources">
+                    <div
+                      *ngIf="searchForm.get('numberOfResources')?.touched && searchForm.get('numberOfResources')?.invalid"
+                      class="text-danger">
                       Number of resources is required and must be greater than 0
                     </div>
                   </div>
                   <div class="form-group">
                     <label>Experience</label>
                     <input type="text" placeholder="Experience Level" class="form-control" formControlName="experience">
-                    <div *ngIf="searchForm.get('experience')?.touched && searchForm.get('experience')?.invalid" class="text-danger">
+                    <div *ngIf="searchForm.get('experience')?.touched && searchForm.get('experience')?.invalid"
+                      class="text-danger">
                       Experience is required
                     </div>
                   </div>
@@ -88,7 +87,8 @@
                         <a (click)="goBack()" class="btn btn-dark mob-mb1 me-2">
                           <i class="bi bi-arrow-left me-2"></i> Go Back
                         </a>
-                        <button type="button" class="btn btn-success" (click)="search()" [disabled]="filters.length === 0">
+                        <button type="button" class="btn btn-success" (click)="search()"
+                          [disabled]="filters.length === 0">
                           <i class="bi bi-search"></i> Search
                         </button>
                       </div>

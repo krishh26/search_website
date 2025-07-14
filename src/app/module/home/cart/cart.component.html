@@ -1,0 +1,30 @@
+<main>
+    <section class="hero">
+        <div class="container">
+            <div class="row align-items-center mb-4">
+                <div class="col-12">
+                    <div *ngIf="cartItems.items && cartItems.items.length > 0; else emptyCart">
+                        <div *ngFor="let item of cartItems.items" class="cart-card">
+                            <div class="cart-card-header">
+                                <h2>{{ maskName(item.itemDetails.companyName) }}</h2>
+                                <button (click)="removeCartItem(item._id)" class="remove-btn">Remove</button>
+                            </div>
+                            <div class="cart-card-body">
+                                <p><strong>Email:</strong> {{ item.itemDetails.email }}</p>
+                                <p><strong>Type:</strong> {{ item.itemType == 'candidate' ? 'WorkAway' : 'IT Subcontract'
+                                    }}</p>
+                                <p><strong>Plan:</strong> {{ item.itemDetails.plan }}</p>
+                                <p><strong>Company Address:</strong> {{ item.itemDetails.companyAddress }}</p>
+                            </div>
+                        </div>
+                    </div>
+                    <ng-template #emptyCart>
+                        <div class="empty-cart-message">No items in cart.</div>
+                    </ng-template>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+
+<!-- Add some basic styles for .cart-card, .cart-card-header, .remove-btn, etc. in the SCSS file for better appearance -->

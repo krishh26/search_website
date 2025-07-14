@@ -177,7 +177,7 @@
                 <p class="mb-0">Job Title: {{candidate.currentRole?.name || 'N/A'}}</p>
               </div>
               <div class="col-lg-2 col-xl-2 col-md-2 col-sm-2 col-12">
-                <a routerLink="/our-services/workaway-registration" class="btn btn-outline-primary w-100">Engage</a>
+                <a (click)="supplierAddToCart(candidate)" class="btn btn-outline-primary w-100">Engage</a>
               </div>
               <div class="dotted-spacer"></div>
               <div class="row">
@@ -260,7 +260,7 @@
                 </ul>
               </div>
               <div class="col-lg-2 col-xl-2 col-md-2 col-sm-2 col-12">
-                <a [routerLink]="['/our-services/it-subcontracting-registration']"
+                <a (click)="candidateAddToCart(supplier)"
                   class="btn btn-outline-primary w-100">Engage</a>
               </div>
               <div class="dotted-spacer"></div>
