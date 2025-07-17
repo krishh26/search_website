@@ -1,0 +1,54 @@
+<main>
+  <section class="hero" style="padding: 135px 0 0 0; background-color: white;">
+    <div class="container">
+      <div class="cart-header mb-4">
+        <h3>My Cart</h3>
+      </div>
+      <div class="row">
+        <!-- Left Filter Sidebar -->
+        <div class="col-md-3 mb-4">
+          <div class="cart-filter" *ngIf="cartItems?.items && cartItems?.items?.length > 0">
+            <h3>Filter By</h3>
+            <ul>
+              <li>
+                <button class="filter-btn" [class.active]="selectedFilter === 'all'" (click)="selectedFilter = 'all'">All</button>
+              </li>
+              <li>
+                <button class="filter-btn" [class.active]="selectedFilter === 'workaway'" (click)="selectedFilter = 'workaway'">WorkAway</button>
+              </li>
+              <li>
+                <button class="filter-btn" [class.active]="selectedFilter === 'it-subcontract'" (click)="selectedFilter = 'it-subcontract'">IT Subcontract</button>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Cart Items -->
+        <div class="col-md-9">
+          <div *ngIf="cartItems?.items && cartItems?.items?.length > 0; else emptyCart">
+            <div *ngFor="let item of cartItems.items; let i = index" class="cart-card" [ngStyle]="{'border-left': '5px solid ' + getBorderColor(i)}">
+              <div class="cart-card-header">
+                <h2>{{ maskName(item.itemDetails.companyName) }}</h2>
+                <button (click)="removeCartItem(item._id)" class="remove-btn">Remove</button>
+              </div>
+              <div class="cart-card-body">
+                <p><strong>Email:</strong> {{ item.itemDetails.email }}</p>
+                <p><strong>Type:</strong> {{ item.itemType == 'candidate' ? 'WorkAway' : 'IT Subcontract' }}</p>
+                <p><strong>Plan:</strong> {{ item.itemDetails.plan }}</p>
+                <p><strong>Company Address:</strong> {{ item.itemDetails.companyAddress }}</p>
+              </div>
+            </div>
+          </div>
+          <ng-template #emptyCart>
+            <div class="empty-cart-message">No items in cart.</div>
+          </ng-template>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-12 text-center mb-4">
+            <a routerLink="/our-services/it-subcontracting-registration" class="btn btn-primary mt-3">Register Now</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>

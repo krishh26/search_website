@@ -1,3 +1,100 @@
+<!--Shrikant neww code-->
+<section class="margin-top104 border-top">
+  <div class="container">
+    <div class="headingTitle3 mb-3">My Cart</div>
+    <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+      <li class="nav-item" role="presentation">
+        <button class="nav-link active" id="pills-all-tab" data-bs-toggle="pill" data-bs-target="#pills-all"
+          type="button" role="tab" aria-controls="pills-all" aria-selected="true">Workaway</button>
+      </li>
+      <li class="nav-item" role="presentation">
+        <button class="nav-link" id="pills-suggested-tab" data-bs-toggle="pill" data-bs-target="#pills-suggested"
+          type="button" role="tab" aria-controls="pills-suggested" aria-selected="false">Resouce Sharing</button>
+      </li>
+    </ul>
+    <div class="tab-content" id="pills-tabContent">
+      <div class="tab-pane fade show active" id="pills-all" role="tabpanel" aria-labelledby="pills-all-tab">
+        <div class="cartCard mb-3">
+          <div class="card-body p-4">
+            <h4><strong>Shrikant *****, </strong> <small>Male</small></h4>
+            <p class="mb-0">Job Title : Front-end Developer</p>
+
+            <ul class="inlineList mt-2">
+              <li><i class="bi bi-globe text-muted me-2"></i> Nationality- Indian</li>
+              <li><i class="bi bi-mortarboard-fill text-muted me-2"></i> Qualification- M.Tech (Computer)</li>
+              <li><i class="bi bi-briefcase-fill text-muted me-2"></i> Experience- 3 Years</li>
+              <li><i class="bi bi-cash text-muted me-2"></i> Hourly Rate- $3.51 | ₹300</li>
+              <li><i class="bi bi-translate text-muted me-2"></i> Language- English (SW), Hindi (SW), Marathi (SW)</li>
+            </ul>           
+          </div>
+        </div>
+        <div class="cartCard mb-3">
+          <div class="card-body p-4">
+            <h4><strong>Shrikant *****, </strong> <small>Male</small></h4>
+            <p class="mb-0">Job Title : Front-end Developer</p>
+
+            <ul class="inlineList mt-2">
+              <li><i class="bi bi-globe text-muted me-2"></i> Nationality- Indian</li>
+              <li><i class="bi bi-mortarboard-fill text-muted me-2"></i> Qualification- M.Tech (Computer)</li>
+              <li><i class="bi bi-briefcase-fill text-muted me-2"></i> Experience- 3 Years</li>
+              <li><i class="bi bi-cash text-muted me-2"></i> Hourly Rate- $3.51 | ₹300</li>
+              <li><i class="bi bi-translate text-muted me-2"></i> Language- English (SW), Hindi (SW), Marathi (SW)</li>
+            </ul>           
+          </div>
+        </div>
+        <div class="cartCard mb-3">
+          <div class="card-body p-4">
+            <h4><strong>Shrikant *****, </strong> <small>Male</small></h4>
+            <p class="mb-0">Job Title : Front-end Developer</p>
+
+            <ul class="inlineList mt-2">
+              <li><i class="bi bi-globe text-muted me-2"></i> Nationality- Indian</li>
+              <li><i class="bi bi-mortarboard-fill text-muted me-2"></i> Qualification- M.Tech (Computer)</li>
+              <li><i class="bi bi-briefcase-fill text-muted me-2"></i> Experience- 3 Years</li>
+              <li><i class="bi bi-cash text-muted me-2"></i> Hourly Rate- $3.51 | ₹300</li>
+              <li><i class="bi bi-translate text-muted me-2"></i> Language- English (SW), Hindi (SW), Marathi (SW)</li>
+            </ul>           
+          </div>
+        </div>
+        <div class="cartCard mb-3">
+          <div class="card-body p-4">
+            <h4><strong>Shrikant *****, </strong> <small>Male</small></h4>
+            <p class="mb-0">Job Title : Front-end Developer</p>
+
+            <ul class="inlineList mt-2">
+              <li><i class="bi bi-globe text-muted me-2"></i> Nationality- Indian</li>
+              <li><i class="bi bi-mortarboard-fill text-muted me-2"></i> Qualification- M.Tech (Computer)</li>
+              <li><i class="bi bi-briefcase-fill text-muted me-2"></i> Experience- 3 Years</li>
+              <li><i class="bi bi-cash text-muted me-2"></i> Hourly Rate- $3.51 | ₹300</li>
+              <li><i class="bi bi-translate text-muted me-2"></i> Language- English (SW), Hindi (SW), Marathi (SW)</li>
+            </ul>           
+          </div>
+        </div>
+      </div>
+      <div class="tab-pane fade" id="pills-suggested" role="tabpanel" aria-labelledby="pills-suggested-tab">
+        <div class="text-center">
+          <img src="/assets/img/error-page.png" width="100"/>
+          <h2 class="headingTitle3 text-center">OOPS!! No Record Found</h2>
+        </div>
+      </div>
+    </div>
+
+     <div class="row">
+        <div class="col-12 text-center mb-4">
+          <a routerLink="/our-services/it-subcontracting-registration" class="btn btn-primary mt-3">Register Now</a>
+        </div>
+      </div>
+
+  </div>
+</section>
+
+<!--/shrikant new code-->
+
+
+
+
+
+
 <main>
   <section class="hero" style="padding: 135px 0 0 0; background-color: white;">
     <div class="container">
@@ -11,13 +108,16 @@
             <h3>Filter By</h3>
             <ul>
               <li>
-                <button class="filter-btn" [class.active]="selectedFilter === 'all'" (click)="selectedFilter = 'all'">All</button>
+                <button class="filter-btn" [class.active]="selectedFilter === 'all'"
+                  (click)="selectedFilter = 'all'">All</button>
               </li>
               <li>
-                <button class="filter-btn" [class.active]="selectedFilter === 'workaway'" (click)="selectedFilter = 'workaway'">WorkAway</button>
+                <button class="filter-btn" [class.active]="selectedFilter === 'workaway'"
+                  (click)="selectedFilter = 'workaway'">WorkAway</button>
               </li>
               <li>
-                <button class="filter-btn" [class.active]="selectedFilter === 'it-subcontract'" (click)="selectedFilter = 'it-subcontract'">IT Subcontract</button>
+                <button class="filter-btn" [class.active]="selectedFilter === 'it-subcontract'"
+                  (click)="selectedFilter = 'it-subcontract'">IT Subcontract</button>
               </li>
             </ul>
           </div>
@@ -26,7 +126,8 @@
         <!-- Cart Items -->
         <div class="col-md-9">
           <div *ngIf="cartItems?.items && cartItems?.items?.length > 0; else emptyCart">
-            <div *ngFor="let item of cartItems.items; let i = index" class="cart-card" [ngStyle]="{'border-left': '5px solid ' + getBorderColor(i)}">
+            <div *ngFor="let item of cartItems.items; let i = index" class="cart-card"
+              [ngStyle]="{'border-left': '5px solid ' + getBorderColor(i)}">
               <div class="cart-card-header">
                 <h2>{{ maskName(item.itemDetails.companyName) }}</h2>
                 <button (click)="removeCartItem(item._id)" class="remove-btn">Remove</button>
@@ -46,7 +147,7 @@
       </div>
       <div class="row">
         <div class="col-12 text-center mb-4">
-            <a routerLink="/our-services/it-subcontracting-registration" class="btn btn-primary mt-3">Register Now</a>
+          <a routerLink="/our-services/it-subcontracting-registration" class="btn btn-primary mt-3">Register Now</a>
         </div>
       </div>
     </div>
