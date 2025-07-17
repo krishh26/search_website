@@ -8,6 +8,7 @@ import { ItSubcontractService } from 'src/app/services/it-subcontract.service';
 })
 export class CartComponent implements OnInit {
   cartItems: any = [];
+  selectedFilter: string = 'all';
 
   constructor(private itSubcontractService: ItSubcontractService) { }
 
@@ -52,5 +53,10 @@ export class CartComponent implements OnInit {
         return '*'.repeat(word.length);
       }
     }).join(' ');
+  }
+
+  getBorderColor(index: number): string {
+    const colors = ['#22c55e', '#2563eb', '#f9a8d4']; // green, blue, light pink
+    return colors[index % colors.length];
   }
 }

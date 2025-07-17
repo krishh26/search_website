@@ -30,6 +30,8 @@ export class HomePageComponent implements OnInit {
   expertiseSearch: string = ''; // New property for expertise search input
   showExpertiseDropdown: boolean = false; // Control dropdown visibility
 
+  technologyList: any[] = [];
+
   // Search subjects for debouncing
   private jobTitleSearchSubject = new Subject<string>();
   private expertiseSearchSubject = new Subject<string>();
@@ -78,6 +80,7 @@ export class HomePageComponent implements OnInit {
     }
     this.getFilterList();
     this.loadFilterList();
+    this.getTechnologies();
 
     // Subscribe to router events to handle navigation
     this.router.events.subscribe(() => {
@@ -109,6 +112,37 @@ export class HomePageComponent implements OnInit {
       } else {
         this.expertiseList = [];
         this.showExpertiseDropdown = false;
+      }
+    });
+  }
+
+  getTechnologies() {
+    this.itSubcontractService.getTechnologies({ search: '' }).subscribe({
+      next: (response) => {
+        if (response?.status) {
+          this.technologyList = response?.data || [];
+        }
+      }
+    });
+  }
+
+  // New method to search technologies with API
+  searchTechnologies(searchTerm: string) {
+    this.isLoading = true;
+    this.itSubcontractService.getTechnologies({ search: searchTerm }).subscribe({
+      next: (response) => {
+        if (response?.status) {
+          // Only add technologies not already in jobRoles
+          const techs = (response?.data || []).map((t: any) => ({ name: t.name, isTech: true }));
+          // Remove duplicates by name
+          const existingNames = new Set(this.jobRoles.map((r: any) => r.name));
+          const newTechs = techs.filter((t: any) => !existingNames.has(t.name));
+          this.jobRoles = [...this.jobRoles, ...newTechs];
+        }
+        this.isLoading = false;
+      },
+      error: () => {
+        this.isLoading = false;
       }
     });
   }
@@ -336,6 +370,8 @@ export class HomePageComponent implements OnInit {
         if (response?.status) {
           this.jobRoles = (response?.data?.roles || []).map((role: string) => ({ name: role }));
         }
+        // After job titles, also search technologies
+        this.searchTechnologies(searchTerm);
         this.isLoading = false;
       },
       error: () => {

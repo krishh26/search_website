@@ -84,6 +84,8 @@ export class CandidateSearchResultComponent implements OnInit {
   // Information message visibility
   showInfoMessage: boolean = true;
 
+  technologyList: any[] = [];
+
   constructor(
     private itSubcontractService: ItSubcontractService,
     private notificationService: NotificationService,
@@ -134,6 +136,7 @@ export class CandidateSearchResultComponent implements OnInit {
     // Load all supporting data
     this.getFilterList();
     this.loadFilterList();
+    this.getTechnologies();
 
     // Setup search debouncing for job titles
     this.jobTitleSearchSubject.pipe(
@@ -162,6 +165,38 @@ export class CandidateSearchResultComponent implements OnInit {
       } else {
         this.expertiseList = [];
         this.showExpertiseDropdown = false;
+      }
+    });
+  }
+
+
+  getTechnologies() {
+    this.itSubcontractService.getTechnologies({ search: '' }).subscribe({
+      next: (response) => {
+        if (response?.status) {
+          this.technologyList = response?.data || [];
+        }
+      }
+    });
+  }
+
+  // New method to search technologies with API
+  searchTechnologies(searchTerm: string) {
+    this.isLoading = true;
+    this.itSubcontractService.getTechnologies({ search: searchTerm }).subscribe({
+      next: (response) => {
+        if (response?.status) {
+          // Only add technologies not already in jobRoles
+          const techs = (response?.data || []).map((t: any) => ({ name: t.name, isTech: true }));
+          // Remove duplicates by name
+          const existingNames = new Set(this.jobRoles.map((r: any) => r.name));
+          const newTechs = techs.filter((t: any) => !existingNames.has(t.name));
+          this.jobRoles = [...this.jobRoles, ...newTechs];
+        }
+        this.isLoading = false;
+      },
+      error: () => {
+        this.isLoading = false;
       }
     });
   }
@@ -395,6 +430,8 @@ export class CandidateSearchResultComponent implements OnInit {
           this.jobRoles = (response?.data?.roles || []).map((role: string) => ({ name: role }));
         }
         this.isLoading = false;
+        // After job titles, also search technologies
+        this.searchTechnologies(searchTerm);
       },
       error: () => {
         this.isLoading = false;

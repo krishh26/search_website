@@ -343,4 +343,9 @@ export class WorkawayRegistrationComponent implements OnInit {
       }
     }).join(' ');
   }
+
+  getBorderColor(index: number): string {
+    const colors = ['#22c55e', '#2563eb', '#f9a8d4']; // green, blue, light pink
+    return colors[index % colors.length];
+  }
 }

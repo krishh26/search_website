@@ -157,7 +157,8 @@
             </div> -->
             <div class="row mb-3">
               <div>
-                <h5>Your Search : </h5>
+                <label for="iama" class="col-sm-3 col-form-label">Your Search :</label>
+                <!-- <h5></h5> -->
               </div>
               <div class="col-12">
                 <ul class="searchresult-tags mb-4">
@@ -189,21 +190,21 @@
 
             <div class="row mb-3" *ngIf="cartItems.items.length">
               <div>
-                <h5>Your Carts : </h5>
+                <label for="iama" class="col-sm-3 col-form-label">Your Carts :</label>
               </div>
               <div class="col-12">
-                <div *ngIf="cartItems.items && cartItems.items.length > 0;">
-                  <div *ngFor="let item of cartItems.items" class="cart-card">
-                    <div class="cart-card-header">
-                      <h2>{{ maskName(item.itemDetails.companyName) }}</h2>
-                      <button (click)="removeCartItem(item._id)" class="remove-btn">Remove</button>
+                <div *ngIf="cartItems.items && cartItems.items.length > 0;" class="row">
+                  <div *ngFor="let item of cartItems.items; let i = index" class="cart-card col-6"
+                    [ngStyle]="{'border-left': '5px solid ' + getBorderColor(i)}">
+                    <div class="cart-card-header small">
+                      <h2 class="small mb-1">{{ maskName(item.itemDetails.companyName) }}</h2>
+                      <button (click)="removeCartItem(item._id)" class="remove-btn btn-sm">Remove</button>
                     </div>
-                    <div class="cart-card-body">
-                      <p><strong>Email:</strong> {{ item.itemDetails.email }}</p>
-                      <p><strong>Type:</strong> {{ item.itemType == 'candidate' ? 'WorkAway' : 'IT Subcontract'
-                        }}</p>
-                      <p><strong>Plan:</strong> {{ item.itemDetails.plan }}</p>
-                      <p><strong>Company Address:</strong> {{ item.itemDetails.companyAddress }}</p>
+                    <div class="cart-card-body small">
+                      <p class="mb-1"><strong>Email:</strong> {{ item.itemDetails.email }}</p>
+                      <p class="mb-1"><strong>Type:</strong> {{ item.itemType == 'candidate' ? 'WorkAway' : 'IT Subcontract' }}</p>
+                      <p class="mb-1"><strong>Plan:</strong> {{ item.itemDetails.plan }}</p>
+                      <p class="mb-1"><strong>Company Address:</strong> {{ item.itemDetails.companyAddress }}</p>
                     </div>
                   </div>
                 </div>
