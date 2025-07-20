@@ -814,13 +814,40 @@ Button CSS
   border-color: #142733;
   background: #142733;
   border-radius: 5px;
-  padding: 0.75rem 0.75rem !important;
+  /* padding: 0.75rem 0.75rem !important; */
 }
 
 .btn-dark:hover {
   color: #fff !important;
   background-color: #0d191f;
   border-color: #0d191f;
+}
+
+.btn-green {
+  color: #fff;
+  border-color: #22C55F;
+  background: #22C55F;
+  border-radius: 5px;
+  /* padding: 0.75rem 0.75rem !important; */
+}
+
+.btn-green:hover {
+  color: #fff !important;
+  background-color: #22C55F;
+  border-color: #22C55F;
+}
+
+.btn-white {
+  color: #000 !important;
+  border-color: #F5F5F5;
+  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+  border-radius: 5px;
+}
+
+.btn-white:hover {
+  color: #000 !important;
+  background-color: #FFFFFF;
+  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
 }
 
 .btn-success,
@@ -833,7 +860,7 @@ Button CSS
 
 .btn-lg,
 .btn-group-lg>.btn {
-  padding: 1rem 2rem;
+  padding: 1rem 1rem;
   font-size: 1.2rem;
   border-radius: 0.3rem;
 }
@@ -1123,6 +1150,39 @@ ul.chekList li::before {
   left: 0;
   top: 0;
   color: #5BBB7B;
+}
+
+ol.orderList {
+  margin: 0 0 1em 0;
+  padding: 0;
+  counter-reset: li;
+  list-style: none;
+}
+
+ol.orderList li {
+  display: block;
+  overflow: hidden;
+  position: relative;
+  padding-left: 36px;
+  min-height: 24px;
+  margin: 10px 0px;
+  padding-top: 0px;
+}
+
+ol.orderList li::before {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  background-color: #f97315;
+  border-radius: 50%;
+  width: 22px;
+  height: 22px;
+  line-height: 23px;
+  text-align: center;
+  font-size: 12px;
+  color: #FFF;
+  content: counter(li);
+  counter-increment: li;
 }
 
 /*=================================
@@ -1644,7 +1704,9 @@ Page header
 }
 
 .overlay-header {
-  background: rgba(0, 0, 0, 0.5);
+  /* background: rgba(0, 0, 0, 0.5); */
+   background: #FFEEEE;
+  background: linear-gradient(90deg, rgba(155, 227, 250, 1) 0%, rgba(254, 209, 233, 1) 100%);
   opacity: 0.84;
   position: absolute;
   width: 100%;
@@ -1665,7 +1727,7 @@ Page header
   font-weight: 600;
   font-size: 36px;
   line-height: 43px;
-  color: #FFFFFF;
+  color: #000;
 }
 
 .page-titletop-2 {
@@ -1696,14 +1758,14 @@ Page header
 }
 
 .breadcrumb a {
-  color: #acacac;
+  color: #7e7e7e;
   font-weight: 400;
   font-size: 16px;
   line-height: 19px;
 }
 
 .breadcrumb-item+.breadcrumb-item {
-  color: #ffc107 !important;
+  color: #323232 !important;
 }
 
 .breadcrumb-item+.breadcrumb-item::before {

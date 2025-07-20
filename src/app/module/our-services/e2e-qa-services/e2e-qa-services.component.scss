@@ -1,3 +1,20 @@
 .margin-top104 {
     margin-top: 104px;
 }
+.P-18{
+    font-size: 18px;
+}
+.ps2{
+    padding-left: 2rem;
+}
+ul.circle-list li::marker {
+  color: #22C55F;
+}
+ul.chekList li::before {
+    content: "\F270";
+    font-family: "bootstrap-icons";
+    position: absolute;
+    left: 0;
+    top: 0;
+    color: #22C55F;
+}
