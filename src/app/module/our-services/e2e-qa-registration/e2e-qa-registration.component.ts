@@ -344,10 +344,13 @@ export class E2eQaRegistrationComponent implements OnInit {
       error: (err) => console.error('Failed to remove item from cart', err)
     });
   }
-
-  maskName(name: string): string {
+  
+  maskName(name: string | undefined | null): string {
+    if (!name || typeof name !== 'string') {
+      return '';
+    }
     const words = name.split(' ');
-
+  
     return words.map((word, index) => {
       if (index === 0) {
         // First word: show 1st, 3rd, 5th
@@ -369,7 +372,8 @@ export class E2eQaRegistrationComponent implements OnInit {
   }
 
   getBorderColor(index: number): string {
-    const colors = ['#22c55e', '#2563eb', '#f9a8d4']; // green, blue, light pink
+    // Colors: green, blue, pink, gold, yellow (from image: #ffd600)
+    const colors = ['#22c55e', '#2563eb', '#f9a8d4', '#fbbf24'];
     return colors[index % colors.length];
   }
 }

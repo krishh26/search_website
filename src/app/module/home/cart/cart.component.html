@@ -14,95 +14,91 @@
     </ul>
     <div class="tab-content" id="pills-tabContent">
       <div class="tab-pane fade show active" id="pills-all" role="tabpanel" aria-labelledby="pills-all-tab">
-        <div class="cartCard mb-3">
-          <div class="card-body p-4">
-            <h4><strong>Shrikant *****, </strong> <small>Male</small></h4>
-            <p class="mb-0">Job Title : Front-end Developer</p>
-
-            <ul class="inlineList mt-2">
-              <li><i class="bi bi-globe text-muted me-2"></i> Nationality- Indian</li>
-              <li><i class="bi bi-mortarboard-fill text-muted me-2"></i> Qualification- M.Tech (Computer)</li>
-              <li><i class="bi bi-briefcase-fill text-muted me-2"></i> Experience- 3 Years</li>
-              <li><i class="bi bi-cash text-muted me-2"></i> Hourly Rate- $3.51 | ₹300</li>
-              <li><i class="bi bi-translate text-muted me-2"></i> Language- English (SW), Hindi (SW), Marathi (SW)</li>
-            </ul>           
+        <ng-container *ngIf="workawayItems.length > 0; else emptyCart">
+          <div *ngFor="let item of workawayItems; let i = index" class="cartCard mb-3"
+            [ngStyle]="{'border-left': '5px solid ' + getBorderColor(i)}" [@fadeIn]>
+            <div class="card-body p-4 d-flex justify-content-between align-items-center">
+              <div>
+                <h4><strong>{{ maskName(item.itemDetails.fullName) }}, </strong> <small>{{ item.itemDetails.gender ||
+                    'N/A' }}</small></h4>
+                <p class="mb-0">Job Title : {{ item.itemDetails.jobTitle || item.itemDetails.role || 'N/A' }}</p>
+                <ul class="inlineList mt-2">
+                  <li><i class="bi bi-mortarboard-fill text-muted me-2"></i> Qualification- {{
+                    item.itemDetails.highestQualification || 'N/A' }}</li>
+                  <li><i class="bi bi-briefcase-fill text-muted me-2"></i> Experience- {{
+                    item.itemDetails.totalExperience || 'N/A' }}</li>
+                  <li><i class="bi bi-cash text-muted me-2"></i> Day Rate- {{ item.itemDetails.ukDayRate || 'N/A' }}
+                  </li>
+                  <!-- <li><i class="bi bi-translate text-muted me-2"></i> Language- {{ item.itemDetails.language || 'N/A' }}</li> -->
+                </ul>
+              </div>
+              <button (click)="removeCartItem(item._id)" class="remove-btn ms-3">
+                <i class="bi bi-trash"></i> Remove
+              </button>
+            </div>
           </div>
-        </div>
-        <div class="cartCard mb-3">
-          <div class="card-body p-4">
-            <h4><strong>Shrikant *****, </strong> <small>Male</small></h4>
-            <p class="mb-0">Job Title : Front-end Developer</p>
-
-            <ul class="inlineList mt-2">
-              <li><i class="bi bi-globe text-muted me-2"></i> Nationality- Indian</li>
-              <li><i class="bi bi-mortarboard-fill text-muted me-2"></i> Qualification- M.Tech (Computer)</li>
-              <li><i class="bi bi-briefcase-fill text-muted me-2"></i> Experience- 3 Years</li>
-              <li><i class="bi bi-cash text-muted me-2"></i> Hourly Rate- $3.51 | ₹300</li>
-              <li><i class="bi bi-translate text-muted me-2"></i> Language- English (SW), Hindi (SW), Marathi (SW)</li>
-            </ul>           
+        </ng-container>
+        <ng-template #emptyCart>
+          <div class="text-center py-5">
+            <img src="/assets/img/norecordfound.png" width="100" />
+            <h5 class="text-center mt-4">OOPS!! No Record Found</h5>
           </div>
-        </div>
-        <div class="cartCard mb-3">
-          <div class="card-body p-4">
-            <h4><strong>Shrikant *****, </strong> <small>Male</small></h4>
-            <p class="mb-0">Job Title : Front-end Developer</p>
-
-            <ul class="inlineList mt-2">
-              <li><i class="bi bi-globe text-muted me-2"></i> Nationality- Indian</li>
-              <li><i class="bi bi-mortarboard-fill text-muted me-2"></i> Qualification- M.Tech (Computer)</li>
-              <li><i class="bi bi-briefcase-fill text-muted me-2"></i> Experience- 3 Years</li>
-              <li><i class="bi bi-cash text-muted me-2"></i> Hourly Rate- $3.51 | ₹300</li>
-              <li><i class="bi bi-translate text-muted me-2"></i> Language- English (SW), Hindi (SW), Marathi (SW)</li>
-            </ul>           
-          </div>
-        </div>
-        <div class="cartCard mb-3">
-          <div class="card-body p-4">
-            <h4><strong>Shrikant *****, </strong> <small>Male</small></h4>
-            <p class="mb-0">Job Title : Front-end Developer</p>
-
-            <ul class="inlineList mt-2">
-              <li><i class="bi bi-globe text-muted me-2"></i> Nationality- Indian</li>
-              <li><i class="bi bi-mortarboard-fill text-muted me-2"></i> Qualification- M.Tech (Computer)</li>
-              <li><i class="bi bi-briefcase-fill text-muted me-2"></i> Experience- 3 Years</li>
-              <li><i class="bi bi-cash text-muted me-2"></i> Hourly Rate- $3.51 | ₹300</li>
-              <li><i class="bi bi-translate text-muted me-2"></i> Language- English (SW), Hindi (SW), Marathi (SW)</li>
-            </ul>           
+        </ng-template>
+        <div class="row">
+          <div class="col-12 text-center mb-4">
+            <a routerLink="/our-services/workaway-registration" class="btn btn-primary mt-3">Register Now</a>
           </div>
         </div>
       </div>
       <div class="tab-pane fade" id="pills-suggested" role="tabpanel" aria-labelledby="pills-suggested-tab">
-        <div class="text-center">
-          <img src="/assets/img/error-page.png" width="100"/>
-          <h2 class="headingTitle3 text-center">OOPS!! No Record Found</h2>
+        <ng-container *ngIf="resourceSharingItems.length > 0; else emptyResourceCart">
+          <div *ngFor="let item of resourceSharingItems; let i = index" class="cartCard mb-3"
+            [ngStyle]="{'border-left': '5px solid ' + getBorderColor(i)}" [@fadeIn]>
+            <div class="card-body p-4 d-flex justify-content-between align-items-center">
+              <div>
+                <h4><strong>{{ maskName(item.itemDetails.companyName) }}, </strong></h4>
+                <p class="mb-0">Job Title : {{ item.itemDetails.jobTitle || item.itemDetails.role || 'N/A' }}</p>
+                <ul class="inlineList mt-2">
+                  <li><i class="bi bi-mortarboard-fill text-muted me-2"></i> Qualification- {{
+                    item.itemDetails.highestQualification || 'N/A' }}</li>
+                  <li><i class="bi bi-briefcase-fill text-muted me-2"></i> Experience- {{
+                    item.itemDetails.totalExperience || 'N/A' }}</li>
+                  <li><i class="bi bi-cash text-muted me-2"></i> Day Rate- {{ item.itemDetails.ukDayRate || 'N/A' }}
+                  </li>
+                  <!-- <li><i class="bi bi-translate text-muted me-2"></i> Language- {{ item.itemDetails.language || 'N/A' }}</li> -->
+                </ul>
+              </div>
+              <button (click)="removeCartItem(item._id)" class="remove-btn ms-3">
+                <i class="bi bi-trash"></i> Remove
+              </button>
+            </div>
+          </div>
+        </ng-container>
+        <ng-template #emptyResourceCart>
+          <div class="text-center py-5">
+            <img src="/assets/img/norecordfound.png" width="100" />
+            <h5 class="text-center mt-4">OOPS!! No Record Found</h5>
+          </div>
+        </ng-template>
+        <div class="row">
+          <div class="col-12 text-center mb-4">
+            <a routerLink="/our-services/it-subcontracting-registration" class="btn btn-primary mt-3">Register Now</a>
+          </div>
         </div>
       </div>
     </div>
-
-     <div class="row">
-        <div class="col-12 text-center mb-4">
-          <a routerLink="/our-services/it-subcontracting-registration" class="btn btn-primary mt-3">Register Now</a>
-        </div>
-      </div>
-
   </div>
 </section>
 
 <!--/shrikant new code-->
 
-
-
-
-
-
-<main>
+<!-- <main>
   <section class="hero" style="padding: 135px 0 0 0; background-color: white;">
     <div class="container">
       <div class="cart-header mb-4">
         <h3>My Cart</h3>
       </div>
       <div class="row">
-        <!-- Left Filter Sidebar -->
         <div class="col-md-3 mb-4">
           <div class="cart-filter" *ngIf="cartItems?.items && cartItems?.items?.length > 0">
             <h3>Filter By</h3>
@@ -123,14 +119,15 @@
           </div>
         </div>
 
-        <!-- Cart Items -->
         <div class="col-md-9">
           <div *ngIf="cartItems?.items && cartItems?.items?.length > 0; else emptyCart">
             <div *ngFor="let item of cartItems.items; let i = index" class="cart-card"
               [ngStyle]="{'border-left': '5px solid ' + getBorderColor(i)}">
               <div class="cart-card-header">
                 <h2>{{ maskName(item.itemDetails.companyName) }}</h2>
-                <button (click)="removeCartItem(item._id)" class="remove-btn">Remove</button>
+                <button (click)="removeCartItem(item._id)" class="remove-btn">
+                  <i class="bi bi-trash"></i> Remove
+                </button>
               </div>
               <div class="cart-card-body">
                 <p><strong>Email:</strong> {{ item.itemDetails.email }}</p>
@@ -152,4 +149,4 @@
       </div>
     </div>
   </section>
-</main>
+</main> -->

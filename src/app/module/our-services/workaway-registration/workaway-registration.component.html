@@ -107,12 +107,12 @@
                   class="text-danger">*</span></label>
               <div class="col-sm-9">
                 <div class="form-check form-check-inline">
-                  <input class="form-check-input" type="radio" name="demandRadioOptions" id="demandYes" value="true"
+                  <input class="form-check-input" type="radio" name="demandReady" id="demandYes" value="true"
                     (click)="onDemandReadyChange(true)">
                   <label class="form-check-label" for="demandYes">Yes</label>
                 </div>
                 <div class="form-check form-check-inline">
-                  <input class="form-check-input" type="radio" name="demandRadioOptions" id="demandNo" value="false"
+                  <input class="form-check-input" type="radio" name="demandReady" id="demandNo" value="false"
                     (click)="onDemandReadyChange(false)">
                   <label class="form-check-label" for="demandNo">No</label>
                 </div>
@@ -135,10 +135,10 @@
                     <i class="bi bi-upload me-2" *ngIf="!isUploading"></i>
                     {{ isUploading ? 'Uploading...' : 'Upload File' }}
                   </button>
-                  <!-- <button type="button" class="btn btn-link text-primary" (click)="onBulkEnquiryUpload()"
+                  <button type="button" class="btn btn-link text-primary" (click)="onBulkEnquiryUpload()"
                     [disabled]="isUploading" data-bs-toggle="modal" data-bs-target="#uploadbulkModal">
                     <u> Sample File</u>
-                  </button> -->
+                  </button>
                 </p>
               </div>
             </div>
@@ -188,23 +188,27 @@
               </div>
             </div>
 
-            <div class="row mb-3" *ngIf="cartItems.items.length">
+            <div class="row mb-3" *ngIf="cartItems?.items?.length">
               <div>
                 <label for="iama" class="col-sm-3 col-form-label">Your Carts :</label>
               </div>
               <div class="col-12">
-                <div *ngIf="cartItems.items && cartItems.items.length > 0;" class="row">
-                  <div *ngFor="let item of cartItems.items; let i = index" class="cart-card col-6"
+                <div *ngIf="cartItems.items && cartItems?.items?.length > 0;" class="row">
+                  <div *ngFor="let item of cartItems.items; let i = index" class="cartCard mb-3 col-12"
                     [ngStyle]="{'border-left': '5px solid ' + getBorderColor(i)}">
-                    <div class="cart-card-header small">
-                      <h2 class="small mb-1">{{ maskName(item.itemDetails.companyName) }}</h2>
-                      <button (click)="removeCartItem(item._id)" class="remove-btn btn-sm">Remove</button>
-                    </div>
-                    <div class="cart-card-body small">
-                      <p class="mb-1"><strong>Email:</strong> {{ item.itemDetails.email }}</p>
-                      <p class="mb-1"><strong>Type:</strong> {{ item.itemType == 'candidate' ? 'WorkAway' : 'IT Subcontract' }}</p>
-                      <p class="mb-1"><strong>Plan:</strong> {{ item.itemDetails.plan }}</p>
-                      <p class="mb-1"><strong>Company Address:</strong> {{ item.itemDetails.companyAddress }}</p>
+                    <div class="card-body p-4 d-flex justify-content-between align-items-center">
+                      <div>
+                        <h4><strong>{{ maskName(item.itemDetails.fullName || item.itemDetails.companyName) }}</strong>, <small>{{ item.itemDetails.gender || 'N/A' }}</small></h4>
+                        <p class="mb-0">Job Title : {{ item.itemDetails.jobTitle || item.itemDetails.role || 'N/A' }}</p>
+                        <ul class="inlineList mt-2">
+                          <li><i class="bi bi-mortarboard-fill text-muted me-2"></i> Qualification- {{ item.itemDetails.highestQualification || 'N/A' }}</li>
+                          <li><i class="bi bi-briefcase-fill text-muted me-2"></i> Experience- {{ item.itemDetails.totalExperience || 'N/A' }}</li>
+                          <li><i class="bi bi-cash text-muted me-2"></i> Day Rate- {{ item.itemDetails.ukDayRate || 'N/A' }}</li>
+                        </ul>
+                      </div>
+                      <button (click)="removeCartItem(item._id)" class="remove-btn ms-3">
+                        <i class="bi bi-trash"></i> Remove
+                      </button>
                     </div>
                   </div>
                 </div>
@@ -290,16 +294,16 @@
     <div class="modal-content">
       <button type="button" class="btn-close-absolute" data-bs-dismiss="modal" aria-label="Close"></button>
       <div class="modal-body p-5">
-        <h2><strong>Don't just find. Be found your bulk enquiry in front of great employers</strong></h2>
-        <p>There are many variations of passages of Lorem Ipsum available, but the alteration in some form, by injected
-          humour, or randomised words.</p>
+        <h2><strong>Please upload the data as a PDF, Word document, or Excel file.</strong></h2>
+        <p>Include key details like the number of quantities and the roles required.
+Also, let us know the expected timeline—how many days you need this delivered in. That way we can plan accordingly.</p>
         <div class="row justify-content-center mt-5">
           <div class="col-lg-6 col-xl-6 col-md-6 col-sm-6 col-12">
             <a href="javascript:void(0);" class="download-csv-btn shadow-nm" (click)="downloadSampleCSV()">
               <img src="/assets/img/csv-file.png" class="mb-3">
-              <p class="p-22 p-600">Download</p>
-              <p>Sample csv file for bulk
-                enquiry search</p>
+              <p class="p-22 p-600">Upload File</p>
+              <!-- <p>Sample csv file for bulk
+                enquiry search</p> -->
             </a>
           </div>
         </div>

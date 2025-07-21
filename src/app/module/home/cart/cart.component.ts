@@ -1,10 +1,19 @@
 import { Component, OnInit } from '@angular/core';
 import { ItSubcontractService } from 'src/app/services/it-subcontract.service';
+import { trigger, transition, style, animate } from '@angular/animations';
 
 @Component({
   selector: 'app-cart',
   templateUrl: './cart.component.html',
-  styleUrls: ['./cart.component.scss']
+  styleUrls: ['./cart.component.scss'],
+  animations: [
+    trigger('fadeIn', [
+      transition(':enter', [
+        style({ opacity: 0, transform: 'translateY(20px)' }),
+        animate('400ms ease', style({ opacity: 1, transform: 'none' }))
+      ])
+    ])
+  ]
 })
 export class CartComponent implements OnInit {
   cartItems: any = [];
@@ -32,9 +41,12 @@ export class CartComponent implements OnInit {
     });
   }
 
-  maskName(name: string): string {
+  maskName(name: string | undefined | null): string {
+    if (!name || typeof name !== 'string') {
+      return '';
+    }
     const words = name.split(' ');
-
+  
     return words.map((word, index) => {
       if (index === 0) {
         // First word: show 1st, 3rd, 5th
@@ -56,7 +68,16 @@ export class CartComponent implements OnInit {
   }
 
   getBorderColor(index: number): string {
-    const colors = ['#22c55e', '#2563eb', '#f9a8d4']; // green, blue, light pink
+    // Colors: green, blue, pink, gold, yellow (from image: #ffd600)
+    const colors = ['#22c55e', '#2563eb', '#f9a8d4', '#fbbf24'];
     return colors[index % colors.length];
+  }
+
+  get workawayItems() {
+    return this.cartItems.items?.filter((item: any) => item.itemType === 'candidate') || [];
+  }
+
+  get resourceSharingItems() {
+    return this.cartItems.items?.filter((item: any) => item.itemType !== 'candidate') || [];
   }
 }

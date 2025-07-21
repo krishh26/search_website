@@ -85,6 +85,7 @@ export class CandidateSearchResultComponent implements OnInit {
   showInfoMessage: boolean = true;
 
   technologyList: any[] = [];
+  cartItems: any[] = [];
 
   constructor(
     private itSubcontractService: ItSubcontractService,
@@ -111,6 +112,8 @@ export class CandidateSearchResultComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.getCartItems();
+
     // Subscribe to route params and load data accordingly
     this.route.queryParams.subscribe(params => {
       // Reset data
@@ -634,19 +637,19 @@ export class CandidateSearchResultComponent implements OnInit {
   supplierAddToCart(item: any) {
     const payload = {
       "itemType": "candidate",
-      "itemId": item?.supplierId,
+      "itemId": item?._id,
       "anonymousUserId": localStorage.getItem('anonymousUserId')
     }
 
     this.itSubcontractService.addToCart(payload).subscribe((response) => {
       {
         if (response?.status) {
+          this.getCartItems();
           this.notificationService.showSuccess('Added to cart.');
         }
       }
     });
   }
-
 
   candidateAddToCart(item: any) {
     console.log("item", item);
@@ -659,9 +662,23 @@ export class CandidateSearchResultComponent implements OnInit {
     this.itSubcontractService.addToCart(payload).subscribe((response) => {
       {
         if (response?.status) {
+          this.getCartItems();
           this.notificationService.showSuccess('Added to cart.');
         }
       }
     });
+  }
+  cartItemsIds: string[] = [];
+  getCartItems() {
+    this.cartItemsIds = [];
+    this.itSubcontractService.getCartItems().subscribe((response: any) => {
+      if (response?.status) {
+        response?.data?.items?.map((data : any) => {
+          this.cartItemsIds.push(data?.itemId);
+        })
+      }
+
+      console.log("this.cartItemsIds", this.cartItemsIds)
+    })
   }
 }

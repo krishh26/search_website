@@ -18,7 +18,11 @@ export class HeaderComponent implements OnInit {
   ngOnInit() {
     // Check initial route
     this.checkIfHomePage();
-    this.getCartItems();
+    // this.getCartItems();
+
+    setInterval(() => {
+      this.getCartItems();
+    }, 3000);
 
     // Listen to route changes
     this.router.events.pipe(
