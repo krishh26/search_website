@@ -126,19 +126,16 @@
               <label for="iama" class="col-sm-3 col-form-label">Upload Enquiry <span
                   class="text-danger">*</span></label>
               <div class="col-sm-9">
-                <input type="file" #fileInput (change)="onFileUpload($event)" accept=".csv,.xlsx,.xls"
-                  style="display: none">
                 <p class="mt-4">
-                  <button type="button" class="btn btn-light me-2" (click)="fileInput.click()" [disabled]="isUploading">
-                    <span *ngIf="isUploading" class="spinner-border spinner-border-sm me-2" role="status"
-                      aria-hidden="true"></span>
-                    <i class="bi bi-upload me-2" *ngIf="!isUploading"></i>
-                    {{ isUploading ? 'Uploading...' : 'Upload File' }}
+                  <button type="button" class="btn btn-light me-2" data-bs-toggle="modal"
+                    data-bs-target="#uploadbulkModal">
+                    <i class="bi bi-upload me-2"></i>
+                    Upload File
                   </button>
-                  <button type="button" class="btn btn-link text-primary" (click)="onBulkEnquiryUpload()"
-                    [disabled]="isUploading" data-bs-toggle="modal" data-bs-target="#uploadbulkModal">
+                  <!-- <button type="button" class="btn btn-link text-primary" (click)="downloadSampleCSV()"
+                    [disabled]="isUploading">
                     <u> Sample File</u>
-                  </button>
+                  </button> -->
                 </p>
               </div>
             </div>
@@ -299,11 +296,11 @@
 Also, let us know the expected timeline—how many days you need this delivered in. That way we can plan accordingly.</p>
         <div class="row justify-content-center mt-5">
           <div class="col-lg-6 col-xl-6 col-md-6 col-sm-6 col-12">
-            <a href="javascript:void(0);" class="download-csv-btn shadow-nm" (click)="downloadSampleCSV()">
+            <input type="file" #fileInput (change)="onFileUpload($event)" accept=".csv,.xlsx,.xls,.pdf,.doc,.docx"
+              style="display: none">
+            <a href="javascript:void(0);" class="download-csv-btn shadow-nm" (click)="fileInput.click()">
               <img src="/assets/img/csv-file.png" class="mb-3">
               <p class="p-22 p-600">Upload File</p>
-              <!-- <p>Sample csv file for bulk
-                enquiry search</p> -->
             </a>
           </div>
         </div>

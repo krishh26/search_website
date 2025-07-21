@@ -34,10 +34,10 @@ export class ItSubPartnerSearchComponent implements OnInit {
 
   initForm() {
     this.partnerForm = this.fb.group({
-      projectName: [''],
+      projectName: ['', Validators.required],
       projectCategory: ['', Validators.required],
-      engagementType: [''],
-      projectDescription: [''],
+      engagementType: ['', Validators.required],
+      projectDescription: ['', Validators.required],
       technologyDemand: [''],
       startDate: [''],
       endDate: [''],

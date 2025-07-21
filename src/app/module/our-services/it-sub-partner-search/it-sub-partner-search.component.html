@@ -52,7 +52,7 @@
             <div class="row">
               <div class="col-12">
                 <div class="form-group">
-                  <label>Project Name</label>
+                  <label>Project Name <span class="text-danger">*</span></label>
                   <ng-select [items]="expertiseList" [loading]="loadingExpertise" [searchable]="true" bindLabel="name"
                     bindValue="_id" placeholder="Select project name" formControlName="projectName">
                   </ng-select>
@@ -71,7 +71,7 @@
                   </div>
                 </div>
                 <div class="form-group">
-                  Engagement Type :
+                  <label>Engagement Type <span class="text-danger">*</span></label>
                   <div class="form-check form-check-inline">
                     <input class="form-check-input" type="radio" name="engagementType" id="Fulldelivery"
                       value="Full Delivery" formControlName="engagementType">
@@ -87,11 +87,17 @@
                       formControlName="engagementType">
                     <label class="form-check-label" for="Ongoing">Ongoing</label>
                   </div>
+                  <div *ngIf="f['engagementType'].touched && f['engagementType'].invalid" class="text-danger">
+                    Engagement Type is required
+                  </div>
                 </div>
                 <div class="form-group">
-                  <label>Project Description</label>
+                  <label>Project Description <span class="text-danger">*</span></label>
                   <input type="text" class="form-control" placeholder="Project description"
                     formControlName="projectDescription">
+                  <div *ngIf="f['projectDescription'].touched && f['projectDescription'].invalid" class="text-danger">
+                    Project Description is required
+                  </div>
                 </div>
                 <div class="form-group">
                   <label>Technology Demand</label>
