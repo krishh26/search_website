@@ -37,7 +37,8 @@ body {
   font-size: 1rem;
   /* font-family: "Poppins", sans-serif; */
   /* font-family: "Inter", sans-serif; */
-  font-family: "Roboto", sans-serif;
+  font-family: "Roboto", "Roboto";
+  /* font-family: "gf_Inter variant0", "Tofu"; */
   color: #000;
   /* background-color: #E2E2E2; */
 }
@@ -61,8 +62,8 @@ h4,
 h5,
 h6 {
   /* font-family: "Poppins", sans-serif; */
-  /* font-family: "Inter", sans-serif; */
-  font-family: "Roboto", sans-serif;
+  font-family: "gf_Inter variant0", "Tofu";
+  /* font-family: "Roboto", sans-serif; */
 }
 
 strong {
@@ -1705,7 +1706,7 @@ Page header
 
 .overlay-header {
   /* background: rgba(0, 0, 0, 0.5); */
-   background: #FFEEEE;
+  background: #FFEEEE;
   background: linear-gradient(90deg, rgba(155, 227, 250, 1) 0%, rgba(254, 209, 233, 1) 100%);
   opacity: 0.84;
   position: absolute;
