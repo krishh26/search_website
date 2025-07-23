@@ -9,7 +9,7 @@
       </li>
       <li class="nav-item" role="presentation">
         <button class="nav-link" id="pills-suggested-tab" data-bs-toggle="pill" data-bs-target="#pills-suggested"
-          type="button" role="tab" aria-controls="pills-suggested" aria-selected="false">Resouce Sharing</button>
+          type="button" role="tab" aria-controls="pills-suggested" aria-selected="false">IT Subcontract</button>
       </li>
     </ul>
     <div class="tab-content" id="pills-tabContent">
@@ -19,17 +19,25 @@
             [ngStyle]="{'border-left': '5px solid ' + getBorderColor(i)}" [@fadeIn]>
             <div class="card-body p-4 d-flex justify-content-between align-items-center">
               <div>
-                <h4><strong>{{ maskName(item.itemDetails.fullName) }}, </strong> <small>{{ item.itemDetails.gender ||
-                    'N/A' }}</small></h4>
-                <p class="mb-0">Job Title : {{ item.itemDetails.jobTitle || item.itemDetails.role || 'N/A' }}</p>
+                <h4><strong>{{ maskName(item.itemDetails.fullName) }} </strong> <small>({{ item.itemDetails.gender ||
+                    'N/A' }})</small></h4>
+                <p class="mb-0">Job Title : {{ item?.itemDetails?.currentRole?.name || 'N/A' }}</p>
                 <ul class="inlineList mt-2">
                   <li><i class="bi bi-mortarboard-fill text-muted me-2"></i> Qualification- {{
                     item.itemDetails.highestQualification || 'N/A' }}</li>
-                  <li><i class="bi bi-briefcase-fill text-muted me-2"></i> Experience- {{
-                    item.itemDetails.totalExperience || 'N/A' }}</li>
-                  <li><i class="bi bi-cash text-muted me-2"></i> Day Rate- {{ item.itemDetails.ukDayRate || 'N/A' }}
+                  <li><i class="bi bi-briefcase-fill text-muted me-2"></i> Experience-
+                    {{item?.itemDetails?.totalExperience ?
+                    getExperienceRange(item.totalExperience) : 0 }}</li>
+                  <li><i class="bi bi-cash text-muted me-2"></i> Day Rate- {{item.itemDetails?.ukDayRate ? '£' : ''}} {{
+                    item.itemDetails.ukDayRate || 'On Request' }}
                   </li>
-                  <!-- <li><i class="bi bi-translate text-muted me-2"></i> Language- {{ item.itemDetails.language || 'N/A' }}</li> -->
+                  <li><i class="bi bi-cash text-muted me-2"></i> Language- {{ item.itemDetails?.languagesKnown.join(',
+                    ') || 'N/A' }}
+                  </li>
+                  <li><i class="bi bi-cash text-muted me-2"></i> Skills- {{ item.itemDetails?.technicalSkills.join(', ')
+                    ||
+                    'N/A' }}
+                  </li>
                 </ul>
               </div>
               <button (click)="removeCartItem(item._id)" class="remove-btn ms-3">
@@ -56,14 +64,28 @@
             [ngStyle]="{'border-left': '5px solid ' + getBorderColor(i)}" [@fadeIn]>
             <div class="card-body p-4 d-flex justify-content-between align-items-center">
               <div>
-                <h4><strong>{{ maskName(item.itemDetails.companyName) }}, </strong></h4>
-                <p class="mb-0">Job Title : {{ item.itemDetails.jobTitle || item.itemDetails.role || 'N/A' }}</p>
+                <h4><strong>{{ maskName(item.itemDetails.companyName) }} </strong></h4>
+                <!-- <p class="mb-0"> -->
+                <ul class="bulletpipeLsit">
+                  <li>{{item?.itemDetails?.employeeCount || 0}} Employees</li>
+                  <li>{{item?.itemDetails?.location || 'Location not specified'}}</li>
+                </ul>
+                <!-- </p> -->
                 <ul class="inlineList mt-2">
-                  <li><i class="bi bi-mortarboard-fill text-muted me-2"></i> Qualification- {{
-                    item.itemDetails.highestQualification || 'N/A' }}</li>
                   <li><i class="bi bi-briefcase-fill text-muted me-2"></i> Experience- {{
-                    item.itemDetails.totalExperience || 'N/A' }}</li>
-                  <li><i class="bi bi-cash text-muted me-2"></i> Day Rate- {{ item.itemDetails.ukDayRate || 'N/A' }}
+                    calculateExperience(item.itemDetails.yearOfEstablishment) || '0' }}</li>
+                  <li><i class="bi bi-mortarboard-fill text-muted me-2"></i> Total Projects Executed- {{
+                    item.itemDetails.totalProjectsExecuted || '0' }}</li>
+                  <li><i class="bi bi-cash text-muted me-2"></i>Resources Capacity- {{ item.itemDetails?.employeeCount ?
+                    resourceCapacity(item.itemDetails?.employeeCount) : 0 }}
+                  </li>
+                  <li><i class="bi bi-cash text-muted me-2"></i>Expertise-
+                    <span *ngFor="let exp of item?.itemDetails?.expertise; let last = last">
+                      {{exp.name}}{{!last ? ', ' : ''}}
+                    </span>
+                  </li>
+                  <li *ngIf="item?.itemDetails?.executiveSummary">
+                    {{item?.itemDetails?.executiveSummary}}
                   </li>
                   <!-- <li><i class="bi bi-translate text-muted me-2"></i> Language- {{ item.itemDetails.language || 'N/A' }}</li> -->
                 </ul>

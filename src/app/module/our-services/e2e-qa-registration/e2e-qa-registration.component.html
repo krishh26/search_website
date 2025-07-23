@@ -183,7 +183,7 @@
                     </div>
                   </div>
                 </div>
-                <div class="row mb-3 align-items-center">
+                <!-- <div class="row mb-3 align-items-center">
                   <label for="language" class="col-sm-3 col-form-label">Language <span
                       class="text-danger">*</span></label>
                   <div class="col-sm-9">
@@ -194,8 +194,38 @@
                       {{ getRegistrationFormError('language') }}
                     </div>
                   </div>
-                </div>
+                </div> -->
                 <div class="row mb-3 align-items-center">
+                  <label for="dates" class="col-sm-3 col-form-label">Start Date, End Date & Budget <span
+                      class="text-danger">*</span></label>
+                  <div class="col-sm-9">
+                    <div class="row">
+                      <div class="col-lg-4 col-xl-4 col-sm-4 col-md-4 col-12 mob-mb1">
+                        <input type="date" class="form-control" formControlName="startDate"
+                          [class.is-invalid]="registrationForm.get('startDate')?.touched && registrationForm.get('startDate')?.errors">
+                        <div class="invalid-feedback" *ngIf="getRegistrationFormError('startDate')">
+                          {{ getRegistrationFormError('startDate') }}
+                        </div>
+                      </div>
+                      <div class="col-lg-4 col-xl-4 col-sm-4 col-md-4 col-12 mob-mb1">
+                        <input type="date" class="form-control" formControlName="endDate"
+                          [class.is-invalid]="registrationForm.get('endDate')?.touched && registrationForm.get('endDate')?.errors">
+                        <div class="invalid-feedback" *ngIf="getRegistrationFormError('endDate')">
+                          {{ getRegistrationFormError('endDate') }}
+                        </div>
+                      </div>
+                      <div class="col-lg-4 col-xl-4 col-sm-4 col-md-4 col-12 mob-mb1">
+                        <input type="text" class="form-control" formControlName="budget"
+                          [class.is-invalid]="registrationForm.get('budget')?.touched && registrationForm.get('budget')?.errors"
+                          placeholder="Eg. 50000-75000">
+                        <div class="invalid-feedback" *ngIf="getRegistrationFormError('budget')">
+                          {{ getRegistrationFormError('budget') }}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!-- <div class="row mb-3 align-items-center">
                   <label for="startDate" class="col-sm-3 col-form-label">Start Date <span
                       class="text-danger">*</span></label>
                   <div class="col-sm-9">
@@ -227,7 +257,7 @@
                       {{ getRegistrationFormError('budget') }}
                     </div>
                   </div>
-                </div>
+                </div> -->
               </div>
 
               <div class="row mb-3">

@@ -166,7 +166,7 @@
         </div>
 
         <!--start result-->
-        <div *ngFor="let candidate of candidates" class="FlatCard searchcard mb-3">
+        <div *ngFor="let candidate of candidates; let i = index" class="FlatCard searchcard mb-3" [ngStyle]="{'border-left': '5px solid ' + getBorderColor(i)}">
           <div class="card-body p-4">
             <div class="row align-items-center">
               <div class="col-lg-10 col-xl-10 col-md-10 col-sm-10 col-12">
@@ -249,7 +249,7 @@
       </div> -->
 
         <!--start result-->
-        <div class="FlatCard searchcard mb-3" *ngFor="let supplier of supplierList">
+        <div class="FlatCard searchcard mb-3" *ngFor="let supplier of supplierList; let i = index" [ngStyle]="{'border-left': '5px solid ' + getBorderColor(i)}">
           <div class="card-body p-4">
             <div class="row align-items-center">
               <div class="col-lg-10 col-xl-10 col-md-10 col-sm-10 col-9 mob-mb1">

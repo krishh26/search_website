@@ -46,7 +46,7 @@ export class CartComponent implements OnInit {
       return '';
     }
     const words = name.split(' ');
-  
+
     return words.map((word, index) => {
       if (index === 0) {
         // First word: show 1st, 3rd, 5th
@@ -79,5 +79,60 @@ export class CartComponent implements OnInit {
 
   get resourceSharingItems() {
     return this.cartItems.items?.filter((item: any) => item.itemType !== 'candidate') || [];
+  }
+
+  getExperienceRange(years: number): string {
+    if (years <= 0) {
+      return "0";
+    } else if (years > 0 && years <= 3) {
+      return "1-3";
+    } else if (years > 3 && years <= 5) {
+      return "3-5";
+    } else if (years > 5 && years <= 10) {
+      return "5-10";
+    } else {
+      return "10+";
+    }
+  }
+
+  calculateExperience(yearOfEstablishment: string | null): string {
+    if (!yearOfEstablishment) return "0";
+
+    const establishmentDate = new Date(yearOfEstablishment);
+    const today = new Date();
+    const diffTime = Math.abs(today.getTime() - establishmentDate.getTime());
+    const diffYears = Math.floor(diffTime / (1000 * 60 * 60 * 24 * 365.25));
+
+    return this.getCompanyExperienceRange(diffYears);
+  }
+
+  getCompanyExperienceRange(years: number): string {
+    if (years <= 0) {
+      return "0";
+    } else if (years > 0 && years <= 3) {
+      return "1-3";
+    } else if (years > 3 && years <= 5) {
+      return "3-5";
+    } else if (years > 5 && years <= 10) {
+      return "5-10";
+    } else {
+      return "10+";
+    }
+  }
+
+  resourceCapacity(value: number): string {
+    if (value === 0) {
+      return "0";
+    } else if (value > 0 && value <= 20) {
+      return "1-20";
+    } else if (value > 20 && value <= 50) {
+      return "21-50";
+    } else if (value > 50 && value <= 100) {
+      return "50-100";
+    } else if (value > 100 && value <= 200) {
+      return "100-200";
+    } else {
+      return "200+";
+    }
   }
 }

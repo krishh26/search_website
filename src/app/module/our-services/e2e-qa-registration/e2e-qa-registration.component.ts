@@ -137,7 +137,7 @@ export class E2eQaRegistrationComponent implements OnInit {
       requirement: [''],
       engagementType: [''],
       description: [''],
-      language: [''],
+      // language: [''],
       startDate: [''],
       endDate: [''],
       budget: ['']
@@ -146,7 +146,7 @@ export class E2eQaRegistrationComponent implements OnInit {
     // Subscribe to hasDemandReady changes
     this.registrationForm.get('hasDemandReady')?.valueChanges.subscribe(value => {
       const isYes = value === 'yes';
-      const controls = ['requirement', 'engagementType', 'description', 'language', 'startDate', 'endDate', 'budget'];
+      const controls = ['requirement', 'engagementType', 'description', 'startDate', 'endDate', 'budget']; // language
 
       controls.forEach(controlName => {
         const control = this.registrationForm.get(controlName);
@@ -217,7 +217,7 @@ export class E2eQaRegistrationComponent implements OnInit {
         requirement: '',
         engagementType: '',
         description: '',
-        language: '',
+        // language: '',
         startDate: '',
         endDate: '',
         budget: ''

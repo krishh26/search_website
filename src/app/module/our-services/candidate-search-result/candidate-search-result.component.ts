@@ -673,12 +673,18 @@ export class CandidateSearchResultComponent implements OnInit {
     this.cartItemsIds = [];
     this.itSubcontractService.getCartItems().subscribe((response: any) => {
       if (response?.status) {
-        response?.data?.items?.map((data : any) => {
+        response?.data?.items?.map((data: any) => {
           this.cartItemsIds.push(data?.itemId);
         })
       }
 
       console.log("this.cartItemsIds", this.cartItemsIds)
     })
+  }
+
+  getBorderColor(index: number): string {
+    // Colors: green, blue, pink, gold, yellow (from image: #ffd600)
+    const colors = ['#22c55e', '#2563eb', '#f9a8d4', '#fbbf24'];
+    return colors[index % colors.length];
   }
 }
