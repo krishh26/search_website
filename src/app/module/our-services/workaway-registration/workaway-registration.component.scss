@@ -211,3 +211,126 @@ ul.inlineList li {
   margin-left: 15px;
   color: #ccc;
 }
+
+// File Upload Modal Styles
+.upload-area {
+  border: 2px dashed #dee2e6;
+  border-radius: 10px;
+  padding: 40px 20px;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  background-color: #f8f9fa;
+  min-height: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+
+  &:hover {
+    border-color: #0d6efd;
+    background-color: #f0f8ff;
+  }
+
+  &.dragover {
+    border-color: #0d6efd;
+    background-color: #e3f2fd;
+    transform: scale(1.02);
+  }
+
+  &.uploaded {
+    border-color: #28a745;
+    background-color: #f8fff9;
+  }
+
+  .display-4 {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+  }
+
+  h6 {
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+  }
+
+  p {
+    margin-bottom: 0.5rem;
+  }
+
+  small {
+    font-size: 0.875rem;
+  }
+}
+
+// Modal backdrop
+.modal-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 1040;
+}
+
+// Modal styles
+.modal {
+  z-index: 1050;
+}
+
+.modal.show {
+  display: block;
+}
+
+// Upload Modal Styles
+.btn-close-absolute {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  z-index: 10;
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  color: #6c757d;
+  cursor: pointer;
+  
+  &:hover {
+    color: #000;
+  }
+}
+
+.download-csv-btn {
+  display: block;
+  text-align: center;
+  padding: 40px 20px;
+  border: 2px dashed #dee2e6;
+  border-radius: 10px;
+  color: #6c757d;
+  transition: all 0.3s ease;
+  background-color: #f8f9fa;
+  text-decoration: none;
+  
+  &:hover {
+    border-color: #0d6efd;
+    background-color: #f0f8ff;
+    color: #0d6efd;
+    text-decoration: none;
+  }
+  
+  img {
+    width: 60px;
+    height: auto;
+  }
+  
+  .p-22 {
+    font-size: 22px;
+  }
+  
+  .p-600 {
+    font-weight: 600;
+  }
+}
+
+.shadow-nm {
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}

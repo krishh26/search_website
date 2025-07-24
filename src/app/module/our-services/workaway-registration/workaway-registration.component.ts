@@ -72,6 +72,8 @@ export class WorkawayRegistrationComponent implements OnInit {
   defaultTagLimit = 7;
   showAllTags = false;
 
+
+
   constructor(
     private router: Router,
     private formBuilder: FormBuilder,
@@ -127,11 +129,7 @@ export class WorkawayRegistrationComponent implements OnInit {
   private validateCurrentStep(): boolean {
     switch (this.currentStep) {
       case 1:
-        // Step 1 validation - at least one service should be selected
-        if (!this.selectedServices.workaway && !this.selectedServices.itSubcontract && !this.selectedServices.e2eQA) {
-          this.toastr.warning('Please select at least one service type.', 'Warning');
-          return false;
-        }
+        // Step 1 validation - no validation required, just review cart items
         return true;
       case 2:
         // Step 2 validation - validate forms based on selected services
@@ -143,6 +141,12 @@ export class WorkawayRegistrationComponent implements OnInit {
 
   private validateStep2(): boolean {
     let isValid = true;
+
+    // Validate that at least one service is selected
+    if (!this.selectedServices.workaway && !this.selectedServices.itSubcontract && !this.selectedServices.e2eQA) {
+      this.toastr.warning('Please select at least one service type.', 'Warning');
+      return false;
+    }
 
     // Validate common fields
     const commonProfessionType = this.unifiedForm.get('commonProfessionType');
@@ -471,7 +475,6 @@ export class WorkawayRegistrationComponent implements OnInit {
           this.isUploading = false;
           if (response?.status == true) {
             this.fileUpload = response?.data;
-            this.unifiedForm.patchValue({ 'workaway.fileUpload': response?.data });
             this.toastr.success('File uploaded successfully!', 'Success');
           } else {
             this.toastr.error('Upload failed. Please try again.', 'Error');
@@ -485,6 +488,8 @@ export class WorkawayRegistrationComponent implements OnInit {
       });
     }
   }
+
+
 
   // Form submission
   onSubmit(): void {
