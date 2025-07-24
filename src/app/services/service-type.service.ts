@@ -12,8 +12,8 @@ export class ServiceTypeService {
   navigateToRegistration(serviceType: ServiceType): void {
     const routes = {
       'workaway': '/our-services/workaway-registration',
-      'itSubcontracting': '/our-services/it-subcontracting-registration',
-      'e2eQA': '/our-services/e2e-qa-registration'
+      'itSubcontracting': '/our-services/workaway-registration',
+      'e2eQA': '/our-services/workaway-registration'
     };
 
     // First clear navigation history

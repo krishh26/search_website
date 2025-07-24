@@ -11,7 +11,7 @@ export class E2eQaRegistrationContactDetailsComponent {
   constructor(private router: Router) { }
 
   goBack(): void {
-    this.router.navigate(['/our-services/e2e-qa-registration']);
+    this.router.navigate(['/our-services/workaway-registration']);
   }
 
   NumberOnly(event: any): boolean {
