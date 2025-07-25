@@ -118,7 +118,8 @@
                               </ul>
                             </div>
                             <button (click)="removeCartItem(item._id)" class="remove-btn ms-3">
-                              <i class="bi bi-trash"></i> Remove
+                              <i class="bi bi-trash"></i>
+                              <span>Remove</span>
                             </button>
                           </div>
                         </div>
@@ -163,7 +164,8 @@
                               </ul>
                             </div>
                             <button (click)="removeCartItem(item._id)" class="remove-btn ms-3">
-                              <i class="bi bi-trash"></i> Remove
+                              <i class="bi bi-trash"></i>
+                              <span>Remove</span>
                             </button>
                           </div>
                         </div>
@@ -195,10 +197,12 @@
 
               <div class="form-group text-end">
                 <button class="btn btn-dark me-2" type="button" (click)="goBack()">
-                  <i class="bi bi-arrow-left me-2"></i> Go Back
+                  <i class="bi bi-arrow-left"></i>
+                  <span>Go Back</span>
                 </button>
                 <button class="btn btn-primary" type="button" (click)="nextStep()">
-                  Next Step <i class="bi bi-arrow-right ms-2"></i>
+                  <span>Next Step</span>
+                  <i class="bi bi-arrow-right"></i>
                 </button>
               </div>
             </div>
@@ -341,8 +345,8 @@
                             <div class="col-sm-9">
                               <p class="mt-4">
                                 <button type="button" class="btn btn-light me-2" (click)="openUploadModal()">
-                                  <i class="bi bi-upload me-2"></i>
-                                  Upload File
+                                  <i class="bi bi-upload"></i>
+                                  <span>Upload File</span>
                                 </button>
                                 <!-- <button type="button" class="btn btn-link text-primary" (click)="downloadSampleCSV()"
                                 [disabled]="isUploading">
@@ -605,10 +609,12 @@
 
               <div class="form-group text-end">
                 <button class="btn btn-dark me-2" type="button" (click)="previousStep()">
-                  <i class="bi bi-arrow-left me-2"></i> Previous
+                  <i class="bi bi-arrow-left"></i>
+                  <span>Previous</span>
                 </button>
                 <button class="btn btn-primary" type="button" (click)="nextStep()">
-                  Next Step <i class="bi bi-arrow-right ms-2"></i>
+                  <span>Next Step</span>
+                  <i class="bi bi-arrow-right"></i>
                 </button>
               </div>
             </div>
@@ -714,13 +720,14 @@
 
                 <div class="form-group text-end">
                   <button class="btn btn-dark me-2" type="button" (click)="previousStep()">
-                    <i class="bi bi-arrow-left me-2"></i> Previous
+                    <i class="bi bi-arrow-left"></i>
+                    <span>Previous</span>
                   </button>
                   <button class="btn btn-primary" type="button" (click)="onSubmit()" [disabled]="isSubmitting">
-                    <span *ngIf="isSubmitting" class="spinner-border spinner-border-sm me-2" role="status"
+                    <span *ngIf="isSubmitting" class="spinner-border spinner-border-sm" role="status"
                       aria-hidden="true"></span>
-                    {{ isSubmitting ? 'Submitting...' : 'Submit' }}
-                    <i class="bi bi-save2 ms-2" *ngIf="!isSubmitting"></i>
+                    <span>{{ isSubmitting ? 'Submitting...' : 'Submit' }}</span>
+                    <i class="bi bi-save2" *ngIf="!isSubmitting"></i>
                   </button>
                 </div>
               </form>
@@ -804,8 +811,8 @@
             <input type="file" #fileInput (change)="onFileUpload($event)" accept=".csv,.xlsx,.xls,.pdf,.doc,.docx"
               style="display: none">
             <a href="javascript:void(0);" class="download-csv-btn shadow-nm" (click)="fileInput.click()">
-              <img src="/assets/img/csv-file.png" class="mb-3">
-              <p class="p-22 p-600">Upload File</p>
+              <img src="/assets/img/csv-file.png">
+              <span class="p-22 p-600">Upload File</span>
             </a>
           </div>
         </div>

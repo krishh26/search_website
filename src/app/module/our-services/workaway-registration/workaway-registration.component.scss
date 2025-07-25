@@ -267,7 +267,9 @@ ul.inlineList li {
 // Upload Modal Styles
 
 .download-csv-btn {
-  display: block;
+  display: inline-flex !important;
+  align-items: center;
+  justify-content: center;
   text-align: center;
   padding: 40px 20px;
   border: 2px dashed #dee2e6;
@@ -276,6 +278,8 @@ ul.inlineList li {
   transition: all 0.3s ease;
   background-color: #f8f9fa;
   text-decoration: none;
+  width: auto !important; /* Remove any fixed width */
+  min-width: auto !important;
 
   &:hover {
     border-color: #0d6efd;
@@ -287,10 +291,12 @@ ul.inlineList li {
   img {
     width: 60px;
     height: auto;
+    margin-bottom: 1rem; /* Add margin below image */
   }
 
   .p-22 {
     font-size: 22px;
+    margin: 0; /* Remove default margin */
   }
 
   .p-600 {
@@ -300,4 +306,74 @@ ul.inlineList li {
 
 .shadow-nm {
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Button styling improvements */
+.btn {
+  width: auto !important; /* Remove any fixed width */
+  min-width: auto !important; /* Remove minimum width constraints */
+  display: inline-flex !important; /* Use flexbox for better icon/text alignment */
+  align-items: center !important; /* Center align icon and text vertically */
+  justify-content: center !important; /* Center align content horizontally */
+  gap: 0.5rem; /* Consistent spacing between icon and text */
+  white-space: nowrap; /* Prevent text wrapping */
+}
+
+/* Ensure consistent spacing for icons in buttons */
+.btn i {
+  display: inline-flex;
+  align-items: center;
+  line-height: 1;
+}
+
+/* Remove fixed width from specific button classes */
+.btn-signin,
+.btn-signup,
+.btn-primary,
+.btn-dark,
+.btn-light {
+  width: auto !important;
+  min-width: auto !important;
+}
+
+/* Mobile responsive button improvements */
+@media (max-width: 768px) {
+  .btn {
+    width: auto !important; /* Override mobile width: 100% */
+    min-width: auto !important;
+    flex: none !important; /* Don't grow to fill container */
+  }
+
+  .btn-signin,
+  .btn-signup {
+    width: auto !important; /* Override the global 100% width on mobile */
+    margin-left: 0 !important;
+  }
+}
+
+/* Ensure form buttons are properly aligned */
+.form-group .btn {
+  margin: 0 0.25rem; /* Small margin between buttons */
+}
+
+/* Remove button specific styling */
+.remove-btn {
+  background: #fff;
+  color: #2563eb;
+  border: 1px solid #2563eb;
+  border-radius: 6px;
+  padding: 6px 18px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+  display: inline-flex !important;
+  align-items: center;
+  gap: 0.5rem;
+  width: auto !important;
+  min-width: auto !important;
+}
+
+.remove-btn:hover {
+  background: #2563eb;
+  color: #fff;
 }
