@@ -284,19 +284,21 @@
                       <label class="col-sm-3 col-form-label">I am registering for <span
                           class="text-danger">*</span></label>
                       <div class="col-sm-9">
-                        <div class="form-check">
-                          <input class="form-check-input" type="radio" formControlName="commonRegistrationType"
-                            value="representative" (change)="onCommonRegistrationTypeChange('representative')">
-                          <label class="form-check-label">Representative for my client</label>
+                        <div class="d-flex flex-wrap gap-3">
+                          <div class="form-check-inline">
+                            <input class="form-check-input me-2" type="radio" formControlName="commonRegistrationType"
+                              value="representative" (change)="onCommonRegistrationTypeChange('representative')">
+                            <label class="form-check-label">Representative for my client</label>
+                          </div>
+                          <div class="form-check-inline">
+                            <input class="form-check-input me-2" type="radio" formControlName="commonRegistrationType"
+                              value="business" (change)="onCommonRegistrationTypeChange('business')">
+                            <label class="form-check-label">I am a business</label>
+                          </div>
                         </div>
-                        <div class="form-check ps-4" *ngIf="isCommonRepresentativeForClient">
+                        <div class="form-check ps-4 mt-2" *ngIf="isCommonRepresentativeForClient">
                           <input class="form-check-input" type="checkbox" formControlName="commonWhiteLabelOption">
                           <label class="form-check-label">I would like to discuss white labelling options</label>
-                        </div>
-                        <div class="form-check">
-                          <input class="form-check-input" type="radio" formControlName="commonRegistrationType"
-                            value="business" (change)="onCommonRegistrationTypeChange('business')">
-                          <label class="form-check-label">I am a business</label>
                         </div>
                       </div>
                     </div>
@@ -338,8 +340,7 @@
                                 class="text-danger">*</span></label>
                             <div class="col-sm-9">
                               <p class="mt-4">
-                                <button type="button" class="btn btn-light me-2" data-bs-toggle="modal"
-                                  data-bs-target="#uploadbulkModal">
+                                <button type="button" class="btn btn-light me-2" (click)="openUploadModal()">
                                   <i class="bi bi-upload me-2"></i>
                                   Upload File
                                 </button>
@@ -789,9 +790,12 @@
 <div class="modal fade" id="uploadbulkModal" tabindex="-1" aria-labelledby="uploadbulkModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered modal-lg">
     <div class="modal-content">
-      <button type="button" class="btn-close-absolute" data-bs-dismiss="modal" aria-label="Close"></button>
-      <div class="modal-body p-5">
-        <h2><strong>Please upload the data as a PDF, Word document, or Excel file.</strong></h2>
+      <div class="modal-header">
+        <h4 class="modal-title" id="uploadbulkModalLabel">Upload Requirements</h4>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body p-4">
+        <h5><strong>Please upload the data as a PDF, Word document, or Excel file.</strong></h5>
         <p>Include key details like the number of quantities and the roles required.
           Also, let us know the expected timeline—how many days you need this delivered in. That way we can plan
           accordingly.</p>

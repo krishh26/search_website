@@ -40,7 +40,7 @@
                   </li>
                 </ul>
               </div>
-              <button (click)="removeCartItem(item._id)" class="remove-btn ms-3">
+              <button (click)="removeCartItem(item._id)" class="remove-btn ms-3" style="width: 100px; white-space: nowrap; display: flex; align-items: center; justify-content: center;">
                 <i class="bi bi-trash"></i> Remove
               </button>
             </div>
@@ -90,7 +90,7 @@
                   <!-- <li><i class="bi bi-translate text-muted me-2"></i> Language- {{ item.itemDetails.language || 'N/A' }}</li> -->
                 </ul>
               </div>
-              <button (click)="removeCartItem(item._id)" class="remove-btn ms-3">
+              <button (click)="removeCartItem(item._id)" class="remove-btn ms-3" style="width: 100px; white-space: nowrap; display: flex; align-items: center; justify-content: center;">
                 <i class="bi bi-trash"></i> Remove
               </button>
             </div>
@@ -147,7 +147,7 @@
               [ngStyle]="{'border-left': '5px solid ' + getBorderColor(i)}">
               <div class="cart-card-header">
                 <h2>{{ maskName(item.itemDetails.companyName) }}</h2>
-                <button (click)="removeCartItem(item._id)" class="remove-btn">
+                <button (click)="removeCartItem(item._id)" class="remove-btn" style="width: 100px; white-space: nowrap; display: flex; align-items: center; justify-content: center;"">
                   <i class="bi bi-trash"></i> Remove
                 </button>
               </div>

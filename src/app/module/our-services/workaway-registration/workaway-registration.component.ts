@@ -151,12 +151,12 @@ export class WorkawayRegistrationComponent implements OnInit {
     // Validate common fields
     const commonProfessionType = this.unifiedForm.get('commonProfessionType');
     const commonRegistrationType = this.unifiedForm.get('commonRegistrationType');
-    
+
     if (!commonProfessionType?.valid) {
       commonProfessionType?.markAsTouched();
       isValid = false;
     }
-    
+
     if (!commonRegistrationType?.valid) {
       commonRegistrationType?.markAsTouched();
       isValid = false;
@@ -206,7 +206,7 @@ export class WorkawayRegistrationComponent implements OnInit {
           languageControl.markAsTouched();
           isValid = false;
         }
-        
+
         if (!itSubForm.valid) {
           this.markFormGroupTouched(itSubForm as FormGroup);
           isValid = false;
@@ -236,7 +236,7 @@ export class WorkawayRegistrationComponent implements OnInit {
       commonProfessionType: ['', [Validators.required]],
       commonRegistrationType: ['representative', [Validators.required]],
       commonWhiteLabelOption: [false],
-      
+
       // Separate demand ready controls for each service
       workawayHasDemandReady: ['', [Validators.required]],
       itSubcontractHasDemandReady: ['', [Validators.required]],
@@ -330,16 +330,16 @@ export class WorkawayRegistrationComponent implements OnInit {
   // Service selection methods
   onServiceSelectionChange(service: 'workaway' | 'itSubcontract' | 'e2eQA', event: any): void {
     this.selectedServices[service] = event?.target?.checked;
-    
+
     if (!event?.target?.checked) {
       // Reset form when service is deselected
       this.unifiedForm.get(service)?.reset();
       this.hasDemandReady[service] = false;
-      
+
       // Reset demand ready control
       const demandControl = `${service}HasDemandReady`;
       this.unifiedForm.get(demandControl)?.reset();
-      
+
       if (service === 'itSubcontract') {
         this.selectedTechnologies = [];
       }
@@ -437,7 +437,7 @@ export class WorkawayRegistrationComponent implements OnInit {
   removeTechnology(techId: string) {
     this.selectedTechnologies = this.selectedTechnologies.filter(t => t._id !== techId);
     this.updateLanguageField();
-    
+
     // Mark language control as touched if no technologies are selected
     if (this.selectedTechnologies.length === 0) {
       const languageControl = this.unifiedForm.get('itSubcontract.language');
@@ -449,7 +449,7 @@ export class WorkawayRegistrationComponent implements OnInit {
     const languageString = this.selectedTechnologies.map(t => t.name).join(', ');
     const languageControl = this.unifiedForm.get('itSubcontract.language');
     languageControl?.patchValue(languageString);
-    
+
     // Update validation based on whether technologies are selected
     if (this.selectedTechnologies.length > 0) {
       languageControl?.setErrors(null);
@@ -463,6 +463,16 @@ export class WorkawayRegistrationComponent implements OnInit {
       this.showTechDropdown = false;
       this.searchResults = [];
     }, 200);
+  }
+
+  // Modal methods
+  openUploadModal(): void {
+    const modalElement = document.getElementById('uploadbulkModal');
+    if (modalElement) {
+      // Use Bootstrap 5 Modal API
+      const modal = new (window as any).bootstrap.Modal(modalElement);
+      modal.show();
+    }
   }
 
   // File upload methods
@@ -501,7 +511,7 @@ export class WorkawayRegistrationComponent implements OnInit {
         registrationType: this.unifiedForm.get('commonRegistrationType')?.value,
         whiteLabelOption: this.unifiedForm.get('commonWhiteLabelOption')?.value
       };
-      
+
       let submissionPromises: Promise<any>[] = [];
 
       // Submit forms for each selected service
@@ -558,7 +568,7 @@ export class WorkawayRegistrationComponent implements OnInit {
         .then((responses) => {
           this.isSubmitting = false;
           const allSuccess = responses.every(response => response?.status === true);
-          
+
           if (allSuccess) {
             this.toastr.success('All forms submitted successfully!', 'Success');
             this.resetAllForms();
@@ -586,7 +596,7 @@ export class WorkawayRegistrationComponent implements OnInit {
     this.selectedTechnologies = [];
     this.fileUpload = null;
     this.currentStep = 1;
-    
+
     // Reset to default values
     this.unifiedForm.patchValue({
       commonRegistrationType: 'representative',
