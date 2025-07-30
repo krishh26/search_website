@@ -7,3 +7,7 @@
 .ps2{
     padding-left: 2rem;
 }
+
+ul.circle-list li::marker {
+  color: #0F51E0;
+}
