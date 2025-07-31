@@ -153,7 +153,7 @@
         $(".add-arrow1, .add-arrow2, .add-arrow3").hide();
       });
 
-       $('#MobshowForcorporate').click(function () {
+      $('#MobshowForcorporate').click(function () {
         $(".add-arrow1").show();
         $('.ForCorporate-content').slideToggle("slow");
         $('.Forbusiness-content, .Foritservices-content, .Foragencies-content').hide();
@@ -178,6 +178,29 @@
         $(".add-arrow1, .add-arrow2, .add-arrow3").hide();
       });
     });
+
+    //Scroll top button code
+
+    $(document).ready(() => {
+
+      const backToTop = $('#backToTop')
+      const amountScrolled = 300
+
+      $(window).scroll(() => {
+        $(window).scrollTop() >= amountScrolled
+          ? backToTop.fadeIn('fast')
+          : backToTop.fadeOut('fast')
+      })
+
+      backToTop.click(() => {
+        $('body, html').animate({
+          scrollTop: 0
+        }, 600)
+        return false
+      })
+    })
+
+
   </script>
 </body>
 
