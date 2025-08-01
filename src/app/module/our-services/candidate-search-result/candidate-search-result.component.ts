@@ -353,9 +353,11 @@ export class CandidateSearchResultComponent implements OnInit {
       next: (response) => {
         if (response.status && response.data) {
           this.itSubFilterList = response.data as any;
-          if (this.filterList?.length == 0 && this.itSubFilterList?.length == 0) {
-            this.router.navigateByUrl('/home');
-          }
+          setTimeout(() => {
+            if (this.filterList?.length == 0 && this.itSubFilterList?.length == 0) {
+              this.router.navigateByUrl('/home');
+            }
+          }, 1500);
           this.itSubFilterList?.forEach((element: any) => {
             if (element) {
               element['type'] = 'itsubcontract'
@@ -367,9 +369,11 @@ export class CandidateSearchResultComponent implements OnInit {
             this.selectFilterItSubContractFilter(this.itSelectedFilter ? this.itSelectedFilter : this.itSubFilterList?.[0]?._id);
           }
         } else {
-          if (this.filterList?.length == 0 && this.itSubFilterList?.length == 0) {
-            this.router.navigateByUrl('/home');
-          }
+          setTimeout(() => {
+            if (this.filterList?.length == 0 && this.itSubFilterList?.length == 0) {
+              this.router.navigateByUrl('/home');
+            }
+          }, 1500);
         }
       }
     });

@@ -53,19 +53,21 @@
               </a>
             </li>
             <li class="nav-item">
-              <a href="javascript:;" class="nav-link cart-icon-wrapper" routerLink="/cart-item">
+              <!-- <a href="javascript:;" class="nav-link cart-icon-wrapper" routerLink="/cart-item"> -->
+              <a href="javascript:;" class="nav-link cart-icon-wrapper"
+                routerLink="/our-services/workaway-registration">
                 <span class="cart-icon">
-                 <i class="bi bi-bag-check"></i>
+                  <i class="bi bi-bag-check"></i>
                   Shortlisted
                 </span>
                 <span class="itemcounter" *ngIf="totalCount > 0">{{ totalCount }}</span>
               </a>
             </li>
-             <li class="nav-item">
+            <li class="nav-item">
               <a href="javascript:;" class="btn btn-signin mob-mb1">Sign In</a>
             </li>
-              <li class="nav-item">
-                <a *ngIf="!isHomePage" routerLink="/" class="btn btn-signup"><i class="bi bi-search"></i> Search</a>
+            <li class="nav-item">
+              <a *ngIf="!isHomePage" routerLink="/" class="btn btn-signup"><i class="bi bi-search"></i> Search</a>
             </li>
           </ul>
         </div>
