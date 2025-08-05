@@ -198,10 +198,10 @@
                   <p><i class="bi bi-cash text-muted me-2"></i> Day Rate- {{candidate.ukHourlyRate ? '£' : ''}}{{candidate.ukHourlyRate ? candidate.ukHourlyRate * 8 : "On Request"}}
                   </p>
                 </div>
-                <div class="col-lg-8 col-xl-8 col-md-8 col-sm-8 col-12">
+                <!-- <div class="col-lg-8 col-xl-8 col-md-8 col-sm-8 col-12">
                   <p><i class="bi bi-translate text-muted me-2"></i> Language- {{candidate.languagesKnown.join(', ') ||
                     'N/A'}}</p>
-                </div>
+                </div> -->
                 <div class="col-12">
                   <p><i class="bi bi-code-slash text-muted me-2"></i> Skills- {{candidate.technicalSkills.join(', ') ||
                     'N/A'}}</p>
@@ -254,10 +254,10 @@
             <div class="row align-items-center">
               <div class="col-lg-10 col-xl-10 col-md-10 col-sm-10 col-9 mob-mb1">
                 <h4><strong>{{ maskName(supplier.companyName)}}</strong></h4>
-                <ul class="bulletpipeLsit">
+                <!-- <ul class="bulletpipeLsit">
                   <li>{{supplier.employeeCount || 0}} Employees</li>
                   <li>{{supplier.location || 'Location not specified'}}</li>
-                </ul>
+                </ul> -->
               </div>
               <div class="col-lg-2 col-xl-2 col-md-2 col-sm-2 col-12"  *ngIf="!cartItemsIds.includes(supplier?._id || '')">
                 <a (click)="candidateAddToCart(supplier)"
