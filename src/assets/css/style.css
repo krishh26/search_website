@@ -2484,38 +2484,7 @@ Services Box
   }
 }
 
-/*==================================
-Scroll top button
-===================================*/
-.back-to-top {
-  background-color: #0d6efd;
-  text-decoration: none;
-  cursor: pointer;
-  width: 56px;
-  height: 56px;
-  z-index: 999;
-  position: fixed;
-  right: 32px;
-  bottom: 32px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border: 0;
-  border-radius: 100%;
-  box-shadow: 0 4px 16px 0 rgba(0, 0, 0, 0.4);
-}
-.back-to-top:hover {
-  background-color: #0457d3;
-}
-.back-to-top:active {
-  box-shadow: none;
-  background-color: #0457d3;
-}
-.back-to-top svg.icon__arrow-up {
-  fill: white;
-  width: 32px;
-  height: 32px;
-}
+
 
 /*===================================
 Media Query

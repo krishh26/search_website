@@ -1,0 +1,49 @@
+.back-to-top {
+  background-color: #0d6efd;
+  text-decoration: none;
+  cursor: pointer;
+  width: 56px;
+  height: 56px;
+  z-index: 999;
+  position: fixed;
+  right: 32px;
+  bottom: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 0;
+  border-radius: 100%;
+  box-shadow: 0 4px 16px 0 rgba(0, 0, 0, 0.4);
+  transition: all 0.3s ease;
+  
+  &:hover {
+    background-color: #0457d3;
+    transform: translateY(-2px);
+  }
+  
+  &:active {
+    box-shadow: none;
+    background-color: #0457d3;
+  }
+  
+  svg.icon__arrow-up {
+    fill: white;
+    width: 32px;
+    height: 32px;
+  }
+}
+
+// Mobile responsive adjustments
+@media only screen and (max-width: 767px) {
+  .back-to-top {
+    right: 16px;
+    bottom: 16px;
+    width: 48px;
+    height: 48px;
+    
+    svg.icon__arrow-up {
+      width: 28px;
+      height: 28px;
+    }
+  }
+}

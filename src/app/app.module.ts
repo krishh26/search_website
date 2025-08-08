@@ -8,6 +8,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './common/header/header.component';
 import { FooterComponent } from './common/footer/footer.component';
+import { BackToTopComponent } from './common/back-to-top/back-to-top.component';
 import { HomeModule } from './module/home/home.module';
 import { AboutUsModule } from './module/about-us/about-us.module';
 import { HashLocationStrategy, LocationStrategy } from '@angular/common';
@@ -17,7 +18,8 @@ import { ServiceTypeService } from './services/service-type.service';
   declarations: [
     AppComponent,
     HeaderComponent,
-    FooterComponent
+    FooterComponent,
+    BackToTopComponent
   ],
   imports: [
     BrowserModule,
