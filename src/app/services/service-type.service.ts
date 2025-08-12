@@ -7,13 +7,13 @@ export type ServiceType = 'workaway' | 'itSubcontracting' | 'e2eQA';
   providedIn: 'root'
 })
 export class ServiceTypeService {
-  constructor(private router: Router) {}
+  constructor(private router: Router) { }
 
   navigateToRegistration(serviceType: ServiceType): void {
     const routes = {
       'workaway': '/our-services/workaway-registration',
-      'itSubcontracting': '/our-services/workaway-registration',
-      'e2eQA': '/our-services/workaway-registration'
+      'itSubcontracting': '/our-services/it-subcontracting-registration',
+      'e2eQA': '/our-services/e2e-qa-registration'
     };
 
     // First clear navigation history

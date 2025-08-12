@@ -3,754 +3,432 @@
     style="background-image: url(/assets/img/search-background-image.png);">
     <div class="overlay-bg" style="opacity: 1;">
       <div class="container">
-        <!-- <div class="text-center text-white">
-        <h1 class="page-titletop mt-3">Unified Registration Portal</h1>
-        <p>Register for WorkAway, IT Subcontracting, and E2E QA Services all in one place</p>
-      </div> -->
+        <div class="text-center text-white">
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="serviceTypeOptions" id="workawayOption" value="option1"
+              (change)="onServiceTypeChange('option1')" [checked]="selectedServiceType === 'option1'">
+            <label class="form-check-label" for="workawayOption">WorkAway</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="serviceTypeOptions" id="itSubcontractingOption"
+              value="option2" (change)="onServiceTypeChange('option2')" [checked]="selectedServiceType === 'option2'">
+            <label class="form-check-label" for="itSubcontractingOption">IT Subcontracting</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="serviceTypeOptions" id="e2eQAOption" value="option3"
+              (change)="onServiceTypeChange('option3')" [checked]="selectedServiceType === 'option3'">
+            <label class="form-check-label" for="e2eQAOption">E2E QA Services</label>
+          </div>
+
+          <h1 class="page-titletop mt-3">WorkAway Registration - IT Talent Banking</h1>
+          <p>Register for WorkAway IT talent recruitment services. Access pre-approved IT professionals for your business needs.</p>
+        </div>
         <div class="FlatCard text-dark" style="z-index: 1;">
           <div class="card-body p-5">
-            <div class="text-center">
-              <p class="p-16 p-600 text-muted">In just a few steps</p>
-              <h2 class="page-titletop text-dark">Register with <span class="text-primary">Spectrum IT Hub</span></h2>
-            </div>
-
-            <!-- Step Indicator -->
-            <ul class="wizard mt-3 mb-5">
-              <li [class.active]="currentStep === 1" (click)="goToStep(1)">
-                <span>Step 1: Shortlisted Items</span>
-              </li>
-              <li [class.active]="currentStep === 2" (click)="goToStep(2)">
-                <span>Step 2: Service Details</span>
-              </li>
-              <li [class.active]="currentStep === 3" (click)="goToStep(3)">
-                <span>Step 3: Contact Details</span>
-              </li>
-            </ul>
-
-            <!-- Step 1: Shortlisted Items -->
-            <div *ngIf="currentStep === 1">
-              <!-- <div class="row mb-3">
-                <div class="col-12">
-                  <div class="alert" role="alert" style="background-color: #E5E4E2; border-color: #E5E4E2;">
-                    <i class="bi bi-exclamation-triangle-fill me-2"></i>
-                    <strong>Step 1:</strong> Review your shortlisted items and cart items.
-                  </div>
-                </div>
-              </div> -->
-
-              <!-- Your Search Tags -->
-              <!-- <div class="row mb-3">
+            <div class="row">
               <div class="col-12">
-                <label class="col-form-label">Your Search:</label>
-                <ul class="searchresult-tags mb-4">
-                  <ng-container *ngFor="let item of visibleCombinedTags">
-                    <li style="cursor: pointer; background-color: #f8f9fa;">
-                      <span *ngIf="item.type === 'workaway'">
-                        {{ item.jobTitle }}
-                        <p style="font-size: 10px; text-align: center; margin-bottom: 0px !important;">(WorkAway)</p>
-                      </span>
-                      <span *ngIf="item.type === 'itsubcontract'">
-                        {{ item.projectName || item.expertise }}
-                        <p style="font-size: 10px; text-align: center; margin-bottom: 0px !important;">(IT Subcontracting)</p>
-                      </span>
-                      <span class="remove-tag" *ngIf="item.type === 'workaway'" (click)="removeFilter(item._id)">
-                        <i class="bi bi-x"></i>
-                      </span>
-                      <span class="remove-tag" *ngIf="item.type === 'itsubcontract'" (click)="removeFilterItSub(item._id)">
-                        <i class="bi bi-x"></i>
-                      </span>
-                    </li>
-                  </ng-container>
-                  <button class="btn btn-link p-0" (click)="toggleShowAllTags()" *ngIf="showToggleButton">
-                    {{ showAllTags ? 'View Less' : 'View More' }}
-                  </button>
+                <div class="text-center">
+                  <p class="p-16 p-600 text-muted">In just a minute away</p>
+                  <h2 class="page-titletop text-dark">Register with <span class="text-primary">Spectrum IT Hub</span>
+                  </h2>
+                </div>
+                <ul class="wizard mt-3 mb-5">
+                  <li [class.active]="!showContactForm">
+                    <span data-translate="">Need Details</span>
+                  </li>
+                  <li [class.active]="showContactForm">
+                    <span data-translate="">Contact Details</span>
+                  </li>
                 </ul>
               </div>
-            </div> -->
+            </div>
 
-              <!-- Your Cart Items -->
-              <div class="row mb-3">
-                <div class="col-12">
-                  <!-- <label class="col-form-label">Your Cart:</label> -->
-                  <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
-                    <li class="nav-item" role="presentation">
-                      <button class="nav-link active" id="pills-all-tab" data-bs-toggle="pill"
-                        data-bs-target="#pills-all" type="button" role="tab" aria-controls="pills-all"
-                        aria-selected="true">Workaway</button>
-                    </li>
-                    <li class="nav-item" role="presentation">
-                      <button class="nav-link" id="pills-suggested-tab" data-bs-toggle="pill"
-                        data-bs-target="#pills-suggested" type="button" role="tab" aria-controls="pills-suggested"
-                        aria-selected="false">IT Subcontract</button>
-                    </li>
-                  </ul>
-                  <div class="tab-content" id="pills-tabContent">
-                    <div class="tab-pane fade show active" id="pills-all" role="tabpanel"
-                      aria-labelledby="pills-all-tab">
-                      <ng-container *ngIf="workawayItems.length > 0; else emptyCart">
-                        <div *ngFor="let item of workawayItems; let i = index" class="cartCard mb-3"
-                          [ngStyle]="{'border-left': '5px solid ' + getBorderColor(i)}" [@fadeIn]>
-                          <div class="card-body p-4 d-flex justify-content-between align-items-center">
-                            <div>
-                              <h4><strong>{{ maskName(item.itemDetails.fullName) }} </strong> <small>({{
-                                  item.itemDetails.gender ||
-                                  'N/A' }})</small></h4>
-                              <p class="mb-0">Job Title : {{ item?.itemDetails?.currentRole?.name || 'N/A' }}</p>
-                              <ul class="inlineList mt-2">
-                                <li><i class="bi bi-mortarboard-fill text-muted me-2"></i> Qualification- {{
-                                  item.itemDetails.highestQualification || 'N/A' }}</li>
-                                <li><i class="bi bi-briefcase-fill text-muted me-2"></i> Experience-
-                                  {{item?.itemDetails?.totalExperience ?
-                                  getExperienceRange(item.totalExperience) : 0 }}</li>
-                                <li><i class="bi bi-cash text-muted me-2"></i> Day Rate- {{item.itemDetails?.ukDayRate ?
-                                  '£' : ''}} {{
-                                  item.itemDetails.ukDayRate || 'On Request' }}
-                                </li>
-                                <!-- <li><i class="bi bi-cash text-muted me-2"></i> Language- {{
-                                  item.itemDetails?.languagesKnown.join(',
-                                  ') || 'N/A' }}
-                                </li> -->
-                                <li><i class="bi bi-cash text-muted me-2"></i> Skills- {{
-                                  item.itemDetails?.technicalSkills.join(', ')
-                                  ||
-                                  'N/A' }}
-                                </li>
-                              </ul>
-                            </div>
-                            <button (click)="removeCartItem(item._id)" class="remove-btn ms-3">
-                              <i class="bi bi-trash"></i>
-                              <span>Remove</span>
-                            </button>
-                          </div>
-                        </div>
-                      </ng-container>
-                      <ng-template #emptyCart>
-                        <div class="text-center py-5">
-                          <img src="/assets/img/norecordfound.png" width="100" />
-                          <h5 class="text-center mt-4"><strong>No profiles shortlisted yet</strong></h5>
-                          <p class="text-center">You haven’t added any profiles to your shortlist. You can start by
-                            clicking here, or skip this step if you prefer.</p>
-                          <p class="text-center">
-                            Just go ahead and register—we’ll get in touch to collect the info we need and help you find
-                            the right match.<br>
-                            Please note: Profile data is updated at the end of each month, so availability may have
-                            changed since the last update.
-                          </p>
-                        </div>
-                      </ng-template>
-                    </div>
-                    <div class="tab-pane fade" id="pills-suggested" role="tabpanel"
-                      aria-labelledby="pills-suggested-tab">
-                      <ng-container *ngIf="resourceSharingItems.length > 0; else emptyResourceCart">
-                        <div *ngFor="let item of resourceSharingItems; let i = index" class="cartCard mb-3"
-                          [ngStyle]="{'border-left': '5px solid ' + getBorderColor(i)}" [@fadeIn]>
-                          <div class="card-body p-4 d-flex justify-content-between align-items-center">
-                            <div>
-                              <h4><strong>{{ maskName(item.itemDetails.companyName) }} </strong></h4>
-                              <!-- <ul class="bulletpipeLsit">
-                                <li>{{item?.itemDetails?.employeeCount || 0}} Employees</li>
-                                <li>{{item?.itemDetails?.location || 'Location not specified'}}</li>
-                              </ul> -->
-                              <ul class="inlineList mt-2">
-                                <li><i class="bi bi-briefcase-fill text-muted me-2"></i> Experience- {{
-                                  calculateExperience(item.itemDetails.yearOfEstablishment) || '0' }}</li>
-                                <li><i class="bi bi-mortarboard-fill text-muted me-2"></i> Total Projects Executed- {{
-                                  item.itemDetails.totalProjectsExecuted || '0' }}</li>
-                                <li><i class="bi bi-cash text-muted me-2"></i>Resources Capacity- {{
-                                  item.itemDetails?.employeeCount ?
-                                  resourceCapacity(item.itemDetails?.employeeCount) : 0 }}
-                                </li>
-                                <li><i class="bi bi-cash text-muted me-2"></i>Expertise-
-                                  <span *ngFor="let exp of item?.itemDetails?.expertise; let last = last">
-                                    {{exp.name}}{{!last ? ', ' : ''}}
-                                  </span>
-                                </li>
-                                <li *ngIf="item?.itemDetails?.executiveSummary">
-                                  {{item?.itemDetails?.executiveSummary}}
-                                </li>
-                              </ul>
-                            </div>
-                            <button (click)="removeCartItem(item._id)" class="remove-btn ms-3">
-                              <i class="bi bi-trash"></i>
-                              <span>Remove</span>
-                            </button>
-                          </div>
-                        </div>
-                      </ng-container>
-                      <ng-template #emptyResourceCart>
-                        <div class="text-center py-5">
-                          <img src="/assets/img/norecordfound.png" width="100" />
-                          <h5 class="text-center mt-4"><strong>No companies shortlisted yet</strong></h5>
-                          <p class="text-center">You haven’t added any companies to your shortlist. You can start by
-                            clicking here, or skip this step entirely.</p>
-                          <p class="text-center">
-                            If you’d rather move ahead, just register—we’ll reach out to gather the details we need and
-                            take it from there. Simple.
-                          </p>
-                        </div>
-                      </ng-template>
-                    </div>
-                  </div>
+            <div class="row mb-3">
+              <div class="col-12">
+                <div class="alert" role="alert" style="background-color: #E5E4E2; border-color: #E5E4E2;">
+                  <i class="bi bi-exclamation-triangle-fill me-2"></i>
+                  <strong>Quick Guide:</strong> Complete your WorkAway registration to access pre-approved IT talent.<br>
+                  <strong>Action:</strong> Fill in your requirements and contact details to get started with talent banking.
                 </div>
-              </div>
-
-              <!-- No Cart Items Template -->
-              <ng-template #noCartItems>
-                <div class="row mb-3">
-                  <div class="col-12">
-                    <div class="alert alert-info" role="alert">
-                      <i class="bi bi-info-circle-fill me-2"></i>
-                      <strong>No Cart Items:</strong> You can proceed to the next step to select services and register.
-                      Cart items are optional for registration.
-                    </div>
-                  </div>
-                </div>
-              </ng-template>
-
-              <div class="form-group text-end">
-                <button class="btn btn-dark me-2" type="button" (click)="goBack()">
-                  <i class="bi bi-arrow-left"></i>
-                  <span>Go Back</span>
-                </button>
-                <button class="btn btn-primary" type="button" (click)="nextStep()">
-                  <span>Next Step</span>
-                  <i class="bi bi-arrow-right"></i>
-                </button>
               </div>
             </div>
 
-            <!-- Step 2: Service Details -->
-            <div *ngIf="currentStep === 2">
+            <form [formGroup]="registrationForm" class="needs-validation" *ngIf="!showContactForm">
+              <div class="row mb-3 align-items-center">
+                <label for="professiontype" class="col-sm-3 col-form-label">I Am a <span
+                    class="text-danger">*</span></label>
+                <div class="col-sm-9">
+                  <select class="form-select" id="professiontype" formControlName="professionType"
+                    [class.is-invalid]="registrationForm.get('professionType')?.touched && registrationForm.get('professionType')?.errors">
+                    <option selected disabled value="">Choose from below...</option>
+                    <option>Corporate recruitment teams</option>
+                    <option>IT recruitment agency</option>
+                    <option>Software house</option>
+                    <option>IT service provider</option>
+                  </select>
+                  <div class="invalid-feedback" *ngIf="getRegistrationFormError('professionType')">
+                    {{ getRegistrationFormError('professionType') }}
+                  </div>
+                </div>
+              </div>
+
               <div class="row mb-3">
-                <div class="col-12">
-                  <div class="alert" role="alert" style="background-color: #E5E4E2; border-color: #E5E4E2;">
-                    <i class="bi bi-exclamation-triangle-fill me-2"></i>
-                    <strong>Step 2:</strong> Select services and fill in the details for each selected service.
+                <label for="registrationType" class="col-sm-3 col-form-label">I am registering for <span
+                    class="text-danger">*</span></label>
+                <div class="col-sm-9">
+                  <div class="d-flex flex-wrap gap-3">
+                    <div class="form-check-inline">
+                      <input class="form-check-input me-2" type="radio" name="registrationType" id="bankClientOption1"
+                        value="representative" formControlName="registrationType"
+                        (change)="onRegistrationTypeChange('representative')">
+                      <label class="form-check-label" for="bankClientOption1">
+                        Representative for my client
+                      </label>
+                    </div>
+                    <div class="form-check-inline">
+                      <input class="form-check-input me-2" type="radio" name="registrationType" id="bankBusinessOption1"
+                        value="business" formControlName="registrationType"
+                        (change)="onRegistrationTypeChange('business')">
+                      <label class="form-check-label" for="bankBusinessOption1">
+                        I am a business
+                      </label>
+                    </div>
+                  </div>
+                  <div class="form-check ps-4 mt-2" *ngIf="isRepresentativeForClient">
+                    <input class="form-check-input" type="checkbox" formControlName="whiteLabelOption">
+                    <label class="form-check-label" for="invalidCheck">
+                      I would like to discuss white labelling options
+                    </label>
                   </div>
                 </div>
               </div>
 
-              <!-- Service Selection -->
-              <div class="row mb-4">
-                <div class="col-12">
-                  <h5 class="mb-3">Select Services to Register:</h5>
-                  <div class="row">
-                    <div class="col-md-4">
-                      <div class="form-check">
-                        <input class="form-check-input" type="checkbox" id="workawayCheck"
-                          [(ngModel)]="selectedServices.workaway"
-                          (change)="onServiceSelectionChange('workaway', $event)">
-                        <label class="form-check-label" for="workawayCheck">
-                          <strong>WorkAway</strong> - IT Talent Recruitment
-                        </label>
-                      </div>
-                    </div>
-                    <div class="col-md-4">
-                      <div class="form-check">
-                        <input class="form-check-input" type="checkbox" id="itSubcontractCheck"
-                          [(ngModel)]="selectedServices.itSubcontract"
-                          (change)="onServiceSelectionChange('itSubcontract', $event)">
-                        <label class="form-check-label" for="itSubcontractCheck">
-                          <strong>IT Subcontracting</strong> - Project Outsourcing
-                        </label>
-                      </div>
-                    </div>
-                    <div class="col-md-4">
-                      <div class="form-check">
-                        <input class="form-check-input" type="checkbox" id="e2eQACheck"
-                          [(ngModel)]="selectedServices.e2eQA" (change)="onServiceSelectionChange('e2eQA', $event)">
-                        <label class="form-check-label" for="e2eQACheck">
-                          <strong>E2E QA Services</strong> - Quality Assurance
-                        </label>
-                      </div>
-                    </div>
+              <div class="row mb-3 align-items-center">
+                <label for="demandReady" class="col-sm-3 col-form-label">Have the demand ready? <span
+                    class="text-danger">*</span></label>
+                <div class="col-sm-9">
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="hasDemandReady" id="demandYes" value="yes"
+                      formControlName="hasDemandReady" (change)="onDemandReadyChange('yes')">
+                    <label class="form-check-label" for="demandYes">Yes</label>
+                  </div>
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="hasDemandReady" id="demandNo" value="no"
+                      formControlName="hasDemandReady" (change)="onDemandReadyChange('no')">
+                    <label class="form-check-label" for="demandNo">No</label>
+                  </div>
+                  <div class="invalid-feedback"
+                    *ngIf="registrationForm.get('hasDemandReady')?.touched && registrationForm.get('hasDemandReady')?.errors?.['required']">
+                    Please select an option.
                   </div>
                 </div>
               </div>
 
-              <form [formGroup]="unifiedForm">
-                <!-- Common Fields Section -->
-                <div class="card mb-4">
-                  <div class="card-header" style="background-color: #f8f9fa; color: #000000;">
-                    <h5 class="mb-0" style="font-size: 18px;"><i class="bi bi-info-circle-fill me-2"></i>Common
-                      Information</h5>
+              <div *ngIf="hasDemandReady">
+                <div class="row mb-3 align-items-center">
+                  <label for="requirement" class="col-sm-3 col-form-label">Enter Your Requirement <span
+                      class="text-danger">*</span></label>
+                  <div class="col-sm-9">
+                    <input type="text" class="form-control" formControlName="requirement"
+                      [class.is-invalid]="registrationForm.get('requirement')?.touched && registrationForm.get('requirement')?.errors"
+                      placeholder="Eg. Angular Developer, QA Engineer">
+                    <div class="invalid-feedback" *ngIf="getRegistrationFormError('requirement')">
+                      {{ getRegistrationFormError('requirement') }}
+                    </div>
                   </div>
-                  <div class="card-body">
-                    <!-- Common Profession Type -->
-                    <div class="row mb-3 align-items-center">
-                      <label class="col-sm-3 col-form-label">I Am a <span class="text-danger">*</span></label>
-                      <div class="col-sm-9">
-                        <select class="form-select" formControlName="commonProfessionType"
-                          [class.is-invalid]="unifiedForm.get('commonProfessionType')?.invalid && unifiedForm.get('commonProfessionType')?.touched">
-                          <option value="">Choose from below...</option>
-                          <option value="Corporate recruitment teams">Corporate recruitment teams</option>
-                          <option value="IT recruitment agency">IT recruitment agency</option>
-                          <option value="Software house">Software house</option>
-                          <option value="IT service provider">IT service provider</option>
+                </div>
+                <div class="row mb-3 align-items-center">
+                  <label for="engagementType" class="col-sm-3 col-form-label">Engagement Type <span
+                      class="text-danger">*</span></label>
+                  <div class="col-sm-9">
+                    <div class="form-check form-check-inline">
+                      <input class="form-check-input" type="radio" name="engagementType" id="Fulldelivery" value="full"
+                        formControlName="engagementType">
+                      <label class="form-check-label" for="Fulldelivery">Full Time</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                      <input class="form-check-input" type="radio" name="engagementType" id="Partdelivery" value="part"
+                        formControlName="engagementType">
+                      <label class="form-check-label" for="Partdelivery">Part Time</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                      <input class="form-check-input" type="radio" name="engagementType" id="Ongoing" value="ongoing"
+                        formControlName="engagementType">
+                      <label class="form-check-label" for="Ongoing">Project Based</label>
+                    </div>
+                    <div class="invalid-feedback"
+                      *ngIf="registrationForm.get('engagementType')?.touched && registrationForm.get('engagementType')?.errors?.['required']">
+                      Please select an engagement type.
+                    </div>
+                  </div>
+                </div>
+                <div class="row mb-3 align-items-center">
+                  <label for="description" class="col-sm-3 col-form-label">Description <span
+                      class="text-danger">*</span></label>
+                  <div class="col-sm-9">
+                    <textarea class="form-control" rows="2" cols="100" formControlName="description"
+                      [class.is-invalid]="registrationForm.get('description')?.touched && registrationForm.get('description')?.errors"
+                      placeholder="Describe your specific requirements..."></textarea>
+                    <div class="invalid-feedback" *ngIf="getRegistrationFormError('description')">
+                      {{ getRegistrationFormError('description') }}
+                    </div>
+                  </div>
+                </div>
+                <div class="row mb-3 align-items-center">
+                  <label for="language" class="col-sm-3 col-form-label">Choose Skills <span
+                      class="text-danger">*</span></label>
+                  <div class="col-sm-9">
+                    <div class="position-relative">
+                      <input type="text" class="form-control" placeholder="Search skills..."
+                        [(ngModel)]="skillSearch" [ngModelOptions]="{standalone: true}"
+                        (input)="onSkillSearchChange($event)" (blur)="onSkillInputBlur()" autocomplete="off">
+
+                      <!-- Dropdown for skills -->
+                      <div class="dropdown-menu w-100 show" *ngIf="showSkillDropdown && skillsList.length > 0"
+                        style="position: absolute; top: 100%; left: 0; z-index: 1000; max-height: 200px; overflow-y: auto;">
+                        <div class="dropdown-item" *ngFor="let skill of skillsList"
+                          (click)="selectSkill(skill)" style="cursor: pointer; padding: 8px 16px;">
+                          {{ skill.name }}
+                        </div>
+                      </div>
+
+                      <!-- Loading indicator -->
+                      <div class="dropdown-menu w-100 show" *ngIf="showSkillDropdown && isLoadingSkill"
+                        style="position: absolute; top: 100%; left: 0; z-index: 1000;">
+                        <div class="dropdown-item text-center" style="padding: 8px 16px;">
+                          <i class="bi bi-arrow-clockwise spin"></i> Loading...
+                        </div>
+                      </div>
+
+                      <!-- No records found -->
+                      <div class="dropdown-menu w-100 show"
+                        *ngIf="showSkillDropdown && hasSearchedSkill && !isLoadingSkill && skillsList.length === 0 && skillSearch.length > 0"
+                        style="position: absolute; top: 100%; left: 0; z-index: 1000;">
+                        <div class="dropdown-item text-center" style="padding: 8px 16px;">
+                          No records found
+                        </div>
+                      </div>
+                    </div>
+
+                    <!-- Selected skills display -->
+                    <div class="mt-2" *ngIf="selectedSkills.length > 0">
+                      <ul class="searchresult-tags mb-2">
+                        <li *ngFor="let skill of selectedSkills"
+                          style="cursor: pointer; background-color: #f8f9fa;">
+                          <span>{{ skill.name }}</span>
+                          <span class="remove-tag" (click)="removeSkill(skill._id)">
+                            <i class="bi bi-x"></i>
+                          </span>
+                        </li>
+                      </ul>
+                    </div>
+
+                    <!-- Hidden input for form validation -->
+                    <input type="hidden" formControlName="language">
+                    <div class="invalid-feedback" *ngIf="getRegistrationFormError('language')">
+                      {{ getRegistrationFormError('language') }}
+                    </div>
+                  </div>
+                </div>
+                <div class="row mb-3 align-items-center">
+                  <label for="dates" class="col-sm-3 col-form-label">Start Date, End Date & Budget <span
+                      class="text-danger">*</span></label>
+                  <div class="col-sm-9">
+                    <div class="row">
+                      <div class="col-lg-4 col-xl-4 col-sm-4 col-md-4 col-12 mob-mb1">
+                        <input type="date" class="form-control" formControlName="startDate"
+                          [class.is-invalid]="registrationForm.get('startDate')?.touched && registrationForm.get('startDate')?.errors">
+                        <div class="invalid-feedback" *ngIf="getRegistrationFormError('startDate')">
+                          {{ getRegistrationFormError('startDate') }}
+                        </div>
+                      </div>
+                      <div class="col-lg-4 col-xl-4 col-sm-4 col-md-4 col-12 mob-mb1">
+                        <input type="date" class="form-control" formControlName="endDate"
+                          [class.is-invalid]="registrationForm.get('endDate')?.touched && registrationForm.get('endDate')?.errors">
+                        <div class="invalid-feedback" *ngIf="getRegistrationFormError('endDate')">
+                          {{ getRegistrationFormError('endDate') }}
+                        </div>
+                      </div>
+                      <div class="col-lg-4 col-xl-4 col-sm-4 col-md-4 col-12 mob-mb1">
+                        <select class="form-select" formControlName="budget"
+                          [class.is-invalid]="registrationForm.get('budget')?.touched && registrationForm.get('budget')?.errors">
+                          <option value="">Select Budget</option>
+                          <option value="5">5 Lac</option>
+                          <option value="1-5">1-5 Lac</option>
                         </select>
-                        <div class="invalid-feedback"
-                          *ngIf="unifiedForm.get('commonProfessionType')?.invalid && unifiedForm.get('commonProfessionType')?.touched">
-                          Please select your profession type.
-                        </div>
-                      </div>
-                    </div>
-
-                    <!-- Common Registration Type -->
-                    <div class="row mb-3">
-                      <label class="col-sm-3 col-form-label">I am registering for <span
-                          class="text-danger">*</span></label>
-                      <div class="col-sm-9">
-                        <div class="d-flex flex-wrap gap-3">
-                          <div class="form-check-inline">
-                            <input class="form-check-input me-2" type="radio" formControlName="commonRegistrationType"
-                              value="representative" (change)="onCommonRegistrationTypeChange('representative')">
-                            <label class="form-check-label">Representative for my client</label>
-                          </div>
-                          <div class="form-check-inline">
-                            <input class="form-check-input me-2" type="radio" formControlName="commonRegistrationType"
-                              value="business" (change)="onCommonRegistrationTypeChange('business')">
-                            <label class="form-check-label">I am a business</label>
-                          </div>
-                        </div>
-                        <div class="form-check ps-4 mt-2" *ngIf="isCommonRepresentativeForClient">
-                          <input class="form-check-input" type="checkbox" formControlName="commonWhiteLabelOption">
-                          <label class="form-check-label">I would like to discuss white labelling options</label>
+                        <div class="invalid-feedback" *ngIf="getRegistrationFormError('budget')">
+                          {{ getRegistrationFormError('budget') }}
                         </div>
                       </div>
                     </div>
                   </div>
                 </div>
 
-                <!-- Service-Specific Demand Ready Questions -->
-                <div class="row mb-4">
-                  <div class="col-12">
-                    <h5 class="mb-3">Service Requirements:</h5>
-
-                    <!-- WorkAway Demand Ready -->
-                    <div *ngIf="selectedServices.workaway" class="card mb-3">
-                      <div class="card-header" style="background-color: #f8f9fa; color: #000000;">
-                        <h6 class="mb-0" style="font-size: 18px;"><i class="bi bi-people-fill me-2"></i>WorkAway</h6>
-                      </div>
-                      <div class="card-body">
-                        <div class="row align-items-center">
-                          <label class="col-sm-3 col-form-label">Have the demand ready for WorkAway? <span
-                              class="text-danger">*</span></label>
-                          <div class="col-sm-9">
-                            <div class="form-check form-check-inline">
-                              <input class="form-check-input" type="radio" formControlName="workawayHasDemandReady"
-                                value="yes" (change)="onDemandReadyChange('workaway', 'yes')">
-                              <label class="form-check-label">Yes</label>
-                            </div>
-                            <div class="form-check form-check-inline">
-                              <input class="form-check-input" type="radio" formControlName="workawayHasDemandReady"
-                                value="no" (change)="onDemandReadyChange('workaway', 'no')">
-                              <label class="form-check-label">No</label>
-                            </div>
-                          </div>
-                        </div>
-
-                        <!-- WorkAway Requirements (shown inline when Yes is selected) -->
-                        <div *ngIf="hasDemandReady.workaway" class="mt-4" formGroupName="workaway">
-                          <div class="row mb-3 align-items-center" *ngIf="hasDemandReady.workaway">
-                            <label for="iama" class="col-sm-3 col-form-label">Upload Enquiry <span
-                                class="text-danger">*</span></label>
-                            <div class="col-sm-9">
-                              <p class="mt-4">
-                                <button type="button" class="btn btn-light me-2" (click)="openUploadModal()">
-                                  <i class="bi bi-upload"></i>
-                                  <span>Upload File</span>
-                                </button>
-                                <!-- <button type="button" class="btn btn-link text-primary" (click)="downloadSampleCSV()"
-                                [disabled]="isUploading">
-                                <u> Sample File</u>
-                              </button> -->
-                              </p>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
+                <!-- WorkAway specific file upload section -->
+                <div class="row mb-3 align-items-center">
+                  <label for="fileUpload" class="col-sm-3 col-form-label">Upload Requirements <span
+                      class="text-danger">*</span></label>
+                  <div class="col-sm-9">
+                    <p class="mt-2">
+                      <button type="button" class="btn btn-light me-2" (click)="openUploadModal()">
+                        <i class="bi bi-upload"></i>
+                        <span>Upload File</span>
+                      </button>
+                      <button type="button" class="btn btn-link text-primary" (click)="downloadSampleCSV()"
+                        [disabled]="isUploading">
+                        <u>Sample File</u>
+                      </button>
+                    </p>
+                    <div *ngIf="fileUpload" class="alert alert-success mt-2">
+                      <i class="bi bi-check-circle me-2"></i>
+                      File uploaded successfully: {{ fileUpload.name }}
                     </div>
+                  </div>
+                </div>
+              </div>
 
-                    <!-- IT Subcontracting Demand Ready -->
-                    <div *ngIf="selectedServices.itSubcontract" class="card mb-3">
-                      <div class="card-header" style="background-color: #f8f9fa; color: #000000;">
-                        <h6 class="mb-0" style="font-size: 18px;"><i class="bi bi-gear-fill me-2"></i>IT Subcontracting
-                        </h6>
-                      </div>
-                      <div class="card-body">
-                        <div class="row align-items-center">
-                          <label class="col-sm-3 col-form-label">Have the demand ready for IT Subcontract? <span
-                              class="text-danger">*</span></label>
-                          <div class="col-sm-9">
-                            <div class="form-check form-check-inline">
-                              <input class="form-check-input" type="radio" formControlName="itSubcontractHasDemandReady"
-                                value="yes" (change)="onDemandReadyChange('itSubcontract', 'yes')">
-                              <label class="form-check-label">Yes</label>
-                            </div>
-                            <div class="form-check form-check-inline">
-                              <input class="form-check-input" type="radio" formControlName="itSubcontractHasDemandReady"
-                                value="no" (change)="onDemandReadyChange('itSubcontract', 'no')">
-                              <label class="form-check-label">No</label>
-                            </div>
-                          </div>
+              <!-- Your Tags Section -->
+              <div class="row mb-3">
+                <div>
+                  <label for="iama" class="col-sm-3 col-form-label">Your Search :</label>
+                </div>
+                <div class="col-12">
+                  <ul class="searchresult-tags mb-4">
+                    <ng-container *ngFor="let item of visibleCombinedTags">
+                      <li style="cursor: pointer; background-color: #f8f9fa;">
+                        <span *ngIf="item.type === 'workaway'">
+                          {{ item.jobTitle }}
+                          <p style="font-size: 10px; text-align: center; margin-bottom: 0px !important;">(WorkAway)</p>
+                        </span>
+                        <span *ngIf="item.type === 'itsubcontract'">
+                          {{ item.projectName || item.expertise }}
+                          <p style="font-size: 10px; text-align: center; margin-bottom: 0px !important;">(IT
+                            Subcontracting)
+                          </p>
+                        </span>
+                        <span class="remove-tag" *ngIf="item.type === 'workaway'" (click)="removeFilter(item._id)"><i
+                            class="bi bi-x"></i></span>
+                        <span class="remove-tag" *ngIf="item.type === 'itsubcontract'"
+                          (click)="removeFilterItSub(item._id)"><i class="bi bi-x"></i></span>
+                        <br>
+                      </li>
+                    </ng-container>
+                    <button class="btn btn-link p-0" (click)="toggleShowAllTags()" *ngIf="showToggleButton">
+                      {{ showAllTags ? 'View Less' : 'View More' }}
+                    </button>
+                  </ul>
+                </div>
+              </div>
+
+              <!-- Your Cart Items Section -->
+              <div class="row mb-3" *ngIf="cartItems?.items?.length">
+                <div>
+                  <label for="iama" class="col-sm-3 col-form-label">Your Carts :</label>
+                </div>
+                <div class="col-12">
+                  <div *ngIf="cartItems.items && cartItems?.items?.length > 0;" class="row">
+                    <div *ngFor="let item of cartItems.items; let i = index" class="cartCard mb-3 col-12"
+                      [ngStyle]="{'border-left': '5px solid ' + getBorderColor(i)}">
+                      <div class="card-body p-4 d-flex justify-content-between align-items-center">
+                        <div>
+                          <h4><strong>{{ maskName(item.itemDetails.fullName || item.itemDetails.companyName) }}</strong>, <small>{{ item.itemDetails.gender || 'N/A' }}</small></h4>
+                          <p class="mb-0">Job Title : {{ item.itemDetails.jobTitle || item.itemDetails.role || 'N/A' }}</p>
+                          <ul class="inlineList mt-2">
+                            <li><i class="bi bi-mortarboard-fill text-muted me-2"></i> Qualification- {{ item.itemDetails.highestQualification || 'N/A' }}</li>
+                            <li><i class="bi bi-briefcase-fill text-muted me-2"></i> Experience- {{ item.itemDetails.totalExperience || 'N/A' }}</li>
+                            <li><i class="bi bi-cash text-muted me-2"></i> Day Rate- {{ item.itemDetails.ukDayRate || 'N/A' }}</li>
+                          </ul>
                         </div>
-
-                        <!-- IT Subcontracting Requirements (shown inline when Yes is selected) -->
-                        <div *ngIf="hasDemandReady.itSubcontract" class="mt-4" formGroupName="itSubcontract">
-                          <div class="row mb-3 align-items-center">
-                            <label class="col-sm-3 col-form-label">Enter Your Requirement <span
-                                class="text-danger">*</span></label>
-                            <div class="col-sm-9">
-                              <input type="text" class="form-control" formControlName="requirement"
-                                [class.is-invalid]="itSubcontractForm.get('requirement')?.invalid && itSubcontractForm.get('requirement')?.touched"
-                                placeholder="Eg. Cloud Migration">
-                              <div class="invalid-feedback"
-                                *ngIf="itSubcontractForm.get('requirement')?.invalid && itSubcontractForm.get('requirement')?.touched">
-                                Requirement is required.
-                              </div>
-                            </div>
-                          </div>
-
-                          <div class="row mb-3 align-items-center">
-                            <label class="col-sm-3 col-form-label">Engagement Type <span
-                                class="text-danger">*</span></label>
-                            <div class="col-sm-9">
-                              <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" formControlName="engagementType"
-                                  value="full">
-                                <label class="form-check-label">Full Delivery</label>
-                              </div>
-                              <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" formControlName="engagementType"
-                                  value="part">
-                                <label class="form-check-label">Part Delivery</label>
-                              </div>
-                              <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" formControlName="engagementType"
-                                  value="ongoing">
-                                <label class="form-check-label">Ongoing</label>
-                              </div>
-                              <div class="invalid-feedback d-block"
-                                *ngIf="itSubcontractForm.get('engagementType')?.invalid && itSubcontractForm.get('engagementType')?.touched">
-                                Please select an engagement type.
-                              </div>
-                            </div>
-                          </div>
-
-                          <div class="row mb-3 align-items-center">
-                            <label class="col-sm-3 col-form-label">Description <span
-                                class="text-danger">*</span></label>
-                            <div class="col-sm-9">
-                              <textarea class="form-control" rows="2" formControlName="description"
-                                [class.is-invalid]="itSubcontractForm.get('description')?.invalid && itSubcontractForm.get('description')?.touched"></textarea>
-                              <div class="invalid-feedback"
-                                *ngIf="itSubcontractForm.get('description')?.invalid && itSubcontractForm.get('description')?.touched">
-                                Description is required.
-                              </div>
-                            </div>
-                          </div>
-
-                          <div class="row mb-3 align-items-center">
-                            <label class="col-sm-3 col-form-label">Choose Language <span
-                                class="text-danger">*</span></label>
-                            <div class="col-sm-9">
-                              <div class="position-relative">
-                                <input type="text" class="form-control" placeholder="Search technologies..."
-                                  [(ngModel)]="techSearch" [ngModelOptions]="{standalone: true}"
-                                  (input)="onTechSearchChange($event)" (blur)="onTechInputBlur()" autocomplete="off">
-
-                                <div class="dropdown-menu w-100 show"
-                                  *ngIf="showTechDropdown && searchResults.length > 0"
-                                  style="position: absolute; top: 100%; left: 0; z-index: 1000; max-height: 200px; overflow-y: auto;">
-                                  <div class="dropdown-item" *ngFor="let tech of searchResults"
-                                    (click)="selectTechnology(tech)" style="cursor: pointer; padding: 8px 16px;">
-                                    {{ tech.name }}
-                                  </div>
-                                </div>
-                              </div>
-
-                              <div class="mt-2" *ngIf="selectedTechnologies.length > 0">
-                                <ul class="searchresult-tags mb-2">
-                                  <li *ngFor="let tech of selectedTechnologies"
-                                    style="cursor: pointer; background-color: #f8f9fa;">
-                                    <span>{{ tech.name }}</span>
-                                    <span class="remove-tag" (click)="removeTechnology(tech._id)">
-                                      <i class="bi bi-x"></i>
-                                    </span>
-                                  </li>
-                                </ul>
-                              </div>
-                              <div class="invalid-feedback"
-                                *ngIf="itSubcontractForm.get('language')?.invalid && itSubcontractForm.get('language')?.touched">
-                                Please select at least one technology/language.
-                              </div>
-                            </div>
-                          </div>
-
-                          <div class="row mb-3 align-items-center">
-                            <label class="col-sm-3 col-form-label">Start Date, End Date & Budget <span
-                                class="text-danger">*</span></label>
-                            <div class="col-sm-9">
-                              <div class="row">
-                                <div class="col-lg-4 col-xl-4 col-sm-4 col-md-4 col-12 mob-mb1">
-                                  <input type="date" class="form-control" formControlName="startDate"
-                                    [class.is-invalid]="itSubcontractForm.get('startDate')?.invalid && itSubcontractForm.get('startDate')?.touched">
-                                  <div class="invalid-feedback"
-                                    *ngIf="itSubcontractForm.get('startDate')?.invalid && itSubcontractForm.get('startDate')?.touched">
-                                    Start date is required.
-                                  </div>
-                                </div>
-                                <div class="col-lg-4 col-xl-4 col-sm-4 col-md-4 col-12 mob-mb1">
-                                  <input type="date" class="form-control" formControlName="endDate"
-                                    [class.is-invalid]="itSubcontractForm.get('endDate')?.invalid && itSubcontractForm.get('endDate')?.touched">
-                                  <div class="invalid-feedback"
-                                    *ngIf="itSubcontractForm.get('endDate')?.invalid && itSubcontractForm.get('endDate')?.touched">
-                                    End date is required.
-                                  </div>
-                                </div>
-                                <div class="col-lg-4 col-xl-4 col-sm-4 col-md-4 col-12 mob-mb1">
-                                  <select class="form-select" formControlName="budget"
-                                    [class.is-invalid]="itSubcontractForm.get('budget')?.invalid && itSubcontractForm.get('budget')?.touched">
-                                    <option value="">Select Budget</option>
-                                    <option value="5">5 Lac</option>
-                                    <option value="1-5">1-5 Lac</option>
-                                  </select>
-                                  <div class="invalid-feedback"
-                                    *ngIf="itSubcontractForm.get('budget')?.invalid && itSubcontractForm.get('budget')?.touched">
-                                    Budget is required.
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-
-                    <!-- E2E QA Demand Ready -->
-                    <div *ngIf="selectedServices.e2eQA" class="card mb-3">
-                      <div class="card-header" style="background-color: #f8f9fa; color: #000000;">
-                        <h6 class="mb-0" style="font-size: 18px;"><i class="bi bi-shield-check me-2"></i>E2E QA Services
-                        </h6>
-                      </div>
-                      <div class="card-body">
-                        <div class="row align-items-center">
-                          <label class="col-sm-3 col-form-label">Have the demand ready for E2E Register? <span
-                              class="text-danger">*</span></label>
-                          <div class="col-sm-9">
-                            <div class="form-check form-check-inline">
-                              <input class="form-check-input" type="radio" formControlName="e2eQAHasDemandReady"
-                                value="yes" (change)="onDemandReadyChange('e2eQA', 'yes')">
-                              <label class="form-check-label">Yes</label>
-                            </div>
-                            <div class="form-check form-check-inline">
-                              <input class="form-check-input" type="radio" formControlName="e2eQAHasDemandReady"
-                                value="no" (change)="onDemandReadyChange('e2eQA', 'no')">
-                              <label class="form-check-label">No</label>
-                            </div>
-                          </div>
-                        </div>
-
-                        <!-- E2E QA Requirements (shown inline when Yes is selected) -->
-                        <div *ngIf="hasDemandReady.e2eQA" class="mt-4" formGroupName="e2eQA">
-                          <div class="row mb-3 align-items-center">
-                            <label class="col-sm-3 col-form-label">Enter Your Requirement <span
-                                class="text-danger">*</span></label>
-                            <div class="col-sm-9">
-                              <input type="text" class="form-control" formControlName="requirement"
-                                placeholder="Eg. Functional Testing">
-                            </div>
-                          </div>
-
-                          <div class="row mb-3 align-items-center">
-                            <label class="col-sm-3 col-form-label">Engagement Type <span
-                                class="text-danger">*</span></label>
-                            <div class="col-sm-9">
-                              <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" formControlName="engagementType"
-                                  value="full">
-                                <label class="form-check-label">Full Delivery</label>
-                              </div>
-                              <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" formControlName="engagementType"
-                                  value="part">
-                                <label class="form-check-label">Part Delivery</label>
-                              </div>
-                              <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" formControlName="engagementType"
-                                  value="ongoing">
-                                <label class="form-check-label">Ongoing</label>
-                              </div>
-                            </div>
-                          </div>
-
-                          <div class="row mb-3 align-items-center">
-                            <label class="col-sm-3 col-form-label">Description <span
-                                class="text-danger">*</span></label>
-                            <div class="col-sm-9">
-                              <textarea class="form-control" rows="2" formControlName="description"></textarea>
-                            </div>
-                          </div>
-
-                          <div class="row mb-3 align-items-center">
-                            <label class="col-sm-3 col-form-label">Start Date, End Date & Budget <span
-                                class="text-danger">*</span></label>
-                            <div class="col-sm-9">
-                              <div class="row">
-                                <div class="col-lg-4 col-xl-4 col-sm-4 col-md-4 col-12 mob-mb1">
-                                  <input type="date" class="form-control" formControlName="startDate">
-                                </div>
-                                <div class="col-lg-4 col-xl-4 col-sm-4 col-md-4 col-12 mob-mb1">
-                                  <input type="date" class="form-control" formControlName="endDate">
-                                </div>
-                                <div class="col-lg-4 col-xl-4 col-sm-4 col-md-4 col-12 mob-mb1">
-                                  <input type="text" class="form-control" formControlName="budget"
-                                    placeholder="Eg. 50000-75000">
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
+                        <button (click)="removeCartItem(item._id)" class="remove-btn ms-3">
+                          <i class="bi bi-trash"></i> Remove
+                        </button>
                       </div>
                     </div>
                   </div>
                 </div>
-
-
-              </form>
+              </div>
 
               <div class="form-group text-end">
-                <button class="btn btn-dark me-2" type="button" (click)="previousStep()">
-                  <i class="bi bi-arrow-left"></i>
-                  <span>Previous</span>
-                </button>
-                <button class="btn btn-primary" type="button" (click)="nextStep()">
-                  <span>Next Step</span>
-                  <i class="bi bi-arrow-right"></i>
-                </button>
+                <button class="btn btn-dark me-2" (click)="goBack()"><i class="bi bi-arrow-left me-2"></i> Go
+                  Back</button>
+                <button class="btn btn-primary" type="button" (click)="nextStep()">Next Step <i
+                    class="bi bi-arrow-right ms-2"></i></button>
               </div>
-            </div>
+            </form>
 
-            <!-- Step 3: Contact Details -->
-            <div *ngIf="currentStep === 3">
-              <div class="row mb-3">
-                <div class="col-12">
-                  <div class="alert" role="alert" style="background-color: #E5E4E2; border-color: #E5E4E2;">
-                    <i class="bi bi-exclamation-triangle-fill me-2"></i>
-                    <strong>Step 3:</strong> Provide your contact information to complete the registration.
-                  </div>
+            <form [formGroup]="contactForm" class="needs-validation" *ngIf="showContactForm">
+              <div class="form-group">
+                <label>Business name <span class="text-danger">*</span></label>
+                <input type="text" class="form-control" formControlName="businessName"
+                  [class.is-invalid]="contactForm.get('businessName')?.touched && contactForm.get('businessName')?.errors"
+                  placeholder="Enter your business name...">
+                <div class="invalid-feedback" *ngIf="getContactFormError('businessName')">
+                  {{ getContactFormError('businessName') }}
                 </div>
               </div>
-
-              <form [formGroup]="contactForm">
-                <div class="row mb-3 align-items-center">
-                  <label class="col-sm-3 col-form-label">Business Name <span class="text-danger">*</span></label>
-                  <div class="col-sm-9">
-                    <input type="text" class="form-control" formControlName="businessName"
-                      [class.is-invalid]="contactForm.get('businessName')?.invalid && contactForm.get('businessName')?.touched"
-                      placeholder="Enter your business name...">
-                    <div class="invalid-feedback"
-                      *ngIf="contactForm.get('businessName')?.invalid && contactForm.get('businessName')?.touched">
-                      Business name is required.
-                    </div>
-                  </div>
+              <div class="form-group">
+                <label>Address <span class="text-danger">*</span></label>
+                <textarea class="form-control" formControlName="address" cols="100" rows="1"
+                  [class.is-invalid]="contactForm.get('address')?.touched && contactForm.get('address')?.errors"
+                  placeholder="Enter your address..."></textarea>
+                <div class="invalid-feedback" *ngIf="getContactFormError('address')">
+                  {{ getContactFormError('address') }}
                 </div>
-
-                <div class="row mb-3 align-items-center">
-                  <label class="col-sm-3 col-form-label">Address <span class="text-danger">*</span></label>
-                  <div class="col-sm-9">
-                    <textarea class="form-control" rows="2" formControlName="address"
-                      [class.is-invalid]="contactForm.get('address')?.invalid && contactForm.get('address')?.touched"
-                      placeholder="Enter your address..."></textarea>
-                    <div class="invalid-feedback"
-                      *ngIf="contactForm.get('address')?.invalid && contactForm.get('address')?.touched">
-                      Address is required.
-                    </div>
-                  </div>
+              </div>
+              <div class="form-group">
+                <label>Your Full Name <span class="text-danger">*</span></label>
+                <input type="text" class="form-control" formControlName="fullName"
+                  [class.is-invalid]="contactForm.get('fullName')?.touched && contactForm.get('fullName')?.errors"
+                  placeholder="Enter your name...">
+                <div class="invalid-feedback" *ngIf="getContactFormError('fullName')">
+                  {{ getContactFormError('fullName') }}
                 </div>
-
-                <div class="row mb-3 align-items-center">
-                  <label class="col-sm-3 col-form-label">Your Full Name <span class="text-danger">*</span></label>
-                  <div class="col-sm-9">
-                    <input type="text" class="form-control" formControlName="fullName"
-                      [class.is-invalid]="contactForm.get('fullName')?.invalid && contactForm.get('fullName')?.touched"
-                      placeholder="Enter your name...">
-                    <div class="invalid-feedback"
-                      *ngIf="contactForm.get('fullName')?.invalid && contactForm.get('fullName')?.touched">
-                      Full name is required.
-                    </div>
-                  </div>
+              </div>
+              <div class="form-group">
+                <label>Job Title <span class="text-danger">*</span></label>
+                <input type="text" class="form-control" formControlName="jobTitle"
+                  [class.is-invalid]="contactForm.get('jobTitle')?.touched && contactForm.get('jobTitle')?.errors"
+                  placeholder="Enter your job title...">
+                <div class="invalid-feedback" *ngIf="getContactFormError('jobTitle')">
+                  {{ getContactFormError('jobTitle') }}
                 </div>
-
-                <div class="row mb-3 align-items-center">
-                  <label class="col-sm-3 col-form-label">Job Title <span class="text-danger">*</span></label>
-                  <div class="col-sm-9">
-                    <input type="text" class="form-control" formControlName="jobTitle"
-                      [class.is-invalid]="contactForm.get('jobTitle')?.invalid && contactForm.get('jobTitle')?.touched"
-                      placeholder="Enter your job title...">
-                    <div class="invalid-feedback"
-                      *ngIf="contactForm.get('jobTitle')?.invalid && contactForm.get('jobTitle')?.touched">
-                      Job title is required.
-                    </div>
-                  </div>
+              </div>
+              <div class="form-group">
+                <label>Phone Number <span class="text-danger">*</span></label>
+                <input type="text" class="form-control" formControlName="phoneNumber" (keypress)="NumberOnly($event)"
+                  [class.is-invalid]="contactForm.get('phoneNumber')?.touched && contactForm.get('phoneNumber')?.errors"
+                  placeholder="Enter your phone number...">
+                <div class="invalid-feedback" *ngIf="getContactFormError('phoneNumber')">
+                  {{ getContactFormError('phoneNumber') }}
                 </div>
-
-                <div class="row mb-3 align-items-center">
-                  <label class="col-sm-3 col-form-label">Phone Number <span class="text-danger">*</span></label>
-                  <div class="col-sm-9">
-                    <input type="text" class="form-control" formControlName="phoneNumber"
-                      (keypress)="NumberOnly($event)"
-                      [class.is-invalid]="contactForm.get('phoneNumber')?.invalid && contactForm.get('phoneNumber')?.touched"
-                      placeholder="Enter your phone number...">
-                    <div class="invalid-feedback"
-                      *ngIf="contactForm.get('phoneNumber')?.invalid && contactForm.get('phoneNumber')?.touched">
-                      Please enter a valid 10-digit phone number.
-                    </div>
-                  </div>
+              </div>
+              <div class="form-group">
+                <label>Email Address <span class="text-danger">*</span></label>
+                <input type="text" class="form-control" formControlName="email"
+                  [class.is-invalid]="contactForm.get('email')?.touched && contactForm.get('email')?.errors"
+                  placeholder="Enter your email id...">
+                <div class="invalid-feedback" *ngIf="getContactFormError('email')">
+                  {{ getContactFormError('email') }}
                 </div>
+              </div>
+              <div class="form-group">
+                <label>How did you hear about us?</label>
+                <input type="text" class="form-control" formControlName="hearAboutUs" placeholder="Enter details...">
+              </div>
+              <div class="form-group text-end">
+                <button class="btn btn-dark me-2" (click)="goBack()"><i class="bi bi-arrow-left me-2"></i> Go
+                  Back</button>
+                <button class="btn btn-primary" type="button" (click)="onSubmit()">Submit <i
+                    class="bi bi-save2 ms-2"></i></button>
+              </div>
+            </form>
 
-                <div class="row mb-3 align-items-center">
-                  <label class="col-sm-3 col-form-label">Email Address <span class="text-danger">*</span></label>
-                  <div class="col-sm-9">
-                    <input type="email" class="form-control" formControlName="email"
-                      [class.is-invalid]="contactForm.get('email')?.invalid && contactForm.get('email')?.touched"
-                      placeholder="Enter your email id...">
-                    <div class="invalid-feedback"
-                      *ngIf="contactForm.get('email')?.invalid && contactForm.get('email')?.touched">
-                      Please enter a valid email address.
-                    </div>
-                  </div>
-                </div>
-
-                <div class="row mb-3 align-items-center">
-                  <label class="col-sm-3 col-form-label">How did you hear about us?</label>
-                  <div class="col-sm-9">
-                    <input type="text" class="form-control" formControlName="hearAboutUs"
-                      placeholder="Enter details...">
-                  </div>
-                </div>
-
-                <div class="form-group text-end">
-                  <button class="btn btn-dark me-2" type="button" (click)="previousStep()">
-                    <i class="bi bi-arrow-left"></i>
-                    <span>Previous</span>
-                  </button>
-                  <button class="btn btn-primary" type="button" (click)="onSubmit()" [disabled]="isSubmitting">
-                    <span *ngIf="isSubmitting" class="spinner-border spinner-border-sm" role="status"
-                      aria-hidden="true"></span>
-                    <span>{{ isSubmitting ? 'Submitting...' : 'Submit' }}</span>
-                    <i class="bi bi-save2" *ngIf="!isSubmitting"></i>
-                  </button>
-                </div>
-              </form>
-            </div>
           </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Skills Section -->
   <section>
     <div class="container">
       <div class="mb-5">
