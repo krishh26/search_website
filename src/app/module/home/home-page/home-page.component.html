@@ -12,21 +12,21 @@
               <h2 class="banner-title">
                 Discover Your Perfect IT Match
               </h2>
-              <p class="banner-subtitle">
+              <!-- <p class="banner-subtitle">
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-              </p>
+              </p> -->
               <div class="banner-features">
                 <div class="feature-item">
                   <i class="bi bi-check-circle-fill"></i>
-                  <span>Lorem ipsum dolor sit amet</span>
+                  <!-- <span>Lorem ipsum dolor sit amet</span> -->
                 </div>
                 <div class="feature-item">
                   <i class="bi bi-check-circle-fill"></i>
-                  <span>Consectetur adipiscing elit</span>
+                  <!-- <span>Consectetur adipiscing elit</span> -->
                 </div>
                 <div class="feature-item">
                   <i class="bi bi-check-circle-fill"></i>
-                  <span>Sed do eiusmod tempor</span>
+                  <!-- <span>Sed do eiusmod tempor</span> -->
                 </div>
               </div>
             </div>
@@ -45,27 +45,27 @@
             <!-- For WorkAway -->
             <ng-container *ngIf="selectedService == 'WorkAway'">
               <div class="form-control border-0 flex-grow-1 position-relative">
-                <input 
-                  type="text" 
-                  class="form-control border-0" 
-                  placeholder="Search Here" 
+                <input
+                  type="text"
+                  class="form-control border-0"
+                  placeholder="Search Here"
                   [(ngModel)]="jobTitleSearch"
                   (input)="onJobTitleSearchChange($event)"
                   (blur)="onInputBlur()"
                   (keypress)="onKeyPress($event)"
                   autocomplete="off">
-                
+
                 <!-- Dropdown for job titles -->
                 <div class="dropdown-menu w-100 show" *ngIf="showJobTitleDropdown && jobRoles.length > 0" style="position: absolute; top: 100%; left: 0; z-index: 1000; max-height: 200px; overflow-y: auto;">
-                  <div 
-                    class="dropdown-item" 
-                    *ngFor="let role of jobRoles" 
+                  <div
+                    class="dropdown-item"
+                    *ngFor="let role of jobRoles"
                     (click)="selectJobTitle(role.name)"
                     style="cursor: pointer; padding: 8px 16px;">
                     {{ role.name }}
                   </div>
                 </div>
-                
+
                 <!-- Loading indicator -->
                 <div class="dropdown-menu w-100 show" *ngIf="showJobTitleDropdown && isLoading" style="position: absolute; top: 100%; left: 0; z-index: 1000;">
                   <div class="dropdown-item text-center" style="padding: 8px 16px;">
@@ -78,27 +78,27 @@
             <!-- For IT Subcontracting -->
             <ng-container *ngIf="selectedService == 'IT Subcontracting'">
               <div class="form-control border-0 flex-grow-1 mob-w100 tab-w100 position-relative">
-                <input 
-                  type="text" 
-                  class="form-control border-0" 
-                  placeholder="Search Here" 
+                <input
+                  type="text"
+                  class="form-control border-0"
+                  placeholder="Search Here"
                   [(ngModel)]="expertiseSearch"
                   (input)="onExpertiseSearchChange($event)"
                   (blur)="onInputBlur()"
                   (keypress)="onKeyPress($event)"
                   autocomplete="off">
-                
+
                 <!-- Dropdown for expertise -->
                 <div class="dropdown-menu w-100 show" *ngIf="showExpertiseDropdown && expertiseList.length > 0" style="position: absolute; top: 100%; left: 0; z-index: 1000; max-height: 200px; overflow-y: auto;">
-                  <div 
-                    class="dropdown-item" 
-                    *ngFor="let expertise of expertiseList" 
+                  <div
+                    class="dropdown-item"
+                    *ngFor="let expertise of expertiseList"
                     (click)="selectExpertise(expertise.name)"
                     style="cursor: pointer; padding: 8px 16px;">
                     {{ expertise.name }}
                   </div>
                 </div>
-                
+
                 <!-- Loading indicator -->
                 <div class="dropdown-menu w-100 show" *ngIf="showExpertiseDropdown && isLoading" style="position: absolute; top: 100%; left: 0; z-index: 1000;">
                   <div class="dropdown-item text-center" style="padding: 8px 16px;">
