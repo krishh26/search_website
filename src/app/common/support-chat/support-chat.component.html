@@ -1,0 +1,59 @@
+<!-- Floating Chat Icon -->
+<div class="chat-icon" (click)="toggleChat()" [class.active]="isChatOpen">
+  <i class="bi bi-chat-dots-fill"></i>
+  <span class="chat-badge" *ngIf="!isChatOpen">?</span>
+</div>
+
+<!-- Chat Popup -->
+<div class="chat-popup" *ngIf="isChatOpen" [@slideInOut]>
+  <div class="chat-header">
+    <div class="chat-title">
+      <i class="bi bi-headset"></i>
+      <span>Support Chat</span>
+    </div>
+    <button class="close-btn" (click)="closeChat()">
+      <i class="bi bi-x-lg"></i>
+    </button>
+  </div>
+
+  <div class="chat-messages" #chatMessages>
+    <div class="message-container" *ngFor="let message of chatSession?.messages">
+      <div class="message" [class.user-message]="message.isUser" [class.bot-message]="!message.isUser">
+        <div class="message-content">
+          {{ message.message }}
+        </div>
+        <div class="message-time">
+          {{ getMessageTime(message.timestamp) }}
+        </div>
+      </div>
+    </div>
+
+    <div class="loading-message" *ngIf="isLoading">
+      <div class="typing-indicator">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </div>
+  </div>
+
+  <div class="chat-input">
+    <div class="input-container">
+      <textarea
+        [(ngModel)]="currentMessage"
+        (keypress)="onKeyPress($event)"
+        placeholder="Type your message..."
+        rows="1"
+        class="message-input"
+        [disabled]="chatSession?.currentStep === 'completed'"
+      ></textarea>
+      <button
+        class="send-btn"
+        (click)="sendMessage()"
+        [disabled]="!currentMessage.trim() || chatSession?.currentStep === 'completed'"
+      >
+        <i class="bi bi-send"></i>
+      </button>
+    </div>
+  </div>
+</div>
